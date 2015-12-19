@@ -37,6 +37,12 @@ app.config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, ASS
 		// Main Layout Structure
 		state('/#', {
 			url: '/',
+			templateUrl: appHelper.templatePath('navbar'),
+			
+		
+		}).
+		state('/login', {
+			url: '/login',
 			templateUrl: appHelper.templatePath('login-light'),
 			controller: 'LoginLightCtrl',
 			resolve: {
@@ -46,11 +52,35 @@ app.config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, ASS
 					]);
 				},
 			}
-		})
+		}).
+          state('/reset', {
+			url: '/reset',
+			templateUrl: appHelper.templatePath('reset'),
+			//controller: 'LoginLightCtrl',
+			resolve: {
+				resources: function($ocLazyLoad){
+					return $ocLazyLoad.load([
+						ASSETS.forms.jQueryValidate,
+					]);
+				},
+			}
+			
+				
+			
+		}).
+          state('/signup', {
+			url: '/signup',
+			templateUrl: appHelper.templatePath('signup'),
+			//controller: 'LoginLightCtrl',
+			resolve: {
+				resources: function($ocLazyLoad){
+					return $ocLazyLoad.load([
+						ASSETS.forms.jQueryValidate,
+					]);
+				},
+			}
+		});
 	});
-
-		// Dashboards
-		
 
 app.constant('ASSETS', {
 	'core': {

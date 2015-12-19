@@ -14,6 +14,9 @@ angular.module('xenon.controllers', []).
 		$rootScope.isLightLoginPage   = true;
 		$rootScope.isLockscreenPage   = false;
 		$rootScope.isMainPage         = false;
+		
+
+
 	}).
 	controller('LockscreenCtrl', function($scope, $rootScope)
 	{
