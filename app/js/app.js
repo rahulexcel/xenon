@@ -76,9 +76,11 @@ app.config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, ASS
 				},
 			}
 		}).
+
  		state('dashboard.storeinfo', {
 			url: '/storeinfo',
 			templateUrl: "app/storeinfo/storeinfo.html",
+
 			// controller: 'signupCtrl',
 			resolve: {
 				bootstrap: function($ocLazyLoad){

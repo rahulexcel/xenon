@@ -1,0 +1,100 @@
+<div class="row">
+
+    <div class="col-sm-1"></div>
+    <div class="col-sm-10">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h1 class="panel-title"><strong>Add Product</strong></h1>
+            </div>
+                <h4>Image</h4>
+            <div class="panel-body">
+                <form class="form-horizontal ng-pristine ng-valid" role="form">
+                    <div class="form-group">
+                       <div class="col-sm-12">
+                           <form></form>
+                           <div class="form-block">
+                               <div class="">
+                                   <form action="data/upload-file.php" class="dropzone"></form>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+
+                    
+                    <div class="form-group-separator"></div>
+                    <div class="form-group">
+                    <h4><strong>Information</strong></h4>
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <strong>Title</strong>
+                                <p>
+                                    <input type="text" class="form-control">
+                                </p>
+                            </div>
+                            <div class="col-sm-4">
+                                <strong>Price</strong> <small>in NOK</small>
+                                <p>
+                                   <input type="text" class="form-control">
+                                </p>
+                            </div>
+                             <div class="col-sm-12">
+                            <span>mrezshop.tictail.com/products/product-name</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group-separator"></div>
+                    <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-12">
+                                <strong>Description</strong>
+                                <p>
+                                     <textarea class="form-control" rows="10" id="uikit_editor_2">#Heading
+                                   </textarea>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group-separator"></div>
+                    <div class="form-group">
+                    <h4><strong>Details</strong></h4>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                        <label class="control-label">Quantity</label>
+                        
+                        <div class="input-group input-group-sm input-group-minimal">
+                            
+                            <input type="text" class="form-control">
+                            <span class="input-group-addon">
+                                <i class="linecons-pencil"></i>
+                            </span>
+                        </div>
+                    </div>
+                            </div>  
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label>
+                                    <div class="cbr-replaced cbr-info cbr-checked"><div class="cbr-input"><input type="checkbox" class="cbr cbr-done"></div><div class="cbr-state"><span></span></div></div>
+                                    Show products in store
+                                </label>
+                            </div>  
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-1"></div>
+
+</div>
+<script type="text/javascript">
+   jQuery.UIkit.htmleditor(jQuery("#uikit_editor_2"), {
+       markdown: true,
+       mode: 'tab'
+   });
+</script>
