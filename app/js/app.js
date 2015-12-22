@@ -31,11 +31,11 @@ app.run(function()
 
 app.config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, ASSETS){
 
-	$urlRouterProvider.otherwise('/navbar/login');
+	$urlRouterProvider.otherwise('/dashboard/login');
 
  	$stateProvider.
- 	state('navbar', {
-			url: '/navbar',
+ 	state('dashboard', {
+			url: '/dashboard',
 			templateUrl: appHelper.templatePath('navbar'),
 			abstract : true,
 			controller: function($rootScope){
@@ -52,7 +52,7 @@ app.config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, ASS
 				},
 			}
 		}).
- 	state('navbar.login', {
+ 	state('dashboard.login', {
 			url: '/login',
 			templateUrl: "app/login/login.html",
 			controller: 'LoginLightCtrl',
@@ -64,7 +64,7 @@ app.config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, ASS
 				},
 			}
 		}).
- 	state('navbar.singup', {
+ 	state('dashboard.singup', {
 			url: '/signup',
 			templateUrl: "app/signup/signup.html",
 			controller: 'signupCtrl',
@@ -76,9 +76,9 @@ app.config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, ASS
 				},
 			}
 		}).
- 		state('navbar.projectstoreinformation', {
-			url: '/projectinfo',
-			templateUrl: "app/productinfo/productstoreinformation.html",
+ 		state('dashboard.storeinfo', {
+			url: '/storeinfo',
+			templateUrl: "app/storeinfo/storeinfo.html",
 			// controller: 'signupCtrl',
 			resolve: {
 				bootstrap: function($ocLazyLoad){
@@ -105,7 +105,7 @@ app.config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, ASS
 				},
 			}
 		}).
- 	state('navbar.reset', {
+ 	state('dashboard.reset', {
 			url: '/reset',
 			templateUrl: "app/resetpassword/reset.html",
 			controller: 'LoginLightCtrl',
@@ -116,7 +116,22 @@ app.config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, ASS
 					]);
 				},
 			}
-		});
+		}).
+ 	  state('dashboard.setting', {
+            url: '/setting',
+            templateUrl: 'app/setting/setting.html',
+            controller: 'settingController',
+        }).
+    state('dashboard.payment', {
+            url: '/payment',
+            templateUrl: 'app/payment/payment.html',
+            controller: 'paymentController',
+        }).
+    state('dashboard.addProduct', {
+            url: '/addProduct',
+            templateUrl: 'app/addproduct/addproduct.html',
+            controller: 'addProductController',
+        });
  });
 
 
