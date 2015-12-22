@@ -1,0 +1,400 @@
+<div class="row">
+    <div class="col-sm-8 col-sm-offset-2">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <form role="form" class="form-horizontal">
+                    <div class="form-group">
+                        <div class="form-inline">
+                            <label class="col-sm-2 control-label">Store info</label>
+                        </div>
+                        <div class="col-sm-9 col-sm-offset-3">
+                            <div class="form-block">
+                                <div class="form-group">
+                                    <label class="control-label" for="full_name">
+                                        <strong>Name</strong>
+                                    </label>
+                                    <input class="form-control" name="full_name" id="full_name" data-validate="required" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-9 col-sm-offset-3">
+                            <div class="form-block">
+                                <div class="form-group">
+                                    <label class="control-label" for="full_name"><strong>Description</strong></label>
+                                    <textarea class="form-control" rows="10" id="uikit_editor_2">#Heading
+                                    </textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-inline">
+                        <label class="col-sm-1 control-label">Logo</label>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-9 col-sm-offset-3">
+                            <form action="data/upload-file.php" class="dropzone"></form>
+                            <div class="form-block">
+                                <div class="form-group">
+                                    <form action="data/upload-file.php" style="height:150px;" class="dropzone"></form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="form-inline">
+                        <label class="col-sm-2 control-label">Contact</label>
+                    </div>
+                    <div class="col-sm-9 col-sm-offset-3">
+                        <div class="form-block">
+                            <div class="form-group">
+                                <label class="control-label" for="full_name">
+                                    <strong>Contact email</strong>&nbsp;&nbsp;&nbsp;Will be included in emails sent to your customers
+                                </label>
+                                <input class="form-control" name="full_name" id="full_name" data-validate="required" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-9 col-sm-offset-3">
+                        <div class="form-block">
+                            <div class="form-group">
+                                <label class="control-label" for="full_name">
+                                    <strong>Store address</strong>
+                                </label>
+                                <input class="form-control" name="full_name" id="full_name" data-validate="required" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-9 col-sm-offset-3">
+                        <div class="form-block">
+                            <div class="form-group">
+                                <label class="control-label" for="full_name">
+                                    <strong>Post code</strong>
+                                </label>
+                                <input class="form-control" name="full_name" id="full_name" data-validate="required" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-9 col-sm-offset-3">
+                        <div class="form-block">
+                            <div class="form-group">
+                                <label class="control-label" for="full_name">
+                                    <strong>Phone</strong>
+                                </label>
+                                <input class="form-control" name="full_name" id="full_name" data-validate="required" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <hr>
+                    </div>
+                    <div class="form-inline">
+                        <label class="col-sm-3 control-label">Store status</label>
+                    </div>
+                    <div class="col-sm-9 col-sm-offset-3">
+                        <div class="form-block">
+                            <div class="form-group">
+                                <label class="control-label" for="full_name">
+                                    <strong>Open to customers</strong>
+                                </label>
+                                <div class="form-block">
+                                    <input type="checkbox" class="iswitch-xlg iswitch-primary">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    jQuery.UIkit.htmleditor(jQuery("#uikit_editor_2"), {
+        markdown: true,
+        mode: 'tab'
+    });
+</script>
+<script type="text/javascript">
+    jQuery(document).ready(function($) {
+        var i = 1,
+            $example_dropzone_filetable = $("#example-dropzone-filetable"),
+            example_dropzone = $("#advancedDropzone").dropzone({
+                url: 'data/upload-file.php',
+
+                // Events
+                addedfile: function(file) {
+                    if (i == 1) {
+                        $example_dropzone_filetable.find('tbody').html('');
+                    }
+
+                    var size = parseInt(file.size / 1024, 10);
+                    size = size < 1024 ? (size + " KB") : (parseInt(size / 1024, 10) + " MB");
+
+                    var $entry = $('<tr>\
+   							<td class="text-center">' + (i++) + '</td>\
+   							<td>' + file.name + '</td>\
+   							<td><div class="progress progress-striped"><div class="progress-bar progress-bar-warning"></div></div></td>\
+   							<td>' + size + '</td>\
+   							<td>Uploading...</td>\
+   						</tr>');
+
+                    $example_dropzone_filetable.find('tbody').append($entry);
+                    file.fileEntryTd = $entry;
+                    file.progressBar = $entry.find('.progress-bar');
+                },
+
+                uploadprogress: function(file, progress, bytesSent) {
+                    file.progressBar.width(progress + '%');
+                },
+
+                success: function(file) {
+                    file.fileEntryTd.find('td:last').html('<span class="text-success">Uploaded</span>');
+                    file.progressBar.removeClass('progress-bar-warning').addClass('progress-bar-success');
+                },
+
+                error: function(file) {
+                    file.fileEntryTd.find('td:last').html('<span class="text-danger">Failed</span>');
+                    file.progressBar.removeClass('progress-bar-warning').addClass('progress-bar-red');
+                }
+            });
+
+        $("#advancedDropzone").css({
+            minHeight: 200
+        });
+
+    });
+</script>
+<div class="col-sm-6 col-sm-offset-2">
+    <h2>Closed days:</h2>
+</div>
+<div class="row">
+    <div class="col-sm-8 col-sm-offset-2">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <section class="calendar-env">
+                    <div class="col-sm-9 calendar-right">
+                        <div class="calendar-main">
+                            <div id="calendar"></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 calendar-left">
+                        <div class="calendar-sidebar">
+                            <form method="post" id="add_event_form">
+                                <input type="text" class="form-control" placeholder="Add new event..." />
+                            </form>
+                            <br />
+                            <ul class="list-unstyled calendar-list" id="events-list">
+                                <li class="list-header">Drago to the calendar</li>
+                                <li>
+                                    <a href="" data-event-class="event-color-success">
+                                        <span class="badge badge-success badge-roundless upper">Meeting</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="" data-event-class="event-color-purple">
+                                        <span class="badge badge-purple badge-roundless upper">Relax</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="" data-event-class="event-color-red">
+                                        <span class="badge badge-red badge-roundless upper">Going Out</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="" data-event-class="event-color-blue">
+                                        <span class="badge badge-blue badge-roundless upper">Meal</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="" data-event-class="event-color-primary">
+                                        <span class="badge badge-warning badge-roundless upper">Basketball</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-8 col-sm-offset-2">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="form-inline">
+                    <label class="col-sm-2 control-label"><strong>Opening time:</strong></label>
+                </div>
+                <div class="col-sm-9 col-sm-offset-3">
+                    <div class="form-block">
+                        <div class="form-group">
+                            <input class="form-control" name="full_name" id="full_name" data-validate="required" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-inline">
+                    <label class="col-sm-2 control-label"><strong>Closing time:</strong></label>
+                </div>
+                <div class="col-sm-9 col-sm-offset-3">
+                    <div class="form-block">
+                        <div class="form-group">
+                            <input class="form-control" name="full_name" id="full_name" data-validate="required" />
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="form-block">
+                        <div class="form-group">
+                            <label class="col-sm-9 col-sm-offset-0 control-label"><strong>Lead	time	(minimum	number	of	minutes	it	takes	to	prepare	for	product	delivery.	</strong></label>
+                            <div class="col-sm-9 col-sm-offset-0 control-label">
+                                <input class="col-xs-1" name="full_name" id="full_name" data-validate="required" />&nbsp;<strong><em>minutes</em></strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="col-sm-9 col-sm-offset-3">
+                        <div class="form-block">
+                            <div class="form-group">
+                                <button class="btn btn-secondary btn-lg">Save</button>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <hr style="height:1px;border:none;color:#333;background-color:#333;" />
+                        <a href="">Add more stores</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<script type="text/javascript">
+    // Calendar Initialization
+    jQuery(document).ready(function($) {
+        // Form to add new event
+        var colors = ['red', 'blue', 'primary', 'success', 'warning', 'info', 'danger', 'purple', 'black', 'gray'];
+
+        $("#add_event_form").on('submit', function(ev) {
+            ev.preventDefault();
+
+            var $event = $(this).find('.form-control'),
+                event_name = $event.val().trim();
+
+            if (event_name.length >= 3) {
+                var color = colors[Math.floor(Math.random() * colors.length)];
+
+                // Create Event Entry
+                $("#events-list").append(
+                    '<li>\
+   					<a href="" data-event-class="event-color-' + color + '">\
+   						<span class="badge badge-' + color + ' badge-roundless upper">' + event_name + '</span>\
+   					</a>\
+   				</li>'
+                );
+
+
+                // Reset draggable
+                $("#events-list li").draggable({
+                    revert: true,
+                    revertDuration: 50,
+                    zIndex: 999
+                });
+
+                // Reset input
+                $event.val('').focus();
+            } else {
+                $event.focus();
+            }
+        });
+
+
+        // Calendar Initialization
+        $('#calendar').fullCalendar({
+            header: {
+                left: 'title',
+                center: '',
+                right: 'month,agendaWeek,agendaDay prev,next'
+            },
+            buttonIcons: {
+                prev: 'prev fa-angle-left',
+                next: 'next fa-angle-right',
+            },
+            defaultDate: '2014-09-12',
+            editable: true,
+            eventLimit: true,
+            events: [{
+                title: 'All Day Event',
+                start: '2014-09-01'
+            }, {
+                title: 'Long Event',
+                start: '2014-09-07',
+                end: '2014-09-10'
+            }, {
+                id: 999,
+                title: 'Repeating Event',
+                start: '2014-09-09T16:00:00'
+            }, {
+                id: 999,
+                title: 'Repeating Event',
+                start: '2014-09-16T16:00:00'
+            }, {
+                title: 'Conference',
+                start: '2014-09-11',
+                end: '2014-09-13'
+            }, {
+                title: 'Meeting',
+                start: '2014-09-12T10:30:00',
+                end: '2014-09-12T12:30:00'
+            }, {
+                title: 'Lunch',
+                start: '2014-09-12T12:00:00'
+            }, {
+                title: 'Meeting',
+                start: '2014-09-12T14:30:00'
+            }, {
+                title: 'Happy Hour',
+                start: '2014-09-12T17:30:00'
+            }, {
+                title: 'Dinner',
+                start: '2014-09-12T20:00:00'
+            }, {
+                title: 'Birthday Party',
+                start: '2014-09-13T07:00:00'
+            }, {
+                title: 'Click for Google',
+                url: 'http://google.com/',
+                start: '2014-09-28'
+            }],
+            droppable: true,
+            drop: function(date) {
+
+                var $event = $(this).find('a'),
+                    eventObject = {
+                        title: $event.find('.badge').text(),
+                        start: date,
+                        className: $event.data('event-class')
+                    };
+
+                $('#calendar').fullCalendar('renderEvent', eventObject, true);
+
+                // Remove event from list
+                $(this).remove();
+            }
+        });
+
+
+        // Draggable Events
+        $("#events-list li").draggable({
+            revert: true,
+            revertDuration: 50,
+            zIndex: 999
+        });
+    });
+</script>

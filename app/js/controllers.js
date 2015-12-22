@@ -9,6 +9,7 @@ angular.module('xenon.controllers', []).
 		$rootScope.isLockscreenPage   = false;
 		$rootScope.isMainPage         = false;
 	}).
+
 	controller('LoginLightCtrl', function($scope, $rootScope,Configurations)
 	{
 		//alert(Configurations.Hostserver);
@@ -47,6 +48,7 @@ angular.module('xenon.controllers', []).
 
 
 	}).
+
 	controller('LockscreenCtrl', function($scope, $rootScope)
 	{
 		$rootScope.isLoginPage        = false;
