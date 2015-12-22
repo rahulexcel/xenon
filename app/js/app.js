@@ -54,7 +54,7 @@ app.config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, ASS
 		}).
  	state('navbar.login', {
 			url: '/login',
-			templateUrl: appHelper.templatePath('login-light'),
+			templateUrl: "app/login/login.html",
 			controller: 'LoginLightCtrl',
 			resolve: {
 				resources: function($ocLazyLoad){
@@ -66,7 +66,7 @@ app.config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, ASS
 		}).
  	state('navbar.singup', {
 			url: '/signup',
-			templateUrl: appHelper.templatePath('signup'),
+			templateUrl: "app/signup/signup.html",
 			controller: 'signupCtrl',
 			resolve: {
 				resources: function($ocLazyLoad){
@@ -78,7 +78,7 @@ app.config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, ASS
 		}).
  		state('navbar.projectstoreinformation', {
 			url: '/projectinfo',
-			templateUrl: appHelper.templatePath('projectstoreinformation'),
+			templateUrl: "app/productinfo/productstoreinformation.html",
 			// controller: 'signupCtrl',
 			resolve: {
 				bootstrap: function($ocLazyLoad){
@@ -107,7 +107,7 @@ app.config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, ASS
 		}).
  	state('navbar.reset', {
 			url: '/reset',
-			templateUrl: appHelper.templatePath('reset'),
+			templateUrl: "app/resetpassword/reset.html",
 			controller: 'LoginLightCtrl',
 			resolve: {
 				resources: function($ocLazyLoad){
