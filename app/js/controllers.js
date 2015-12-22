@@ -3,13 +3,41 @@
 angular.module('xenon.controllers', []).
 	controller('LoginCtrl', function($scope, $rootScope)
 	{
+
 		$rootScope.isLoginPage        = true;
 		$rootScope.isLightLoginPage   = false;
 		$rootScope.isLockscreenPage   = false;
 		$rootScope.isMainPage         = false;
 	}).
-	controller('LoginLightCtrl', function($scope, $rootScope)
+	controller('LoginLightCtrl', function($scope, $rootScope,Configurations)
 	{
+		//alert(Configurations.Hostserver);
+
+		$rootScope.isLoginPage        = true;
+		$rootScope.isLightLoginPage   = true;
+		$rootScope.isLockscreenPage   = false;
+		$rootScope.isMainPage         = false;
+		
+
+
+	}).
+	controller('signupCtrl', function($scope, $rootScope,Configurations, ajaxRequest )
+	{   
+
+		$scope.signup=function(){
+			 var hash = CryptoJS.SHA256($scope.password);
+			 var stringpassword= hash.toString(CryptoJS.enc.Hex);
+				
+			ajaxRequest.send('/reg', {
+                        email: $scope.Email,
+                        password: stringpassword
+                    },
+                    'POST')
+                .then(function(response) {
+        console.log(response);          
+				  		});
+            }
+		 
 		$rootScope.isLoginPage        = true;
 		$rootScope.isLightLoginPage   = true;
 		$rootScope.isLockscreenPage   = false;

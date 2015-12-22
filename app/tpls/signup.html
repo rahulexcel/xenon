@@ -1,10 +1,9 @@
 
-<div class="login-container" style="
-    height: 100px;">
+<div class="login-container">
             
 	<div class="row">
-
-		<div class="col-sm-6" style="margin-left: 220px;bottom: 100px;">
+   
+		<div class="col-sm-6 col-sm-offset-3">
 
 			
 
@@ -15,34 +14,31 @@
 
 				<div class="login-header">
 					<a href="#/app/dashboard-variant-1" class="logo">
-						<img src="assets/images/logo-white-bg@2x.png" alt="" width="80" />
-						<span>log in</span>
+						
+						<strong>SIGN UP</strong>
 					</a>
 
 					<p>Resgistration!</p>
 				</div>
 
 
+				
 				<div class="form-group">
 					<label class="control-label" for="Email">Email</label>
-					<input type="text" class="form-control" name="Email" id="Email" autocomplete="off" />
-				</div>
-				<div class="form-group">
-					<label class="control-label" for="username">Username</label>
-					<input type="text" class="form-control" name="username" id="username" autocomplete="off" />
+					<input type="Email" class="form-control" name="Email" id="Email" autocomplete="off" ng-model="Email" />
 				</div>
 
 				<div class="form-group">
 					<label class="control-label" for="passwd">Password</label>
-					<input type="password" class="form-control" name="passwd" id="passwd" autocomplete="off" />
+					<input type="password" class="form-control" name="passwd" id="passwd" autocomplete="off" ng-model="password"/>
 				</div>
-				<div class="form-group">
+				<!-- <div class="form-group">
 					<label class="control-label" for="cpasswd"> Confirm Password</label>
 					<input type="password" class="form-control" name="cpasswd" id="cpasswd" autocomplete="off" />
-				</div>
+				</div> -->
 
 				<div class="form-group">
-					<button type="submit" class="btn btn-primary  btn-block text-left">
+					<button type="submit" class="btn btn-primary  btn-block text-left" ng-click="signup()">
 						<i class="fa-lock"></i>
 						Sign Up
 					</button>

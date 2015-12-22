@@ -2,7 +2,7 @@
 
 var app = angular.module('xenon-app', [
 	'ngCookies',
-
+     'ngResource',
 	'ui.router',
 	'ui.bootstrap',
 
@@ -31,17 +31,28 @@ app.run(function()
 
 app.config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, ASSETS){
 
-	$urlRouterProvider.otherwise('/');
+	$urlRouterProvider.otherwise('/navbar/login');
 
-	$stateProvider.
-		// Main Layout Structure
-		state('/#', {
-			url: '/',
+ 	$stateProvider.
+ 	state('navbar', {
+			url: '/navbar',
 			templateUrl: appHelper.templatePath('navbar'),
-			
-		
+			abstract : true,
+			controller: function($rootScope){
+				$rootScope.isLoginPage        = false;
+				$rootScope.isLightLoginPage   = false;
+				$rootScope.isLockscreenPage   = false;
+				$rootScope.isMainPage         = true;
+			},
+			resolve: {
+				resources: function($ocLazyLoad){
+					return $ocLazyLoad.load([
+						ASSETS.forms.jQueryValidate,
+					]);
+				},
+			}
 		}).
-		state('/login', {
+ 	state('navbar.login', {
 			url: '/login',
 			templateUrl: appHelper.templatePath('login-light'),
 			controller: 'LoginLightCtrl',
@@ -53,10 +64,10 @@ app.config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, ASS
 				},
 			}
 		}).
-          state('/reset', {
-			url: '/reset',
-			templateUrl: appHelper.templatePath('reset'),
-			//controller: 'LoginLightCtrl',
+ 	state('navbar.singup', {
+			url: '/signup',
+			templateUrl: appHelper.templatePath('signup'),
+			controller: 'signupCtrl',
 			resolve: {
 				resources: function($ocLazyLoad){
 					return $ocLazyLoad.load([
@@ -64,14 +75,40 @@ app.config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, ASS
 					]);
 				},
 			}
-			
-				
-			
 		}).
-          state('/signup', {
-			url: '/signup',
-			templateUrl: appHelper.templatePath('signup'),
-			//controller: 'LoginLightCtrl',
+ 		state('navbar.projectstoreinformation', {
+			url: '/projectinfo',
+			templateUrl: appHelper.templatePath('projectstoreinformation'),
+			// controller: 'signupCtrl',
+			resolve: {
+				bootstrap: function($ocLazyLoad){
+					return $ocLazyLoad.load([
+						ASSETS.core.bootstrap,
+					]);
+				},
+				bootstrapWysihtml5: function($ocLazyLoad){
+					return $ocLazyLoad.load([
+						ASSETS.forms.bootstrapWysihtml5,
+					]);
+				},
+				uikit: function($ocLazyLoad){
+					return $ocLazyLoad.load([
+						ASSETS.uikit.base,
+						ASSETS.uikit.codemirror,
+						ASSETS.uikit.marked,
+					]);
+				},
+				uikitHtmlEditor: function($ocLazyLoad){
+					return $ocLazyLoad.load([
+						ASSETS.uikit.htmleditor,
+					]);
+				},
+			}
+		}).
+ 	state('navbar.reset', {
+			url: '/reset',
+			templateUrl: appHelper.templatePath('reset'),
+			controller: 'LoginLightCtrl',
 			resolve: {
 				resources: function($ocLazyLoad){
 					return $ocLazyLoad.load([
@@ -80,7 +117,12 @@ app.config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, ASS
 				},
 			}
 		});
-	});
+ });
+
+
+
+  
+		
 
 app.constant('ASSETS', {
 	'core': {

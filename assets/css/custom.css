@@ -1,0 +1,11 @@
+/*html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    border: none;
+}*/
+.login-page {
+    background: #2c2e2f;
+    color: #fff;
+    padding-top: 0;
+}
