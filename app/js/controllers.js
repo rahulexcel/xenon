@@ -34,7 +34,8 @@ angular.module('xenon.controllers', []).
                     },
                     'POST')
                 .then(function(response) {
-        console.log(response);          
+        console.log(response);  
+        $rootScope.isMainPage         = true;        
 				  		});
             }
 		 

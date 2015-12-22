@@ -76,6 +76,39 @@ app.config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, ASS
 				},
 			}
 		}).
+ 	state('dashboard', {
+			url: '/dashboard',
+			templateUrl: appHelper.templatePath('dashboard'),
+			abstract : true,
+			controller: function($rootScope){
+				$rootScope.isLoginPage        = false;
+				$rootScope.isLightLoginPage   = false;
+				$rootScope.isLockscreenPage   = false;
+				$rootScope.isMainPage         = true;
+			},
+			resolve: {
+				resources: function($ocLazyLoad){
+					return $ocLazyLoad.load([
+						ASSETS.forms.jQueryValidate,
+					]);
+				},
+			}
+		}).
+ 	state('dashboard.setting', {
+			url: '/setting',
+			templateUrl: 'app/setting/setting.html',
+			controller: 'settingController',
+		}).
+ 	state('dashboard.payment', {
+			url: '/payment',
+			templateUrl: 'app/payment/payment.html',
+			controller: 'paymentController',
+		}).
+ 	state('dashboard.addProduct', {
+			url: '/addProduct',
+			templateUrl: 'app/addproduct/addproduct.html',
+			controller: 'addProductController',
+		}).
  		state('navbar.projectstoreinformation', {
 			url: '/projectinfo',
 			templateUrl: appHelper.templatePath('projectstoreinformation'),
