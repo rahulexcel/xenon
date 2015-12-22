@@ -109,6 +109,16 @@ app.config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, ASS
 			templateUrl: 'app/addproduct/addproduct.html',
 			controller: 'addProductController',
 		}).
+ 	state('dashboard.productOrders', {
+			url: '/productOrders',
+			templateUrl: 'app/productorders/productorders.html',
+			controller: 'productOrdersController',
+		}).
+ 	state('dashboard.orderDetails', {
+			url: '/orderDetails',
+			templateUrl: 'app/orderdetails/orderdetails.html',
+			controller: 'orderDetailsController',
+		}).
  		state('navbar.projectstoreinformation', {
 			url: '/projectinfo',
 			templateUrl: "app/productinfo/productstoreinformation.html",
