@@ -7,7 +7,7 @@ var app = angular.module('xenon-app', [
 	'ui.bootstrap',
      'ngAnimate',
 	'oc.lazyLoad',
-
+	'ngStorage',
 	'xenon.controllers',
 	'xenon.directives',
 	'xenon.factory',
