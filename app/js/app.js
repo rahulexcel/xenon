@@ -12,7 +12,6 @@ var app = angular.module('xenon-app', [
 	'xenon.directives',
 	'xenon.factory',
 	'xenon.services',
-
 	// Added in v1.3
 	'FBAngular'
 ]);

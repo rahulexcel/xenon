@@ -9,3 +9,8 @@
     color: #fff;
     padding-top: 0;
 }
+.file {
+  visibility: hidden;
+  position: absolute;
+}
+
