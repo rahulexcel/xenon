@@ -4,12 +4,11 @@ angular.module('xenon.controllers').
 	{   
 
 		$scope.signup=function(){
-			 var hash = CryptoJS.SHA256($scope.password);
-			 var stringpassword= hash.toString(CryptoJS.enc.Hex);
-				
+			 // var hash = CryptoJS.SHA256($scope.password);
+			 // var stringpassword= hash.toString(CryptoJS.enc.Hex);	
 			ajaxRequest.send('/reg', {
                         email: $scope.Email,
-                        password: stringpassword
+                        password: $scope.password
                     },
                     'POST')
                 .then(function(response) {
