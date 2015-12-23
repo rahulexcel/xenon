@@ -1,57 +1,36 @@
-
 <div class="login-container">
-            
-	<div class="row">
-   
-		<div class="col-sm-6 col-sm-offset-3">
-
-			
-
-			
-
-			
-			<form method="post" role="form" id="login" class="login-form fade-in-effect in">
-
-				<div class="login-header">
-					<a href="#/app/dashboard-variant-1" class="logo">
-						
-						<strong>SIGN UP</strong>
-					</a>
-
-					<p>Resgistration!</p>
-				</div>
-
-
-				
-				<div class="form-group">
-					<label class="control-label" for="Email">Email</label>
-					<input type="Email" class="form-control" name="Email" id="Email" autocomplete="off" ng-model="Email" />
-				</div>
-
-				<div class="form-group">
-					<label class="control-label" for="passwd">Password</label>
-					<input type="password" class="form-control" name="passwd" id="passwd" autocomplete="off" ng-model="password"/>
-				</div>
-				<!-- <div class="form-group">
-					<label class="control-label" for="cpasswd"> Confirm Password</label>
-					<input type="password" class="form-control" name="cpasswd" id="cpasswd" autocomplete="off" />
-				</div> -->
-
-				<div class="form-group">
-					<button type="submit" class="btn btn-primary  btn-block text-left" ng-click="signup()">
-						<i class="fa-lock"></i>
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+            <form method="post" role="form" id="signupform" class="login-form fade-in-effect in" name="signup" novalidate>
+                <div class="login-header">
+                    <a href="#/app/dashboard-variant-1" class="logo">
+                        <strong>SIGN UP</strong>
+                    </a>
+                    <p>Resgistration!</p>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="Email">Email</label>
+                    <input type="Email" class="form-control" name="Email" id="Email" autocomplete="off" ng-model="email" required/>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="passwd">Password</label>
+                    <input type="password" class="form-control" name="passwd" id="passwd" autocomplete="off" ng-model="password" required/>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary  btn-block text-left" ng-click="signup()" ng-disabled="signup.$invalid">
+					
 						Sign Up
-					</button>
-				</div>
 
-				
-			</form>
-
-			
-			</div>
-
-		</div>
-
-	</div>
-
+						
+                        <i class="fa-lock"></i>
+                        <span ng-show="spinner">
+                            <i class="fa fa-spin fa-spinner"></i>
+                        </span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
+
+	

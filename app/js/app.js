@@ -5,7 +5,7 @@ var app = angular.module('xenon-app', [
      'ngResource',
 	'ui.router',
 	'ui.bootstrap',
-
+     'ngAnimate',
 	'oc.lazyLoad',
 
 	'xenon.controllers',
@@ -128,8 +128,9 @@ app.config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, ASS
  		state('dashboard.storeinfo', {
 			url: '/storeinfo',
 			templateUrl: "app/storeinfo/storeinfo.html",
-			// controller: 'signupCtrl',
-			resolve: {
+	        controller: 'storeinfoCtrl',
+
+		resolve: {
 				bootstrap: function($ocLazyLoad){
 					return $ocLazyLoad.load([
 						ASSETS.core.bootstrap,

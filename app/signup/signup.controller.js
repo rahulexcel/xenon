@@ -1,23 +1,23 @@
-angular.module('xenon.controllers').
-	controller('signupCtrl', signupCtrl); 
-		function signupCtrl($scope, $rootScope,Configurations, ajaxRequest )
-	{   
+(function() {
+   'use strict';
+angular
+   .module('xenon.controllers')
+   .controller('signupCtrl', signupCtrl);
 
-		$scope.signup=function(){
-			 // var hash = CryptoJS.SHA256($scope.password);
-			 // var stringpassword= hash.toString(CryptoJS.enc.Hex);	
-			ajaxRequest.send('/reg', {
-                        email: $scope.Email,
-                        password: $scope.password
-                    },
-                    'POST')
-                .then(function(response) {
-        console.log(response);          
-				  		});
-            }
-		 
-		$rootScope.isLoginPage        = true;
-		$rootScope.isLightLoginPage   = true;
-		$rootScope.isLockscreenPage   = false;
-		$rootScope.isMainPage         = false;
-	}
+function signupCtrl($scope, $rootScope, Configurations, signupFactory) {
+
+    $scope.signup = function() {
+        $scope.spinner = "true";
+       var query = signupFactory.save({email: $scope.email, password: $scope.password});
+       query.$promise.then(function(data) {
+                       console.log(data);
+                       $scope.spinner = false;
+                   });
+    }   
+
+    $rootScope.isLoginPage = true;
+    $rootScope.isLightLoginPage = true;
+    $rootScope.isLockscreenPage = false;
+    $rootScope.isMainPage = false;
+}
+})();

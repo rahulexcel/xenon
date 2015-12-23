@@ -1,5 +1,6 @@
 
-
+// (function() {
+//    'use strict';
 // angular.module('xenon-app')
 //   .factory('myInterceptor', function ($q) {
 //             var requestInterceptor = {
@@ -21,3 +22,4 @@
 //             };
 //             return requestInterceptor;
 //         });
+//   })();
