@@ -6,7 +6,7 @@
 //             var requestInterceptor = {
 //                 request: function (config) {
                                         
-//                         config.headers = {'Content-Type': 'application/x-www-form-urlencoded'};
+//                         // config.headers = {'Content-Type': 'application/x-www-form-urlencoded'};
                     
 //                     var deferred = $q.defer();
 
