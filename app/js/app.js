@@ -76,13 +76,37 @@ app.config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, ASS
 				},
 			}
 		}).
-
+ 	state('dashboard.setting', {
+			url: '/setting',
+			templateUrl: 'app/setting/setting.html',
+			controller: 'settingController',
+		}).
+ 	state('dashboard.payment', {
+			url: '/payment',
+			templateUrl: 'app/payment/payment.html',
+			controller: 'paymentController',
+		}).
+ 	state('dashboard.addProduct', {
+			url: '/addProduct',
+			templateUrl: 'app/addproduct/addproduct.html',
+			controller: 'addProductController',
+		}).
+ 	state('dashboard.productOrders', {
+			url: '/productOrders',
+			templateUrl: 'app/productorders/productorders.html',
+			controller: 'productOrdersController',
+		}).
+ 	state('dashboard.orderDetails', {
+			url: '/orderDetails',
+			templateUrl: 'app/orderdetails/orderdetails.html',
+			controller: 'orderDetailsController',
+		}).
  		state('dashboard.storeinfo', {
 			url: '/storeinfo',
 			templateUrl: "app/storeinfo/storeinfo.html",
+	        controller: 'storeinfoCtrl',
 
-			 controller: 'storeinfoCtrl',
-			resolve: {
+		resolve: {
 				bootstrap: function($ocLazyLoad){
 					return $ocLazyLoad.load([
 						ASSETS.core.bootstrap,
