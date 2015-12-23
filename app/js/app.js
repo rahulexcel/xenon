@@ -45,11 +45,11 @@ app.config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, ASS
 				$rootScope.isMainPage         = true;
 			},
 			resolve: {
-				resources: function($ocLazyLoad){
+				bootstrap: function($ocLazyLoad){
 					return $ocLazyLoad.load([
-						ASSETS.forms.jQueryValidate,
+						ASSETS.core.bootstrap,
 					]);
-				},
+				}
 			}
 		}).
  	state('dashboard.login', {
@@ -89,6 +89,30 @@ app.config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, ASS
  	state('dashboard.addProduct', {
 			url: '/addProduct',
 			templateUrl: 'app/addproduct/addproduct.html',
+			resolve: {
+				bootstrap: function($ocLazyLoad){
+					return $ocLazyLoad.load([
+						ASSETS.core.bootstrap,
+					]);
+				},
+				bootstrapWysihtml5: function($ocLazyLoad){
+					return $ocLazyLoad.load([
+						ASSETS.forms.bootstrapWysihtml5,
+					]);
+				},
+				uikit: function($ocLazyLoad){
+					return $ocLazyLoad.load([
+						ASSETS.uikit.base,
+						ASSETS.uikit.codemirror,
+						ASSETS.uikit.marked,
+					]);
+				},
+				uikitHtmlEditor: function($ocLazyLoad){
+					return $ocLazyLoad.load([
+						ASSETS.uikit.htmleditor,
+					]);
+				},
+			},
 			controller: 'addProductController',
 		}).
  	state('dashboard.productOrders', {
@@ -142,22 +166,7 @@ app.config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, ASS
 					]);
 				},
 			}
-		}).
- 	  state('dashboard.setting', {
-            url: '/setting',
-            templateUrl: 'app/setting/setting.html',
-            controller: 'settingController',
-        }).
-    state('dashboard.payment', {
-            url: '/payment',
-            templateUrl: 'app/payment/payment.html',
-            controller: 'paymentController',
-        }).
-    state('dashboard.addProduct', {
-            url: '/addProduct',
-            templateUrl: 'app/addproduct/addproduct.html',
-            controller: 'addProductController',
-        });
+		});
  });
 
 

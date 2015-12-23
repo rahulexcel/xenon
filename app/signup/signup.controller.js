@@ -9,13 +9,15 @@ function signupCtrl($scope, $rootScope, Configurations, signupFactory) {
 
     $scope.signup = function() {
         $scope.spinner = "true";
-        var hash = CryptoJS.SHA256($scope.password);
-        var stringpassword = hash.toString(CryptoJS.enc.Hex);
+        
 
-       var query = signupFactory.save({email: $scope.email, password: stringpassword});
+       var query = signupFactory.save({email: $scope.email, password: $scope.password});
        query.$promise.then(function(data) {
-                       console.log(data);
-                       $scope.spinner = false;
+                       if(data.success=="true");{
+                       	$scope.info="Registration successfull";
+                       	 $scope.spinner = false;
+                       }
+                      
                    });
     }   
 
