@@ -9,30 +9,34 @@
 		<img src="assets/images/logo-white-bg@2x.png"  alt="" class="navbar-brand"/>
 	</div>
 	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-		<ul class="nav navbar-nav navbar-right">
+		<ul class="nav navbar-nav navbar-right" ng-show="navMenu">
 			<li>
 				<a href="#/dashboard/login">LOG IN</a>
 			</li>
 			<li>
 				<a href="#/dashboard/signup">SIGN UP</a>
 			</li>
+		</ul>
+		<ul class="nav navbar-nav navbar-right" ng-show="userNavMenu">
 			<li>
-				<a href="#/dashboard/addProduct">Add product</a>
+				<a href="#/dashboard/addProduct">Add PRODUCT</a>
 			</li>
 			<li>
-				<a href="#/dashboard/setting">Setting</a>
+				<a href="#/dashboard/setting">SETTING</a>
 			</li>
 			<li>
-				<a href="#/dashboard/payment">Payment</a>
+				<a href="#/dashboard/payment">PAYMENT</a>
 			</li>
 			<li>
-				<a href="#/dashboard/storeinfo">Store info</a>
+				<a href="#/dashboard/storeinfo">STORE INFO</a>
 			</li>
 			<li>
-				<a href="#/dashboard/orderDetails">Order Details</a>
+				<a href="#/dashboard/orderDetails">ORDER DETAILS</a>
 			</li>
 			<li>
-				<a href="#/dashboard/productOrders">Product Orders</a>
+				<a href="#/dashboard/productOrders">PRODUCT ORDERS</a>
+			</li>
+			<li ng-click="logout()"><a>LOGOUT</a>
 			</li>
 		</ul>
 	</div>

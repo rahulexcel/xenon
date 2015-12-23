@@ -15,7 +15,8 @@
                         <div class="col-sm-5">
                             <strong>Store is located in</strong>
                             <p>
-                                <select class="form-control">
+                            
+                                <select class="form-control" id="country" name ="country">
                                     <option value="Option 1">Option 1</option>
                                     <option value="Option 2">Option 2</option>
                                 </select>
@@ -45,26 +46,19 @@
                                 </p>
                             </div>
                             <div class="col-sm-5">
-                                <strong>Tax applies in</strong>
+                                <!-- <strong>Tax applies in</strong>
                                 <p>
                                     <select class="form-control">
                                         <option value="Option 1">Option 1</option>
                                         <option value="Option 2">Option 2</option>
                                     </select>
-                                </p>
+                                </p> -->
                             </div>
                             <div class="col-sm-10">
                                 <br>
                                 <div class="panel-body">
                                         <strong>All my prices include tax</strong>
                                     <p>if 'No' tax will be added on the top of your product and shipping prices.</p>
-                                    <div class="form-block">
-                                        <input type="checkbox" checked="" class="iswitch-lg iswitch-info">
-                                    </div>
-                                    <h5>
-                                        <strong>Apply tax to shipping</strong>
-                                    </h5>
-                                    <p>Apply the same tax rateon the shipping cost.</p>
                                     <div class="form-block">
                                         <input type="checkbox" checked="" class="iswitch-lg iswitch-info">
                                     </div>
@@ -76,18 +70,20 @@
 
                     <div class="form-group-separator"></div>
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">Country &amp; Currency</label>
+                        <label class="col-sm-2 control-label">Translation</label>
                         <div class="col-sm-4">
                             <strong>Storefront language</strong>
                             <p>
                                 <select class="form-control">
-                                    <option value="Option 1">Option 1</option>
-                                    <option value="Option 2">Option 2</option>
+                                    <option value="Option 1">English</option>
+                                    <option value="Option 2">Other</option>
                                 </select>
                             </p>
                         </div>
                     </div>
-                    <div class="form-group-separator"></div>
+                    <!-- Do not delete below commented area -->
+                    
+                    <!-- <div class="form-group-separator"></div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Legal</label>
                         <div class="col-sm-10">
@@ -114,7 +110,7 @@
                         </div>
                         </div>
                         </div>
-                    </div>
+                    </div> -->
                 </form>
             </div>
         </div>
@@ -122,3 +118,6 @@
     <div class="col-sm-1"></div>
 
 </div>
+<script language="javascript">
+populateCountries("country");
+ </script>

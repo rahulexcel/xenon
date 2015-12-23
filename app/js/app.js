@@ -50,7 +50,8 @@ app.config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, ASS
 						ASSETS.core.bootstrap,
 					]);
 				}
-			}
+			},
+			controller: 'navbarController'
 		}).
  	state('dashboard.login', {
 			url: '/login',
