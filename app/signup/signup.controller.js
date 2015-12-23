@@ -10,8 +10,11 @@ function signupCtrl($scope, $rootScope, Configurations, signupFactory) {
         $scope.spinner = "true";
        var query = signupFactory.save({email: $scope.email, password: $scope.password});
        query.$promise.then(function(data) {
-                       console.log(data);
-                       $scope.spinner = false;
+                       if(data.success=="true");{
+                       	$scope.info="Registration successfull";
+                       	 $scope.spinner = false;
+                       }
+                      
                    });
     }   
 
