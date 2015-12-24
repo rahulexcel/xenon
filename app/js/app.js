@@ -9,6 +9,7 @@ var app = angular.module('xenon-app', [
 	'oc.lazyLoad',
     'angularFileUpload',
 	'ngStorage',
+	'ngFileUpload',
 	'xenon.controllers',
 	'xenon.directives',
 	'xenon.factory',
