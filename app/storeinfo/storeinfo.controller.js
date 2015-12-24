@@ -4,14 +4,8 @@ angular
 
 .controller('storeinfoCtrl', storeinfoCtrl);
 
-function storeinfoCtrl($scope, $log) {
-
+function storeinfoCtrl($scope, $log,  FileUploader, storeinfoFactory) {
   $scope.mytime = new Date();
-
-  $scope.hstep = 1;
-
-  $scope.mstep = 15;
-
   $scope.options = {
 
     hstep: [1, 2, 3],
@@ -19,37 +13,39 @@ function storeinfoCtrl($scope, $log) {
     mstep: [1, 5, 10, 15, 25, 30]
 
   };
-
-  $scope.ismeridian = true;
-
-  $scope.toggleMode = function() {
-
-    $scope.ismeridian = ! $scope.ismeridian;
-
+$scope.openingtime = function () {
+    $log.log('Time changed to: ' + $scope.open);
   };
 
-  $scope.update = function() {
-
-    var d = new Date();
-
-    d.setHours( 14 );
-
-    d.setMinutes( 0 );
-
-    $scope.mytime = d;
-
+ 
+  
+  $scope.closingtime = function () {
+    $log.log('Time changed to: ' + $scope.close);
   };
 
-  $scope.changed = function () {
+  
+  $scope.lsave=function(){
+    //alert($scope.open);
+   // alert($scope.close);
+    $scope.ldesc = angular.element(document.querySelector('#uikit_editor_2')).val();
+    var query = storeinfoFactory.save({lname: $scope.lname, ldesc: $scope.ldesc,lemail: $scope.lemail, llgo: $scope.llogo,laddr: $scope.laddr, lpostcode: $scope.lpostcode,lcity: $scope.city, lcountry: $scope.lcountry,lphone: $scope.lphone, llt: $scope.llt,lmessage: $scope.lmessage, lopentime:$scope.open, lclosetime:$scope.close});   
+       query.$promise.then(function(data) {
+                      console.log(data);
+                      
+                   });
+    }   
+   
+  
+    var uploader = $scope.uploader = new FileUploader({ 
 
-    $log.log('Time changed to: ' + $scope.mytime);
+        });
+   uploader.filters.push({
+            name: 'imageFilter',
+            fn: function(item, options) {
+                var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
+                return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
+            }
 
-  };
-
-  $scope.clear = function() {
-
-    $scope.mytime = null;
-
-  };
-
+        });
+    
 }
