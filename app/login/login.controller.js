@@ -22,7 +22,7 @@ controller('LoginLightCtrl', LoginLightCtrl);
                         localStorageService.set('userData',{'userid': data.userid, 'eid': data.eid, 'locations': data.locations, 'token': data.token});
                         $rootScope.userNavMenu = true;
                         $rootScope.navMenu = false;
-                        $state.go('dashboard.setting');
+                        $state.go('dashboard.storeinfo');
                     });
             };
 	}
