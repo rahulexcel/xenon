@@ -68,7 +68,7 @@
                             
                             <input type="text" class="form-control">
                             <span class="input-group-addon">
-                                <i class="linecons-pencil"></i>
+                                <i class="linecons-pencil"></i><i class="fa fa-infinite"></i>
                             </span>
                         </div>
                     </div>
@@ -102,10 +102,21 @@
 
    jQuery.UIkit.htmleditor(jQuery("#uikit_editor_2"), {
        markdown: true,
-       mode: 'tab'
+       mode: 'split',
+       lblPreview: ''
    });
 
   Dropzone.options.dropzone = {
+    maxFiles: 1,
+    accept: function(file, done) {
+    console.log("uploaded");
+    done();
+    },
+    init: function() {
+    this.on("maxfilesexceeded", function(file){
+        this.removeFile(file);
+    });
+  },
   acceptedFiles: 'image/*'
 };
 </script>

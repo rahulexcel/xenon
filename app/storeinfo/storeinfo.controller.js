@@ -1,18 +1,18 @@
-
 angular
+
 .module('xenon.controllers')
+
 .controller('storeinfoCtrl', storeinfoCtrl);
+
 function storeinfoCtrl($scope, $log,  FileUploader, storeinfoFactory) {
   $scope.mytime = new Date();
-
-  $scope.hstep = 1;
-  $scope.mstep = 15;
-
   $scope.options = {
-    hstep: [1, 2, 3],
-    mstep: [1, 5, 10, 15, 25, 30]
-  };
 
+    hstep: [1, 2, 3],
+
+    mstep: [1, 5, 10, 15, 25, 30]
+
+  };
 $scope.openingtime = function () {
     $log.log('Time changed to: ' + $scope.open);
   };

@@ -1,7 +1,12 @@
-angular.module('xenon.controllers').
+(function() {
+   'use strict';
+
+angular.module('xenon-app').
 controller('LoginLightCtrl', LoginLightCtrl);
-	function LoginLightCtrl($scope, $rootScope, ajaxRequest, loginFactory)
+	function LoginLightCtrl($scope, $rootScope, ajaxRequest, loginFactory, localStorageService, $log, $state)
 	{
+		$log.debug('Login Controller');
+		$rootScope.navMenu = true;
 		$rootScope.isLoginPage        = true;
 		$rootScope.isLightLoginPage   = true;
 		$rootScope.isLockscreenPage   = false;
@@ -13,8 +18,12 @@ controller('LoginLightCtrl', LoginLightCtrl);
 			 var stringpassword = hash.toString(CryptoJS.enc.Hex);
 			var query = loginFactory.save({email: $scope.email, password: stringpassword});
 			query.$promise.then(function(data) {
-                        console.log(data);
                         $scope.spinner = false;
+                        localStorageService.set('userData',{'userid': data.userid, 'eid': data.eid, 'locations': data.locations, 'token': data.token});
+                        $rootScope.userNavMenu = true;
+                        $rootScope.navMenu = false;
+                        $state.go('dashboard.setting');
                     });
             };
 	}
+})();
