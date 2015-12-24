@@ -1,7 +1,5 @@
- 
-
 <div class="row">
-  <div class="col-sm-1"></div>
+    <div class="col-sm-1"></div>
     <div class="col-sm-10">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -12,63 +10,66 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Store Description</label>
                         <div class="col-sm-10">
-                        <div class="row">
-                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-sm-12">
                                     <label class="control-label" for="full_name">
                                         <strong>Name</strong>
                                     </label>
-                                    <input class="form-control" name="full_name" id="full_name" data-validate="required" />
-                        </div>
-                        <div class="col-sm-12">
-                                    <label class="control-label" for="full_name"><strong>Description</strong></label>
-                                    <textarea class="form-control" rows="10" id="uikit_editor_2">#Heading
+                                    <input class="form-control" name="full_name" id="full_name" data-validate="required" ng-model="lname" />
+                                </div>
+                                <div class="col-sm-12">
+                                    <label class="control-label" for="full_name">
+                                        <strong>Description</strong>
+                                    </label>
+                                    <textarea class="form-control" rows="10" id="uikit_editor_2" ng-model="ldesc">#Heading
                                     </textarea>
-                               
-                        </div>
-                        <div class="col-sm-9 ">
-                        <br/><br/>
-                                   <form action="data/upload-file.php" class="dropzone"></form>
-                                    <label class="control-label" for="full_name"><strong>Logo</strong></label>
-                                     <div class="form-group">
-                                          <input type="file" name="img[]" class="file">
-                                          <div class="input-group col-xs-8 col-sm-offset-2">
-                                          <span class="input-group-addon"><i class="glyphicon glyphicon-picture"></i></span>
-                                           <input type="text" class="form-control input-lg" disabled placeholder="Upload Image">
-                                        <span class="input-group-btn">
-                               <button class="browse btn btn-primary input-lg" type="button"><i class="glyphicon glyphicon-search"></i> Browse</button>
-                              </span>
-                                 </div>
-                                   </div>
-                               
-                               
-                        </div>
-                        </div>
+                                </div>
+                                <div class="col-sm-9 ">
+                                    <br/>
+                                    <br/>
+
+                                    <label class="control-label" for="full_name">
+                                        <strong>Logo</strong>
+                                    </label>
+                                    <br/>
+                                    <span class="file-input btn btn-blue btn-file">
+                                       Browse&hellip; 
+                                        <input type="file" nv-file-select="" uploader="uploader" single>
+                                        </span>
+                                         <strong ng-model="imagename">{{uploader.queue.file.name[0]}}</strong>
+                                    <div ng-repeat="item in uploader.queue">
+                                       
+                                        <div ng-show="uploader.isHTML5" ng-thumb="{ file: item._file, height: 100 }"></div>
+                                           <button type="button" class="btn btn-success btn-xs" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
+                                                <span class="glyphicon glyphicon-upload"></span> Upload                         
+                                            </button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    
-                    <hr>
 
-                     
-                   
-                      <div class="form-group-separator"></div>
-
+                    <div class="form-group-separator"></div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Contact</label>
-                    <div class="col-sm-10">
+                    </div>
+                    <div class="col-sm-9 col-sm-offset-2">
+                        <div class="form-block">
+                            <div class="form-group">
                                 <label class="control-label" for="full_name">
                                     <strong>Contact email</strong>&nbsp;&nbsp;&nbsp;Will be included in emails sent to your customers
                                 </label>
-                                <input class="form-control" name="full_name" id="full_name" data-validate="required" />
+                                <input class="form-control" name="full_name" id="full_name" data-validate="required" ng-model="lemail" />
+                            </div>
+                        </div>
                     </div>
-                    </div>
-
                     <div class="col-sm-9 col-sm-offset-2">
                         <div class="form-block">
                             <div class="form-group">
                                 <label class="control-label" for="full_name">
                                     <strong>Store address</strong>
                                 </label>
-                                <input class="form-control" name="full_name" id="full_name" data-validate="required" />
+                                <input class="form-control" name="full_name" id="full_name" data-validate="required" ng-model="laddr" />
                             </div>
                         </div>
                     </div>
@@ -78,7 +79,37 @@
                                 <label class="control-label" for="full_name">
                                     <strong>Post code</strong>
                                 </label>
-                                <input class="form-control" name="full_name" id="full_name" data-validate="required" />
+                                <input class="form-control" name="full_name" id="full_name" data-validate="required" ng-model="lpostcode" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-9 col-sm-offset-2">
+                        <div class="form-block">
+                            <div class="form-group">
+                                <label class="control-label" for="full_name">
+                                    <strong>City</strong>
+                                </label>
+                                <input class="form-control" name="full_name" id="full_name" data-validate="required" ng-model="lcity" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-9 col-sm-offset-2">
+                        <div class="form-block">
+                            <div class="form-group">
+                                <label class="control-label" for="full_name">
+                                    <strong>State</strong>
+                                </label>
+                                <input class="form-control" name="full_name" id="full_name" data-validate="required" ng-model="lstate" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-9 col-sm-offset-2">
+                        <div class="form-block">
+                            <div class="form-group">
+                                <label class="control-label" for="full_name">
+                                    <strong>Country</strong>
+                                </label>
+                                <input class="form-control" name="full_name" id="full_name" data-validate="required" ng-model="lcountry" />
                             </div>
                         </div>
                     </div>
@@ -88,7 +119,7 @@
                                 <label class="control-label" for="full_name">
                                     <strong>Phone</strong>
                                 </label>
-                                <input class="form-control" name="full_name" id="full_name" data-validate="required" />
+                                <input class="form-control" name="full_name" id="full_name" data-validate="required" ng-model="lphone" />
                             </div>
                         </div>
                     </div>
@@ -96,168 +127,106 @@
                         <hr>
                     </div>
                     <div class="form-group">
-                       <label class="col-sm-2 control-label">Store status</label>
-                        <div class="col-sm-9">  
-                              <label class="control-label" for="full_name">
-                                    <strong>Open to customers</strong>
-                                </label>
-                                <div class="form-block">
-                                        <input type="checkbox" checked="" class="iswitch-lg iswitch-info">
-                                   
-                    </div>
-                 </div> 
-                    </div>
-                   <div>           
-                                   
-
-                               
-<script type="text/javascript">
-    jQuery.UIkit.htmleditor(jQuery("#uikit_editor_2"), {
-        markdown: false
-        
-    });
-</script>
-<script type="text/javascript">
-    jQuery(document).ready(function($) {
-        var i = 1,
-            $example_dropzone_filetable = $("#example-dropzone-filetable"),
-            example_dropzone = $("#advancedDropzone").dropzone({
-                url: 'data/upload-file.php',
-
-                // Events
-                addedfile: function(file) {
-                    if (i == 1) {
-                        $example_dropzone_filetable.find('tbody').html('');
-                    }
-
-                    var size = parseInt(file.size / 1024, 10);
-                    size = size < 1024 ? (size + " KB") : (parseInt(size / 1024, 10) + " MB");
-
-                    var $entry = $('<tr>\
-                            <td class="text-center">' + (i++) + '</td>\
-                            <td>' + file.name + '</td>\
-                            <td><div class="progress progress-striped"><div class="progress-bar progress-bar-warning"></div></div></td>\
-                            <td>' + size + '</td>\
-                            <td>Uploading...</td>\
-                        </tr>');
-
-                    $example_dropzone_filetable.find('tbody').append($entry);
-                    file.fileEntryTd = $entry;
-                    file.progressBar = $entry.find('.progress-bar');
-                },
-
-                uploadprogress: function(file, progress, bytesSent) {
-                    file.progressBar.width(progress + '%');
-                },
-
-                success: function(file) {
-                    file.fileEntryTd.find('td:last').html('<span class="text-success">Uploaded</span>');
-                    file.progressBar.removeClass('progress-bar-warning').addClass('progress-bar-success');
-                },
-
-                error: function(file) {
-                    file.fileEntryTd.find('td:last').html('<span class="text-danger">Failed</span>');
-                    file.progressBar.removeClass('progress-bar-warning').addClass('progress-bar-red');
-                }
-            });
-
-        $("#advancedDropzone").css({
-            minHeight: 200
-        });
-
-    });
-</script>
-       
-             <div class="col-sm-12">
-                        <hr>
-                    </div>
-                <div class="form-group">
-
-                    <label class="col-sm-2 control-label">Closed days:</label>
-                 <div class="col-sm-10">   
-                <section class="calendar-env">
-                    <div class="col-sm-10 calendar-right">
-                        <div class="calendar-main" style="padding:0px;">
-                            <div id="calendar"></div>
-                        </div>
-                    </div>
-                  <div class="col-sm-9 col-sm-offset-4">
-                    <div class="col-sm-3 calendar-right">
-                        <div class="calendar-sidebar">
-        
-                        </div>
-                    </div>
-                    </div>
-                </section>
-                </div>
-                </div>
-          
-
-
-               <div class="col-sm-12">
-                        <hr>
-                    </div>
-                     <div class="form-group">
-                     <label class="col-sm-2 control-label">Timing:</label>
-
-
-                <div class="col-sm-10">
-                    <div class="form-block">
-                         
-                        <div class="form-group">
-                          
-                               <div class="row">
-                               <div class="col-sm-3 "> 
-                               <label class="control-label" for="full_name">
-                                    <strong>Opening time:</strong>
-                                </label>
-                            <timepicker ng-model="mytime" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></timepicker>
+                        <label class="col-sm-2 control-label">Store status</label>
+                        <div class="col-sm-9">
+                            <label class="control-label" for="full_name">
+                                <strong>Open to customers</strong>
+                            </label>
+                            <div class="form-block">
+                                <input type="checkbox" checked="" class="iswitch-lg iswitch-info" ng-model="lstatus">
                             </div>
-                             <div class="col-sm-3"> 
-                              <label class="control-label" for="full_name">
-                                    <strong>&nbsp;&nbsp;Closing time:</strong>
-                                </label>
-                            
-                             <timepicker ng-model="mytime" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></timepicker>
-                             </div>
-                             <div class="col-sm-8"></div>
-                            
                         </div>
                     </div>
-                </div>
-                </div>
-                
-                <div class="col-sm-9 col-sm-offset-2">
-                    <div class="form-block">
-                          
+                    <div>
+                        <div class="col-sm-12">
+                            <hr>
+                        </div>
                         <div class="form-group">
-                            
-                          
+                            <label class="col-sm-2 control-label">Closed days:</label>
+                            <div class="col-sm-10">
+                                <section class="calendar-env">
+                                    <div class="col-sm-10 calendar-right">
+                                        <div class="calendar-main" style="padding:0px;">
+                                            <div id="calendar"></div>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                   <div class="col-sm-9 col-sm-offset-2">
-                    <div class="form-block">
+                        <div class="col-sm-12">
+                            <hr>
+                        </div>
                         <div class="form-group">
-                          <label class="control-label" for="full_name">
-                                    <strong>Lead    time    (minimum    number  of  minutes it  takes   to  prepare for product delivery.) in minuts</strong>
-                                </label><br/>
-                            <input class="col-xs-4" name="full_name" id="full_name" data-validate="required" />
+                            <label class="col-sm-2 control-label">Timing:</label>
+                            <div class="col-sm-10">
+                                <div class="form-block">
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-sm-3 ">
+                                                <label class="control-label" for="full_name">
+                                                    <strong>Opening time:</strong>
+                                                </label>
+                                                <timepicker ng-model="open" ng-change="openingtime()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></timepicker>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <label class="control-label" for="full_name">
+                                                    <strong>&nbsp;&nbsp;Closing time:</strong>
+                                                </label>
+                                                <timepicker ng-model="close" ng-change="closingtime()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></timepicker>
+                                            </div>
+                                            <div class="col-sm-8"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-9 col-sm-offset-2">
+                                <div class="form-block">
+                                    <div class="form-group"></div>
+                                </div>
+                            </div>
+                            <div class="col-sm-9 col-sm-offset-2">
+                                <div class="form-block">
+                                    <div class="form-group">
+                                        <label class="control-label" for="full_name">
+                                            <strong>Lead    time    (minimum    number  of  minutes it  takes   to  prepare for product delivery.) in minuts</strong>
+                                        </label>
+                                        <br/>
+                                        <input class="col-xs-4" name="full_name" id="full_name" data-validate="required" ng-model="llt" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-9 col-sm-offset-2">
+                                <div class="form-block">
+                                    <div class="form-group">
+                                        <label class="control-label" for="full_name">
+                                            <strong>Message</strong>
+                                        </label>
+                                        <input class="form-control" name="full_name" id="full_name" data-validate="required" ng-model="lmessage" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="col-sm-4 col-sm-offset-2">
+                                    <br>
+                                    <button class="btn btn-success" ng-click="lsave();">Save</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div>
-                    <div class="col-sm-4 col-sm-offset-2">
-                        <br>
-                            <button class="btn btn-success">Save</button>
-                        </div>
-                </div>
             </div>
         </div>
+        </form>
     </div>
 </div>
 </div>
+</div>
 
+<script type="text/javascript">
+    jQuery.UIkit.htmleditor(jQuery("#uikit_editor_2"), {
+        markdown: true
+
+    });
+</script>
 <script type="text/javascript">
     // Calendar Initialization
     jQuery(document).ready(function($) {
