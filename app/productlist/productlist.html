@@ -4,54 +4,46 @@
     <div class="col-sm-10">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h1 class="panel-title"><strong>Orders</strong></h1>
+            <div class="row">
+                <div class="col-sm-6">
+                    <h1 class="panel-title"><strong>Product List</strong></h1>
+                </div>
+                <div class="col-sm-2 col-sm-offset-4">
+                    <a href="#/dashboard/addProduct" class="btn btn-success">Add</a>
+                </div>
+            </div>
+                
             </div>
             <div class="panel-body">
-                <form class="form-horizontal ng-pristine ng-valid" role="form">
-                    <div class="row">
-                    <div class="col-sm-3">
-                            <select class="form-control">
-                                <option value="Option 1">Inbox</option>
-                                <option value="Option 2">Archive</option>
-                                <option value="Option 3">All</option>
-                            </select>
-                        </div>
-                    </div>
                     <div class="row">
                         <div class="col-sm-10">
                             <table class="table responsive">
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Name</th>
-                                    <th>Address</th>
+                                    <th>Product Name</th>
+                                    <th>Description</th>
+                                    <th>Quantity</th>
+                                    <th>Price</th>
+                                    <th>Edit</th>
+                                    <th>Delete</th>
                                 </tr>
                             </thead>
                             
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Arlind</td>
-                                    <td>Nushi</td>
-                                </tr>
-                                
-                                <tr>
-                                    <td>2</td>
-                                    <td>Art</td>
-                                    <td>Ramadani</td>
-                                </tr>
-                                
-                                <tr>
-                                    <td>3</td>
-                                    <td>Filan</td>
-                                    <td>Fisteku</td>
+                                <tr ng-repeat="product in productList">
+                                    <td>{{$index}}</td>
+                                    <td>{{product.pname}}</td>
+                                    <td>{{product.pdesc}}</td>
+                                    <td>{{product.__v}}</td>
+                                    <td>{{product.price}}</td>
+                                   <td><button class="btn" ng-click="editProduct(product._id)"><span class="glyphicon glyphicon-pencil"></span></button></td>
+                                    <td><button class="btn" ng-click="deleteProduct(product._id)"><span class="glyphicon glyphicon-trash"></span></button></td>
                                 </tr>
                             </tbody>
                         </table>
                         </div>
                     </div>
-
-                </form>
             </div>
         </div>
     </div>

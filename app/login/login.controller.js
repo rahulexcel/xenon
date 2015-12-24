@@ -3,7 +3,7 @@
 
 angular.module('xenon-app').
 controller('LoginLightCtrl', LoginLightCtrl);
-	function LoginLightCtrl($scope, $rootScope, ajaxRequest, loginFactory, localStorageService, $log, $state)
+	function LoginLightCtrl($scope, $rootScope, ajaxRequest, loginFactory, localStorageService, $log, $state, storeinfoLocationsFactory)
 	{
 		$log.debug('Login Controller');
 		$rootScope.navMenu = true;
@@ -20,9 +20,17 @@ controller('LoginLightCtrl', LoginLightCtrl);
 			query.$promise.then(function(data) {
                         $scope.spinner = false;
                         localStorageService.set('userData',{'userid': data.userid, 'eid': data.eid, 'locations': data.locations, 'token': data.token});
+                        
+              //           var query1 = storeinfoLocationsFactory.get({
+            		// 				'eid': data.eid
+						        // });
+						        // query1.$promise.then(function(data) {
+						        //     console.log(data);
+						        // });
+
                         $rootScope.userNavMenu = true;
                         $rootScope.navMenu = false;
-                        $state.go('dashboard.setting');
+                        $state.go('dashboard.storeinfo');
                     });
             };
 	}

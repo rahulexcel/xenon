@@ -5,9 +5,8 @@ angular.module('xenon-app')
             var requestInterceptor = {
                 request: function (config) {
                   var currentUser = localStorageService.get('userData');
-              var accessToken = currentUser.token;
-
-              if (accessToken) {
+              if (currentUser) {
+                var accessToken = currentUser.token;
                    config.headers = {
                    'Content-Type': 'application/json',
                    'Authorization': 'Bearer ' + accessToken
