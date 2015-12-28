@@ -16,36 +16,45 @@ function storeinfoCtrl($scope, $log, FileUploader, storeinfoFactory, localStorag
     $scope.closingtime = function() {
         $log.log('Time close ' + $scope.close);
     };
+    var dateArray = [];
+    var responseDateArr=[];
+    var i;
+    var flag = 0;
+    
+    $scope.logInfos = function(event, date) {
+       
+        event.preventDefault()
+        var timeStamp = date.valueOf();
+        var day = new Date(timeStamp).getDate();
+        var month = new Date(timeStamp).getMonth() + 1;
+        var year = new Date(timeStamp).getFullYear();
+        var fullDate = day + "-" + month + "-" + year;
+        for (i = 0; i < dateArray.length; i++) {
+            if (dateArray[i] === fullDate) {
+                dateArray.pop(fullDate);
+                flag = 1;
+            } else {
+                flag = 0;
+            }
 
-
+        }
+        if (flag == 0) {
+            dateArray.push(fullDate);
+        }
+        date.selected = !date.selected;
+    }
     var userData = localStorageService.get("userData");
-    console.log("location id at o \n" + userData.locations[0]);
     var a = userData.locations[0];
-    console.log("locations in local storage\n" + userData.locations);
-
-
     edit();
 
     function edit() {
+        $scope.spinner = true;
         var query = storeinfoLocationsIdFactory.update({}, {
-            'locationid': userData.locations[0],
-            'lname': $scope.lname,
-            'ldesc': $scope.ldesc,
-            'lemail': $scope.lemail,
-            'llgo': $scope.llogo,
-            'laddr': $scope.laddr,
-            'lpostcode': $scope.lpostcode,
-            'lcity': $scope.city,
-            'lcountry': $scope.lcountry,
-            'lphone': $scope.lphone,
-            'llt': $scope.llt,
-            'lmessage': $scope.lmessage,
-            'lopentime': $scope.open,
-            'lclosetime': $scope.close
+            'locationid': userData.locations[0]
         });
         query.$promise.then(function(data) {
-            console.log(data);
-            $scope.lname = data.data.lname;       
+            $scope.spinner = false;
+            $scope.lname = data.data.lname;
             angular.element(document.querySelector('.CodeMirror-code pre span')).text(data.data.ldesc);
             $scope.lemail = data.data.lemail;
             $scope.llogo = data.data.llogo;
@@ -58,26 +67,21 @@ function storeinfoCtrl($scope, $log, FileUploader, storeinfoFactory, localStorag
             $scope.lmessage = data.data.lmessage;
             $scope.open = data.data.lopentime;
             $scope.close = data.data.lclosetime;
-
+            $scope.highlightDays = data.data.ldateclosed;
+            var closed = data.data.ldateclosed;
+            dateArray= dateArray.concat(closed);
+            console.log(dateArray); 
+            for (i = 0; i < closed.length; i++) {
+                var responseDate = closed[i].split('-').reverse();
+                var responseTimestamp = new Date(responseDate).getTime();
+                responseDateArr.push(responseTimestamp);
+            }
+              $scope.selectedDays=responseDateArr;
+              
         });
-
     }
-    // eid();
-    // function eid() {
-    //     var userData = localStorageService.get("userData");
-    //     var eid = userData.eid;
-    //     console.log(eid);
-    //     var query1 = storeinfoLocationsFactory.get({
-    //         eid: eid
-    //     });
-    //     query1.$promise.then(function(data) {
-    //         console.log(data);
-    //     });
-
-    // }
-
     $scope.lsave = function() {
-      $scope.spinner=true;
+        $scope.spinner = true;
         var query = storeinfoLocationsIdFactory.update({}, {
             'locationid': userData.locations[0],
             'lname': $scope.lname,
@@ -90,16 +94,15 @@ function storeinfoCtrl($scope, $log, FileUploader, storeinfoFactory, localStorag
             'lcountry': $scope.lcountry,
             'lphone': $scope.lphone,
             'llt': $scope.llt,
+            'ldateclosed': dateArray,
             'lmessage': $scope.lmessage,
             'lopentime': $scope.open,
             'lclosetime': $scope.close
         });
         query.$promise.then(function(data) {
-            $scope.spinner=false;
+            $scope.spinner = false;
         });
     }
-
-
 
 
     // $scope.lsave = function() {
@@ -129,7 +132,7 @@ function storeinfoCtrl($scope, $log, FileUploader, storeinfoFactory, localStorag
     //     });
     // }
 
-
+     
     var uploader = $scope.uploader = new FileUploader({
 
     });
