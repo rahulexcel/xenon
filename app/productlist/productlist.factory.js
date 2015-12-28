@@ -4,6 +4,12 @@
         .factory('productListFactory', productListFactory);
 
     function productListFactory($resource, Configurations) {
-        return $resource(Configurations.Hostserver+'/locations/products/:locationid', {},{});
+        return $resource(Configurations.Hostserver+'/locations/products/:locationid', {},{
+        	singleProduct: {
+                method: 'GET',
+                isArray: false,
+                url: Configurations.Hostserver + '/products/:productId'
+            }
+        });
     };
 })();

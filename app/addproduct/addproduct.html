@@ -1,5 +1,4 @@
 <div class="row">
-
     <div class="col-sm-2"></div>
     <div class="col-sm-8">
         <div class="panel panel-default">
@@ -9,6 +8,7 @@
                 <h4>Image</h4>
             <div class="panel-body">
                 <form class="form-horizontal ng-pristine ng-valid" role="form">
+            
                     <div class="form-group">
                        <div class="col-sm-12">
                            <form></form>
@@ -20,7 +20,14 @@
                        </div>
                    </div>
 
-                    
+                     <image-crop
+         data-width="300"
+         data-height="300"
+         data-shape="circle"
+         data-step="imageCropStep"
+         data-result="imageCropResult"
+         ng-show="showImageCropper"
+       ></image-crop>
                     <div class="form-group-separator"></div>
                     <div class="form-group">
                     <h4><strong>Information</strong></h4>
@@ -49,7 +56,7 @@
                         <div class="col-sm-12">
                                 <strong>Description</strong>
                                 <p>
-                                     <textarea ck-editor class="form-control" rows="10" id="uikit_editor_2">
+                                     <textarea class="form-control" rows="10" id="uikit_editor_2" ng-model="productDescription">
                                    </textarea>
                                 </p>
                             </div>
@@ -84,7 +91,8 @@
                             </div> 
                             <div class="col-sm-12">
                             <br>
-                            <button class="btn btn-success btn-lg" ng-click="addProduct()">Save</button>
+                            <button ng-show="saveProduct" class="btn btn-success btn-lg" ng-click="addProduct()">Save <span ng-show="spinner"><i class="fa fa-spin fa-spinner"></i></span></button>
+                            <button ng-show="editThisProduct" class="btn btn-success btn-lg" ng-click="editProduct(editProductId)">Update <span ng-show="spinner"><i class="fa fa-spin fa-spinner"></i></span></button>
                             <button class="btn btn-white btn-lg">Cancel</button>
                         </div>
                         </div>
