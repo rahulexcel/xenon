@@ -4,7 +4,9 @@
         .factory('productFactory', productFactory);
 
     function productFactory($resource, Configurations) {
-        return $resource(Configurations.Hostserver+'/prod', {},{
+        return $resource(Configurations.Hostserver+'/prod/:prodId', {
+             'prodId': '@prodId'
+        },{
         	editProduct: {
                 method: 'PUT',
                 isArray: false,
