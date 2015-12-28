@@ -32,200 +32,194 @@
                                     </label>
                                     <br/>
                                     <span class="file-input btn btn-blue btn-file">
-                                        Browse&hellip; 
-
+                                       Browse&hellip; 
+                                        
                                         <input type="file" nv-file-select="" uploader="uploader" single>
-                                    </span>
-                                    <strong ng-model="imagename">{{uploader.queue.file.name[0]}}</strong>
-                                    <div ng-repeat="item in uploader.queue">
-                                        <div ng-show="uploader.isHTML5" ng-thumb="{ file: item._file, height: 100 }"></div>
-                                        <button type="button" class="btn btn-success btn-xs" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
-                                            <span class="glyphicon glyphicon-upload"></span> Upload
-
-                                        </button>
+                                        </span>
+                                        <strong ng-model="imagename">{{uploader.queue.file.name[0]}}</strong>
+                                        <div ng-repeat="item in uploader.queue">
+                                            <div ng-show="uploader.isHTML5" ng-thumb="{ file: item._file, height: 100 }"></div>
+                                            <button type="button" class="btn btn-success btn-xs" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
+                                                <span class="glyphicon glyphicon-upload"></span> Upload
+                                        
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group-separator"></div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">Contact</label>
-                    </div>
-                    <div class="col-sm-9 col-sm-offset-2">
-                        <div class="form-block">
-                            <div class="form-group">
-                                <label class="control-label" for="full_name">
-                                    <strong>Contact email</strong>&nbsp;&nbsp;&nbsp;Will be included in emails sent to your customers
-
-                                </label>
-                                <input class="form-control" name="full_name" id="full_name" data-validate="required" ng-model="lemail" />
-                            </div>
+                        <div class="form-group-separator"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Contact</label>
                         </div>
-                    </div>
-                    <div class="col-sm-9 col-sm-offset-2">
-                        <div class="form-block">
-                            <div class="form-group">
-                                <label class="control-label" for="full_name">
-                                    <strong>Store address</strong>
-                                </label>
-                                <input class="form-control" name="full_name" id="full_name" data-validate="required" ng-model="laddr" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-9 col-sm-offset-2">
-                        <div class="form-block">
-                            <div class="form-group">
-                                <label class="control-label" for="full_name">
-                                    <strong>Post code</strong>
-                                </label>
-                                <input class="form-control" name="full_name" id="full_name" data-validate="required" ng-model="lpostcode" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-9 col-sm-offset-2">
-                        <div class="form-block">
-                            <div class="form-group">
-                                <label class="control-label" for="full_name">
-                                    <strong>City</strong>
-                                </label>
-                                <input class="form-control" name="full_name" id="full_name" data-validate="required" ng-model="lcity" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-9 col-sm-offset-2">
-                        <div class="form-block">
-                            <div class="form-group">
-                                <label class="control-label" for="full_name">
-                                    <strong>State</strong>
-                                </label>
-                                <input class="form-control" name="full_name" id="full_name" data-validate="required" ng-model="lstate" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-9 col-sm-offset-2">
-                        <div class="form-block">
-                            <div class="form-group">
-                                <label class="control-label" for="full_name">
-                                    <strong>Country</strong>
-                                </label>
-                                <input class="form-control" name="full_name" id="full_name" data-validate="required" ng-model="lcountry" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-9 col-sm-offset-2">
-                        <div class="form-block">
-                            <div class="form-group">
-                                <label class="control-label" for="full_name">
-                                    <strong>Phone</strong>
-                                </label>
-                                <input class="form-control" name="full_name" id="full_name" data-validate="required" ng-model="lphone" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-12">
-                        <hr>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">Store status</label>
-                        <div class="col-sm-9">
-                            <label class="control-label" for="full_name">
-                                <strong>Open to customers</strong>
-                            </label>
+                        <div class="col-sm-9 col-sm-offset-2">
                             <div class="form-block">
-                                <input type="checkbox" checked="" class="iswitch-lg iswitch-info" ng-model="lstatus">
+                                <div class="form-group">
+                                    <label class="control-label" for="full_name">
+                                        <strong>Contact email</strong>&nbsp;&nbsp;&nbsp;Will be included in emails sent to your customers
+                                
+                                    </label>
+                                    <input class="form-control" name="full_name" id="full_name" data-validate="required" ng-model="lemail" />
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div>
+                        <div class="col-sm-9 col-sm-offset-2">
+                            <div class="form-block">
+                                <div class="form-group">
+                                    <label class="control-label" for="full_name">
+                                        <strong>Store address</strong>
+                                    </label>
+                                    <input class="form-control" name="full_name" id="full_name" data-validate="required" ng-model="laddr" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-9 col-sm-offset-2">
+                            <div class="form-block">
+                                <div class="form-group">
+                                    <label class="control-label" for="full_name">
+                                        <strong>Post code</strong>
+                                    </label>
+                                    <input class="form-control" name="full_name" id="full_name" data-validate="required" ng-model="lpostcode" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-9 col-sm-offset-2">
+                            <div class="form-block">
+                                <div class="form-group">
+                                    <label class="control-label" for="full_name">
+                                        <strong>City</strong>
+                                    </label>
+                                    <input class="form-control" name="full_name" id="full_name" data-validate="required" ng-model="lcity" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-9 col-sm-offset-2">
+                            <div class="form-block">
+                                <div class="form-group">
+                                    <label class="control-label" for="full_name">
+                                        <strong>State</strong>
+                                    </label>
+                                    <input class="form-control" name="full_name" id="full_name" data-validate="required" ng-model="lstate" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-9 col-sm-offset-2">
+                            <div class="form-block">
+                                <div class="form-group">
+                                    <label class="control-label" for="full_name">
+                                        <strong>Country</strong>
+                                    </label>
+                                    <input class="form-control" name="full_name" id="full_name" data-validate="required" ng-model="lcountry" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-9 col-sm-offset-2">
+                            <div class="form-block">
+                                <div class="form-group">
+                                    <label class="control-label" for="full_name">
+                                        <strong>Phone</strong>
+                                    </label>
+                                    <input class="form-control" name="full_name" id="full_name" data-validate="required" ng-model="lphone" />
+                                </div>
+                            </div>
+                        </div>
                         <div class="col-sm-12">
                             <hr>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Closed days:</label>
-                            <div class="col-sm-10">
-                                <section class="calendar-env">
-                                    <div class="col-sm-10 calendar-right">
-                                        <div class="calendar-main" style="padding:0px;">
-                                            <div id="calendar"></div>
-                                        </div>
-                                    </div>
-                                </section>
                             </div>
-                        </div>
-                        <div class="col-sm-12">
-                            <hr>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Timing:</label>
-                            <div class="col-sm-10">
-                                <div class="form-block">
-                                    <div class="form-group">
-                                        <div class="row">
-                                            <div class="col-sm-3 ">
-                                                <label class="control-label" for="full_name">
-                                                    <strong>Opening time:</strong>
-                                                </label>
-                                                <timepicker ng-model="open" ng-change="openingtime()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></timepicker>
-                                            </div>
-                                            <div class="col-sm-3">
-                                                <label class="control-label" for="full_name">
-                                                    <strong>&nbsp;&nbsp;Closing time:</strong>
-                                                </label>
-                                                <timepicker ng-model="close" ng-change="closingtime()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></timepicker>
-                                            </div>
-                                            <div class="col-sm-8"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-9 col-sm-offset-2">
-                                <div class="form-block">
-                                    <div class="form-group"></div>
-                                </div>
-                            </div>
-                            <div class="col-sm-9 col-sm-offset-2">
-                                <div class="form-block">
-                                    <div class="form-group">
-                                        <label class="control-label" for="full_name">
-                                            <strong>Lead    time    (minimum    number  of  minutes it  takes   to  prepare for product delivery.) in minuts</strong>
-                                        </label>
-                                        <br/>
-                                        <input class="col-xs-4" name="full_name" id="full_name" data-validate="required" ng-model="llt" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-9 col-sm-offset-2">
-                                <div class="form-block">
-                                    <div class="form-group">
-                                        <label class="control-label" for="full_name">
-                                            <strong>Message</strong>
-                                        </label>
-                                        <input class="form-control" name="full_name" id="full_name" data-validate="required" ng-model="lmessage" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="col-sm-9 col-sm-offset-2">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Store status</label>
+                                <div class="col-sm-9">
+                                    <label class="control-label" for="full_name">
+                                        <strong>Open to customers</strong>
+                                    </label>
                                     <div class="form-block">
-                                        <div class="form-group">
-
-                                            <button class="btn btn-success" ng-click="lsave();">Save <span ng-show="spinner"><i class="fa fa-spin fa-spinner"></i></span></button>
-
+                                        <input type="checkbox" checked="" class="iswitch-lg iswitch-info" ng-model="lstatus">
                                         </div>
                                     </div>
                                 </div>
+                                <div>
+                                    <div class="col-sm-12">
+                                        <hr>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Closed days:</label>
+                                            <div class="col-sm-10">
+                                                 <multiple-date-picker days-selected="selectedDays" day-click="logInfos"  highlight-days="highlightDays"/>
+                                           </div>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <hr>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Timing:</label>
+                                                <div class="col-sm-10">
+                                                    <div class="form-block">
+                                                        <div class="form-group">
+                                                            <div class="row">
+                                                                <div class="col-sm-3 ">
+                                                                    <label class="control-label" for="full_name">
+                                                                        <strong>Opening time:</strong>
+                                                                    </label>
+                                                                    <timepicker ng-model="open" ng-change="openingtime()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></timepicker>
+                                                                </div>
+                                                                <div class="col-sm-3">
+                                                                    <label class="control-label" for="full_name">
+                                                                        <strong>&nbsp;&nbsp;Closing time:</strong>
+                                                                    </label>
+                                                                    <timepicker ng-model="close" ng-change="closingtime()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></timepicker>
+                                                                </div>
+                                                                <div class="col-sm-8"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-9 col-sm-offset-2">
+                                                    <div class="form-block">
+                                                        <div class="form-group"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-9 col-sm-offset-2">
+                                                    <div class="form-block">
+                                                        <div class="form-group">
+                                                            <label class="control-label" for="full_name">
+                                                                <strong>Lead    time    (minimum    number  of  minutes it  takes   to  prepare for product delivery.) in minuts</strong>
+                                                            </label>
+                                                            <br/>
+                                                            <input class="col-xs-4" name="full_name" id="full_name" data-validate="required" ng-model="llt" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-9 col-sm-offset-2">
+                                                    <div class="form-block">
+                                                        <div class="form-group">
+                                                            <label class="control-label" for="full_name">
+                                                                <strong>Message</strong>
+                                                            </label>
+                                                            <input class="form-control" name="full_name" id="full_name" data-validate="required" ng-model="lmessage" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <div class="col-sm-9 col-sm-offset-2">
+                                                        <div class="form-block">
+                                                        <div class="form-group">
+                                                          
+                                                            <button class="btn btn-success" ng-click="lsave();">Save <span ng-show="spinner"><i class="fa fa-spin fa-spinner"></i></span></button>
+                                                           
+                                                            </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
-            </div>
-        </div>
-        </form>
-    </div>
-    <div class="col-sm-1"></div>
-</div>
-
-
+                </div>
+                    
 
 
 <script type="text/javascript">
@@ -244,19 +238,19 @@
             ev.preventDefault();
 
             var $event = $(this).find('.form-control'),
-                    event_name = $event.val().trim();
+                event_name = $event.val().trim();
 
             if (event_name.length >= 3) {
                 var color = colors[Math.floor(Math.random() * colors.length)];
 
                 // Create Event Entry
                 $("#events-list").append(
-                        '<li>\
+                    '<li>\
                     <a href="" data-event-class="event-color-' + color + '">\
                         <span class="badge badge-' + color + ' badge-roundless upper">' + event_name + '</span>\
                     </a>\
                 </li>'
-                        );
+                );
 
 
                 // Reset draggable
@@ -289,57 +283,57 @@
             editable: true,
             eventLimit: true,
             events: [{
-                    title: 'All Day Event',
-                    start: '2014-09-01'
-                }, {
-                    title: 'Long Event',
-                    start: '2014-09-07',
-                    end: '2014-09-10'
-                }, {
-                    id: 999,
-                    title: 'Repeating Event',
-                    start: '2014-09-09T16:00:00'
-                }, {
-                    id: 999,
-                    title: 'Repeating Event',
-                    start: '2014-09-16T16:00:00'
-                }, {
-                    title: 'Conference',
-                    start: '2014-09-11',
-                    end: '2014-09-13'
-                }, {
-                    title: 'Meeting',
-                    start: '2014-09-12T10:30:00',
-                    end: '2014-09-12T12:30:00'
-                }, {
-                    title: 'Lunch',
-                    start: '2014-09-12T12:00:00'
-                }, {
-                    title: 'Meeting',
-                    start: '2014-09-12T14:30:00'
-                }, {
-                    title: 'Happy Hour',
-                    start: '2014-09-12T17:30:00'
-                }, {
-                    title: 'Dinner',
-                    start: '2014-09-12T20:00:00'
-                }, {
-                    title: 'Birthday Party',
-                    start: '2014-09-13T07:00:00'
-                }, {
-                    title: 'Click for Google',
-                    url: 'http://google.com/',
-                    start: '2014-09-28'
-                }],
+                title: 'All Day Event',
+                start: '2014-09-01'
+            }, {
+                title: 'Long Event',
+                start: '2014-09-07',
+                end: '2014-09-10'
+            }, {
+                id: 999,
+                title: 'Repeating Event',
+                start: '2014-09-09T16:00:00'
+            }, {
+                id: 999,
+                title: 'Repeating Event',
+                start: '2014-09-16T16:00:00'
+            }, {
+                title: 'Conference',
+                start: '2014-09-11',
+                end: '2014-09-13'
+            }, {
+                title: 'Meeting',
+                start: '2014-09-12T10:30:00',
+                end: '2014-09-12T12:30:00'
+            }, {
+                title: 'Lunch',
+                start: '2014-09-12T12:00:00'
+            }, {
+                title: 'Meeting',
+                start: '2014-09-12T14:30:00'
+            }, {
+                title: 'Happy Hour',
+                start: '2014-09-12T17:30:00'
+            }, {
+                title: 'Dinner',
+                start: '2014-09-12T20:00:00'
+            }, {
+                title: 'Birthday Party',
+                start: '2014-09-13T07:00:00'
+            }, {
+                title: 'Click for Google',
+                url: 'http://google.com/',
+                start: '2014-09-28'
+            }],
             droppable: true,
             drop: function(date) {
 
                 var $event = $(this).find('a'),
-                        eventObject = {
-                            title: $event.find('.badge').text(),
-                            start: date,
-                            className: $event.data('event-class')
-                        };
+                    eventObject = {
+                        title: $event.find('.badge').text(),
+                        start: date,
+                        className: $event.data('event-class')
+                    };
 
                 $('#calendar').fullCalendar('renderEvent', eventObject, true);
 
