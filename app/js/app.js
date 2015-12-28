@@ -88,6 +88,11 @@ app.config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, ASS
 			templateUrl: 'app/payment/payment.html',
 			controller: 'paymentController',
 		}).
+ 	state('dashboard.productList', {
+			url: '/productList',
+			templateUrl: 'app/productlist/productlist.html',
+			controller: 'productListController',
+		}).
  	state('dashboard.addProduct', {
 			url: '/addProduct',
 			templateUrl: 'app/addproduct/addproduct.html',

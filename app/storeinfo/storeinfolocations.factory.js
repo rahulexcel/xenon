@@ -5,4 +5,6 @@
    function storeinfoLocationsFactory($resource, Configurations) {
        return $resource(Configurations.Hostserver+'/locations/:eid', {},{});
     };
-})();                                             
+
+})();
+

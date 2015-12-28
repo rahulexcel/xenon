@@ -16,9 +16,10 @@ controller('navbarController', navbarController);
 		}
 		$scope.logout = function() {
 			localStorageService.removeAll();
-			$state.go('dashboard.login');
+			
 			$rootScope.userNavMenu = false;
 			$rootScope.navMenu = true;
+			$state.go('dashboard.login');
 		};
 		
 	}
