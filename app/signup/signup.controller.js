@@ -4,7 +4,7 @@ angular
    .module('xenon.controllers')
    .controller('signupCtrl', signupCtrl);
 
-function signupCtrl($scope, $rootScope, Configurations, signupFactory) {
+function signupCtrl($scope, $rootScope, Configurations, signupFactory, $state) {
 
     $scope.signup = function() {
     
@@ -17,7 +17,10 @@ function signupCtrl($scope, $rootScope, Configurations, signupFactory) {
                        }
                       
                    });
-    }   
+    };   
+    $scope.goLogin = function(){
+      $state.go('dashboard.login');
+    }
 
     $rootScope.isLoginPage = true;
     $rootScope.isLightLoginPage = true;

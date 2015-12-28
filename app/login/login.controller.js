@@ -3,10 +3,10 @@
 
 angular.module('xenon-app').
 controller('LoginLightCtrl', LoginLightCtrl);
-	function LoginLightCtrl($scope, $rootScope, ajaxRequest, loginFactory, localStorageService, $log, $state, storeinfoLocationsFactory)
+	function LoginLightCtrl($scope, $rootScope, ajaxRequest, loginFactory, localStorageService, $log, $state, storeinfoLocationsFactory, userValidate)
 	{
 		$log.debug('Login Controller');
-		$rootScope.navMenu = true;
+		userValidate.validUser();
 		$rootScope.isLoginPage        = true;
 		$rootScope.isLightLoginPage   = true;
 		$rootScope.isLockscreenPage   = false;

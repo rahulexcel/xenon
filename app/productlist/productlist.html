@@ -1,7 +1,7 @@
 <div class="row">
 
-    <div class="col-sm-1"></div>
-    <div class="col-sm-10">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8">
         <div class="panel panel-default">
             <div class="panel-heading">
             <div class="row">
@@ -16,7 +16,7 @@
             </div>
             <div class="panel-body">
                     <div class="row">
-                        <div class="col-sm-10">
+                        <div class="col-sm-12">
                             <table class="table responsive">
                             <thead>
                                 <tr>
@@ -34,11 +34,11 @@
                             <tr ng-show="spinner">
                                 <td colspan="7" style="text-align:center;"><i class="fa fa-spin fa-spinner"></i></td>
                             </tr>
-                                <tr ng-repeat="product in productList">
+                                <tr ng-repeat="product in productList | orderBy: '-created'">
                                     <td>{{$index}}</td>
                                     <td>{{product.pname}}</td>
                                     <td>{{product.pdesc}}</td>
-                                    <td>{{product.__v}}</td>
+                                    <td>{{product.pinv}}</td>
                                     <td>{{product.price}}</td>
                                    <td><button class="btn" ng-click="editProduct(product._id)"><span class="glyphicon glyphicon-pencil"></span></button></td>
                                     <td><button class="btn" ng-click="deleteProduct(product._id, $index)"><span class="glyphicon glyphicon-trash"></span></button></td>
@@ -50,6 +50,6 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-1"></div>
+    <div class="col-sm-2"></div>
 
 </div>
