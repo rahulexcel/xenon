@@ -1,9 +1,7 @@
 (function() {
    'use strict';
    angular.module('xenon-app')
-   .config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, ASSETS){
-
-    
+   .config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, ASSETS){    
     $stateProvider.
     state('dashboard', {
             url: '/dashboard',
@@ -105,9 +103,7 @@
         state('dashboard.storeinfo', {
             url: '/storeinfo',
             templateUrl: "app/storeinfo/storeinfo.html",
-            controller: 'storeinfoCtrl',
-
-        resolve: {
+            controller: 'storeinfoCtrl',        resolve: {
                 bootstrap: function($ocLazyLoad){
                     return $ocLazyLoad.load([
                         ASSETS.core.bootstrap,
@@ -145,7 +141,5 @@
             }
         });
     $urlRouterProvider.otherwise('/dashboard/login');
-
-});
-
+     });
 })();

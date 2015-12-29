@@ -10,11 +10,11 @@
 	</div>
 	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		<ul class="nav navbar-nav navbar-right" ng-show="navMenu">
-			<li>
-				<a href="#/dashboard/login">LOG IN</a>
+			<li ng-click="goLogin()">
+				<a>LOG IN</a>
 			</li>
-			<li>
-				<a href="#/dashboard/signup">SIGN UP</a>
+			<li ng-click="goSignUp()">
+				<a>SIGN UP</a>
 			</li>
 		</ul>
 		<ul class="nav navbar-nav navbar-right" ng-show="userNavMenu">

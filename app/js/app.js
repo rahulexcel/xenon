@@ -30,6 +30,7 @@ app.run(function()
 	})
 });
 
+
 app.constant('ASSETS', {
 	'core': {
 		'bootstrap': appHelper.assetPath('js/bootstrap.min.js'), // Some plugins which do not support angular needs this

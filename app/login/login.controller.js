@@ -1,7 +1,5 @@
 (function() {
-  'use strict';
-
-angular.module('xenon-app').
+  'use strict';angular.module('xenon-app').
 controller('LoginLightCtrl', LoginLightCtrl);
     function LoginLightCtrl($scope, $rootScope, ajaxRequest, loginFactory, localStorageService, $log, $state, storeinfoLocationsFactory, userValidate)
     {
@@ -33,4 +31,3 @@ controller('LoginLightCtrl', LoginLightCtrl);
            };
     }
 })();
-
