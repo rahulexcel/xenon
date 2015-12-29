@@ -1,0 +1,19 @@
+(function() {
+    'use strict';
+    angular.module('xenon-app')
+        .run(function(userValidate, $rootScope, $state, localStorageService, $location) {
+            //userValidate.validUser1();
+            $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
+            	//event.preventDefault(); 
+            	console.log(toState.url);
+                if (toState.url!== "/storeinfo") {
+                    var userData = localStorageService.get("userData");
+                    console.log(userData.locations.length);
+                    if (userData.locations.length == 0) {
+                         $location.path('/storeinfo');     
+                   }
+                }
+
+            });
+        })
+})();

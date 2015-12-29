@@ -19,7 +19,7 @@ controller('navbarController', navbarController);
 			
 			$rootScope.userNavMenu = false;
 			$rootScope.navMenu = true;
-			$state.go('dashboard.login');
+			//$state.go('dashboard.login');
 		};
 		
 	}
