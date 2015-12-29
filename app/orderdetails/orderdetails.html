@@ -4,7 +4,14 @@
     <div class="col-sm-10">
         <div class="panel panel-default">
             <div class="panel-heading">
+            <div class="row">
+                <div class="col-sm-6">
                 <h1 class="panel-title"><strong>Order details:</strong></h1>
+                </div>
+                <div class="col-sm-2 col-sm-offset-4">
+                    <button class="btn btn-success" ng-click="deleteOrder()">Delete</button>
+                </div>
+            </div>
             </div>
             <div class="panel-body">
                 <div class="row">
@@ -18,7 +25,7 @@
                         <p>Invoice No. #5652256 <br>15 December 15 <br>Prishtine, Kosovo</p>
                     </div>
                     <div class="col-sm-4 col-sm-offset-4">
-                    <br>
+                    <!-- <br>
                         <p><span class="input-group-btn">
                                     <button type="button" class="btn btn-white btn-md">Send</button>
                                     <button type="button" class="btn btn-white">
@@ -30,7 +37,7 @@
                                     <button type="button" class="btn btn-success">
                                         <i class="fa-print"></i>
                                     </button>
-                                </span>
+                                </span> -->
                     </div>
                 </div><br><br>
                 <div class="row">
@@ -41,7 +48,7 @@
                         <p><br>1982 OOP <br> Madrid, Spain<br> +1 (151) 225-4183</p>
                     </div>
                     <div class="col-sm-5">
-                        <p><strong>Payment Details</strong><br>V.A.T Reg #: <strong>54254(DEMO)78</strong> <br> Account Name: <strong>Food Master Ltd</strong><br> SWIFT code: <strong>454785DV54FGH54</strong></p>
+                        <!-- <p><strong>Payment Details</strong><br>V.A.T Reg #: <strong>54254(DEMO)78</strong> <br> Account Name: <strong>Food Master Ltd</strong><br> SWIFT code: <strong>454785DV54FGH54</strong></p> -->
                     </div>
                 </div><br>
                 <div class="row">
@@ -63,41 +70,11 @@
                             </thead>
                             
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>On my office things</td>
-                                    <td>3</td>
-                                    <td style="text-align:right"><strong>$1,254</strong></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>On my office things</td>
-                                    <td>1</td>
-                                    <td style="text-align:right"><strong>$154</strong></td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>On my office things</td>
-                                    <td>3</td>
-                                    <td style="text-align:right"><strong>$1,254</strong></td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>On my office things</td>
-                                    <td>3</td>
-                                    <td style="text-align:right"><strong>$2,254</strong></td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>On my office things</td>
-                                    <td>3</td>
-                                    <td style="text-align:right"><strong>$3,254</strong></td>
-                                </tr>
-                                <tr>
-                                    <td>6</td>
-                                    <td>On my office things</td>
-                                    <td>3</td>
-                                    <td style="text-align:right"><strong>$954</strong></td>
+                                <tr ng-repeat="order in orderDetails">
+                                    <td>{{$index}}</td>
+                                    <td>{{order.pname}}</td>
+                                    <td>{{order.pinv}}</td>
+                                    <td style="text-align:right"><strong>${{order.price}}</strong></td>
                                 </tr>
                                 <tr>
                                     <td></td>
@@ -110,10 +87,10 @@
                                     705 Park Ave, Suit 120 <br>san Francisco, CA 94170 <br> P: (234) 145-184 <br> Full Name <br>first.last@emai.com
                                     </td>
                                     <td colspan="2" style="text-align:right">
-                                    Sub - Total amount: <strong>$6,258</strong><br>
+                                    Sub - Total amount: <strong>${{totalAmount}}</strong><br>
                                     VAT: <strong> 12.9%</strong><br>
                                     Discount: <strong>......</strong><br>
-                                    Grand Total: <strong>$7,2858</strong><br>
+                                    Grand Total: <strong>${{grandTotalAmount}}</strong><br>
                                     </td>
 
 
