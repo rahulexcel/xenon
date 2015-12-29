@@ -10,7 +10,7 @@ controller('navbarController', navbarController);
 			localStorageService.removeAll();
 			$rootScope.userNavMenu = false;
 			$rootScope.navMenu = true;
-			$state.go('dashboard.login');
+			//$state.go('dashboard.login');
 		};
 		$scope.goLogin = function(){
 			$state.go('dashboard.login');
