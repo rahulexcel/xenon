@@ -32,6 +32,7 @@
 				$rootScope.editProductId = '';
 				$state.go('dashboard.addProduct');
 			};
+			
 };
 
 })();

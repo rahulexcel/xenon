@@ -34,4 +34,3 @@ controller('LoginLightCtrl', LoginLightCtrl);
     }
 })();
 
-
