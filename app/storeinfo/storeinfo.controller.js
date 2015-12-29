@@ -11,18 +11,16 @@ function storeinfoCtrl($scope, $log, FileUploader, storeinfoFactory, localStorag
         mstep: [1, 5, 10, 15, 25, 30]
     };
     $scope.openingtime = function() {
-        $log.log('open time ' + $scope.open);
+        //$log.log('open time ' + $scope.open);
     };
     $scope.closingtime = function() {
-        $log.log('Time close ' + $scope.close);
+        //$log.log('Time close ' + $scope.close);
     };
     var dateArray = [];
     var responseDateArr=[];
     var i;
     var flag = 0;
-    
     $scope.logInfos = function(event, date) {
-       
         event.preventDefault()
         var timeStamp = date.valueOf();
         var day = new Date(timeStamp).getDate();
@@ -80,7 +78,14 @@ function storeinfoCtrl($scope, $log, FileUploader, storeinfoFactory, localStorag
               
         });
     }
+    //console.log(localStorageService.locations);
+
     $scope.lsave = function() {
+      if (angular.isDefined(a)) {
+                alert("yes");
+            } else {
+               alert("no");
+            }
         $scope.spinner = true;
         var query = storeinfoLocationsIdFactory.update({}, {
             'locationid': userData.locations[0],
