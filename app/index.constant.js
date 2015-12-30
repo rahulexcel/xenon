@@ -2,7 +2,7 @@
     'use strict';
     angular.module('xenon-app')
         .constant('Configurations', {
-            Hostserver: 'http://foodmaster.azurewebsites.net'
+            Hostserver: 'https://protected-badlands-3499.herokuapp.com'
         });
 
 })();

@@ -1,6 +1,8 @@
-'use strict';
-
-crop.directive('imgCrop', ['$timeout', 'cropHost', 'cropPubSub', function($timeout, CropHost, CropPubSub) {
+(function() {
+   'use strict';
+   
+       angular.module('xenon-app')
+       .directive('imgCrop', ['$timeout', 'cropHost', 'cropPubSub', function($timeout, CropHost, CropPubSub) {
   return {
     restrict: 'E',
     scope: {
@@ -119,3 +121,4 @@ crop.directive('imgCrop', ['$timeout', 'cropHost', 'cropPubSub', function($timeo
     }
   };
 }]);
+})();

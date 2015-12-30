@@ -7,12 +7,6 @@
             url: '/dashboard',
             templateUrl: "app/navbar/navbar.html",
             abstract : true,
-            controller: function($rootScope){
-                $rootScope.isLoginPage        = false;
-                $rootScope.isLightLoginPage   = false;
-                $rootScope.isLockscreenPage   = false;
-                $rootScope.isMainPage         = true;
-            },
             resolve: {
                 bootstrap: function($ocLazyLoad){
                     return $ocLazyLoad.load([

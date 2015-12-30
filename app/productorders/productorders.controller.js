@@ -11,19 +11,19 @@
        			var cid = userData.userid;
        			$scope.spinner = true;
        			var orderAm=[];
+            var totalAmount = 0;
 				var query = orderListFactory.query({"storeId":lid});
       			query.$promise.then(function(data) {
-                        //console.log(data);
+                        console.log(data);
 		       			$scope.spinner = false;
                         $scope.orderList = data;
                         for(var i=0; i < data.length; i++){
-                        	// console.log(data[i].products.length);
-                        	if(data[i].products.length == 0 || data[i].products.length == 11 || data[i].products.length == 4){
-                        		// console.log('not data');
-                        	} else{
-                        		console.log(data[i].products[0].price);
-                        	}
+                          for (var j = 0; j < data[i].products.length; j++) {
+                            // console.log(data[i].products[j].price);
+                            totalAmount = totalAmount+data[i].products[j].price;
+                          }
                         }
+                        console.log(totalAmount);
                     });
 
 
