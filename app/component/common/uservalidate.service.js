@@ -6,19 +6,7 @@
    function userValidate(localStorageService, $state, $stateParams, $rootScope, $location) {
 
        return {
-           validUser: function(currentState) {
-               var userData = localStorageService.get('userData');
-               if (userData) {
-                   $state.go('dashboard.storeinfo');
-                   $rootScope.userNavMenu = true;
-                   $rootScope.navMenu = false;
-               } else {
-                   $state.go('dashboard.login');
-                   $rootScope.userNavMenu = false;
-                   $rootScope.navMenu = true;
-               }                
-           },
-           validUser1: function() {
+           validUser: function() {
                var userData = localStorageService.get('userData');
             
                if (userData) {
@@ -27,8 +15,8 @@
                    $rootScope.navMenu = false;
                } else {
                    console.log('nhi');
-                   // $state.go('dashboard.login');
                    $location.path('/login');
+                   //$state.go('dashboard.login');
                    $rootScope.userNavMenu = false;
                    $rootScope.navMenu = true;
                }                
