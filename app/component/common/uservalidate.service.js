@@ -3,7 +3,7 @@
    angular.module('xenon-app')
        .factory('userValidate', userValidate);
 
-   function userValidate(localStorageService, $state, $stateParams, $rootScope) {
+   function userValidate(localStorageService, $state, $stateParams, $rootScope, $location) {
 
        return {
            validUser: function(currentState) {
@@ -27,7 +27,8 @@
                    $rootScope.navMenu = false;
                } else {
                    console.log('nhi');
-                   $state.go('dashboard.login');
+                   // $state.go('dashboard.login');
+                   $location.path('/login');
                    $rootScope.userNavMenu = false;
                    $rootScope.navMenu = true;
                }                

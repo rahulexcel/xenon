@@ -34,6 +34,18 @@
                 },
             }
         }).
+    state('dashboard.category', {
+            url: '/category',
+            templateUrl: "app/productcategory/productcategory.html",
+            controller: 'categoryController',
+            resolve: {
+                resources: function($ocLazyLoad){
+                    return $ocLazyLoad.load([
+                        ASSETS.forms.jQueryValidate,
+                    ]);
+                },
+            }
+        }).
     state('dashboard.singup', {
             url: '/signup',
             templateUrl: "app/signup/signup.html",
