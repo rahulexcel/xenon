@@ -15,6 +15,7 @@ var app = angular.module('xenon-app', [
 	'xenon.factory',
 	'xenon.services',
 	'multipleDatePicker',
+	'ui.tree',
 	// Added in v1.3
 	'FBAngular'
 ]);
