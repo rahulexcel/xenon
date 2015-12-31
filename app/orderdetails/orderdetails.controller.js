@@ -3,7 +3,7 @@
    
        angular.module('xenon-app')
        .controller('orderDetailsController', orderDetailsController);
-        function orderDetailsController($scope, $rootScope, orderDetailsFactory) {
+        function orderDetailsController($scope, $rootScope, orderDetailsFactory, $state, orderDetailsService, localStorageService) {
        		console.log("Order Details Page");
        		console.log("Single Order id "+$rootScope.singleOrderId);
           if($rootScope.singleOrderId){
@@ -18,16 +18,27 @@
                 $scope.totalAmount = totalAmount;
                 var vatAmount = (totalAmount*12.9)/100;
                 $scope.grandTotalAmount = totalAmount + vatAmount;
+                $scope.orderDate = orderDetailsService.orderDate(data.created);
+                var storeInfo = localStorageService.get('storeInfo');
+                $scope.storeAddress = storeInfo.data.laddr;
+                $scope.storeCountry = storeInfo.data.lcountry;
+                $scope.storeEmail = storeInfo.data.lemail;
+                $scope.storePhone = storeInfo.data.lphone;
+                $scope.storeName = storeInfo.data.lname;
                     });
           }
        		
-      		$scope.deleteOrder = function(){
-      			console.log($rootScope.singleOrderId);
-      			var query = orderDetailsFactory.deleteOrder({"orderId":$rootScope.singleOrderId});
-      			query.$promise.then(function(data) {
-                        console.log(data);
-                    });
-      		};
+      		// $scope.deleteOrder = function(){
+      		// 	console.log($rootScope.singleOrderId);
+      		// 	var query = orderDetailsFactory.deleteOrder({"orderId":$rootScope.singleOrderId});
+      		// 	query.$promise.then(function(data) {
+        //                 console.log(data);
+        //                 $state.go('dashboard.productOrders');
+        //             });
+      		// };
+          $scope.backTolist = function(){
+            $state.go('dashboard.productOrders');
+          };
 
 
 

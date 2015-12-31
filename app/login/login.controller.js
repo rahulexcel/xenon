@@ -4,6 +4,11 @@ controller('LoginLightCtrl', LoginLightCtrl);
     function LoginLightCtrl($scope, $rootScope, ajaxRequest, loginFactory, localStorageService, $log, $state, storeinfoLocationsFactory, userValidate)
     {
         $log.debug('Login Controller');
+        var userData = localStorageService.get('userData');
+        if(userData){
+          $state.go('dashboard.storeinfo');
+        } else {}
+
         $scope.login = function(){
             $scope.spinner = true;
             console.log($scope.email);

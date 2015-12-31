@@ -14,6 +14,8 @@ function signupCtrl($scope, $rootScope, Configurations, signupFactory, $state) {
                        if(data.success=="true");{
                        	$scope.info="Registration successfull";
                        	 $scope.spinner = false;
+                         $scope.email = '';
+                         $scope.password = '';
                        }
                       
                    });

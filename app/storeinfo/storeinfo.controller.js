@@ -57,6 +57,7 @@ function storeinfoCtrl($scope, $log, FileUploader, storeinfoFactory, localStorag
             'locationid': userData.locations[0]
         });
         query.$promise.then(function(data) {
+            localStorageService.set('storeInfo',data);
            console.log(data);
             $scope.spinner = false;
             $scope.lname = data.data.lname;
@@ -108,6 +109,7 @@ function storeinfoCtrl($scope, $log, FileUploader, storeinfoFactory, localStorag
             });
             query.$promise.then(function(data) {
                 $scope.spinner = false;
+                localStorageService.set('storeInfo',data);
             });
         } else {
             console.log("flag=1 save is firing");
@@ -130,6 +132,7 @@ function storeinfoCtrl($scope, $log, FileUploader, storeinfoFactory, localStorag
             });
             query.$promise.then(function(data) {
                 $scope.spinner = false;
+                localStorageService.set('storeInfo',data);
             });
         }
     }

@@ -25,8 +25,12 @@
 			};
 			$scope.deleteProduct = function(id, index){
 				console.log('id '+id);
+				console.log(index);
+				console.log($scope.productList);
 				productFactory.deleteProduct({'productId': id});
-				$scope.productList.splice(index,1)
+				$scope.productList.splice(index,1);
+				console.log($scope.productList);
+
 			};
 			$scope.addProductPage = function(){
 				$rootScope.editProductId = '';
