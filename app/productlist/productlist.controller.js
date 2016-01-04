@@ -30,11 +30,9 @@
             });
             query1.$promise.then(function(data2) {
               console.log(data2.data.lpcats);
-              if(data2.data.lpcats===null){   
-              }else{
-                console.log(data2.data.lpcats);
-                //$scope.data=data2.data.lpcats;
-              }
+               var tree=[];
+                tree.push($scope.data);
+                console.log(tree);
                 
             });
         }
