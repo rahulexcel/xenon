@@ -18,10 +18,10 @@
             });
             query.$promise.then(function(data1) {
                 $scope.spinner = false;
-                console.log(data1);
                  firstapidata=data1;
                 $scope.spinner = false;
                 secondapi();
+
             });
         }
         function secondapi() {
@@ -29,15 +29,13 @@
                 'locationid': userData.locations[0]
             });
             query1.$promise.then(function(data2) {
+              console.log(data2.data.lpcats);
+              if(data2.data.lpcats===null){   
+              }else{
                 console.log(data2.data.lpcats);
-                for (var i = 0; i < data2.data.lpcats.length; i++) {
-                    catArr.push(data2.data.lpcats[i]);
-                }
-                console.log(firstapidata);
-                 var data = firstapidata.concat(data2);
-                $scope.catArr = catArr;
-               console.log(data);
-                  $scope.productList = data;
+                //$scope.data=data2.data.lpcats;
+              }
+                
             });
         }
         $scope.editProduct = function(id) {
@@ -68,24 +66,25 @@
         }
         $scope.saveCategory = function() {
             catArr.push($scope.name);
-            console.log(catArr);
+            //console.log(catArr);
             var query = storeinfoLocationsIdFactory.update({}, {
                 'locationid': userData.locations[0],
                 'lpcats': catArr
             });
             query.$promise.then(function(data) {
-                console.log(data.data.lpcats);
+                //console.log(data.data.lpcats);
                 for (var i = 0; i <= data.data.lpcats.length; i++) {
                     if (angular.isArray(data.data.lpcats[i])) {
                         catArr.push(data.data.lpcats[i]);
                     }
                 }
-                console.log(catArr);
                 $scope.catArr = catArr;
             });
 
         }
-    };
+      
+   
+     };
 
 })();
 
@@ -134,30 +133,10 @@
                 
 //             }
 //         };
-//           $scope.remove = function (scope) {
-//         scope.remove();
-//       };
-
-//       $scope.toggle = function (scope) {
-//         scope.toggle();
-//       };
-
-//       $scope.moveLastToTheBeginning = function () {
-//         var a = $scope.data.pop();
-//         $scope.data.splice(0, 0, a);
-//       };
-
-//       $scope.newSubItem = function (scope) {
-//         var nodeData = scope.$modelValue;
-//         nodeData.nodes.push({
-//           id: nodeData.id * 10 + nodeData.nodes.length,
-//           title: nodeData.title + '.' + (nodeData.nodes.length + 1),
-//           nodes: []
-//         });
-//       };
+      
 
     
-//     $scope.data = [{
+    // $scope.data = [{
     //     'id': 1,
     //     'title': 'node1',
     //     'nodes': [
@@ -205,7 +184,7 @@
     //       }
     //     ]
     //   }];
-    // }]);
+   
    
 // };
 

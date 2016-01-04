@@ -1,4 +1,4 @@
-<div class="row">
+ <div class="row">
     <div class="col-sm-2"></div>
     <div class="col-sm-8">
         <div class="panel panel-default">
@@ -16,9 +16,13 @@
             <div class="panel-body">
                 <div class="row">
                     <div class="col-sm-12">
-
                         <br/>
                         <br/>
+                         <div ui-tree id="tree-root">
+       <ol ui-tree-nodes ng-model="data">
+         <li ng-repeat="node in data" ui-tree-node ng-include="'nodes_renderer.html'"></li>
+       </ol>
+         </div>
                         <ul id="nestable-list-1" class="uk-nestable">
                             <li data-item="Item 1" data-item-id="a">
                                 <div class="uk-nestable-item">
@@ -59,18 +63,6 @@
                                         </li>
                                     </ul>
                                 </ol>
-                                 <ol ui-tree-nodes ng-model="productList">
-                                    <ul id="nestable-list-1" class="uk-nestable">
-                                        <li data-item="Item 1" data-item-id="a" ui-tree-node ng-repeat="arr in catArr" ui-tree-node>
-                                            <div class="uk-nestable-item">
-                                                <div class="uk-nestable-handle"></div>
-                                                <div data-nestable-action="toggle"></div>
-
-                                                <div class="list-label">{{arr}}</div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </ol>
                             </div>
                         </div>
                     </div>
@@ -78,8 +70,8 @@
             </div>
             <div class="col-sm-2"></div>
         </div>
-        <!-- Modal-->
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    
+         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -104,86 +96,24 @@
 
 
 
-        <script type="text/ng-template" id="nodes_renderer.html">
+         <script type="text/ng-template" id="nodes_renderer.html">
 
-  // <div ui-tree-handle class="tree-node tree-node-content">
-  //   <a class="btn btn-success btn-xs" ng-if="node.nodes && node.nodes.length > 0" data-nodrag ng-click="toggle(this)"><span
-  //       class="glyphicon"
-  //       ng-class="{
-  //         'glyphicon-chevron-right': collapsed,
-  //         'glyphicon-chevron-down': !collapsed
-  //       }"></span></a>
-  //   {{node.title}}
-  //   <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="remove(this)"><span
-  //       class="glyphicon glyphicon-remove"></span></a>
-  //   <a class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="newSubItem(this)" style="margin-right: 8px;"><span
-  //       class="glyphicon glyphicon-plus"></span></a>
-  // </div>
-  // <ol ui-tree-nodes="" ng-model="node.nodes" ng-class="{hidden: collapsed}">
-  //   <li ng-repeat="node in node.nodes" ui-tree-node ng-include="'nodes_renderer.html'">
-  //   </li>
-  // </ol>
-</script>
-
-<!-- <div class="row">
-    <div class="col-sm-2"></div>
-    <div class="col-sm-8">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-            <div class="row">
-                <div class="col-sm-6">
-                    <h1 class="panel-title"><strong>Product List</strong></h1>
-                </div>
-                <div class="col-sm-2 col-sm-offset-4">
-                    <a class="btn btn-blue pull-right" ng-click="addProductPage()">Add</a>
-                </div>
-            </div>
-                
-            </div>
-            <div class="panel-body">
-                    <div class="row">
-                        <div class="col-sm-12">
- <div ui-tree id="tree-root">
-      <ol ui-tree-nodes ng-model="data">
-        <li ng-repeat="node in data" ui-tree-node ng-include="'nodes_renderer.html'"></li>
-      </ol>
-        </div>
+  <div ui-tree-handle class="tree-node tree-node-content">
+    <a class="btn btn-success btn-xs" ng-if="node.nodes && node.nodes.length > 0" data-nodrag ng-click="toggle(this)"><span
+        class="glyphicon"
+        ng-class="{
+          'glyphicon-chevron-right': collapsed,
+          'glyphicon-chevron-down': !collapsed
+        }"></span></a>
+    {{node.title}}
+    <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="remove(this)"><span
+        class="glyphicon glyphicon-remove"></span></a>
+    <a class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="newSubItem(this)" style="margin-right: 8px;"><span
+        class="glyphicon glyphicon-plus"></span></a>
   </div>
+  <ol ui-tree-nodes="" ng-model="node.nodes" ng-class="{hidden: collapsed}">
+    <li ng-repeat="node in node.nodes" ui-tree-node ng-include="'nodes_renderer.html'">
+    </li>
+  </ol>
+ </script>
 
-                            <table class="table responsive">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Product Name</th>
-                                    <th>Description</th>
-                                    <th>Quantity</th>
-                                    <th>Price</th>
-                                    <th>Edit</th>
-                                    <th>Delete</th>
-                                </tr>
-                            </thead>
-                            
-                            <tbody>
-                            <tr ng-show="spinner">
-                                <td colspan="7" style="text-align:center;"><i class="fa fa-spin fa-spinner"></i></td>
-                            </tr>
-                                <tr ng-repeat="product in productList | orderBy: '-created' track by $index">
-                                    <td>{{$index}}</td>
-                                    <td>{{product.pname}}</td>
-                                    <td>{{product.pdesc}}</td>
-                                    <td>{{ (product.pinv == -1) ? "infinite" : product.pinv }}
-                                    </td>
-                                    <td>{{product.price}}</td>
-                                   <td><button class="btn" ng-click="editProduct(product._id)"><span class="glyphicon glyphicon-pencil"></span></button></td>
-                                    <td><button class="btn" ng-click="deleteProduct(product._id, $index)"><span class="glyphicon glyphicon-trash"></span></button></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        </div>
-                    </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-2"></div>
-
-</div> -->
