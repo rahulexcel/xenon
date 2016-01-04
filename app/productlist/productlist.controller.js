@@ -3,38 +3,35 @@
 
     angular.module('xenon-app')
         .controller('productListController', productListController);
-    function productListController($scope, storeinfoLocationsIdFactory, productListFactory, productFactory, localStorageService, $rootScope, $state) {
+    function productListController($scope, $timeout, storeinfoLocationsIdFactory, productListFactory, productFactory, localStorageService, $rootScope, $state) {
         var catArr = [];
         var firstapidata=[];
         var secondapidata=[];
         $scope.spinner = true;
-        $scope.spinner = true;
+        $scope.catSpinner = true;
         var userData = localStorageService.get('userData');
         var lid = userData.locations[0];
-        firstapi();
+        secondapi();
         function firstapi() {
             var query = productListFactory.query({
                 'locationid': lid
             });
             query.$promise.then(function(data1) {
                 $scope.spinner = false;
-                 firstapidata=data1;
-                $scope.spinner = false;
-                secondapi();
+                 // firstapidata=data1;
+                 $scope.productList = data1;
 
             });
         }
         function secondapi() {
-            var query1 = storeinfoLocationsIdFactory.update({}, {
+            var query1 = storeinfoLocationsIdFactory.get({}, {
                 'locationid': userData.locations[0]
             });
             query1.$promise.then(function(data2) {
-              console.log(data2.data.lpcats);
-              if(data2.data.lpcats===null){   
-              }else{
-                console.log(data2.data.lpcats);
-                //$scope.data=data2.data.lpcats;
-              }
+              // console.log(data2.lpcats);
+              $scope.catArr = data2.lpcats;
+              $scope.catSpinner = false;
+              firstapi();
                 
             });
         }
@@ -58,31 +55,67 @@
                 return true;
             },
             dropped: function(e) {
-
+            },
+            beforeDrop: function(event) {
+                if(event.pos.dirX == -1 || event.pos.dirX == 0){
+                    alertDanger();
+                    //$scope.noDrop = true;
+                    return false;
+                }
+                if (!event.dest.nodesScope.$parent.category) {
+                    // If not, cancel the drop
+                    event.source.nodeScope.$$apply = false;
+                }
             }
         };
+
+
         $scope.categoryForm = function() {
 
         }
         $scope.saveCategory = function() {
-            catArr.push($scope.name);
-            //console.log(catArr);
-            var query = storeinfoLocationsIdFactory.update({}, {
+            //console.log(JSON.stringify($scope.catArr));
+            //console.log($scope.catArr);
+            if($scope.catArr){
+                var lpcats = {
+                        "id": new Date().getTime(),
+                        "title": $scope.name,
+                        "products": []
+                      }
+                      $scope.catArr.push(lpcats);
+                      //console.log(JSON.stringify($scope.catArr));
+                 var query = storeinfoLocationsIdFactory.update({}, {
                 'locationid': userData.locations[0],
-                'lpcats': catArr
+                'lpcats': $scope.catArr
             });
             query.$promise.then(function(data) {
                 //console.log(data.data.lpcats);
-                for (var i = 0; i <= data.data.lpcats.length; i++) {
-                    if (angular.isArray(data.data.lpcats[i])) {
-                        catArr.push(data.data.lpcats[i]);
-                    }
-                }
-                $scope.catArr = catArr;
+                //$scope.catArr = data.lpcats;
             });
-
-        }
+                } else {
+            var query = storeinfoLocationsIdFactory.update({}, {
+                'locationid': userData.locations[0],
+                'lpcats': {
+                        "id": new Date().getTime(),
+                        "title": $scope.name,
+                        "products": []
+                      }
+            });
+            query.$promise.then(function(data) {
+                //console.log(data.data.lpcats);
+                $scope.catArr = data.lpcats;
+            });
+            }
+        };
       
+function alertDanger(){
+$scope.alertDanger = true;
+ $timeout(function() {
+        $scope.alertDanger = false;
+    }, 5000);
+}
+
+
    
      };
 
