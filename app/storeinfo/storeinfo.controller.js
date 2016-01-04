@@ -29,23 +29,27 @@ function storeinfoCtrl($scope, $log, FileUploader, storeinfoFactory, localStorag
     };
 
     $scope.logInfos = function(event, date) {
-        event.preventDefault()
+        event.preventDefault();
         var timeStamp = date.valueOf();
         var day = new Date(timeStamp).getDate();
         var month = new Date(timeStamp).getMonth() + 1;
         var year = new Date(timeStamp).getFullYear();
         var fullDate = day + "-" + month + "-" + year;
         //console.log(dateArray);
+
         for (i = 0; i < dateArray.length; i++) {
+            
             if (dateArray[i] === fullDate) {
-                dateArray.pop(fullDate);
+                var idx = dateArray.indexOf(fullDate);
+                // dateArray.pop(fullDate);
+                dateArray.splice(idx,1);
                 DateFlag = 1;
-            } else {
-                DateFlag = 0;
-            }
+            } 
 
         }
+        console.log(DateFlag);
         if (DateFlag == 0) {
+            console.log('unmatch');
             dateArray.push(fullDate);
         }
         console.log(dateArray);
@@ -77,7 +81,7 @@ function storeinfoCtrl($scope, $log, FileUploader, storeinfoFactory, localStorag
             var closed = data.data.ldateclosed;
             dateArray = dateArray.concat(closed);
             //console.log(dateArray);
-            for (i = 0; i < closed.length; i++) {
+            for (i = 1; i < closed.length; i++) {
                 var responseDate = closed[i].split('-').reverse();
                 var responseTimestamp = new Date(responseDate).getTime();
                 responseDateArr.push(responseTimestamp);
