@@ -9,6 +9,8 @@ function storeinfoCtrl($scope, $log, FileUploader, storeinfoFactory, localStorag
     var LocationIdFlag = 0;
     var userData = localStorageService.get("userData");
     var locationId = userData.locations[0];
+    var openingTime;
+    var closingTime;
     if (angular.isDefined(locationId)) {
         edit();
     } else {
@@ -22,10 +24,12 @@ function storeinfoCtrl($scope, $log, FileUploader, storeinfoFactory, localStorag
         mstep: [1, 5, 10, 15, 25, 30]
     };
     $scope.openingtime = function() {
-        //$log.log('open time ' + $scope.open);
+      openingTime= String($scope.open).substring(16, 21);
+      //console.log(openingTime);    
     };
     $scope.closingtime = function() {
-        //$log.log('Time close ' + $scope.close);
+         closingTime= String($scope.close).substring(16, 21);
+      //console.log(openingTime);    
     };
 
     $scope.logInfos = function(event, date) {
@@ -36,7 +40,7 @@ function storeinfoCtrl($scope, $log, FileUploader, storeinfoFactory, localStorag
         var year = new Date(timeStamp).getFullYear();
         var fullDate = day + "-" + month + "-" + year;
         //console.log(dateArray);
-
+         
         for (i = 0; i < dateArray.length; i++) {
             
             if (dateArray[i] === fullDate) {
@@ -70,7 +74,8 @@ function storeinfoCtrl($scope, $log, FileUploader, storeinfoFactory, localStorag
             $scope.llogo = data.data.llogo;
             $scope.laddr = data.data.laddr;
             $scope.lpostcode = data.data.lpostcode;
-            $scope.city = data.data.city;
+            $scope.lcity = data.data.lcity;
+            $scope.lstate = data.data.lstate;
             $scope.lcountry = data.data.lcountry;
             $scope.lphone = data.data.lphone;
             $scope.llt = data.data.llt;
@@ -102,7 +107,8 @@ function storeinfoCtrl($scope, $log, FileUploader, storeinfoFactory, localStorag
                 'llgo': $scope.llogo,
                 'laddr': $scope.laddr,
                 'lpostcode': $scope.lpostcode,
-                'lcity': $scope.city,
+                'lcity': $scope.lcity,
+                'lstate':$scope.lstate,
                 'lcountry': $scope.lcountry,
                 'lphone': $scope.lphone,
                 'llt': $scope.llt,
@@ -126,7 +132,8 @@ function storeinfoCtrl($scope, $log, FileUploader, storeinfoFactory, localStorag
                 llgo: $scope.llogo,
                 laddr: $scope.laddr,
                 lpostcode: $scope.lpostcode,
-                lcity: $scope.city,
+                lcity: $scope.lcity,
+                lstate:$scope.lstate,
                 lcountry: $scope.lcountry,
                 lphone: $scope.lphone,
                 llt: $scope.llt,
@@ -140,7 +147,29 @@ function storeinfoCtrl($scope, $log, FileUploader, storeinfoFactory, localStorag
             });
         }
     }
-    
+    var dayArr=[];
+    $scope.tsave=function(){
+        console.log(openingTime);
+        console.log(closingTime);
+       var day= $scope.day;
+       var open=$scope.open;
+       var close=$scope.close;
+       var json;
+       console.log($scope.open);
+          json={'day': day,
+                'opening time':openingTime,
+                'closing time':closingTime 
+          }
+          dayArr.push(json);
+          console.log(JSON.stringify(dayArr));
+       console.log(dayArr);
+       $scope.day1=dayArr;
+    }
+    $scope.removeTimes=function(index){
+        console.log(index.day);
+        console.log(dayArr.day);
+
+    }
     var uploader = $scope.uploader = new FileUploader({});
     uploader.filters.push({
         name: 'imageFilter',
