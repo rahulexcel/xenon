@@ -93,7 +93,7 @@
      function upload (file, url) {
         Upload.upload({
             url: url,
-            data: {file: file}
+            data: {fileName: file}
         }).then(function (resp) {
             console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
         }, function (resp) {

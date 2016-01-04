@@ -18,22 +18,25 @@
             });
             query.$promise.then(function(data1) {
                 $scope.spinner = false;
-                 firstapidata=data1;
+                firstapidata=data1;
                 $scope.spinner = false;
                 secondapi();
-
+                
             });
         }
         function secondapi() {
             var query1 = storeinfoLocationsIdFactory.update({}, {
                 'locationid': userData.locations[0]
             });
-            query1.$promise.then(function(data2) {
+              query1.$promise.then(function(data2) {
               console.log(data2.data.lpcats);
-               var tree=[];
-                tree.push($scope.data);
-                console.log(tree);
-                
+              $scope.catArr=data2.data.lpcats;  
+              if(data2.data.lpcats===null){
+                alert("y");
+              } 
+              else{
+                alert("n");
+              }
             });
         }
         $scope.editProduct = function(id) {
@@ -50,38 +53,30 @@
             $rootScope.editProductId = '';
             $state.go('dashboard.addProduct');
         };
-
         $scope.treeOptions = {
             accept: function(sourceNodeScope, destNodesScope, destIndex) {
                 return true;
             },
             dropped: function(e) {
-
             }
         };
         $scope.categoryForm = function() {
-
         }
         $scope.saveCategory = function() {
             catArr.push($scope.name);
-            //console.log(catArr);
             var query = storeinfoLocationsIdFactory.update({}, {
                 'locationid': userData.locations[0],
                 'lpcats': catArr
             });
-            query.$promise.then(function(data) {
-                //console.log(data.data.lpcats);
-                for (var i = 0; i <= data.data.lpcats.length; i++) {
+            query.$promise.then(function(data){
+                    for (var i = 0; i <= data.data.lpcats.length; i++) {
                     if (angular.isArray(data.data.lpcats[i])) {
                         catArr.push(data.data.lpcats[i]);
                     }
                 }
                 $scope.catArr = catArr;
             });
-
         }
-      
-   
      };
 
 })();
