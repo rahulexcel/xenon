@@ -16,6 +16,7 @@
                        	 $scope.spinner = false;
                          $scope.email = '';
                          $scope.password = '';
+                          $state.go('dashboard.storeinfo');
                        }
                       
                    });

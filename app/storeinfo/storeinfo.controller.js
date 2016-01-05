@@ -11,6 +11,7 @@ function storeinfoCtrl($scope, $log, FileUploader, storeinfoFactory, localStorag
     var locationId = userData.locations[0];
     var openingTime;
     var closingTime;
+    var dayArr=[];
     if (angular.isDefined(locationId)) {
         edit();
     } else {
@@ -25,11 +26,11 @@ function storeinfoCtrl($scope, $log, FileUploader, storeinfoFactory, localStorag
     };
     $scope.openingtime = function() {
       openingTime= String($scope.open).substring(16, 21);
-      //console.log(openingTime);    
+     
     };
     $scope.closingtime = function() {
          closingTime= String($scope.close).substring(16, 21);
-      //console.log(openingTime);    
+       
     };
 
     $scope.logInfos = function(event, date) {
@@ -40,12 +41,11 @@ function storeinfoCtrl($scope, $log, FileUploader, storeinfoFactory, localStorag
         var year = new Date(timeStamp).getFullYear();
         var fullDate = day + "-" + month + "-" + year;
         //console.log(dateArray);
-         
         for (i = 0; i < dateArray.length; i++) {
             
             if (dateArray[i] === fullDate) {
                 var idx = dateArray.indexOf(fullDate);
-                // dateArray.pop(fullDate);
+               
                 dateArray.splice(idx,1);
                 DateFlag = 1;
             } 
@@ -83,9 +83,11 @@ function storeinfoCtrl($scope, $log, FileUploader, storeinfoFactory, localStorag
             $scope.open = data.data.lopentime;
             $scope.close = data.data.lclosetime;
             $scope.highlightDays = data.data.ldateclosed;
+            $scope.day1=data.data.lwots;
+           dayArr= $scope.day1;
+           console.log(dayArr);
             var closed = data.data.ldateclosed;
             dateArray = dateArray.concat(closed);
-            //console.log(dateArray);
             for (i = 1; i < closed.length; i++) {
                 var responseDate = closed[i].split('-').reverse();
                 var responseTimestamp = new Date(responseDate).getTime();
@@ -96,12 +98,15 @@ function storeinfoCtrl($scope, $log, FileUploader, storeinfoFactory, localStorag
         });
     }
     $scope.lsave = function() {
+        alert($scope.lphone);
+         console.log(dayArr);
         $scope.spinner = true;
         if (LocationIdFlag === 0) {
             console.log("flag=o update is firing");
             var query = storeinfoLocationsIdFactory.update({}, {
                 'locationid': userData.locations[0],
                 'lname': $scope.lname,
+                 'lwots': dayArr,
                 'ldesc': $scope.ldesc,
                 'lemail': $scope.lemail,
                 'llgo': $scope.llogo,
@@ -127,6 +132,7 @@ function storeinfoCtrl($scope, $log, FileUploader, storeinfoFactory, localStorag
             var query = storeinfoFactory.save({
                 locationId: userData.locations[0],
                 lname: $scope.lname,
+                lwots: dayArr,
                 ldesc: $scope.ldesc,
                 lemail: $scope.lemail,
                 llgo: $scope.llogo,
@@ -147,7 +153,6 @@ function storeinfoCtrl($scope, $log, FileUploader, storeinfoFactory, localStorag
             });
         }
     }
-    var dayArr=[];
     $scope.tsave=function(){
         console.log(openingTime);
         console.log(closingTime);
@@ -157,18 +162,19 @@ function storeinfoCtrl($scope, $log, FileUploader, storeinfoFactory, localStorag
        var json;
        console.log($scope.open);
           json={'day': day,
-                'opening time':openingTime,
-                'closing time':closingTime 
+                'opening_time':openingTime,
+                'closing_time':closingTime 
           }
-          dayArr.push(json);
-          console.log(JSON.stringify(dayArr));
+          dayArr.unshift(json);      
+    console.log(JSON.stringify(dayArr));
        console.log(dayArr);
        $scope.day1=dayArr;
+        
     }
     $scope.removeTimes=function(index){
-        console.log(index.day);
-        console.log(dayArr.day);
-
+      var idx=dayArr.indexOf(index);
+      dayArr.splice(idx,1);
+       console.log(dayArr);
     }
     var uploader = $scope.uploader = new FileUploader({});
     uploader.filters.push({
