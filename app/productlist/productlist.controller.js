@@ -3,7 +3,7 @@
 
     angular.module('xenon-app')
         .controller('productListController', productListController);
-    function productListController($scope, $timeout, storeinfoLocationsIdFactory, productListFactory, productFactory, localStorageService, $rootScope, $state) {
+    function productListController($scope, $timeout, productlistService, storeinfoLocationsIdFactory, productListFactory, productFactory, localStorageService, $rootScope, $state) {
         var catArr = [];
         var firstapidata=[];
         var secondapidata=[];
@@ -18,9 +18,7 @@
             });
             query.$promise.then(function(data1) {
                 $scope.spinner = false;
-                 // firstapidata=data1;
-                 $scope.productList = data1;
-
+                $scope.productList = productlistService.productlist($scope.catArr, data1);
             });
         }
         function secondapi() {
@@ -55,19 +53,34 @@
                 return true;
             },
             dropped: function(e) {
+                saveCategoryStructure();
             },
             beforeDrop: function(event) {
-                if(event.pos.dirX == -1 || event.pos.dirX == 0){
+                console.log(event.pos);
+                if(event.pos.dirX == -1){
                     alertDanger();
                     //$scope.noDrop = true;
                     return false;
                 }
-                if (!event.dest.nodesScope.$parent.category) {
-                    // If not, cancel the drop
-                    event.source.nodeScope.$$apply = false;
-                }
+                // if(event.source.nodeScope.Arr.title){
+                //     return true;
+                //     console.log(event.source.nodeScope.Arr.id);
+                // } else{
+                //     console.log(event.source.nodeScope.Arr.id);
+                //     return false;
+                // }
+                // if(event.pos.dirX == -1 || event.pos.dirX == 0){
+                //     alertDanger();
+                //     //$scope.noDrop = true;
+                //     return false;
+                // }
             }
         };
+        $scope.productTreeOption = {
+            dropped: function(e) {
+                saveCategoryStructure();
+            }
+        }
 
 
         $scope.categoryForm = function() {
@@ -107,6 +120,26 @@
             });
             }
         };
+
+$scope.deleteCategory = function(index){
+    console.log(index);
+    $scope.catArr.splice(index, 1);
+    var query = storeinfoLocationsIdFactory.update({}, {
+                'locationid': userData.locations[0],
+                'lpcats': $scope.catArr
+            });
+    console.log($scope.catArr);
+};
+$scope.saveStructure = function(){
+    saveCategoryStructure();
+}
+
+function saveCategoryStructure(){
+    var query = storeinfoLocationsIdFactory.update({}, {
+                'locationid': userData.locations[0],
+                'lpcats': $scope.catArr
+            });
+};
       
 function alertDanger(){
 $scope.alertDanger = true;

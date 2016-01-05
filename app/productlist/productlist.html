@@ -43,7 +43,7 @@
                                             <div class="uk-nestable-item">
                                                 <!-- <div class="uk-nestable-handle"></div> -->
                                                <!--  <div data-nestable-action="toggle"></div> -->
-                                                <div class="">{{Arr.title}} <a class="pull-right btn btn-danger btn-xs" data-nodrag="" ng-click="deleteCategory()">
+                                                <div class=""><strong>{{Arr.title}}</strong> <a class="pull-right btn btn-danger btn-xs" data-nodrag="" ng-click="deleteCategory($index)">
                                                 <i class="fa fa-times"></i>
                                                 </a></div>
                                             </div>
@@ -51,9 +51,13 @@
                                             <ul ui-tree-nodes="" ng-model="Arr.products">
                                             <li ng-repeat="product in Arr.products" ui-tree-node style="margin-bottom:10px;">
                                               <div ui-tree-handle>
-                                                  <div>
-                                                      {{product.pname}}&nbsp; &nbsp; {{product.pdesc}}&nbsp; &nbsp; {{product.pinv}}&nbsp; &nbsp; {{product.price}}
-                                                  </div>
+                                                  <div class="row">
+                             <div class="col-sm-4">{{product.pname}}</div>
+                             <div class="col-sm-4">Qty - {{ (product.pinv == -1) ? "Infinite" : product.pinv }}</div>
+                             <div class="col-sm-4">{{product.price}} <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="remove(this); saveStructure()"><span
+        class="glyphicon glyphicon-remove"></span></a>
+        </div>
+                         </div>
                                               </div>
                                             </li>
                                           </ul>
@@ -63,26 +67,41 @@
                             </div>
                         </div>
                         <hr/>
-                         <h1 class="panel-title"><strong>Uncategoriesed Product&nbsp;</strong></h1>
+                         <h1 class="panel-title"><strong>Uncategoriesed Product&nbsp;</strong></h1>                        
+                         <div class="row">
+                             <div class="col-sm-4"><strong>Name</strong></div>
+                             <div class="col-sm-4"><strong>Quantity</strong></div>
+                             <div class="col-sm-4"><strong>Price</strong></div>
+                         </div>
                          <h1 class="text-center"><span ng-show="spinner"><i class="fa fa-spin fa-spinner"></i></span></h1>
+
                         <div ui-tree>
-                            <div ui-tree="treeOptions">
+                            <div ui-tree="productTreeOption">
                                 <ol ui-tree-nodes ng-model="productList">
                                     <ul id="nestable-list-1" class="uk-nestable">
                                         <li data-item="Item 1" data-item-id="a" ui-tree-node ng-repeat="product in productList" ui-tree-node>
                                             <div class="uk-nestable-item">
-                                                <!-- <div class="uk-nestable-handle"></div>
-                                                <div data-nestable-action="toggle"></div> -->
-
-                                                <div class="">{{product.pname}}&nbsp; &nbsp; {{product.pdesc}}&nbsp; &nbsp; {{product.pinv}}&nbsp; &nbsp; {{product.price}} <a class="pull-right btn btn-danger btn-xs" data-nodrag="">
+                                                <div class="row">
+                             <div class="col-sm-4">{{product.pname}}</div>
+                             <div class="col-sm-4">{{ (product.pinv == -1) ? "Infinite" : product.pinv }}</div>
+                             <div class="col-sm-4">{{product.price}} 
+                             <a class="pull-right btn btn-danger btn-xs" data-nodrag="" ng-click="deleteProduct(product._id, $index)">
                                                 <i class="fa fa-times"></i>
-                                                </a></div>
+                                                </a>
+                                                 <a class="pull-right btn btn-danger btn-xs" data-nodrag="" ng-click="editProduct(product._id)">
+                                                <i class="fa fa-pencil"></i>
+                                                </a>
+                                                </div>
+                         </div>
                                             </div>
                                         </li>
                                     </ul>
                                 </ol>
                             </div>
                         </div>
+
+
+
                     </div>
                 </div>
             </div>
