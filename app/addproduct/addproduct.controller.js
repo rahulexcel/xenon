@@ -27,7 +27,7 @@
             $scope.editForm = true;
           }
           $scope.infinite = function(){
-            $scope.productQuantity = 'infinite';
+            $scope.productQuantity = 'Infinite';
           };
           $scope.editProduct = function(editProductId){
             $scope.spinner = true;
@@ -35,15 +35,17 @@
             $scope.productDescription = angular.element(document.querySelector('.CodeMirror-code pre span')).text();
             var userData = localStorageService.get('userData');
             var lid = userData.locations[0];
-            if($scope.productQuantity == 'infinite' || $scope.productQuantity == undefined){
-              $scope.productQuantity = -1;
+            if($scope.productQuantity == 'Infinite' || $scope.productQuantity == undefined){
+              $scope.apiproductQuantity = -1;
+            } else{
+              $scope.apiproductQuantity =$scope.productQuantity;
             }
             var query = productFactory.editProduct({
               "prodId":editProductId,
               "pname": $scope.productName,
               "pdesc":$scope.productDescription,
               "price":$scope.productPrice,
-              "pinv":$scope.productQuantity,
+              "pinv":$scope.apiproductQuantity,
               "pinvdaily":false,
               "pcal":false,
               "pimages":["353473874.jpg"],
@@ -59,18 +61,20 @@
 
        		$scope.addProduct = function(){
             $scope.spinner = true;
-                        $scope.productDescription = angular.element(document.querySelector('#uikit_editor_2')).val();
+            $scope.productDescription = angular.element(document.querySelector('#uikit_editor_2')).val();
             var userData = localStorageService.get('userData');
             var lid = userData.locations[0];
-            if($scope.productQuantity == 'infinite' || $scope.productQuantity == undefined){
-              $scope.productQuantity = -1;
+            if($scope.productQuantity == 'Infinite' || $scope.productQuantity == undefined){
+              $scope.apiproductQuantity = -1;
+            } else{
+              $scope.apiproductQuantity =$scope.productQuantity;
             }
 
             var query = addProductFactory.save({
               "pname": $scope.productName,
               "pdesc":$scope.productDescription,
               "price":$scope.productPrice,
-              "pinv":$scope.productQuantity,
+              "pinv":$scope.apiproductQuantity,
               "pinvdaily":false,
               "pcal":false,
               // "pimages":[data.filename],
@@ -87,6 +91,7 @@
                         angular.element(document.querySelector('.CodeMirror-code pre span')).text(' ');
                     });
                         upload($scope.picImage, 'https://protected-badlands-3499.herokuapp.com/prodfile');
+                        $state.go('dashboard.productList');
        		};
           
            // upload on file select or drop

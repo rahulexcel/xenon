@@ -9,6 +9,7 @@
         var secondapidata=[];
         $scope.spinner = true;
         $scope.catSpinner = true;
+        $scope.saveCategoryTreeStructure = false;
         var userData = localStorageService.get('userData');
         var lid = userData.locations[0];
         secondapi();
@@ -56,27 +57,58 @@
                 saveCategoryStructure();
             },
             beforeDrop: function(event) {
-                console.log(event.pos);
-                if(event.pos.dirX == -1){
-                    alertDanger();
-                    //$scope.noDrop = true;
-                    return false;
+                if(event.dest.nodesScope.$id === event.source.nodesScope.$id){
+                    return true;
                 }
-                // if(event.source.nodeScope.Arr.title){
-                //     return true;
-                //     console.log(event.source.nodeScope.Arr.id);
-                // } else{
-                //     console.log(event.source.nodeScope.Arr.id);
-                //     return false;
-                // }
-                // if(event.pos.dirX == -1 || event.pos.dirX == 0){
-                //     alertDanger();
-                //     //$scope.noDrop = true;
-                //     return false;
-                // }
+                var is_source_category = false;
+                var is_dest_category = false;
+                if(event.source.nodeScope.$modelValue.title){
+                    is_source_category = true;
+                }
+                // console.log(event.dest.nodesScope.$parent.$type);
+                if(event.dest.nodesScope.$parent.$type == "uiTree"){
+                    is_dest_category = true;
+                }
+
+                // console.log(event);
+
+                if(is_source_category){
+                    console.log('//we are moving category');
+                    if(is_dest_category){
+                        console.log('//its fine to move category up/down');
+                        return true;
+                    }else{
+                        console.log('//we cannot move category in product');
+                        alertDanger();
+                        return false;
+                    }
+
+                }
+
+                if(!is_source_category){
+                    console.log('//we are moving a product');
+                    if(!is_dest_category){
+                        console.log('//moving inside product is fine');
+                        return true;
+                    }else{
+                        console.log('//cannot move product in parent category');
+                        alertDanger();
+                        return false;
+                    }
+                }
+
+                return true;
             }
         };
         $scope.productTreeOption = {
+            beforeDrop : function(event){
+                // console.log(event);
+                if(event.dest.nodesScope.$parent.$type == "uiTree"){
+                    alertDanger();
+                    return false;
+                }
+                return true;
+            },
             dropped: function(e) {
                 saveCategoryStructure();
             }
@@ -102,6 +134,7 @@
                 'lpcats': $scope.catArr
             });
             query.$promise.then(function(data) {
+                $scope.name = '';
                 //console.log(data.data.lpcats);
                 //$scope.catArr = data.lpcats;
             });
@@ -115,6 +148,7 @@
                       }
             });
             query.$promise.then(function(data) {
+                $scope.name = '';
                 //console.log(data.data.lpcats);
                 $scope.catArr = data.lpcats;
             });
@@ -135,9 +169,13 @@ $scope.saveStructure = function(){
 }
 
 function saveCategoryStructure(){
+    $scope.saveCategoryTreeStructure = true;
     var query = storeinfoLocationsIdFactory.update({}, {
                 'locationid': userData.locations[0],
                 'lpcats': $scope.catArr
+            });
+    query.$promise.then(function(data) {
+    $scope.saveCategoryTreeStructure = false;
             });
 };
       

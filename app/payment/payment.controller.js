@@ -11,6 +11,7 @@
                     });
             $scope.activateStripe = function(){
             	console.log('activateStripe');
+              //window.open ("https://protected-badlands-3499.herokuapp.com/payments/authorize");
        		var query = paymentFactory.authorize();
             query.$promise.then(function(data) {
                         console.log(data);

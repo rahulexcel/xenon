@@ -7,31 +7,48 @@
 
        return {
            productlist: function(catArr, data1) {
-                var indexArr = [];
+                var idArr = [];
+                var newArray = [];
                  for(var i=0; i<catArr.length; i++){
                     //console.log(catArr[i].products);
-                    if(catArr[i].products.length > 0){
+                    if(catArr[i].products && catArr[i].products.length > 0){
                         for(var j=0; j < catArr[i].products.length; j++){
                        // console.log(catArr[i].products[j]._id);
                         var catProductId = catArr[i].products[j]._id;
-                            for(var k =0; k < data1.length; k++){
-                                //console.log(data1[k]._id);
-                                var productId = data1[k]._id;
-                                if(catProductId == productId){
-                                    indexArr.push(k);
-                                }                           
-                            }                            
+                        idArr.push(catProductId);
                         }
                     }
                  }
-                 //console.log(indexArr);
-                 var nIdx=0;
-                 for(var x =0; x <indexArr.length;x++){
-                    //console.log(indexArr[x]);
-                    data1.splice(indexArr[x]-nIdx,1);
-                    var nIdx=nIdx+1;
+                 var ar=[];var r=0;
+                 //console.log(idArr);
+                 for(var k=0; k<data1.length;k++){
+                    //console.log(data1[k]._id);
+                    var flag;
+                    for(var l=0; l<idArr.length;l++){
+                      //console.log(idArr[l]);
+                      ar[k]=true;
+                      if(data1[k]._id == idArr[l]){
+                        console.log('match');
+                        ar[k]=false;
+                        r=r+1;
+                        break;
+                      } 
+                    }
                  }
-                 return data1;
+                 for(var p=0;p<data1.length;p++)
+                 {
+                  if(ar[p]==true)
+                  {
+                    newArray.push(data1[p]);
+                  }
+                 }
+                 console.log(newArray.length);
+                 if(newArray.length == 0 && r ==0){
+                  return data1;
+                 } else{
+                  return newArray;
+                 }
+                 // console.log(data1);
            }
        }
    }
