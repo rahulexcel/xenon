@@ -7,10 +7,11 @@ angular.module('xenon-app')
                   var currentUser = localStorageService.get('userData');
               if (currentUser) {
                 var accessToken = currentUser.token;
-                   config.headers = {
-                   'Content-Type': 'application/json',
-                   'Authorization': 'Bearer ' + accessToken
-                 };
+                config.headers['Authorization'] = 'Bearer ' + accessToken;
+//                   config.headers = {
+//                   'Content-Type': 'application/json',
+//                   'Authorization': 'Bearer ' + accessToken
+//                 };
                }
                return config;
                 }

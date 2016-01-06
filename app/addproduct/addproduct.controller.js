@@ -90,9 +90,10 @@
                         $scope.productQuantity= '';
                         angular.element(document.querySelector('.CodeMirror-code pre span')).text(' ');
                     });
-                        upload($scope.picImage, 'https://protected-badlands-3499.herokuapp.com/prodfile');
                         $state.go('dashboard.productList');
-       		};
+                        upload($scope.picImage, 'https://protected-badlands-3499.herokuapp.com/prodfile');
+       		console.log($scope.picImage);
+          };
           
            // upload on file select or drop
      function upload (file, url) {
@@ -115,21 +116,6 @@
 $scope.back = function(){
             $state.go('dashboard.productList');
           };
-//     function upload_file(file, signed_request, url){
-//     var xhr = new XMLHttpRequest();
-//     xhr.open("PUT", signed_request);
-//     xhr.setRequestHeader('x-amz-acl', 'public-read');
-//     xhr.onload = function() {
-//         if (xhr.status === 200) {
-//             document.getElementById("preview").src = url;
-//             document.getElementById("avatar_url").value = url;
-//         }
-//     };
-//     xhr.onerror = function() {
-//         alert("Could not upload file.");
-//     };
-//     xhr.send(file);
-// };
 
 
 
