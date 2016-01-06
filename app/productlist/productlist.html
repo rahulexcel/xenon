@@ -5,10 +5,10 @@
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-sm-6">
-                        <h1 class="panel-title"><strong>Product List&nbsp;<span ng-show="spinner"><i class="fa fa-spin fa-spinner"></i></span></strong></h1>
+                        <h1 class="panel-title"><strong>Categoriesed Product&nbsp; <span ng-show="saveCategoryTreeStructure"><i class="fa fa-spin fa-spinner"></i></span></strong></h1>
                     </div>
                     <div class="col-sm-2 col-sm-offset-4">
-                        <a class="btn btn-success" ng-click="addProductPage()">Add</a>
+                        <a class="btn btn-success pull-right" ng-click="addProductPage()">Add Product</a>
                     </div>
                 </div>
 
@@ -16,8 +16,6 @@
             <div class="panel-body">
                 <div class="row">
                     <div class="col-sm-12">
-                        <br/>
-                        <br/>
                          <div ui-tree id="tree-root">
        <ol ui-tree-nodes ng-model="data">
          <li ng-repeat="node in data" ui-tree-node ng-include="'nodes_renderer.html'"></li>
@@ -26,45 +24,89 @@
                         <ul id="nestable-list-1" class="uk-nestable">
                             <li data-item="Item 1" data-item-id="a">
                                 <div class="uk-nestable-item">
-                                    <div class="uk-nestable-handle"></div>
+                                    <!-- <div class="uk-nestable-handle"></div> -->
+
                                     <div data-nestable-action="toggle"></div>
-                                    <div class="list-label"><a href="" ng-click='categoryForm()' data-toggle="modal" data-target="#myModal">Add Category Menu</a> </div>
+                                    <div class="list-label"><a href="" ng-click='categoryForm()' data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i> &nbsp;&nbsp;Add Category Menu</a> </div>
                                 </div>
                             </li>
                         </ul>
+                        <h1 class="text-center"><span ng-show="catSpinner"><i class="fa fa-spin fa-spinner"></i></span></h1>
+                        <alert type="danger" ng-show="alertDanger" id="alertDanger">
+                            You can not drop here
+                        </alert>
                           <div ui-tree>
-                            <div ui-tree="treeOptions">
+                            <div ui-tree="treeOptions" data-nodrop-enabled="{{noDrop}}" data-empty-placeholder-enabled="false">
                                 <ol ui-tree-nodes ng-model="catArr">
                                     <ul id="nestable-list-1" class="uk-nestable">
                                         <li data-item="Item 1" data-item-id="a" ui-tree-node ng-repeat="Arr in catArr" ui-tree-node>
                                             <div class="uk-nestable-item">
-                                                <div class="uk-nestable-handle"></div>
-                                                <div data-nestable-action="toggle"></div>
-                                                <div class="list-label">{{Arr}}
-                                                {{Arr.pname}}</div>
+                                                <!-- <div class="uk-nestable-handle"></div> -->
+                                               <!--  <div data-nestable-action="toggle"></div> -->
+                                                <div class=""><strong>{{Arr.title}}</strong> <a class="pull-right btn btn-danger btn-xs" data-nodrag="" ng-click="deleteCategory($index)">
+                                                <i class="fa fa-times"></i>
+                                                </a>
+                                                <button ng-click="toggle(this)" style="float:right;" data-nodrag="" ng-if="Arr.products &amp;&amp; Arr.products.length &gt; 0" class="btn btn-success btn-xs ng-scope"><span ng-class="{
+          'glyphicon-chevron-right': collapsed,
+          'glyphicon-chevron-down': !collapsed
+        }" class="glyphicon glyphicon-chevron-down"></span></button>  
+                                                </div>
                                             </div>
+
+                                            <ul ui-tree-nodes="" ng-model="Arr.products" ng-class="{hidden: collapsed}">
+                                            <li ng-repeat="product in Arr.products" ui-tree-node style="margin-bottom:10px;">
+                                              <div ui-tree-handle>
+                                                  <div class="row">
+                             <div class="col-xs-4">{{product.pname}}</div>
+                             <div class="col-xs-4">Qty - {{ (product.pinv == -1) ? "Infinite" : product.pinv }}</div>
+                             <div class="col-xs-4">{{product.price}} <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="remove(this); saveStructure()"><span
+        class="glyphicon glyphicon-remove"></span></a>
+        </div>
+                         </div>
+                                              </div>
+                                            </li>
+                                          </ul>
                                         </li>
                                     </ul>
                                 </ol>
                             </div>
                         </div>
                         <hr/>
+                         <h1 class="panel-title" ng-if="productList"><strong>Uncategoriesed Product&nbsp;</strong></h1>                        
+                         <div class="row" ng-if="productList">
+                             <div class="col-xs-4"><strong>Name</strong></div>
+                             <div class="col-xs-4"><strong>Quantity</strong></div>
+                             <div class="col-xs-4"><strong>Price</strong></div>
+                         </div>
+                         <h1 class="text-center"><span ng-show="spinner"><i class="fa fa-spin fa-spinner"></i></span></h1>
+
                         <div ui-tree>
-                            <div ui-tree="treeOptions">
+                            <div ui-tree="productTreeOption" data-empty-placeholder-enabled="false">
                                 <ol ui-tree-nodes ng-model="productList">
                                     <ul id="nestable-list-1" class="uk-nestable">
                                         <li data-item="Item 1" data-item-id="a" ui-tree-node ng-repeat="product in productList" ui-tree-node>
                                             <div class="uk-nestable-item">
-                                                <div class="uk-nestable-handle"></div>
-                                                <div data-nestable-action="toggle"></div>
-
-                                                <div class="list-label">{{product.pname}}&nbsp; &nbsp; {{product.pdesc}}&nbsp; &nbsp; {{product.pinv}}&nbsp; &nbsp; {{product.price}}</div>
+                                                <div class="row">
+                             <div class="col-xs-4">{{product.pname}}</div>
+                             <div class="col-xs-4">{{ (product.pinv == -1) ? "Infinite" : product.pinv }}</div>
+                             <div class="col-xs-4">{{product.price}} 
+                             <a class="pull-right btn btn-danger btn-xs" data-nodrag="" ng-click="deleteProduct(product._id, $index)">
+                                                <i class="fa fa-times"></i>
+                                                </a>
+                                                 <a class="pull-right btn btn-success btn-xs" data-nodrag="" ng-click="editProduct(product._id)">
+                                                <i class="fa fa-pencil"></i>
+                                                </a>
+                                                </div>
+                         </div>
                                             </div>
                                         </li>
                                     </ul>
                                 </ol>
                             </div>
                         </div>
+
+
+
                     </div>
                 </div>
             </div>

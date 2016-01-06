@@ -3,40 +3,35 @@
 
     angular.module('xenon-app')
         .controller('productListController', productListController);
-    function productListController($scope, storeinfoLocationsIdFactory, productListFactory, productFactory, localStorageService, $rootScope, $state) {
+    function productListController($scope, $timeout, productlistService, storeinfoLocationsIdFactory, productListFactory, productFactory, localStorageService, $rootScope, $state) {
         var catArr = [];
         var firstapidata=[];
         var secondapidata=[];
         $scope.spinner = true;
-        $scope.spinner = true;
+        $scope.catSpinner = true;
+        $scope.saveCategoryTreeStructure = false;
         var userData = localStorageService.get('userData');
         var lid = userData.locations[0];
-        firstapi();
+        secondapi();
         function firstapi() {
             var query = productListFactory.query({
                 'locationid': lid
             });
             query.$promise.then(function(data1) {
                 $scope.spinner = false;
-                firstapidata=data1;
-                $scope.spinner = false;
-                secondapi();
-                
+                $scope.productList = productlistService.productlist($scope.catArr, data1);
             });
         }
         function secondapi() {
-            var query1 = storeinfoLocationsIdFactory.update({}, {
+            var query1 = storeinfoLocationsIdFactory.get({}, {
                 'locationid': userData.locations[0]
             });
-              query1.$promise.then(function(data2) {
-              console.log(data2.data.lpcats);
-              $scope.catArr=data2.data.lpcats;  
-              if(data2.data.lpcats===null){
-                alert("y");
-              } 
-              else{
-                alert("n");
-              }
+            query1.$promise.then(function(data2) {
+              // console.log(data2.lpcats);
+              $scope.catArr = data2.lpcats;
+              $scope.catSpinner = false;
+              firstapi();
+                
             });
         }
         $scope.editProduct = function(id) {
@@ -53,30 +48,146 @@
             $rootScope.editProductId = '';
             $state.go('dashboard.addProduct');
         };
+
         $scope.treeOptions = {
             accept: function(sourceNodeScope, destNodesScope, destIndex) {
                 return true;
             },
             dropped: function(e) {
-            }
-        };
-        $scope.categoryForm = function() {
-        }
-        $scope.saveCategory = function() {
-            catArr.push($scope.name);
-            var query = storeinfoLocationsIdFactory.update({}, {
-                'locationid': userData.locations[0],
-                'lpcats': catArr
-            });
-            query.$promise.then(function(data){
-                    for (var i = 0; i <= data.data.lpcats.length; i++) {
-                    if (angular.isArray(data.data.lpcats[i])) {
-                        catArr.push(data.data.lpcats[i]);
+                saveCategoryStructure();
+            },
+            beforeDrop: function(event) {
+                if(event.dest.nodesScope.$id === event.source.nodesScope.$id){
+                    return true;
+                }
+                var is_source_category = false;
+                var is_dest_category = false;
+                if(event.source.nodeScope.$modelValue.title){
+                    is_source_category = true;
+                }
+                // console.log(event.dest.nodesScope.$parent.$type);
+                if(event.dest.nodesScope.$parent.$type == "uiTree"){
+                    is_dest_category = true;
+                }
+
+                // console.log(event);
+
+                if(is_source_category){
+                    console.log('//we are moving category');
+                    if(is_dest_category){
+                        console.log('//its fine to move category up/down');
+                        return true;
+                    }else{
+                        console.log('//we cannot move category in product');
+                        alertDanger();
+                        return false;
+                    }
+
+                }
+
+                if(!is_source_category){
+                    console.log('//we are moving a product');
+                    if(!is_dest_category){
+                        console.log('//moving inside product is fine');
+                        return true;
+                    }else{
+                        console.log('//cannot move product in parent category');
+                        alertDanger();
+                        return false;
                     }
                 }
-                $scope.catArr = catArr;
-            });
+
+                return true;
+            }
+        };
+        $scope.productTreeOption = {
+            beforeDrop : function(event){
+                // console.log(event);
+                if(event.dest.nodesScope.$parent.$type == "uiTree"){
+                    alertDanger();
+                    return false;
+                }
+                return true;
+            },
+            dropped: function(e) {
+                saveCategoryStructure();
+            }
         }
+
+
+        $scope.categoryForm = function() {
+
+        }
+        $scope.saveCategory = function() {
+            //console.log(JSON.stringify($scope.catArr));
+            //console.log($scope.catArr);
+            if($scope.catArr){
+                var lpcats = {
+                        "id": new Date().getTime(),
+                        "title": $scope.name,
+                        "products": []
+                      }
+                      $scope.catArr.push(lpcats);
+                      //console.log(JSON.stringify($scope.catArr));
+                 var query = storeinfoLocationsIdFactory.update({}, {
+                'locationid': userData.locations[0],
+                'lpcats': $scope.catArr
+            });
+            query.$promise.then(function(data) {
+                $scope.name = '';
+                //console.log(data.data.lpcats);
+                //$scope.catArr = data.lpcats;
+            });
+                } else {
+            var query = storeinfoLocationsIdFactory.update({}, {
+                'locationid': userData.locations[0],
+                'lpcats': {
+                        "id": new Date().getTime(),
+                        "title": $scope.name,
+                        "products": []
+                      }
+            });
+            query.$promise.then(function(data) {
+                $scope.name = '';
+                //console.log(data.data.lpcats);
+                $scope.catArr = data.lpcats;
+            });
+            }
+        };
+
+$scope.deleteCategory = function(index){
+    console.log(index);
+    $scope.catArr.splice(index, 1);
+    var query = storeinfoLocationsIdFactory.update({}, {
+                'locationid': userData.locations[0],
+                'lpcats': $scope.catArr
+            });
+    console.log($scope.catArr);
+};
+$scope.saveStructure = function(){
+    saveCategoryStructure();
+}
+
+function saveCategoryStructure(){
+    $scope.saveCategoryTreeStructure = true;
+    var query = storeinfoLocationsIdFactory.update({}, {
+                'locationid': userData.locations[0],
+                'lpcats': $scope.catArr
+            });
+    query.$promise.then(function(data) {
+    $scope.saveCategoryTreeStructure = false;
+            });
+};
+      
+function alertDanger(){
+$scope.alertDanger = true;
+ $timeout(function() {
+        $scope.alertDanger = false;
+    }, 5000);
+}
+
+
+   
      };
 
 })();
