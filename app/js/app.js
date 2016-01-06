@@ -1,7 +1,6 @@
 'use strict';
 
 var app = angular.module('xenon-app', [
-	
 	'ngCookies',
      'ngResource',
 	'ui.router',
