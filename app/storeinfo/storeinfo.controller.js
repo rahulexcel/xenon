@@ -1,6 +1,7 @@
 angular
     .module('xenon.controllers')
     .controller('storeinfoCtrl', storeinfoCtrl);
+
 function storeinfoCtrl($scope, $log, FileUploader, storeinfoFactory, localStorageService, storeinfoLocationsFactory, storeinfoLocationsIdFactory) {
     var dateArray = [];
     var responseDateArr = [];
@@ -11,7 +12,7 @@ function storeinfoCtrl($scope, $log, FileUploader, storeinfoFactory, localStorag
     var locationId = userData.locations[0];
     var openingTime;
     var closingTime;
-    var dayArr=[];
+    var dayArr = [];
     if (angular.isDefined(locationId)) {
         edit();
     } else {
@@ -25,13 +26,14 @@ function storeinfoCtrl($scope, $log, FileUploader, storeinfoFactory, localStorag
         mstep: [1, 5, 10, 15, 25, 30]
     };
     $scope.openingtime = function() {
-      openingTime= String($scope.open).substring(16, 21);
-     
+        openingTime = String($scope.open).substring(16, 21);
+
     };
     $scope.closingtime = function() {
-         closingTime= String($scope.close).substring(16, 21);
-       
+        closingTime = String($scope.close).substring(16, 21);
+
     };
+
 
     $scope.logInfos = function(event, date) {
         event.preventDefault();
@@ -42,14 +44,12 @@ function storeinfoCtrl($scope, $log, FileUploader, storeinfoFactory, localStorag
         var fullDate = day + "-" + month + "-" + year;
         //console.log(dateArray);
         for (i = 0; i < dateArray.length; i++) {
-            
+
             if (dateArray[i] === fullDate) {
                 var idx = dateArray.indexOf(fullDate);
-               
-                dateArray.splice(idx,1);
+                dateArray.splice(idx, 1);
                 DateFlag = 1;
-            } 
-
+            }
         }
         console.log(DateFlag);
         if (DateFlag == 0) {
@@ -59,14 +59,15 @@ function storeinfoCtrl($scope, $log, FileUploader, storeinfoFactory, localStorag
         console.log(dateArray);
         date.selected = !date.selected;
     }
+
     function edit() {
         $scope.spinner = true;
         var query = storeinfoLocationsIdFactory.update({}, {
             'locationid': userData.locations[0]
         });
         query.$promise.then(function(data) {
-            localStorageService.set('storeInfo',data);
-           console.log(data);
+            localStorageService.set('storeInfo', data);
+            console.log(data);
             $scope.spinner = false;
             $scope.lname = data.data.lname;
             angular.element(document.querySelector('.CodeMirror-code pre span')).text(data.data.ldesc);
@@ -80,12 +81,11 @@ function storeinfoCtrl($scope, $log, FileUploader, storeinfoFactory, localStorag
             $scope.lphone = data.data.lphone;
             $scope.llt = data.data.llt;
             $scope.lmessage = data.data.lmessage;
-            $scope.open = data.data.lopentime;
-            $scope.close = data.data.lclosetime;
             $scope.highlightDays = data.data.ldateclosed;
-            $scope.day1=data.data.lwots;
-           dayArr= $scope.day1;
-           console.log(dayArr);
+            $scope.day1 = data.data.lwots;
+            $scope.lclosed = data.data.lclosed;
+            dayArr = $scope.day1;
+            console.log(dayArr);
             var closed = data.data.ldateclosed;
             dateArray = dateArray.concat(closed);
             for (i = 1; i < closed.length; i++) {
@@ -97,84 +97,135 @@ function storeinfoCtrl($scope, $log, FileUploader, storeinfoFactory, localStorag
 
         });
     }
+    $scope.dropdown_days = {
+        "'Architect'": [
+            "Sunday",
+            "Monday",
+            "Tuesday",
+            "Wdnesday",
+            "Thursday",
+            "Friday",
+            "Saturday"
+
+        ]
+    };
+    $scope.showOptions = function(row) {
+        var flag=0;
+        if (angular.isDefined($scope.day1)) {
+            for (var i = 0; i < 7; i++) {
+                if (row == $scope.day1[i].day) {
+                     flag=1;
+                } else {
+                    flag = 0;
+
+                }
+
+            }
+        } else {
+            return true;
+        }
+        if(flag==0){
+            return false;
+        }else{
+            return true;
+        }
+
+
+    }
     $scope.lsave = function() {
-        alert($scope.lphone);
-         console.log(dayArr);
+
         $scope.spinner = true;
         if (LocationIdFlag === 0) {
             console.log("flag=o update is firing");
             var query = storeinfoLocationsIdFactory.update({}, {
                 'locationid': userData.locations[0],
                 'lname': $scope.lname,
-                 'lwots': dayArr,
+                'lwots': dayArr,
                 'ldesc': $scope.ldesc,
                 'lemail': $scope.lemail,
                 'llgo': $scope.llogo,
                 'laddr': $scope.laddr,
                 'lpostcode': $scope.lpostcode,
                 'lcity': $scope.lcity,
-                'lstate':$scope.lstate,
+                'lstate': $scope.lstate,
                 'lcountry': $scope.lcountry,
                 'lphone': $scope.lphone,
                 'llt': $scope.llt,
                 'ldateclosed': dateArray,
                 'lmessage': $scope.lmessage,
-                'lopentime': $scope.open,
-                'lclosetime': $scope.close
+                'lclosed': $scope.lclosed
+
             });
             query.$promise.then(function(data) {
                 $scope.spinner = false;
-                localStorageService.set('storeInfo',data);
+                localStorageService.set('storeInfo', data);
             });
         } else {
             console.log("flag=1 save is firing");
             $scope.ldesc = angular.element(document.querySelector('#uikit_editor_2')).val();
             var query = storeinfoFactory.save({
-                locationId: userData.locations[0],
-                lname: $scope.lname,
-                lwots: dayArr,
-                ldesc: $scope.ldesc,
-                lemail: $scope.lemail,
-                llgo: $scope.llogo,
-                laddr: $scope.laddr,
-                lpostcode: $scope.lpostcode,
-                lcity: $scope.lcity,
-                lstate:$scope.lstate,
-                lcountry: $scope.lcountry,
-                lphone: $scope.lphone,
-                llt: $scope.llt,
-                lmessage: $scope.lmessage,
-                lopentime: $scope.open,
-                lclosetime: $scope.close
+                'locationId': userData.locations[0],
+                'lname': $scope.lname,
+                'lwots': dayArr,
+                'ldesc': $scope.ldesc,
+                'lemail': $scope.lemail,
+                'llgo': $scope.llogo,
+                'laddr': $scope.laddr,
+                'lpostcode': $scope.lpostcode,
+                'lcity': $scope.lcity,
+                'ldateclosed': dateArray,
+                'lstate': $scope.lstate,
+                'lcountry': $scope.lcountry,
+                'lphone': $scope.lphone,
+                'llt': $scope.llt,
+                'lmessage': $scope.lmessage,
+                'lclosed': $scope.lclosed
             });
             query.$promise.then(function(data) {
                 $scope.spinner = false;
-                localStorageService.set('storeInfo',data);
+                console.log(data.data._id);
+                userData.locations = [data.data._id];
+                localStorageService.set('userData', userData);
             });
         }
     }
-    $scope.tsave=function(){
-        console.log(openingTime);
-        console.log(closingTime);
-       var day= $scope.day;
-       var open=$scope.open;
-       var close=$scope.close;
-       var json;
-       console.log($scope.open);
-          json={'day': day,
-                'opening_time':openingTime,
-                'closing_time':closingTime 
-          }
-          dayArr.unshift(json);      
-    console.log(JSON.stringify(dayArr));
-       console.log(dayArr);
-       $scope.day1=dayArr;
-        
+    $scope.tsave = function() {
+
+        var day = $scope.day;
+        var open = $scope.open;
+        var close = $scope.close;
+        var json;
+        if ((angular.isDefined(openingTime)) && (angular.isDefined(closingTime))) {
+
+        } else {
+            if (angular.isDefined(openingTime)) {
+                console.log(openingTime);
+            } else {
+                var ot = new Date();
+                openingTime = String(ot).substring(16, 21);
+            }
+            if (angular.isDefined(closingTime)) {} else {
+                var ct = new Date();
+                closingTime = String(ct).substring(16, 21);
+            }
+        }
+
+        json = {
+            'day': day,
+            'opening_time': openingTime,
+            'closing_time': closingTime
+        }
+        dayArr.unshift(json);
+        console.log(JSON.stringify(dayArr));
+        console.log(dayArr);
+        $scope.day1 = dayArr;
+
+
     }
-    $scope.removeTimes=function(index){
-      var idx=dayArr.indexOf(index);
-      dayArr.splice(idx,1);
-       console.log(dayArr);
+    $scope.removeTimes = function(index) {
+        var idx = dayArr.indexOf(index);
+        dayArr.splice(idx, 1);
+        console.log(dayArr);
     }
     var uploader = $scope.uploader = new FileUploader({});
     uploader.filters.push({
