@@ -4,7 +4,8 @@
         .constant('Configurations', {
             Hostserver: 'https://protected-badlands-3499.herokuapp.com'
         })
-         .constant("country", [       
+  
+       .constant("country", [       
                              {
       "code": "+7840",
       "name": "Abkhazia"
