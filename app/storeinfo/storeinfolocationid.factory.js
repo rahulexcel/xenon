@@ -7,8 +7,26 @@
         return $resource(Configurations.Hostserver + '/loc/:locationid', {
             'locationid': '@locationid'
         }, {
-            'update': {
-                method: 'PUT',
+            'get': {
+                method: 'GET',
+                params: {
+                    lname: '@lname',
+                    ldesc: '@ldesc',
+                    lemail: '@lemail',
+                    llgo: '@llgo',
+                    ladd: '@ladd',
+                    lpostcode: '@lpostcode',
+                    lcity: '@lcity',
+                    lcountry: '@lcountry',
+                    lphone: '@lphone',
+                    llt: '@llt',
+                    lmessage: '@lmessage',
+                    lopentime: '@lopentime',
+                    lclosetime: '@lclosetime'
+                }
+            },
+            'update':{
+                method:'PUT',
                 params: {
                     lname: '@lname',
                     ldesc: '@ldesc',
@@ -25,6 +43,8 @@
                     lclosetime: '@lclosetime'
                 }
             }
+
         });
+
     };
 })();

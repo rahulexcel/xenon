@@ -90,7 +90,7 @@
                         $scope.productQuantity= '';
                         angular.element(document.querySelector('.CodeMirror-code pre span')).text(' ');
                     });
-                        $state.go('dashboard.productList');
+                       // $state.go('dashboard.productList');
                         upload($scope.picImage, 'https://protected-badlands-3499.herokuapp.com/prodfile');
        		console.log($scope.picImage);
           };
@@ -106,7 +106,7 @@
             console.log('Error status: ' + resp.status);
         }, function (evt) {
             var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-            console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+            //console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
         });
     };
 
