@@ -10,11 +10,11 @@
                 var idArr = [];
                 var newArray = [];
                  for(var i=0; i<catArr.length; i++){
-                    //console.log(catArr[i].products);
-                    if(catArr[i].products && catArr[i].products.length > 0){
-                        for(var j=0; j < catArr[i].products.length; j++){
-                       // console.log(catArr[i].products[j]._id);
-                        var catProductId = catArr[i].products[j]._id;
+                    
+                    if(catArr[i].catproducts && catArr[i].catproducts.length > 0){
+                      // console.log(catArr[i].catproducts.length);
+                        for(var j=0; j < catArr[i].catproducts.length; j++){
+                        var catProductId = catArr[i].catproducts[j];
                         idArr.push(catProductId);
                         }
                     }

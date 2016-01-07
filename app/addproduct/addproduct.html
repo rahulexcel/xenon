@@ -53,7 +53,7 @@
                         <div class="col-sm-12">
                                 <strong>Description</strong>
                                 <p>
-                                     <textarea class="form-control" rows="5" id="uikit_editor_2" ng-model="productDescription">
+                                     <textarea class="form-control" rows="5" ng-model="productDescription">
                                    </textarea>
                                 </p>
                             </div>
@@ -99,28 +99,3 @@
     <div class="col-sm-2"></div>
 
 </div>
-<script type="text/javascript">
-
-   jQuery.UIkit.htmleditor(jQuery("#uikit_editor_2"), {
-       markdown: false,
-       mode: 'tab',
-       height : 250,
-       lblPreview   : ' ',
-       lblCodeview  : ' ',
-       lblMarkedview: ' '
-   });
-
-  Dropzone.options.dropzone = {
-    maxFiles: 1,
-    accept: function(file, done) {
-    console.log("uploaded");
-    done();
-    },
-    init: function() {
-    this.on("maxfilesexceeded", function(file){
-        this.removeFile(file);
-    });
-  },
-  acceptedFiles: 'image/*'
-};
-</script>
