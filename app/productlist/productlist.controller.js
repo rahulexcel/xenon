@@ -20,6 +20,23 @@
             query.$promise.then(function(data1) {
                 $scope.spinner = false;
                 $scope.productList = productlistService.productlist($scope.catArr, data1);
+
+                console.log($scope.catArr);
+                console.log(data1);
+                for(var i =0; i <$scope.catArr.length; i++){
+                    console.log($scope.catArr[i].catproducts);
+                }
+
+
+
+
+
+
+
+
+
+
+
             });
         }
         function categoryListApi() {
@@ -27,8 +44,7 @@
                 "locationId": lid,
             }, {});
             query1.$promise.then(function(data2) {
-                console.log(data2);
-              // console.log(data2.lpcats);
+                //console.log(data2);
               $scope.catArr = data2;
                $scope.catSpinner = false;
               productListApi();
@@ -67,7 +83,11 @@
                 return true;
             },
             dropped: function(e) {
-                saveCategoryStructure();
+                console.log(e);
+                console.log ('Parent Category Id: '+e.dest.nodesScope.$parent.$modelValue._id);
+                console.log('Dropped Product Id: '+e.source.nodeScope.$modelValue._id);
+                // saveCategoryStructure();
+                // updateCategory(e.dest.nodesScope.$parent.$modelValue._id,e.source.nodeScope.$modelValue._id);
             },
             beforeDrop: function(event) {
                 if(event.dest.nodesScope.$id === event.source.nodesScope.$id){
@@ -123,7 +143,11 @@
                 return true;
             },
             dropped: function(e) {
-                saveCategoryStructure();
+                // console.log (e);
+                console.log ('Parent Category Id: '+e.dest.nodesScope.$parent.$modelValue._id);
+                console.log('Dropped Product Id: '+e.source.nodeScope.$modelValue._id);
+                // saveCategoryStructure();
+                // updateCategory(e.dest.nodesScope.$parent.$modelValue._id,e.source.nodeScope.$modelValue._id);
             }
         }
 
@@ -204,21 +228,15 @@ $scope.deleteCategory = function(categoryId){
     //         });
     // console.log($scope.catArr);
 };
-$scope.updateCategory = function(categoryId){
+function updateCategory(categoryId, productId){
     console.log(categoryId);
     var query = categoryFactory.Update({}, {
-                'catid': categoryId
+                'catid': categoryId,
+                'catproducts': productId
             });
             query.$promise.then(function(data) {
                 console.log(data);
             });
-    // console.log(index);
-    // $scope.catArr.splice(index, 1);
-    // var query = storeinfoLocationsIdFactory.update({}, {
-    //             'locationid': userData.locations[0],
-    //             'lpcats': $scope.catArr
-    //         });
-    // console.log($scope.catArr);
 };
 $scope.saveStructure = function(){
     saveCategoryStructure();
