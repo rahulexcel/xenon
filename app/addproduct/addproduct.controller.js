@@ -3,8 +3,16 @@
    
        angular.module('xenon-app')
        .controller('addProductController', addProductController);
-        function addProductController($scope, addProductFactory, Upload, localStorageService, $rootScope, productListFactory, productFactory, $state, imageUploadFactory) {
-        //  console.log("Add Product Page");
+        function addProductController($scope, addProductService, addProductFactory, Upload, localStorageService, $rootScope, productListFactory, productFactory, $state, imageUploadFactory) {
+        console.log("Add Product Page");
+        addProductService.getCategoryList().then(function(categorylist){
+        $scope.categorylist = categorylist;
+        });
+
+
+
+
+
         var after_load_image_response;
         var flag_for_cheking_add_or_edit=0;
         var edit_Product_Id;
@@ -68,6 +76,9 @@
             });
       query.$promise.then(function(data) {
                         console.log(data);
+                        if($scope.selectedCategoryArray){
+                         addProductService.updateCategoryList($scope.selectedCategoryArray,data.data._id);
+                        }
                         $state.go('dashboard.productList');
                     });
           }
@@ -106,14 +117,17 @@
               "lid": lid
             });
       query.$promise.then(function(data) {
-                       // console.log(data);
+                        // console.log(data);
+                        if($scope.selectedCategoryArray){
+                         addProductService.updateCategoryList($scope.selectedCategoryArray,data.data._id);
+                        }
                         $scope.spinner = false;
                         $scope.productName = '';
                         $scope.productPrice = '';
-                        $scope.productQuantity= '';
-                        angular.element(document.querySelector('.CodeMirror-code pre span')).text(' ');
+                        $scope.productQuantity = '';
+                        $scope.productDescription = '';
                     });
-                        $state.go('dashboard.productList');
+                         $state.go('dashboard.productList');
                        
            }
            // upload on file select or drop
