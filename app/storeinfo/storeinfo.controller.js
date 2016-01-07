@@ -69,7 +69,7 @@ function storeinfoCtrl($scope, $log, FileUploader, storeinfoFactory, localStorag
             console.log(data);
             $scope.spinner = false;
             $scope.lname = data.data.lname;
-            angular.element(document.querySelector('.CodeMirror-code pre span')).text(data.data.ldesc);
+            $scope.ldesc=data.data.ldesc;
             $scope.lemail = data.data.lemail;
             $scope.llogo = data.data.llogo;
             $scope.laddr = data.data.laddr;
@@ -116,7 +116,7 @@ function storeinfoCtrl($scope, $log, FileUploader, storeinfoFactory, localStorag
             "Sunday",
             "Monday",
             "Tuesday",
-            "Wdnesday",
+            "Wednesday",
             "Thursday",
             "Friday",
             "Saturday"
@@ -144,7 +144,6 @@ function storeinfoCtrl($scope, $log, FileUploader, storeinfoFactory, localStorag
     }
     $scope.lsave = function(){
         var phoneNumber=$scope.phone_code+"-"+$scope.phone_no;
-          $scope.ldesc = angular.element(document.querySelector('#uikit_editor_2')).val();
         $scope.spinner = true;
         if (LocationIdFlag === 0) {
             console.log("flag=o update is firing");
@@ -236,12 +235,25 @@ function storeinfoCtrl($scope, $log, FileUploader, storeinfoFactory, localStorag
         dayArr_for_schedule_view.splice(idx, 1);
         console.log(dayArr_for_schedule_view);
     }
-    var cc=[];
+    var countryCode=[];
+    var countryName=[];
      for(var i=0; i< country.length; i++){
-        
-        cc.push(country[i].code);
+        countryCode.push(country[i].code);
+        countryName.push(country[i].name);
      }
-      $scope.dropdown_code=cc;
+      $scope.dropdown_country=countryName;
+      $scope.dropdown_code=countryCode;
+      $scope.country_selected=function(){
+        for(var i=0; i< country.length; i++){
+            if($scope.lcountry==country[i].name){
+                $scope.phone_code=country[i].code;
+            }
+        }
+        console.log($scope.lcountry);
+      }
+
+
+
     var uploader = $scope.uploader = new FileUploader({});
     uploader.filters.push({
         name: 'imageFilter',
