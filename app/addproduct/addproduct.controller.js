@@ -15,7 +15,7 @@
             query.$promise.then(function(data) {
                         console.log(data);
                         $scope.productName = data.pname;
-                        angular.element(document.querySelector('.CodeMirror-code pre span')).text(data.pdesc);
+                        $scope.productDescription = data.pdesc;
                         $scope.productPrice = data.price;
                         $scope.productQuantity = data.pinv;
                         $scope.formSpinner = false;
@@ -32,7 +32,6 @@
           $scope.editProduct = function(editProductId){
             $scope.spinner = true;
             console.log(editProductId);
-            $scope.productDescription = angular.element(document.querySelector('.CodeMirror-code pre span')).text();
             var userData = localStorageService.get('userData');
             var lid = userData.locations[0];
             if($scope.productQuantity == 'Infinite' || $scope.productQuantity == undefined){
@@ -61,7 +60,6 @@
 
        		$scope.addProduct = function(){
             $scope.spinner = true;
-            $scope.productDescription = angular.element(document.querySelector('#uikit_editor_2')).val();
             var userData = localStorageService.get('userData');
             var lid = userData.locations[0];
             if($scope.productQuantity == 'Infinite' || $scope.productQuantity == undefined){
@@ -101,12 +99,12 @@
             url: url,
             data: {fileName: file}
         }).then(function (resp) {
-            console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
+            console.log('Success ' + resp.config.data.file + 'uploaded. Response: ' + resp.data);
         }, function (resp) {
             console.log('Error status: ' + resp.status);
         }, function (evt) {
             var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-            console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+            console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file);
         });
     };
 
