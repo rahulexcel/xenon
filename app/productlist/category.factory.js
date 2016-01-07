@@ -9,7 +9,7 @@
         }, {
             'Update': {
                 method: 'PUT',
-                url: Configurations.Hostserver+'/cats/:catid',
+                url: Configurations.Hostserver+'/cats/:catid/:catproducts',
             }
         });
     };
