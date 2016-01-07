@@ -43,7 +43,6 @@
             productFactory.deleteProduct({
                 'productId': id
             });
-            $scope.displayProductList.splice(index, 1)
         };
         $scope.addProductPage = function() {
             $rootScope.editProductId = '';
@@ -56,6 +55,9 @@
             },
             dropped: function(e) {
                 // console.log(e);
+                if(angular.isDefined(e.dest.nodesScope.$parent.$modelValue._id)){
+                    console.log('can fie api');
+                }
                 var destinationParentCategoryId = e.dest.nodesScope.$parent.$modelValue._id;
                 var destinationProductIds = [];
                 for(var i=0; i<e.dest.nodesScope.$parent.$modelValue.products.length; i++){
@@ -138,16 +140,17 @@
             }
         }
 
-        $scope.saveCategory = function() {
-                 $scope.catArr.push({"catname": $scope.name, "lid": lid, "catproducts": [], "index" : 1});
+        $scope.addCategory = function() {
+                 $scope.catArr.push({"catname": $scope.categoryName, "lid": lid, "catproducts": [], "index" : 1});
                  var query = addCategoryFactory.save({}, {
-                 "catname": $scope.name,
+                 "catname": $scope.categoryName,
                       "lid": lid,
                       "catproducts": [],
                      "index" : 1
             });
+            $scope.categoryName = '';
             query.$promise.then(function(data) {
-                $scope.name = '';
+                console.log(data);
             });
  
         };
@@ -159,6 +162,7 @@ $scope.deleteCategory = function(categoryId){
             });
             query.$promise.then(function(data) {
                 console.log(data);
+                productListApi();
             });
 };
 function updateCategory(categoryId, productIds){

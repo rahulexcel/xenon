@@ -4,11 +4,14 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-xs-6">
                         <h1 class="panel-title"><strong>Categoriesed Product&nbsp; <span ng-show="saveCategoryTreeStructure"><i class="fa fa-spin fa-spinner"></i></span></strong></h1>
                     </div>
-                    <div class="col-sm-2 col-sm-offset-4">
-                        <a class="btn btn-success pull-right" ng-click="addProductPage()">Add Product</a>
+                    <div class="col-sm-2 col-sm-offset-2">
+                        <a class="btn btn-info pull-right" ng-click="addProductPage()">Add Product</a>
+                    </div>
+                    <div class="col-sm-2">
+                        <a href="" class="btn btn-info pull-right" data-toggle="modal" data-target="#myModal">Add Category</a>
                     </div>
                 </div>
 
@@ -16,19 +19,6 @@
             <div class="panel-body">
                 <div class="row">
                     <div class="col-sm-12">
-                        <div ui-tree id="tree-root">
-                            <ol ui-tree-nodes ng-model="data">
-                                <li ng-repeat="node in data" ui-tree-node ng-include="'nodes_renderer.html'"></li>
-                            </ol>
-                        </div>
-                        <ul id="nestable-list-1" class="uk-nestable">
-                            <li data-item="Item 1" data-item-id="a">
-                                <div class="uk-nestable-item">
-                                    <div data-nestable-action="toggle"></div>
-                                    <div class="list-label"><a href="" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i> &nbsp;&nbsp;Add Category Menu</a> </div>
-                                </div>
-                            </li>
-                        </ul>
                         <h1 class="text-center"><span ng-show="catSpinner"><i class="fa fa-spin fa-spinner"></i></span></h1>
                         <alert type="danger" ng-show="alertDanger" id="alertDanger">
                             You can not drop here
@@ -91,7 +81,7 @@
                                                     <div class="col-xs-4">{{product.pname}}</div>
                                                     <div class="col-xs-4">{{ (product.pinv == - 1) ? "Infinite" : product.pinv}}</div>
                                                     <div class="col-xs-4">{{product.price}} 
-                                                        <a class="pull-right btn btn-danger btn-xs" data-nodrag="" ng-click="deleteProduct(product._id, $index)">
+                                                        <a class="pull-right btn btn-danger btn-xs" data-nodrag="" ng-click="remove(this); deleteProduct(product._id)">
                                                             <i class="fa fa-times"></i>
                                                         </a>
                                                         <a class="pull-right btn btn-success btn-xs" data-nodrag="" ng-click="editProduct(product._id)">
@@ -123,12 +113,12 @@
                         <label class="control-label" for="full_name">
                             <strong>Name</strong>
                         </label>
-                        <input class="form-control" name="full_name" id="full_name" data-validate="required" ng-model="name" />
+                        <input class="form-control" name="full_name" id="full_name" data-validate="required" ng-model="categoryName" />
 
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" ng-click="saveCategory()" data-dismiss="modal">Save changes</button>
+                        <button type="button" class="btn btn-primary" ng-click="addCategory()" data-dismiss="modal">Save changes</button>
                     </div>
                 </div>
             </div>
