@@ -55,9 +55,9 @@
             },
             dropped: function(e) {
                 // console.log(e);
-                if(angular.isDefined(e.dest.nodesScope.$parent.$modelValue._id)){
-                    console.log('can fie api');
-                }
+                // if(angular.isDefined(e.dest.nodesScope.$parent.$modelValue._id)){
+                //     console.log('can fie api');
+                // }
                 var destinationParentCategoryId = e.dest.nodesScope.$parent.$modelValue._id;
                 var destinationProductIds = [];
                 for(var i=0; i<e.dest.nodesScope.$parent.$modelValue.products.length; i++){

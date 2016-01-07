@@ -85,8 +85,8 @@
                         $scope.spinner = false;
                         $scope.productName = '';
                         $scope.productPrice = '';
-                        $scope.productQuantity= '';
-                        angular.element(document.querySelector('.CodeMirror-code pre span')).text(' ');
+                        $scope.productQuantity = '';
+                        $scope.productDescription = '';
                     });
                         $state.go('dashboard.productList');
                         upload($scope.picImage, 'https://protected-badlands-3499.herokuapp.com/prodfile');
