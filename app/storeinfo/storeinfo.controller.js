@@ -16,32 +16,58 @@ function storeinfoCtrl($scope, $log, FileUploader, storeinfoFactory, localStorag
     var dayArr_for_schedule_view = [];
     var response_phone_no;
     var response_pic_name;
+    var On_refresh_data;
     if (angular.isDefined(locationId)) {
         On_refresh();
     } else {
         LocationIdFlag = 1;
     }
-    $scope.mytime = new Date();
-    $scope.hstep = 1;
-    $scope.mstep = 15;
-    $scope.options = {
-        hstep: [1, 2, 3],
-        mstep: [1, 5, 10, 15, 25, 30]
-    };
-    $scope.openingtime = function() {
-        openingTime = String($scope.open).substring(16, 21);
+   // var current_time=new Date();
+   // var hours = new Date().getHours();
+   // var minut=new Date().getMinutes();
+// formatAMPM(date);
+// function formatAMPM(date) {
+//   var hours = date.getHours();
+//   var minutes = date.getMinutes();
+//   var ampm = hours >= 12 ? 'pm' : 'am';
+//   hours = hours % 12;
+//   hours = hours ? hours : 12; // the hour '0' should be '12'
+//   minutes = minutes < 10 ? '0'+minutes : minutes;
+//   var strTime = hours + ':' + minutes + ' ' + ampm;
+//   console.log(strTime);
+// }
 
-    };
-    $scope.closingtime = function() {
-        closingTime = String($scope.close).substring(16, 21);
 
-    };
+
+
+
+
+
+
+
+
+
+    // $scope.mytime = new Date();
+    // $scope.hstep = 1;
+    // $scope.mstep = 15;
+    // $scope.options = {
+    //     hstep: [1, 2, 3],
+    //     mstep: [1, 5, 10, 15, 25, 30]
+    // };
+    // $scope.openingtime = function() {
+    //     openingTime = String($scope.open).substring(16, 21);
+
+    // };
+    // $scope.closingtime = function() {
+    //     closingTime = String($scope.close).substring(16, 21);
+
+    // };
     $scope.logInfos = function(event, date) {
         event.preventDefault();
         var timeStamp = date.valueOf();
-        var hours = new Date().getHours();
+       // var hours = new Date().getHours();
         //console.log(hours);
-        var minut = new Date().getMinutes();
+       // var minut = new Date().getMinutes();
         //console.log(minut);
         var day = new Date(timeStamp).getDate();
         var month = new Date(timeStamp).getMonth() + 1;
@@ -63,8 +89,7 @@ function storeinfoCtrl($scope, $log, FileUploader, storeinfoFactory, localStorag
         // console.log(dateArray);
         date.selected = !date.selected;
     }
-    var On_refresh_data;
-
+   
     function On_refresh() {
         $scope.spinner = true;
         var query = storeinfoLocationsIdFactory.get({}, {
@@ -115,6 +140,7 @@ function storeinfoCtrl($scope, $log, FileUploader, storeinfoFactory, localStorag
             $scope.picImage = 'http://s3.amazonaws.com/ordermagic/'+data.data.llogo;
             response_pic_name=$scope.picImage;
            //console.log($scope.picImage);
+           console.log(data);
             for (var i = 0; i < response_phone_no.length; i++) {
                 if (response_phone_no[i] == '+') {
                     var plus = i;
@@ -236,10 +262,18 @@ function storeinfoCtrl($scope, $log, FileUploader, storeinfoFactory, localStorag
     }
 
     $scope.tsave = function() {
+        //  console.log($scope.opening_selected_hour);
+        // console.log($scope.opening_selected_minute);
+        //  console.log($scope.opening_selected_division);
+        //   console.log($scope.closing_selected_hour);
+        //    console.log($scope.closing_selected_minute);
+        //      console.log($scope.opening_selected_division);
         var day = $scope.day;
-        var open = $scope.open;
-        var close = $scope.close;
+        var openingTime = $scope.opening_selected_hour + ":" + $scope.opening_selected_minute+" "+$scope.opening_selected_division;
+        var closingTime = $scope.closing_selected_hour + ":" + $scope.closing_selected_minute+" "+$scope.closing_selected_division;
         var json;
+        console.log(openingTime);
+        console.log(closingTime);
         if ((angular.isDefined(openingTime)) && (angular.isDefined(closingTime))) {
 
         } else {
@@ -306,11 +340,19 @@ function storeinfoCtrl($scope, $log, FileUploader, storeinfoFactory, localStorag
         });
 
     };
+       
+    var hour=[];   
     for (var i = 1; i <= 12; i++) {
-        console.log(i);
+        hour.push(i);
     }
-
-
+    $scope.openingtime_hour=hour;
+    $scope.closingtime_hour=hour;
+     var minute=[];   
+    for (var i = 0; i <= 59; i++) {
+        minute.push(i);
+    }
+    $scope.openingtime_minute=minute;
+    $scope.closingtime_minute=minute;
 
 
 }

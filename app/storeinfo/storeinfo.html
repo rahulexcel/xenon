@@ -140,18 +140,25 @@
                                                             </label>
                                                             <div class='row' style="padding:0px;">
                                                             <div class='col-sm-6'>
-                                                            <select class="form-control" ng-model="selected_hour">
+                                                            <select class="form-control" ng-model="opening_selected_hour">
                                                                   <option  
-                                                                  ng-repeat="row in hours
-                                                                   track by $index">{{row}}</option> 
+                                                                  ng-repeat="row in openingtime_hour
+                                                                   track by $index"  value="{{row}}">{{row}}</option> 
                                                              </select>
                                                              </div>
-
                                                              <div class='col-sm-6'>
-                                                               <select class="form-control" ng-model="day">
+                                                               <select class="form-control" ng-model="opening_selected_minute">
                                                                   <option  
-                                                                  ng-repeat="row in minutes
+                                                                  ng-repeat="row in closingtime_minute
                                                                    track by $index" value="{{row}}">{{row}}</option>
+                                                             </select>
+                                                             </div>
+                                                               <div class='col-sm-6'>
+                                                               <select class="form-control" ng-model="opening_selected_division">
+                                                                  <option value="AM">AM  
+                                                                  </option>
+                                                                  <option value="PM">PM  
+                                                                  </option>
                                                              </select>
                                                              </div>
                                                                </div>
@@ -161,7 +168,32 @@
                                                             <label class="control-label" for="full_name">
                                                                 <strong>&nbsp;&nbsp;Closing time:</strong>
                                                             </label>
-                                                            <timepicker ng-model="close" ng-change="closingtime()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></timepicker>
+                                                                 <div class='row' style="padding:0px;">
+                                                            <div class='col-sm-6'>
+                                                            <select class="form-control" ng-model="closing_selected_hour">
+                                                                  <option  
+                                                                  ng-repeat="row in closingtime_hour
+                                                                   track by $index">{{row}}</option> 
+                                                             </select>
+                                                             </div>
+                                                             <div class='col-sm-6'>
+                                                               <select class="form-control" ng-model="closing_selected_minute">
+                                                                  <option  
+                                                                  ng-repeat="row in closingtime_minute
+                                                                   track by $index" value="{{row}}">{{row}}</option>
+                                                             </select>
+                                                             </div>
+                                                              <div class='col-sm-6'>
+                                                               <select class="form-control" ng-model="closing_selected_division">
+                                                                  <option value="AM">AM  
+                                                                  </option>
+                                                                  <option value="PM">PM  
+                                                                  </option>
+                                                             </select>
+                                                             </div>
+                                                               </div>
+
+                                                          <!--   <timepicker ng-model="close" ng-change="closingtime()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></timepicker> -->
                                                         </div>
                                                         <div class="col-sm-3">
                                                             <div style="margin-top:67px">
@@ -260,6 +292,3 @@
         </div>
     </div>
 </div>
-<script language="javascript">
-// populateCountries("country");
- </script>
