@@ -6,11 +6,15 @@ position:relative;
 overflow:hidden;
 }*/
 
-/*img-crop canvas {
-display:block;
-position:absolute;
-
--webkit-tap-highlight-color:transparent;
+img-crop canvas {
+    display: block;
+    position: absolute;
+    left: 33%;
+    top: 96%;
+    -webkit-tap-highlight-color: transparent;
+    width: 210px;
+    height: 210px;
+    margin-top: 0px!important;
 }
 .cropArea {
   background: #E4E4E4;
@@ -18,10 +22,4 @@ position:absolute;
   width:500px;
   height:350px;
   margin: auto;
-}	*/
-.cropArea {
-    background: #E4E4E4;
-    overflow: hidden;
-    width:500px;
-    height:350px;
 }

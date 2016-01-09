@@ -27,6 +27,7 @@
                                     <textarea class="form-control" rows="5" id="comment" ng-model="ldesc"></textarea>
                                 </div>
                                 <div class="col-sm-9 ">
+                                <br>
                                     <div class="row">
                                         <div class="col-sm-3">
                                             <label class="control-label" for="full_name">
@@ -39,9 +40,8 @@
                                                 <input type="file" ngf-select ng-model="picImage" name="fileName" ngf-accept="'image/*'">
                                                 </span>
                                             </div>
-                                            <div ngf-drop ng-model="picImage" ngf-pattern="image/*"><br/><br/><br/>
-                                                &nbsp;&nbsp;&nbsp;&nbsp;
-                                                <img-crop image="picImage  | ngfDataUrl"   area-type="square"             
+                                            <div ngf-drop ng-model="picImage" ngf-pattern="image/*" class="col-sm-6" style="position:relative;">
+                                                <img-crop image="picImage  | ngfDataUrl" area-type="square" area-min-size="10"             
                                               result-image="croppedDataUrl" ng-init="croppedDataUrl=''"   data-width='500px'></img-crop>
                                             </div>
                                             <div class="col-sm-3">
