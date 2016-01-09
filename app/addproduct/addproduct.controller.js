@@ -23,10 +23,10 @@
             query.$promise.then(function(data) {
                         console.log(data); 
                           if (angular.isDefined(data.pimages[0])) {
-                             $scope.picImage = 'http://s3.amazonaws.com/ordermagic/'+data.pimages[0];
+                             $scope.croppedDataUrl = 'http://s3.amazonaws.com/ordermagic/'+data.pimages[0];
                              } 
                       //$scope.picImage='http://s3.amazonaws.com/ordermagic/'+
-                      after_load_image_response=$scope.picImage;
+                      after_load_image_response=$scope.croppedDataUrl;
                         $scope.productName = data.pname;
                         $scope.productDescription = data.pdesc;
                         $scope.productPrice = data.price;
@@ -42,15 +42,15 @@
           $scope.infinite = function(){
             $scope.productQuantity = 'Infinite';
           };
-          $scope.editProduct = function(editProductId){
+          $scope.editProduct = function(editProductId, picImageurl){
             edit_Product_Id=editProductId;
             $scope.spinner = true;
-             if($scope.picImage==after_load_image_response){
+             if($scope.croppedDataUrl==after_load_image_response){
                   edit_product_after_uploader_response();
          
             }else{
                   $scope.spinner = true;
-                   upload($scope.picImage, 'https://protected-badlands-3499.herokuapp.com/prodfile');
+                   upload(picImageurl, 'https://protected-badlands-3499.herokuapp.com/prodfile');
                  }
           };
           function edit_product_after_uploader_response(){
@@ -83,13 +83,13 @@
           }
 
 
-          $scope.addProduct = function(){
-            if($scope.picImage==after_load_image_response){
+          $scope.addProduct = function(picImageurl){
+            if($scope.croppedDataUrl==after_load_image_response){
                   send_data_after_uploader_response();
          
             }else{
                   $scope.spinner = true;
-                   upload($scope.picImage, 'https://protected-badlands-3499.herokuapp.com/prodfile');
+                   upload(picImageurl, 'https://protected-badlands-3499.herokuapp.com/prodfile');
                  }
 
 
