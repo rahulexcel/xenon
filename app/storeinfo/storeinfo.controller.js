@@ -1,8 +1,7 @@
 angular
     .module('xenon.controllers')
-    .controller('storeinfoCtrl', storeinfoCtrl);
-
-function storeinfoCtrl($scope, $log, FileUploader, storeinfoFactory, localStorageService, Upload, storeinfoLocationsFactory, storeinfoLocationsIdFactory, country, storeinfoLocFile) {
+    .controller('storeinfoCtrl', storeinfoCtrl);    
+function storeinfoCtrl($scope, $log, FileUploader, storeinfoFactory, $timeout,  localStorageService, Upload, storeinfoLocationsFactory, storeinfoLocationsIdFactory, country, storeinfoLocFile) {
 
     var dateArray = [];
     var responseDateArr = [];
@@ -22,46 +21,7 @@ function storeinfoCtrl($scope, $log, FileUploader, storeinfoFactory, localStorag
     } else {
         LocationIdFlag = 1;
     }
-   // var current_time=new Date();
-   // var hours = new Date().getHours();
-   // var minut=new Date().getMinutes();
-// formatAMPM(date);
-// function formatAMPM(date) {
-//   var hours = date.getHours();
-//   var minutes = date.getMinutes();
-//   var ampm = hours >= 12 ? 'pm' : 'am';
-//   hours = hours % 12;
-//   hours = hours ? hours : 12; // the hour '0' should be '12'
-//   minutes = minutes < 10 ? '0'+minutes : minutes;
-//   var strTime = hours + ':' + minutes + ' ' + ampm;
-//   console.log(strTime);
-// }
-
-
-
-
-
-
-
-
-
-
-
-    // $scope.mytime = new Date();
-    // $scope.hstep = 1;
-    // $scope.mstep = 15;
-    // $scope.options = {
-    //     hstep: [1, 2, 3],
-    //     mstep: [1, 5, 10, 15, 25, 30]
-    // };
-    // $scope.openingtime = function() {
-    //     openingTime = String($scope.open).substring(16, 21);
-
-    // };
-    // $scope.closingtime = function() {
-    //     closingTime = String($scope.close).substring(16, 21);
-
-    // };
+   
     $scope.logInfos = function(event, date) {
         event.preventDefault();
         var timeStamp = date.valueOf();
@@ -137,9 +97,11 @@ function storeinfoCtrl($scope, $log, FileUploader, storeinfoFactory, localStorag
             $scope.day_in_schedule_view = data.data.lwots;
             $scope.lclosed = data.data.lclosed;
             response_phone_no = data.data.lphone;
-            $scope.picImage = 'http://s3.amazonaws.com/ordermagic/'+data.data.llogo;
-            response_pic_name=$scope.picImage;
-           //console.log($scope.picImage);
+            if (angular.isDefined(data.data.llogo)) {
+           // $scope.picImage = 'http://s3.amazonaws.com/ordermagic/'+data.data.llogo;
+        }
+           // response_pic_name=$scope.picImage;
+         
            console.log(data);
             for (var i = 0; i < response_phone_no.length; i++) {
                 if (response_phone_no[i] == '+') {
@@ -194,22 +156,22 @@ function storeinfoCtrl($scope, $log, FileUploader, storeinfoFactory, localStorag
         }
 
     }
-    $scope.lsave = function() {
+    $scope.lsave = function(picImageurl) {
+       console.log(picImageurl)
         //console.log($scope.picImage);
         if($scope.picImage==response_pic_name){
           send_data_after_upload();
         }else{
-        upload($scope.picImage, 'https://protected-badlands-3499.herokuapp.com/locfile');
+        upload(picImageurl, 'https://protected-badlands-3499.herokuapp.com/locfile');
        // console.log(upload);
        }
     }
 
     function send_data_after_upload() {
-       // console.log(uploadResponseFileName);
+        console.log(uploadResponseFileName);
         var phoneNumber = $scope.phone_code + "-" + $scope.phone_no;
         $scope.spinner = true;
         if (LocationIdFlag === 0) {
-           // console.log("flag=o update is firing");
             var query = storeinfoLocationsIdFactory.update({}, {
                 'locationid': userData.locations[0],
                 'lname': $scope.lname,
@@ -233,7 +195,6 @@ function storeinfoCtrl($scope, $log, FileUploader, storeinfoFactory, localStorag
                 localStorageService.set('storeInfo', data);
             });
         } else {
-            //console.log("flag=1 save is firing");
             var query = storeinfoFactory.save({
                 'locationId': userData.locations[0],
                 'lname': $scope.lname,
@@ -262,15 +223,9 @@ function storeinfoCtrl($scope, $log, FileUploader, storeinfoFactory, localStorag
     }
 
     $scope.tsave = function() {
-        //  console.log($scope.opening_selected_hour);
-        // console.log($scope.opening_selected_minute);
-        //  console.log($scope.opening_selected_division);
-        //   console.log($scope.closing_selected_hour);
-        //    console.log($scope.closing_selected_minute);
-        //      console.log($scope.opening_selected_division);
         var day = $scope.day;
-        var openingTime = $scope.opening_selected_hour + ":" + $scope.opening_selected_minute+" "+$scope.opening_selected_division;
-        var closingTime = $scope.closing_selected_hour + ":" + $scope.closing_selected_minute+" "+$scope.closing_selected_division;
+        var openingTime = $scope.opening_selected_hour;
+        var closingTime = $scope.closing_selected_hour;
         var json;
         console.log(openingTime);
         console.log(closingTime);
@@ -320,20 +275,36 @@ function storeinfoCtrl($scope, $log, FileUploader, storeinfoFactory, localStorag
         }
     }
     var uploadResponseFileName;
+    //  $scope.upload = function (dataUrl) {
+    //     Upload.upload({
+    //         url: 'https://angular-file-upload-cors-srv.appspot.com/upload',
+    //         data: {
+    //             file: Upload.dataUrltoBlob(dataUrl)
+    //         },
+    //     }).then(function (response) {
+    //         $timeout(function () {
+    //             $scope.result = response.data;
+    //         });
+    //     }, function (response) {
+    //         if (response.status > 0) $scope.errorMsg = response.status 
+    //             + ': ' + response.data;
+    //     }, function (evt) {
+    //         $scope.progress = parseInt(100.0 * evt.loaded / evt.total);
+    //     });
+    // }
     function upload(file, url) {
         Upload.upload({
             url: url,
-            data: {
-                fileName: file
-            }
+             data: {
+                fileName: Upload.dataUrltoBlob(file)
+            },
         }).then(function(resp) {
-           // console.log(resp);
             uploadResponseFileName = resp.data.filename;
             console.log(uploadResponseFileName);
             send_data_after_upload();
 
         }, function(resp) {
-            //console.log('Error status: ' + resp.status);
+            
         }, function(evt) {
             var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
             //console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
@@ -343,16 +314,16 @@ function storeinfoCtrl($scope, $log, FileUploader, storeinfoFactory, localStorag
        
     var hour=[];   
     for (var i = 1; i <= 12; i++) {
-        hour.push(i);
+        hour.push(i+' '+'AM');
+
+    }
+     for (var k = 1; k <= 12; k++) {
+        hour.push(k+' '+'PM');
+        
     }
     $scope.openingtime_hour=hour;
     $scope.closingtime_hour=hour;
-     var minute=[];   
-    for (var i = 0; i <= 59; i++) {
-        minute.push(i);
-    }
-    $scope.openingtime_minute=minute;
-    $scope.closingtime_minute=minute;
+
 
 
 }

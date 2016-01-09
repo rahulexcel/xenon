@@ -9,10 +9,6 @@
         $scope.categorylist = categorylist;
         });
 
-
-
-
-
         var after_load_image_response;
         var flag_for_cheking_add_or_edit=0;
         var edit_Product_Id;
@@ -25,8 +21,11 @@
             $scope.saveProduct = false;
             var query = productListFactory.singleProduct({"productId": $rootScope.editProductId});
             query.$promise.then(function(data) {
-                        console.log(data);  
-                      $scope.picImage='http://s3.amazonaws.com/ordermagic/'+data.pimages[0];
+                        console.log(data); 
+                          if (angular.isDefined(data.pimages[0])) {
+                             $scope.picImage = 'http://s3.amazonaws.com/ordermagic/'+data.pimages[0];
+                             } 
+                      //$scope.picImage='http://s3.amazonaws.com/ordermagic/'+
                       after_load_image_response=$scope.picImage;
                         $scope.productName = data.pname;
                         $scope.productDescription = data.pdesc;

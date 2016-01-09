@@ -16,6 +16,7 @@ var app = angular.module('xenon-app', [
 	'xenon.services',
 	'multipleDatePicker',
 	'ui.tree',
+	'ngImgCrop',
 	// Added in v1.3
 	'FBAngular'
 ]);

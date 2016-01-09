@@ -2,13 +2,10 @@
    'use strict';
    angular.module('xenon-app')
        .factory('userValidate', userValidate);
-
    function userValidate(localStorageService, $state, $stateParams, $rootScope, $location) {
-
        return {
            validUser: function() {
                var userData = localStorageService.get('userData');
-            
                if (userData) {
                    console.log('hai');
                    $rootScope.userNavMenu = true;

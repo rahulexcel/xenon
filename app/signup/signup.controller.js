@@ -4,7 +4,7 @@
         .module('xenon.controllers')
         .controller('signupCtrl', signupCtrl);
 
-    function signupCtrl($scope, $rootScope, Configurations, signupFactory, $state, localStorageService) {
+    function signupCtrl($scope, $rootScope, Configurations, signupFactory, $state, localStorageService, userValidate) {
 
     $scope.signup = function() {
     
@@ -16,7 +16,10 @@
                        	 $scope.spinner = false;
                          $scope.email = '';
                          $scope.password = '';
-                            localStorageService.set('userData',{'userid': data.userid, 'eid': data.eid, 'locations': data.locations, 'token': data.token});
+                         var locations=[];
+                            localStorageService.set('userData',{'userid': data.userid, 'eid': data.eid, 'locations':locations, 'token': data.token});
+                        $rootScope.userNavMenu = true;
+                       $rootScope.navMenu = false;
                         $state.go('dashboard.storeinfo');
  
                        }
