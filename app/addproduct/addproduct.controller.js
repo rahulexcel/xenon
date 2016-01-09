@@ -9,14 +9,9 @@
         $scope.categorylist = categorylist;
         });
         var editProductId = localStorageService.get('editProductId');
-
-
-
-
-        var after_load_image_response;
+       var after_load_image_response;
         var flag_for_cheking_add_or_edit=0;
         var edit_Product_Id;
-
           if(editProductId){
             flag_for_cheking_add_or_edit=1;
             $scope.formSpinner = true;
@@ -26,9 +21,12 @@
             $scope.saveProduct = false;
             var query = productListFactory.singleProduct({"productId": editProductId});
             query.$promise.then(function(data) {
-                        console.log(data);  
-                      $scope.picImage='http://s3.amazonaws.com/ordermagic/'+data.pimages[0];
-                      after_load_image_response=$scope.picImage;
+                        console.log(data); 
+                          if (angular.isDefined(data.pimages[0])) {
+                             $scope.croppedDataUrl = 'http://s3.amazonaws.com/ordermagic/'+data.pimages[0];
+                             } 
+                      //$scope.picImage='http://s3.amazonaws.com/ordermagic/'+
+                      after_load_image_response=$scope.croppedDataUrl;
                         $scope.productName = data.pname;
                         $scope.productDescription = data.pdesc;
                         $scope.productPrice = data.price;
@@ -44,15 +42,15 @@
           $scope.infinite = function(){
             $scope.productQuantity = 'Infinite';
           };
-          $scope.editProduct = function(editProductId){
+          $scope.editProduct = function(editProductId, picImageurl){
             edit_Product_Id=editProductId;
             $scope.spinner = true;
-             if($scope.picImage==after_load_image_response){
+             if($scope.croppedDataUrl==after_load_image_response){
                   edit_product_after_uploader_response();
          
             }else{
                   $scope.spinner = true;
-                   upload($scope.picImage, 'https://protected-badlands-3499.herokuapp.com/prodfile');
+                   upload(picImageurl, 'https://protected-badlands-3499.herokuapp.com/prodfile');
                  }
           };
           function edit_product_after_uploader_response(){
@@ -86,13 +84,16 @@
           }
 
 
-          $scope.addProduct = function(){
-            if($scope.picImage==after_load_image_response){
+          $scope.addProduct = function(picImageurl){
+            console.log(picImageurl);
+            console.log($scope.croppedDataUrl);
+            console.log(after_load_image_response);
+            if($scope.croppedDataUrl==after_load_image_response){
                   send_data_after_uploader_response();
          
             }else{
                   $scope.spinner = true;
-                   upload($scope.picImage, 'https://protected-badlands-3499.herokuapp.com/prodfile');
+                   upload(picImageurl, 'https://protected-badlands-3499.herokuapp.com/prodfile');
                  }
 
 
@@ -139,7 +140,9 @@
      function upload (file, url) {
         Upload.upload({
             url: url,
-            data: {fileName: file}
+             data: {
+                fileName: Upload.dataUrltoBlob(file)
+            },
         }).then(function (resp) {
             uploadResponseFileName = resp.data.filename;
             console.log(uploadResponseFileName);
@@ -163,11 +166,6 @@
 $scope.back = function(){
             $state.go('dashboard.productList');
           };
-
-
-
-
-
 
 
 };

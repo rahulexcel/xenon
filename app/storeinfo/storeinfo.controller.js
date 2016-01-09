@@ -2,7 +2,6 @@ angular
     .module('xenon.controllers')
     .controller('storeinfoCtrl', storeinfoCtrl);    
 function storeinfoCtrl($scope, $log, FileUploader, storeinfoFactory, $timeout,  localStorageService, Upload, storeinfoLocationsFactory, storeinfoLocationsIdFactory, country, storeinfoLocFile) {
-
     var dateArray = [];
     var responseDateArr = [];
     var i;
@@ -98,9 +97,9 @@ function storeinfoCtrl($scope, $log, FileUploader, storeinfoFactory, $timeout,  
             $scope.lclosed = data.data.lclosed;
             response_phone_no = data.data.lphone;
             if (angular.isDefined(data.data.llogo)) {
-           // $scope.picImage = 'http://s3.amazonaws.com/ordermagic/'+data.data.llogo;
+            $scope.croppedDataUrl = 'http://s3.amazonaws.com/ordermagic/'+data.data.llogo;
         }
-           // response_pic_name=$scope.picImage;
+           response_pic_name=$scope.croppedDataUrl;
          
            console.log(data);
             for (var i = 0; i < response_phone_no.length; i++) {
@@ -157,9 +156,12 @@ function storeinfoCtrl($scope, $log, FileUploader, storeinfoFactory, $timeout,  
 
     }
     $scope.lsave = function(picImageurl) {
-       console.log(picImageurl)
-        //console.log($scope.picImage);
-        if($scope.picImage==response_pic_name){
+         $scope.spinner = true;
+       console.log($scope.croppedDataUrl);
+       // console.log($scope.response_pic_name);
+
+       
+        if($scope.croppedDataUrl==response_pic_name){
           send_data_after_upload();
         }else{
         upload(picImageurl, 'https://protected-badlands-3499.herokuapp.com/locfile');
@@ -168,9 +170,9 @@ function storeinfoCtrl($scope, $log, FileUploader, storeinfoFactory, $timeout,  
     }
 
     function send_data_after_upload() {
-        console.log(uploadResponseFileName);
+        // console.log(uploadResponseFileName);
         var phoneNumber = $scope.phone_code + "-" + $scope.phone_no;
-        $scope.spinner = true;
+       
         if (LocationIdFlag === 0) {
             var query = storeinfoLocationsIdFactory.update({}, {
                 'locationid': userData.locations[0],
@@ -275,23 +277,6 @@ function storeinfoCtrl($scope, $log, FileUploader, storeinfoFactory, $timeout,  
         }
     }
     var uploadResponseFileName;
-    //  $scope.upload = function (dataUrl) {
-    //     Upload.upload({
-    //         url: 'https://angular-file-upload-cors-srv.appspot.com/upload',
-    //         data: {
-    //             file: Upload.dataUrltoBlob(dataUrl)
-    //         },
-    //     }).then(function (response) {
-    //         $timeout(function () {
-    //             $scope.result = response.data;
-    //         });
-    //     }, function (response) {
-    //         if (response.status > 0) $scope.errorMsg = response.status 
-    //             + ': ' + response.data;
-    //     }, function (evt) {
-    //         $scope.progress = parseInt(100.0 * evt.loaded / evt.total);
-    //     });
-    // }
     function upload(file, url) {
         Upload.upload({
             url: url,
@@ -307,7 +292,6 @@ function storeinfoCtrl($scope, $log, FileUploader, storeinfoFactory, $timeout,  
             
         }, function(evt) {
             var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-            //console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
         });
 
     };
@@ -323,7 +307,4 @@ function storeinfoCtrl($scope, $log, FileUploader, storeinfoFactory, $timeout,  
     }
     $scope.openingtime_hour=hour;
     $scope.closingtime_hour=hour;
-
-
-
 }
