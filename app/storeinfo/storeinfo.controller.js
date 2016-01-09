@@ -1,8 +1,7 @@
 angular
     .module('xenon.controllers')
-    .controller('storeinfoCtrl', storeinfoCtrl);
-
-function storeinfoCtrl($scope, $log, FileUploader, storeinfoFactory, localStorageService, Upload, storeinfoLocationsFactory, storeinfoLocationsIdFactory, country, storeinfoLocFile) {
+    .controller('storeinfoCtrl', storeinfoCtrl);    
+function storeinfoCtrl($scope, $log, FileUploader, storeinfoFactory, $timeout,  localStorageService, Upload, storeinfoLocationsFactory, storeinfoLocationsIdFactory, country, storeinfoLocFile) {
 
     var dateArray = [];
     var responseDateArr = [];
@@ -16,32 +15,19 @@ function storeinfoCtrl($scope, $log, FileUploader, storeinfoFactory, localStorag
     var dayArr_for_schedule_view = [];
     var response_phone_no;
     var response_pic_name;
+    var On_refresh_data;
     if (angular.isDefined(locationId)) {
         On_refresh();
     } else {
         LocationIdFlag = 1;
     }
-    $scope.mytime = new Date();
-    $scope.hstep = 1;
-    $scope.mstep = 15;
-    $scope.options = {
-        hstep: [1, 2, 3],
-        mstep: [1, 5, 10, 15, 25, 30]
-    };
-    $scope.openingtime = function() {
-        openingTime = String($scope.open).substring(16, 21);
-
-    };
-    $scope.closingtime = function() {
-        closingTime = String($scope.close).substring(16, 21);
-
-    };
+   
     $scope.logInfos = function(event, date) {
         event.preventDefault();
         var timeStamp = date.valueOf();
-        var hours = new Date().getHours();
+       // var hours = new Date().getHours();
         //console.log(hours);
-        var minut = new Date().getMinutes();
+       // var minut = new Date().getMinutes();
         //console.log(minut);
         var day = new Date(timeStamp).getDate();
         var month = new Date(timeStamp).getMonth() + 1;
@@ -63,8 +49,7 @@ function storeinfoCtrl($scope, $log, FileUploader, storeinfoFactory, localStorag
         // console.log(dateArray);
         date.selected = !date.selected;
     }
-    var On_refresh_data;
-
+   
     function On_refresh() {
         $scope.spinner = true;
         var query = storeinfoLocationsIdFactory.get({}, {
@@ -112,9 +97,12 @@ function storeinfoCtrl($scope, $log, FileUploader, storeinfoFactory, localStorag
             $scope.day_in_schedule_view = data.data.lwots;
             $scope.lclosed = data.data.lclosed;
             response_phone_no = data.data.lphone;
-            $scope.picImage = 'http://s3.amazonaws.com/ordermagic/'+data.data.llogo;
-            response_pic_name=$scope.picImage;
-           //console.log($scope.picImage);
+            if (angular.isDefined(data.data.llogo)) {
+           // $scope.picImage = 'http://s3.amazonaws.com/ordermagic/'+data.data.llogo;
+        }
+           // response_pic_name=$scope.picImage;
+         
+           console.log(data);
             for (var i = 0; i < response_phone_no.length; i++) {
                 if (response_phone_no[i] == '+') {
                     var plus = i;
@@ -168,22 +156,22 @@ function storeinfoCtrl($scope, $log, FileUploader, storeinfoFactory, localStorag
         }
 
     }
-    $scope.lsave = function() {
+    $scope.lsave = function(picImageurl) {
+       console.log(picImageurl)
         //console.log($scope.picImage);
         if($scope.picImage==response_pic_name){
           send_data_after_upload();
         }else{
-        upload($scope.picImage, 'https://protected-badlands-3499.herokuapp.com/locfile');
+        upload(picImageurl, 'https://protected-badlands-3499.herokuapp.com/locfile');
        // console.log(upload);
        }
     }
 
     function send_data_after_upload() {
-       // console.log(uploadResponseFileName);
+        console.log(uploadResponseFileName);
         var phoneNumber = $scope.phone_code + "-" + $scope.phone_no;
         $scope.spinner = true;
         if (LocationIdFlag === 0) {
-           // console.log("flag=o update is firing");
             var query = storeinfoLocationsIdFactory.update({}, {
                 'locationid': userData.locations[0],
                 'lname': $scope.lname,
@@ -207,7 +195,6 @@ function storeinfoCtrl($scope, $log, FileUploader, storeinfoFactory, localStorag
                 localStorageService.set('storeInfo', data);
             });
         } else {
-            //console.log("flag=1 save is firing");
             var query = storeinfoFactory.save({
                 'locationId': userData.locations[0],
                 'lname': $scope.lname,
@@ -237,9 +224,11 @@ function storeinfoCtrl($scope, $log, FileUploader, storeinfoFactory, localStorag
 
     $scope.tsave = function() {
         var day = $scope.day;
-        var open = $scope.open;
-        var close = $scope.close;
+        var openingTime = $scope.opening_selected_hour;
+        var closingTime = $scope.closing_selected_hour;
         var json;
+        console.log(openingTime);
+        console.log(closingTime);
         if ((angular.isDefined(openingTime)) && (angular.isDefined(closingTime))) {
 
         } else {
@@ -286,30 +275,54 @@ function storeinfoCtrl($scope, $log, FileUploader, storeinfoFactory, localStorag
         }
     }
     var uploadResponseFileName;
+    //  $scope.upload = function (dataUrl) {
+    //     Upload.upload({
+    //         url: 'https://angular-file-upload-cors-srv.appspot.com/upload',
+    //         data: {
+    //             file: Upload.dataUrltoBlob(dataUrl)
+    //         },
+    //     }).then(function (response) {
+    //         $timeout(function () {
+    //             $scope.result = response.data;
+    //         });
+    //     }, function (response) {
+    //         if (response.status > 0) $scope.errorMsg = response.status 
+    //             + ': ' + response.data;
+    //     }, function (evt) {
+    //         $scope.progress = parseInt(100.0 * evt.loaded / evt.total);
+    //     });
+    // }
     function upload(file, url) {
         Upload.upload({
             url: url,
-            data: {
-                fileName: file
-            }
+             data: {
+                fileName: Upload.dataUrltoBlob(file)
+            },
         }).then(function(resp) {
-           // console.log(resp);
             uploadResponseFileName = resp.data.filename;
             console.log(uploadResponseFileName);
             send_data_after_upload();
 
         }, function(resp) {
-            //console.log('Error status: ' + resp.status);
+            
         }, function(evt) {
             var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
             //console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
         });
 
     };
+       
+    var hour=[];   
     for (var i = 1; i <= 12; i++) {
-        console.log(i);
-    }
+        hour.push(i+' '+'AM');
 
+    }
+     for (var k = 1; k <= 12; k++) {
+        hour.push(k+' '+'PM');
+        
+    }
+    $scope.openingtime_hour=hour;
+    $scope.closingtime_hour=hour;
 
 
 
