@@ -8,18 +8,18 @@
         addProductService.getCategoryList().then(function(categorylist){
         $scope.categorylist = categorylist;
         });
-
-        var after_load_image_response;
+        var editProductId = localStorageService.get('editProductId');
+       var after_load_image_response;
         var flag_for_cheking_add_or_edit=0;
         var edit_Product_Id;
-          if($rootScope.editProductId){
+          if(editProductId){
             flag_for_cheking_add_or_edit=1;
             $scope.formSpinner = true;
             $scope.editForm = false;
           //  console.log('Edit Product Id: '+$rootScope.editProductId);
             $scope.editThisProduct = true;
             $scope.saveProduct = false;
-            var query = productListFactory.singleProduct({"productId": $rootScope.editProductId});
+            var query = productListFactory.singleProduct({"productId": editProductId});
             query.$promise.then(function(data) {
                         console.log(data); 
                           if (angular.isDefined(data.pimages[0])) {
@@ -71,19 +71,23 @@
               "pcal":false,
               "pimages":uploadResponseFileName,
               "pfeatures":false,
-              "lid": lid
+              "lid": lid,
+              "pcatid": $scope.selectedCategoryId
             });
       query.$promise.then(function(data) {
                         console.log(data);
-                        if($scope.selectedCategoryArray){
-                         addProductService.updateCategoryList($scope.selectedCategoryArray,data.data._id);
-                        }
+                        // if($scope.selectedCategoryArray){
+                        //  addProductService.updateCategoryList($scope.selectedCategoryArray,data.data._id);
+                        // }
                         $state.go('dashboard.productList');
                     });
           }
 
 
           $scope.addProduct = function(picImageurl){
+            console.log(picImageurl);
+            console.log($scope.croppedDataUrl);
+            console.log(after_load_image_response);
             if($scope.croppedDataUrl==after_load_image_response){
                   send_data_after_uploader_response();
          
@@ -113,20 +117,22 @@
               "pcal":false,
               "pimages":uploadResponseFileName,
               "pfeatures":false,
-              "lid": lid
+              "lid": lid,
+              "pcatid": $scope.selectedCategoryId
             });
       query.$promise.then(function(data) {
                         // console.log(data);
-                        if($scope.selectedCategoryArray){
-                         addProductService.updateCategoryList($scope.selectedCategoryArray,data.data._id);
-                        }
+                        // if($scope.selectedCategoryArray){
+                        //  addProductService.updateCategoryList($scope.selectedCategoryArray,data.data._id);
+                        // }
                         $scope.spinner = false;
                         $scope.productName = '';
                         $scope.productPrice = '';
                         $scope.productQuantity = '';
                         $scope.productDescription = '';
+                        $state.go('dashboard.productList');
                     });
-                         $state.go('dashboard.productList');
+                         
                        
            }
            // upload on file select or drop
@@ -134,7 +140,9 @@
      function upload (file, url) {
         Upload.upload({
             url: url,
-            data: {fileName: file}
+             data: {
+                fileName: Upload.dataUrltoBlob(file)
+            },
         }).then(function (resp) {
             uploadResponseFileName = resp.data.filename;
             console.log(uploadResponseFileName);
@@ -158,11 +166,6 @@
 $scope.back = function(){
             $state.go('dashboard.productList');
           };
-
-
-
-
-
 
 
 };

@@ -35,10 +35,12 @@
                                                     <a class="pull-right btn btn-secondary btn-xs" data-nodrag="" ng-click="updateCategory(Arr._id)">
                                                         <i class="fa fa-pencil"></i>
                                                     </a>
-                                                    <button ng-click="toggle(this)" style="float:right;" data-nodrag="" ng-if="Arr.catproducts && Arr.catproducts.length > 0" class="btn btn-info btn-xs"><span ng-class="{
-          'glyphicon-chevron - right': collapsed,
-          'glyphicon-chevron - down': !collapsed
-        }" class="glyphicon glyphicon-chevron-down"></span></button>  
+                                                    <button ng-click="toggle(this)" style="float:right;" data-nodrag="" ng-if="Arr.products && Arr.products.length > 0" class="btn btn-info btn-xs"><span
+                                                    class="glyphicon"
+                                                    ng-class="{
+                                                      'glyphicon-chevron-right': collapsed,
+                                                      'glyphicon-chevron-down': !collapsed
+                                                    }"></span></button>  
                                                 </div>
                                             </div>
 
@@ -142,4 +144,3 @@
             </li>
             </ol>
         </script>
-
