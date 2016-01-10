@@ -1,284 +1,113 @@
-   
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <div class="row">
-    <div class="col-sm-1"></div>
-    <div class="col-sm-10">
-        <alert type="danger" ng-show="location_id_is_not_available" id="alertDanger">
-            Please setup your store information first before going to other pages
-    </alert>
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h4 class="panel-title">Store info:</h4>
-            </div>
-            <div class="panel-body">
-                <form role="form" class="form-horizontal">
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">Store Description</label>
-                        <div class="col-sm-10">
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <label class="control-label" for="full_name">
-                                        <strong>Name</strong>
-                                    </label>
-                                    <input class="form-control" name="full_name" id="full_name" data-validate="required" ng-model="lname" />
-                                </div>
-                                <div class="col-sm-12">
-                                    <label class="control-label" for="full_name">
-                                        <strong>Description</strong>
-                                    </label>
-                                    <textarea class="form-control" rows="5" id="comment" ng-model="ldesc"></textarea>
-                                </div>
-                                <div class="col-sm-9 ">
-                                    <div class="row">
-                                        <div class="col-sm-3">
-                                            <label class="control-label" for="full_name">
-                                                <strong>Logo</strong>
-                                            </label>
-                                            <br/>
-                                            <span class="file-input btn btn-blue btn-file">
-                                       Browse&hellip;           
-                                          
-                                                <input type="file" ngf-select ng-model="picImage" name="fileName" ngf-accept="'image/*'">
-                                                </span>
-                                            </div>
-                                            <div ngf-drop ng-model="picImage" ngf-pattern="image/*"><br/><br/><br/>
-                                                &nbsp;&nbsp;&nbsp;&nbsp;
-                                                <img-crop image="picImage  | ngfDataUrl"   area-type="square"             
-                                              result-image="croppedDataUrl" ng-init="croppedDataUrl=''"   data-width='500px'></img-crop>
-                                            </div>
-                                            <div class="col-sm-3">
-                                                <img ng-src="{{croppedDataUrl}}"  height: '200px'/>
-                                            </div>
-                                            <!--   <button ng-click="upload(croppedDataUrl)">Submit</button>  -->
-                                        </div>
-                                       <!--   <img ngf-src="picImage" height: '200px' > -->
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group-separator"></div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Contact:</label>
-                            <div class="col-sm-10">
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <label class="control-label" for="full_name">
-                                            <strong>Contact email</strong>&nbsp;&nbsp;&nbsp;Will be included in emails sent to your customers
-                                        
-                                        
-                                        </label>
-                                        <input class="form-control" name="full_name" id="full_name" data-validate="required" ng-model="lemail" />
-                                        <label class="control-label" for="full_name">
-                                            <strong>Store address</strong>
-                                        </label>
-                                        <input class="form-control" name="full_name" id="full_name" data-validate="required" ng-model="laddr" />
-                                        <label class="control-label" for="full_name">
-                                            <strong>Post code</strong>
-                                        </label>
-                                        <input class="form-control" name="full_name" id="full_name" data-validate="required" ng-model="lpostcode" />
-                                        <label class="control-label" for="full_name">
-                                            <strong>City</strong>
-                                        </label>
-                                        <input class="form-control" name="full_name" id="full_name" data-validate="required" ng-model="lcity" />
-                                        <label class="control-label" for="full_name">
-                                            <strong>State</strong>
-                                        </label>
-                                        <input class="form-control" name="full_name" id="full_name" data-validate="required" ng-model="lstate" />
-                                        <label class="control-label" for="full_name">
-                                            <strong>Country</strong>
-                                        </label>
-                                        <select class="form-control"  ng-model="lcountry" ng-change="country_selected()">
-                                            <option ng-repeat="row in dropdown_country track by $index" value="{{row}}">{{row}}</option>
-                                        </select>
-                                    </select>
-                                    <label class="control-label" for="full_name">
-                                        <strong>Phone</strong>
-                                    </label>
-                                    <div class='row'>
-                                        <div class='col-sm-2'>
-                                            <select class="form-control" ng-model="phone_code">
-                                                <option ng-repeat="row in dropdown_code track by $index" value="{{row}}">{{row}}</option>
-                                            </select>
-                                        </div>
-                                        <div class='col-sm-10'>
-                                            <input class="form-control" name="full_name" id="full_name" data-validate="required" ng-model="phone_no" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-12">
-                        <hr>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Store status</label>
-                            <div class="col-sm-9">
-                                <label class="control-label" for="full_name">
-                                    <strong>Open to customers</strong>
-                                </label>
-                                <div class="form-block">
-                                    <input type="checkbox" checked="" class="iswitch-lg iswitch-info" ng-model="lclosed">
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="col-sm-12">
-                                    <hr>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">Closed days:</label>
-                                        <div class="col-sm-10">
-                                            <multiple-date-picker days-selected="selectedDays" day-click="logInfos" highlight-days="highlightDays" />
-                                        </div>
-                                    </div>
-                                    <div class="form-group-separator"></div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">Timing:</label>
-                                        <div class="col-sm-9">
-                                            <div class="row">
-                                                <div class="col-sm-3">
-                                                    <label class="control-label" for="full_name" style="margin-left:30px;">
-                                                        <strong>Select Day:</strong>
-                                                    </label>
-                                                    <div style="margin-top:48px">
-                                                        <select class="form-control" ng-model="day">
-                                                            <option  
-                                                                  ng-repeat="row in dropdown_days[&quot;'Architect'&quot;]" value="{{row}}" ng-if="showOptions(row)">{{row}}</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-3" >
-                                                    <label class="control-label" for="full_name"style="margin-left:30px;">
-                                                        <strong>Opening time:</strong>
-                                                    </label>
-                                                    <select class="form-control" ng-model="opening_selected_hour" style="margin-top:48px">
-                                                        <option  
-                                                                  ng-repeat="row in openingtime_hour
-                                                                   track by $index"  value="{{row}}">{{row}}</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-sm-3" >
-                                                    <label class="control-label" for="full_name" style="margin-left:30px;">
-                                                        <strong>&nbsp;&nbsp;Closing time:</strong>
-                                                    </label>
-                                                    <select class="form-control" ng-model="closing_selected_hour" style="margin-top:48px">
-                                                        <option  
-                                                                  ng-repeat="row in closingtime_hour
-                                                                   track by $index">{{row}}</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-sm-3" >
-                                                    <div style="margin-top:73px">
-                                                        <button class="btn btn-blue" ng-click="tsave();">Add 
-                                                                </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-9 col-sm-offset-2">
-                                            <div class="form-block">
-                                                <div class="col-sm-14">
-                                                    <div class="col-sm-12">
-                                                        <table class="table responsive">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>Day</th>
-                                                                    <th>Opening Time</th>
-                                                                    <th>Closing Time</th>
-                                                                    <th>Delete</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td colspan="7" style="text-align:center;"></td>
-                                                                </tr>
-                                                                <tr ng-repeat="day in day_in_schedule_view track by $index">
-                                                                    <td>{{day.day}}</td>
-                                                                    <td >{{day.opening_time}}</td>
-                                                                    <td>{{day.closing_time}}</td>
-                                                                    <td>
-                                                                        <button class="btn" ng-click="removeTimes(day)">
-                                                                            <span class="glyphicon glyphicon-trash"></span>
-                                                                        </button>
-                                                                    </td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-10 col-sm-offset-2">
-                                    <div class="form-block">
-                                        <div class="form-group">
-                                            <label class="control-label" for="full_name">
-                                                <strong>Lead    time    (minimum    number  of  minutes it  takes   to  prepare for product delivery.) in minutes</strong>
-                                            </label>
-                                            <br/>
-                                            <div class="col-sm-3" style="padding:0px;">
-                                                <input class="form-control" name="full_name" id="full_name" data-validate="required" ng-model="llt"/>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-9 col-sm-offset-2">
-                                    <div class="form-block">
-                                        <div class="form-group">
-                                            <label class="control-label" for="full_name">
-                                                <strong>Message</strong>
-                                            </label>
-                                            <textarea class="form-control" rows="5" id="comment" ng-model="lmessage"></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="col-sm-9 col-sm-offset-2">
-                                        <div class="form-block">
-                                            <div class="form-group">
-                                                <button class="btn btn-blue" ng-click="lsave(croppedDataUrl);">Save             
-                                                        
-                                                    <span ng-show="spinner">
-                                                        <i class="fa fa-spin fa-spinner"></i>
-                                                    </span>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <h1 class="panel-title"><strong>Add Product</strong></h1>
                 </div>
-            </form>
+                <div class="col-sm-2 col-sm-offset-4">
+                    <button class="btn btn-blue btn-md pull-right" style="background-color:#ddd;" ng-click="back()">Back</button>
+                </div>
+            </div>
+            </div>
+            <span ng-show="formSpinner" style="text-align:center;display:block;"><i class="fa fa-spin fa-spinner"></i></span>
+                
+            <div class="panel-body" ng-show="editForm">
+            <h4>Image</h4>
+                <form class="form-horizontal ng-pristine ng-valid" role="form">
+                    <div class="form-group">
+                       <div class="col-sm-12">
+                       <span class="file-input btn btn-blue btn-file">Browse...
+                       <input type="file" ngf-select="" ng-model="picImage" name="fileName" ngf-accept="'image/*'" ngf-resize="{width: 400, height: 400, quality: 0.9}">
+                       </span>
+                       <br>
+                      <!--   -->
+                       </div>
+                   </div>
+                    <div class="form-group-separator"></div>
+                    <div class="col-sm-12">
+                    <div class="form-group">
+                    <h4><strong>Information</strong></h4>
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <strong>Title</strong>
+                                <p>
+                                    <input type="text" class="form-control" ng-model="productName">
+                                </p>
+                                <span>mrezshop.tictail.com/products/{{productName | spaceless}}</span>
+                            </div>
+                            <div class="col-sm-4">
+                                <strong>Price</strong> <small>in NOK</small>
+                                <p>
+                                   <input type="text" class="form-control" ng-model="productPrice">
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group-separator"></div>
+                    <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-12">
+                                <strong>Description</strong>
+                                <p>
+                                     <textarea class="form-control" rows="5" ng-model="productDescription">
+                                   </textarea>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group-separator"></div>
+                    <div class="form-group">
+                    <h4><strong>Select Category</strong></h4>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <select class="col-sm-6" ng-model="selectedCategoryArray">
+                                        <option ng-repeat="cat in categorylist" value="{{cat}}">{{cat.catname}}</option>
+                                    </select>
+                                    </div>
+                                </div>
+                            </div>  
+                    </div>
+                    <div class="form-group-separator"></div>
+                    <div class="form-group">
+                    <h4><strong>Details</strong></h4>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                        <label class="control-label">Quantity</label>
+                        
+                        <div class="input-group input-group-sm input-group-minimal">
+                            
+                            <input type="text" class="form-control" ng-model="productQuantity">
+                            <span class="input-group-addon" style="font-size:12px; background-color:#8dc63f;" ng-click="infinite()">
+                                &#8734;<!-- <i class="linecons-pencil"></i> -->
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>  
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-6">
+                           <label>
+                                    <input type="checkbox" class="cbr cbr-info" ng-model="showInStore">
+                                   Show products in store
+                                </label>
+                            </div> 
+                            <div class="col-sm-12">
+                            <br>
+                            <button ng-show="saveProduct" class="btn btn-blue" ng-click="addProduct()">Save <span ng-show="spinner"><i class="fa fa-spin fa-spinner"></i></span></button>
+                            <button ng-show="editThisProduct" class="btn btn-blue" ng-click="editProduct(editProductId)">Update <span ng-show="spinner"><i class="fa fa-spin fa-spinner"></i></span></button>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
+    <div class="col-sm-2"></div>
+
 </div>
