@@ -75,6 +75,7 @@ function storeinfoCtrl($scope, $log, FileUploader, storeinfoFactory, $timeout,  
             'lname': On_refresh_data.lname,
             'lpcats': On_refresh_data.lpcats,
             'ldateclosed': On_refresh_data.ldateclosed,
+            'lcountry':On_refresh_data.lcountry,
             'lwots': On_refresh_data.lwots
         });
         query.$promise.then(function(data) {

@@ -8,12 +8,12 @@ overflow:hidden;
 
 img-crop canvas {
     display: block;
-    position: absolute;
-    left: 33%;
+    position: relative;
+    left: 12%;
     top: 96%;
     -webkit-tap-highlight-color: transparent;
-    width: 210px;
-    height: 210px;
+    width: 100%!important;
+    height: 200px!important;
     margin-top: 0px!important;
 }
 .cropArea {
