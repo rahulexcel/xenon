@@ -29,15 +29,16 @@
                                     <ul id="nestable-list-1" class="uk-nestable">
                                         <li data-item="Item 1" data-item-id="a" ui-tree-node ng-repeat="Arr in displaycatArr" ui-tree-node>
                                             <div class="uk-nestable-item">
-                                                <div class=""><strong>{{Arr.catname}}</strong> <a class="pull-right btn btn-danger btn-xs" data-nodrag="" ng-click="remove(this); deleteCategory(Arr._id)">
+                                                <div class=""><strong>{{Arr.catname}}</strong> <a class="pull-right btn btn-danger btn-xs" data-nodrag="" ng-click="remove(this);
+                                                        deleteCategory(Arr._id)">
                                                         <i class="fa fa-times"></i>
                                                     </a>
                                                     <a class="pull-right btn btn-secondary btn-xs" data-nodrag="" ng-click="updateCategory(Arr._id)">
                                                         <i class="fa fa-pencil"></i>
                                                     </a>
                                                     <button ng-click="toggle(this)" style="float:right;" data-nodrag="" ng-if="Arr.products && Arr.products.length > 0" class="btn btn-info btn-xs"><span
-                                                    class="glyphicon"
-                                                    ng-class="{
+                                                            class="glyphicon"
+                                                            ng-class="{
                                                       'glyphicon-chevron-right': collapsed,
                                                       'glyphicon-chevron-down': !collapsed
                                                     }"></span></button>  
@@ -49,12 +50,13 @@
                                                     <div ui-tree-handle>
                                                         <div class="row">
                                                             <div class="col-xs-4">{{product.pname}}</div>
-                                                            <div class="col-xs-4">Qty - {{ (product.pinv == - 1) ? "Infinite" : product.pinv}}</div>
-                                                            <div class="col-xs-4">{{product.price}} <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="remove(this); deleteProduct(product._id)"><span
+                                                            <div class="col-xs-4">Qty - {{ (product.pinv == -1) ? "Infinite" : product.pinv}}</div>
+                                                            <div class="col-xs-4">{{product.price}} <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="remove(this);
+                                                                        deleteProduct(product._id)"><span
                                                                         class="glyphicon glyphicon-remove"></span></a>
                                                                 <a class="pull-right btn btn-success btn-xs" data-nodrag="" ng-click="editProduct(product._id)">
-                                                            <i class="fa fa-pencil"></i>
-                                                        </a>
+                                                                    <i class="fa fa-pencil"></i>
+                                                                </a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -81,9 +83,10 @@
                                             <div class="uk-nestable-item">
                                                 <div class="row">
                                                     <div class="col-xs-4">{{product.pname}}</div>
-                                                    <div class="col-xs-4">{{ (product.pinv == - 1) ? "Infinite" : product.pinv}}</div>
+                                                    <div class="col-xs-4">{{ (product.pinv == -1) ? "Infinite" : product.pinv}}</div>
                                                     <div class="col-xs-4">{{product.price}} 
-                                                        <a class="pull-right btn btn-danger btn-xs" data-nodrag="" ng-click="remove(this); deleteProduct(product._id)">
+                                                        <a class="pull-right btn btn-danger btn-xs" data-nodrag="" ng-click="remove(this);
+                                                                deleteProduct(product._id)">
                                                             <i class="fa fa-times"></i>
                                                         </a>
                                                         <a class="pull-right btn btn-success btn-xs" data-nodrag="" ng-click="editProduct(product._id)">
@@ -125,22 +128,24 @@
                 </div>
             </div>
         </div>
-        <script type="text/ng-template" id="nodes_renderer.html">
-            <div ui-tree-handle class="tree-node tree-node-content">
-            <a class="btn btn-success btn-xs" ng-if="node.nodes && node.nodes.length > 0" data-nodrag ng-click="toggle(this)"><span
-            class="glyphicon"
-            ng-class="{
-            'glyphicon-chevron-right': collapsed,
-            'glyphicon-chevron-down': !collapsed
-            }"></span></a>
-            {{node.title}}
-            <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="remove(this)"><span
-            class="glyphicon glyphicon-remove"></span></a>
-            <a class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="newSubItem(this)" style="margin-right: 8px;"><span
-            class="glyphicon glyphicon-plus"></span></a>
-            </div>
-            <ol ui-tree-nodes="" ng-model="node.nodes" ng-class="{hidden: collapsed}">
-            <li ng-repeat="node in node.nodes" ui-tree-node ng-include="'nodes_renderer.html'">
-            </li>
-            </ol>
-        </script>
+    </div>
+</div>
+<script type="text/ng-template" id="nodes_renderer.html">
+    <div ui-tree-handle class="tree-node tree-node-content">
+    <a class="btn btn-success btn-xs" ng-if="node.nodes && node.nodes.length > 0" data-nodrag ng-click="toggle(this)"><span
+    class="glyphicon"
+    ng-class="{
+    'glyphicon-chevron-right': collapsed,
+    'glyphicon-chevron-down': !collapsed
+    }"></span></a>
+    {{node.title}}
+    <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="remove(this)"><span
+    class="glyphicon glyphicon-remove"></span></a>
+    <a class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="newSubItem(this)" style="margin-right: 8px;"><span
+    class="glyphicon glyphicon-plus"></span></a>
+    </div>
+    <ol ui-tree-nodes="" ng-model="node.nodes" ng-class="{hidden: collapsed}">
+    <li ng-repeat="node in node.nodes" ui-tree-node ng-include="'nodes_renderer.html'">
+    </li>
+    </ol>
+</script>
