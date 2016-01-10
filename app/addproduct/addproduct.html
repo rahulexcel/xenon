@@ -20,18 +20,10 @@
                     <div class="form-group">
                        <div class="col-sm-12">
                        <span class="file-input btn btn-blue btn-file">Browse...
-                       <input type="file" ngf-select ng-model="picImage" name="fileName" ngf-accept="'image/*'">
+                       <input type="file" ngf-select="" ng-model="picImage" name="fileName" ngf-accept="'image/*'" ngf-resize="{width: 400, height: 400, quality: 0.9}">
                        </span>
                        <br>
-                        <div ngf-drop ng-model="picImage" ngf-pattern="image/*"><br/><br/><br/>
-                                                &nbsp;&nbsp;&nbsp;&nbsp;
-                                                <img-crop image="picImage  | ngfDataUrl"   area-type="square"             
-                                              result-image="croppedDataUrl" ng-init="croppedDataUrl=''"   data-width='500px'></img-crop>
-                                            </div>
-                                            <div class="col-sm-3">
-                                                <img ng-src="{{croppedDataUrl}}"  height: '200px'/>
-                                            </div>
-                      <!--  <img ngf-src="picImage" height: '200px' > -->
+                      <!--  <img ngf-src="picImage" ngf-resize="{width: 400, height: 400, quality: 0.9}" > -->
                        </div>
                    </div>
                     <div class="form-group-separator"></div>
@@ -72,8 +64,8 @@
                     <h4><strong>Select Category</strong></h4>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <select class="col-sm-6" ng-model="selectedCategoryId">
-                                        <option ng-repeat="cat in categorylist" value="{{cat._id}}">{{cat.catname}}</option>
+                                    <select class="col-sm-6" ng-model="selectedCategoryArray">
+                                        <option ng-repeat="cat in categorylist" value="{{cat}}">{{cat.catname}}</option>
                                     </select>
                                     </div>
                                 </div>
@@ -106,8 +98,8 @@
                             </div> 
                             <div class="col-sm-12">
                             <br>
-                            <button ng-show="saveProduct" class="btn btn-blue" ng-click="addProduct(croppedDataUrl)">Save <span ng-show="spinner"><i class="fa fa-spin fa-spinner"></i></span></button>
-                            <button ng-show="editThisProduct" class="btn btn-blue" ng-click="editProduct(editProductId, croppedDataUrl)">Update <span ng-show="spinner"><i class="fa fa-spin fa-spinner"></i></span></button>
+                            <button ng-show="saveProduct" class="btn btn-blue" ng-click="addProduct()">Save <span ng-show="spinner"><i class="fa fa-spin fa-spinner"></i></span></button>
+                            <button ng-show="editThisProduct" class="btn btn-blue" ng-click="editProduct(editProductId)">Update <span ng-show="spinner"><i class="fa fa-spin fa-spinner"></i></span></button>
                         </div>
                         </div>
                     </div>

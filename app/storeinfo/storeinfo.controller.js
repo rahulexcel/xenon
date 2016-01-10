@@ -56,6 +56,7 @@ function storeinfoCtrl($scope, $log, FileUploader, storeinfoFactory, $timeout,  
         });
         query.$promise.then(function(data) {
             On_refresh_data = data;
+           // $scope.lcountrydata.lcountry
             edit();
             localStorageService.set('storeInfo', data);
 
@@ -71,6 +72,7 @@ function storeinfoCtrl($scope, $log, FileUploader, storeinfoFactory, $timeout,  
             'lmessage': On_refresh_data.lmessage,
             'lphone': On_refresh_data.lphone,
             'lcity': On_refresh_data.lcity,
+            'lcountry':On_refresh_data.lcountry,
             'ldesc': On_refresh_data.ldesc,
             'lname': On_refresh_data.lname,
             'lpcats': On_refresh_data.lpcats,
@@ -97,9 +99,9 @@ function storeinfoCtrl($scope, $log, FileUploader, storeinfoFactory, $timeout,  
             $scope.lclosed = data.data.lclosed;
             response_phone_no = data.data.lphone;
             if (angular.isDefined(data.data.llogo)) {
-            $scope.croppedDataUrl = 'http://s3.amazonaws.com/ordermagic/'+data.data.llogo;
+            $scope.picImage = 'http://s3.amazonaws.com/ordermagic/'+data.data.llogo;
         }
-           response_pic_name=$scope.croppedDataUrl;
+            response_pic_name=$scope.picImage;
          
            console.log(data);
             for (var i = 0; i < response_phone_no.length; i++) {
@@ -157,20 +159,18 @@ function storeinfoCtrl($scope, $log, FileUploader, storeinfoFactory, $timeout,  
     }
     $scope.lsave = function(picImageurl) {
          $scope.spinner = true;
-       console.log($scope.croppedDataUrl);
-       // console.log($scope.response_pic_name);
-
-       
-        if($scope.croppedDataUrl==response_pic_name){
+       console.log(picImageurl)
+        //console.log($scope.picImage);
+        if($scope.picImage==response_pic_name){
           send_data_after_upload();
         }else{
-        upload(picImageurl, 'https://protected-badlands-3499.herokuapp.com/locfile');
+        upload($scope.picImage, 'https://protected-badlands-3499.herokuapp.com/locfile');
        // console.log(upload);
        }
     }
 
     function send_data_after_upload() {
-        // console.log(uploadResponseFileName);
+        console.log(uploadResponseFileName);
         var phoneNumber = $scope.phone_code + "-" + $scope.phone_no;
        
         if (LocationIdFlag === 0) {
@@ -278,11 +278,12 @@ function storeinfoCtrl($scope, $log, FileUploader, storeinfoFactory, $timeout,  
     }
     var uploadResponseFileName;
     function upload(file, url) {
+        // upload.resize(file, width, height, quality, type, ratio, centerCrop).then(function(resizedFile){
+        //     console.log(resizedFile);
+        // });
         Upload.upload({
             url: url,
-             data: {
-                fileName: Upload.dataUrltoBlob(file)
-            },
+            data: {fileName: file}
         }).then(function(resp) {
             uploadResponseFileName = resp.data.filename;
             console.log(uploadResponseFileName);

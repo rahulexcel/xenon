@@ -34,22 +34,14 @@
                                                 <strong>Logo</strong>
                                             </label>
                                             <br/>
-                                            <span class="file-input btn btn-blue btn-file">
-                                       Browse&hellip;           
-                                          
-                                                <input type="file" ngf-select ng-model="picImage" name="fileName" ngf-accept="'image/*'">
-                                                </span>
-                                            </div>
-                                            <div ngf-drop ng-model="picImage" ngf-pattern="image/*" class="col-sm-6" style="position:relative;">
-                                                <img-crop image="picImage  | ngfDataUrl" area-type="square" area-min-size="10"             
-                                              result-image="croppedDataUrl" ng-init="croppedDataUrl=''"   data-width='500px'></img-crop>
-                                            </div>
-                                            <div class="col-sm-3">
-                                                <img ng-src="{{croppedDataUrl}}"  height: '200px'/>
-                                            </div>
+                                            <span class="file-input btn btn-blue btn-file">Browse...
+                                          <input type="file" ngf-select="" ng-model="picImage" name="fileName" ngf-accept="'image/*'"   ngf-resize="{width: 400, height: 400, quality: 0.9}" >
+                                         </span>
+                                            <br>
+                                              <img ngf-src="picImage" ngf-resize="{width: 400, height: 400, quality: 0.9}" >
                                             <!--   <button ng-click="upload(croppedDataUrl)">Submit</button>  -->
                                         </div>
-                                         <!-- <img ng-src="pic" height: '200px' > -->
+                                         
                                     </div>
                                 </div>
                             </div>
