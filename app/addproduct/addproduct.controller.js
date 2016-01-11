@@ -15,13 +15,11 @@
 
         var after_load_image_response;
         var flag_for_cheking_add_or_edit = 0;
-        var edit_Product_Id;
         var editProductId = localStorageService.get('editProductId');
         if (editProductId) {
             flag_for_cheking_add_or_edit = 1;
             $scope.formSpinner = true;
             $scope.editForm = false;
-            //  console.log('Edit Product Id: '+editProductId);
             $scope.editThisProduct = true;
             $scope.saveProduct = false;
             var query = productListFactory.singleProduct({"productId": editProductId});
@@ -34,7 +32,11 @@
                 $scope.productName = data.pname;
                 $scope.productDescription = data.pdesc;
                 $scope.productPrice = data.price;
-                $scope.productQuantity = data.pinv;
+                if (data.pinv == -1) {
+                    $scope.productQuantity = 'Infinite';
+                } else {
+                    $scope.productQuantity = data.pinv;
+                }
                 $scope.formSpinner = false;
                 $scope.editForm = true;
             });
@@ -46,8 +48,7 @@
         $scope.infinite = function() {
             $scope.productQuantity = 'Infinite';
         };
-        $scope.editProduct = function(editProductId) {
-            edit_Product_Id = editProductId;
+        $scope.editProduct = function() {
             $scope.spinner = true;
             if ($scope.picImage == after_load_image_response) {
                 edit_product_after_uploader_response();
@@ -65,7 +66,7 @@
                 $scope.apiproductQuantity = $scope.productQuantity;
             }
             var query = productFactory.editProduct({
-                "prodId": edit_Product_Id,
+                "prodId": editProductId,
                 "pname": $scope.productName,
                 "pdesc": $scope.productDescription,
                 "price": $scope.productPrice,
@@ -84,6 +85,7 @@
         }
 
         $scope.addProduct = function() {
+            $scope.spinner = true;
             if ($scope.picImage == after_load_image_response) {
                 send_data_after_uploader_response();
             } else {
@@ -143,10 +145,12 @@
                 var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
                 // console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file);
             });
-        };
+        }
+        ;
         $scope.back = function() {
             $state.go('dashboard.productList');
         };
-    };
+    }
+    ;
 
 })();
