@@ -70,41 +70,42 @@
                                 </div>
                             </div>
                         </div>  
-                    </div>
-                    <div class="form-group-separator"></div>
-                    <div class="form-group">
-                        <h4><strong>Details</strong></h4>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label class="control-label">Quantity</label>
-
-                                <div class="input-group input-group-sm input-group-minimal">
-
-                                    <input type="text" class="form-control" ng-model="productQuantity">
-                                    <span class="input-group-addon" style="font-size:12px; background-color:#8dc63f;" ng-click="infinite()">
-                                        &#8734;<!-- <i class="linecons-pencil"></i> -->
-                                    </span>
-                                </div>
-                            </div>
-                        </div>  
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
+                        <div class="form-group-separator"></div>
+                        <div class="form-group">
+                            <h4><strong>Details</strong></h4>
                             <div class="col-sm-6">
-                                <label>
-                                    <input type="checkbox" class="cbr cbr-info" ng-model="showInStore">
-                                    Show products in store
-                                </label>
-                            </div> 
-                            <div class="col-sm-12">
-                                <br>
-                                <button ng-show="saveProduct" class="btn btn-blue" ng-click="addProduct()">Save <span ng-show="spinner"><i class="fa fa-spin fa-spinner"></i></span></button>
-                                <button ng-show="editThisProduct" class="btn btn-blue" ng-click="editProduct(editProductId)">Update <span ng-show="spinner"><i class="fa fa-spin fa-spinner"></i></span></button>
+                                <div class="form-group">
+                                    <label class="control-label">Quantity</label>
+
+                                    <div class="input-group input-group-sm input-group-minimal">
+
+                                        <input type="text" class="form-control" ng-model="productQuantity">
+                                        <span class="input-group-addon" style="font-size:12px; background-color:#8dc63f;" ng-click="infinite()">
+                                            &#8734;<!-- <i class="linecons-pencil"></i> -->
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>  
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label>
+                                        <input type="checkbox" class="cbr cbr-info" ng-model="showInStore">
+                                        Show products in store
+                                    </label>
+                                </div> 
+                                <div class="col-sm-12">
+                                    <br>
+                                    <button ng-show="saveProduct" class="btn btn-blue" ng-click="addProduct()">Save <span ng-show="spinner"><i class="fa fa-spin fa-spinner"></i></span></button>
+                                    <button ng-show="editThisProduct" class="btn btn-blue" ng-click="editProduct()">Update <span ng-show="spinner"><i class="fa fa-spin fa-spinner"></i></span></button>
+                                </div>
                             </div>
                         </div>
                     </div>
+                </form>
             </div>
-            </form>
+
         </div>
     </div>
     <div class="col-sm-2"></div>

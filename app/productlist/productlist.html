@@ -5,7 +5,7 @@
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-xs-6">
-                        <h1 class="panel-title"><strong>Categoriesed Product&nbsp; <span ng-show="saveCategoryTreeStructure"><i class="fa fa-spin fa-spinner"></i></span></strong></h1>
+                        <h1 class="panel-title" style="padding-top:14px;"><strong>Categories <span ng-show="saveCategoryTreeStructure"><i class="fa fa-spin fa-spinner"></i></span></strong></h1>
                     </div>
                     <div class="col-sm-2 col-sm-offset-2">
                         <a class="btn btn-info pull-right" ng-click="addProductPage()">Add Product</a>
@@ -16,16 +16,19 @@
                 </div>
 
             </div>
-            <div class="panel-body">
+            <div class="panel-body" style="padding-top:0px;">
                 <div class="row">
                     <div class="col-sm-12">
                         <h1 class="text-center"><span ng-show="catSpinner"><i class="fa fa-spin fa-spinner"></i></span></h1>
                         <alert type="danger" ng-show="alertDanger" id="alertDanger">
                             You can not drop here
                         </alert>
+                        <alert type="success" ng-show="alertDanger" id="alertDanger">
+                            Edit the product to assign it to a category
+                        </alert>
                         <div ui-tree>
                             <div ui-tree="treeOptions" data-nodrop-enabled="{{noDrop}}" data-empty-placeholder-enabled="false">
-                                <ol ui-tree-nodes ng-model="displaycatArr">
+                                <ol ui-tree-nodes ng-model="displaycatArr" id="tree-root">
                                     <ul id="nestable-list-1" class="uk-nestable">
                                         <li data-item="Item 1" data-item-id="a" ui-tree-node ng-repeat="Arr in displaycatArr" ui-tree-node>
                                             <div class="uk-nestable-item">
@@ -33,9 +36,10 @@
                                                         deleteCategory(Arr._id)">
                                                         <i class="fa fa-times"></i>
                                                     </a>
-                                                    <a class="pull-right btn btn-secondary btn-xs" data-nodrag="" ng-click="updateCategory(Arr._id)">
+                                                    <!-- Html code For editing Category -->
+                                                    <!-- <a class="pull-right btn btn-secondary btn-xs" data-nodrag="" ng-click="updateCategory(Arr._id)">
                                                         <i class="fa fa-pencil"></i>
-                                                    </a>
+                                                    </a> -->
                                                     <button ng-click="toggle(this)" style="float:right;" data-nodrag="" ng-if="Arr.products && Arr.products.length > 0" class="btn btn-info btn-xs"><span
                                                             class="glyphicon"
                                                             ng-class="{
@@ -49,14 +53,18 @@
                                                 <li ng-repeat="product in Arr.products" ui-tree-node style="margin-bottom:10px;">
                                                     <div ui-tree-handle>
                                                         <div class="row">
-                                                            <div class="col-xs-4">{{product.pname}}</div>
-                                                            <div class="col-xs-4">Qty - {{ (product.pinv == -1) ? "Infinite" : product.pinv}}</div>
-                                                            <div class="col-xs-4">{{product.price}} <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="remove(this);
+                                                            <div class="col-xs-4"><p class="pad-top-5">{{product.pname}}</p></div>
+                                                            <!-- Html Code for showing product details in category -->
+                                                            <div class="col-xs-4"><!-- Qty - {{ (product.pinv == -1) ? "Infinite" : product.pinv}} -->
+                                                            <p class="pad-top-5"><button type="button" class="pull-right btn btn-success
+                                                            btn-circle"><i class="glyphicon glyphicon-ok"></i></button></p>
+                                                            </div>
+                                                            <div class="col-xs-4"><!-- {{product.price}} --> <p class="pad-top-5"><a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="remove(this);
                                                                         deleteProduct(product._id)"><span
                                                                         class="glyphicon glyphicon-remove"></span></a>
                                                                 <a class="pull-right btn btn-success btn-xs" data-nodrag="" ng-click="editProduct(product._id)">
                                                                     <i class="fa fa-pencil"></i>
-                                                                </a>
+                                                                </a></p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -68,7 +76,7 @@
                             </div>
                         </div>
                         <hr/>
-                        <h1 class="panel-title" ng-if="displayProductList"><strong>Uncategoriesed Product&nbsp;</strong></h1>                        
+                        <h4 ng-if="displayProductList"><strong>Products</strong></h4>                        
                         <div class="row" ng-if="displayProductList">
                             <div class="col-xs-4"><strong>Name</strong></div>
                             <div class="col-xs-4"><strong>Quantity</strong></div>
