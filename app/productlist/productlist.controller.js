@@ -17,11 +17,13 @@
             });
             query.$promise.then(function(data1) {
                 $scope.spinner = false;
-                //console.log(data1);
                 //$scope.productList = data1;
                 $scope.displayProductList = productlistService.productlist($scope.catArr, data1);
                 $scope.catSpinner = false;
                 // $scope.displaycatArr = $scope.catArr;
+                if($scope.catArr[0].level == 0){
+                    $scope.catArr.shift();
+                }
                 $scope.displaycatArr = categorylistService.categorylist($scope.catArr,data1);
             });
         }

@@ -1,7 +1,7 @@
 (function() {
     'use strict';
     angular.module('xenon-app')
-        .factory('addProductService', addProductService);
+            .factory('addProductService', addProductService);
 
     function addProductService(localStorageService, categoryListFactory, $q, categoryFactory) {
         var def = $q.defer();
@@ -15,11 +15,11 @@
             query.$promise.then(function(categoryList) {
                 def.resolve(categoryList);
             });
-           return def.promise;
+            return def.promise;
         };
         service.updateCategoryList = function(selectedCategoryArray, productId) {
             //console.log(selectedCategoryArray);
-            var myObject=JSON.parse(selectedCategoryArray);
+            var myObject = JSON.parse(selectedCategoryArray);
             myObject.catproducts.push(productId);
             console.log(myObject.catproducts);
             var query = categoryFactory.Update({}, {
