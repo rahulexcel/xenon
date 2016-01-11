@@ -1,242 +1,236 @@
 (function() {
-    'use strict';
-angular
-    .module('xenon.controllers')
-    .controller('storeinfoCtrl', storeinfoCtrl);
-function storeinfoCtrl($scope, $log, FileUploader, dropdownService, $state,  storeinfoFactory, $timeout, calanderService, localStorageService, Upload, storeinfoLocationsFactory, storeinfoLocationsIdFactory, country, storeinfoLocFile) {
-    var dateArray = [];
-    var responseDateArr = [];
-    var i;
-    var DateFlag = 0;
-    var LocationIdFlag = 0;
-    var userData = localStorageService.get("userData");
-    var locationId = userData.locations[0];
-    var openingTime;
-    var closingTime;
-    var dayArr_for_schedule_view = [];
-    var response_phone_no;
-    var response_pic_name;
-    var On_refresh_data;
-    $scope.dropdown_days =dropdownService.Daydropdown();
-    $scope.openingtime_hour = dropdownService.Timedropdown();
-    $scope.closingtime_hour = dropdownService.Timedropdown();
-    if (angular.isDefined(locationId)) {
-        On_refresh();
+ 'use strict';
+ angular
+  .module('xenon.controllers')
+  .controller('storeinfoCtrl', storeinfoCtrl);
+
+ function storeinfoCtrl($scope, $log, FileUploader, dropdownService, $state, storeinfoFactory, $timeout, calanderService, localStorageService, Upload, storeinfoLocationsFactory, storeinfoLocationsIdFactory, country, storeinfoLocFile) {
+  var dateArray = [];
+  var responseDateArr = [];
+  var i;
+  var DateFlag = 0;
+  var LocationIdFlag = 0;
+  var userData = localStorageService.get("userData");
+  var locationId = userData.locations[0];
+  var openingTime;
+  var closingTime;
+  var dayArr_for_schedule_view = [];
+  var response_phone_no;
+  var response_pic_name;
+  var On_refresh_data;
+  $scope.dropdown_days = dropdownService.Daydropdown();
+  $scope.openingtime_hour = dropdownService.Timedropdown();
+  $scope.closingtime_hour = dropdownService.Timedropdown();
+  if (angular.isDefined(locationId)) {
+   On_refresh();
+  } else {
+   LocationIdFlag = 1;
+  }
+  $scope.logInfos = function(event, date) {
+   var ServiceDateArrayResponse = calanderService.getcalanderService(event, date, dateArray);
+   console.log(ServiceDateArrayResponse);
+  }
+
+  function On_refresh() {
+   $scope.spinner = true;
+   var query = storeinfoLocationsIdFactory.get({}, {
+    'locationid': userData.locations[0]
+   });
+   query.$promise.then(function(data) {
+    On_refresh_data = data;
+    console.log(data);
+    localStorageService.set('storeInfo', data);
+    localStorageService.set('storeInfo', data);
+    $scope.spinner = false;
+    $scope.lname = data.lname;
+    $scope.ldesc = data.ldesc;
+    $scope.lemail = data.lemail;
+    $scope.llogo = data.llogo;
+    $scope.laddr = data.laddr;
+    $scope.lpostcode = data.lpostcode;
+    $scope.lcity = data.lcity;
+    $scope.lstate = data.lstate;
+    $scope.lcountry = data.lcountry;
+    $scope.lphone = data.lphone;
+    $scope.llt = data.llt;
+    $scope.lmessage = data.lmessage;
+    $scope.highlightDays = data.ldateclosed;
+    $scope.day_in_schedule_view = data.lwots;
+    $scope.lclosed = data.lclosed;
+    if ($scope.day_in_schedule_view.length == 0) {
+     $scope.show_scheduled_table = false;
     } else {
-        LocationIdFlag = 1;
+     $scope.show_scheduled_table = true;
     }
-    $scope.logInfos = function(event, date) {
-        var ServiceDateArrayResponse = calanderService.getcalanderService(event, date, dateArray);
-        console.log(ServiceDateArrayResponse);
+    response_phone_no = data.lphone;
+    if (angular.isDefined(data.llogo)) {
+     $scope.picImage = 'http://s3.amazonaws.com/ordermagic/' + data.llogo;
     }
-    function On_refresh() {
-        $scope.spinner = true;
-        var query = storeinfoLocationsIdFactory.get({}, {
-            'locationid': userData.locations[0]
-        });
-        query.$promise.then(function(data) {
-            On_refresh_data = data;
-            console.log(data);
-            localStorageService.set('storeInfo', data);
-            localStorageService.set('storeInfo', data);
-            $scope.spinner = false;
-            $scope.lname = data.lname;
-            $scope.ldesc = data.ldesc;
-            $scope.lemail = data.lemail;
-            $scope.llogo = data.llogo;
-            $scope.laddr = data.laddr;
-            $scope.lpostcode = data.lpostcode;
-            $scope.lcity = data.lcity;
-            $scope.lstate = data.lstate;
-            $scope.lcountry = data.lcountry;
-            $scope.lphone = data.lphone;
-            $scope.llt = data.llt;
-            $scope.lmessage = data.lmessage;
-            $scope.highlightDays = data.ldateclosed;
-            $scope.day_in_schedule_view = data.lwots;
-            $scope.lclosed = data.lclosed;
-            if($scope.day_in_schedule_view.length==0){
-                $scope.show_scheduled_table=false;
-            }else{
-                 $scope.show_scheduled_table=true;
-            }
-            response_phone_no = data.lphone;
-            if (angular.isDefined(data.llogo)) {
-                $scope.picImage = 'http://s3.amazonaws.com/ordermagic/' + data.llogo;
-            }
-            response_pic_name = $scope.picImage;
-            for (var i = 0; i < response_phone_no.length; i++) {
-                if (response_phone_no[i] == '+') {
-                    var plus = i;
-                }
-                if (response_phone_no[i] == '-') {
-                    var dash = i;
-                }
-            }
-            $scope.phone_code = response_phone_no.substring(plus, dash);
-            $scope.phone_no = response_phone_no.substring(dash + 1, response_phone_no.length);
-            dayArr_for_schedule_view = $scope.day_in_schedule_view;
-            var closed = data.ldateclosed;
-            dateArray = dateArray.concat(closed);
-            for (i = 0; i < closed.length; i++) {
-                var responseDate = closed[i].split('-').reverse();
-                var responseTimestamp = new Date(responseDate).getTime();
-                responseDateArr.push(responseTimestamp);
-            }
-            $scope.selectedDays = responseDateArr;
-        });
+    response_pic_name = $scope.picImage;
+    for (var i = 0; i < response_phone_no.length; i++) {
+     if (response_phone_no[i] == '+') {
+      var plus = i;
+     }
+     if (response_phone_no[i] == '-') {
+      var dash = i;
+     }
     }
-    var removed_day_array_from_dropdown = [];
-    $scope.showOptions = function(row_from_dropdown) {
-        var flag = 0;
-        if (angular.isDefined($scope.day_in_schedule_view)) {
-            for (var i = 0; i < $scope.day_in_schedule_view.length; i++) {
-                if (row_from_dropdown == $scope.day_in_schedule_view[i].day) {
-                    removed_day_array_from_dropdown.push(row_from_dropdown);
-                    flag = 1;
-                } else {}
-            }
-        } else {
-            return true;
-        }
-        if (flag == 0) {
-            return true;
-        } else {
-            return false;
-        }
+    $scope.phone_code = response_phone_no.substring(plus, dash);
+    if (angular.isDefined(response_phone_no.substring(dash + 1, response_phone_no.length))) {
+     $scope.phone_no = response_phone_no.substring(dash + 1, response_phone_no.length);
+    }
+    dayArr_for_schedule_view = $scope.day_in_schedule_view;
+    var closed = data.ldateclosed;
+    dateArray = dateArray.concat(closed);
+    for (i = 0; i < closed.length; i++) {
+     var responseDate = closed[i].split('-').reverse();
+     var responseTimestamp = new Date(responseDate).getTime();
+     responseDateArr.push(responseTimestamp);
+    }
+    $scope.selectedDays = responseDateArr;
+   });
+  }
+  var removed_day_array_from_dropdown = [];
+  $scope.showOptions = function(row_from_dropdown) {
+   var flag = 0;
+   if (angular.isDefined($scope.day_in_schedule_view)) {
+    for (var i = 0; i < $scope.day_in_schedule_view.length; i++) {
+     if (row_from_dropdown == $scope.day_in_schedule_view[i].day) {
+      removed_day_array_from_dropdown.push(row_from_dropdown);
+      flag = 1;
+     } else {}
+    }
+   } else {
+    return true;
+   }
+   if (flag == 0) {
+    return true;
+   } else {
+    return false;
+   }
 
-    }
-    $scope.lsave = function(picImageurl) {
-        $scope.spinner = true;
-        if ($scope.picImage == response_pic_name) {
-            send_data_after_upload();
-        } else {
-            upload($scope.picImage, 'https://protected-badlands-3499.herokuapp.com/locfile');
-        }
-    }
+  }
+  $scope.lsave = function(picImageurl) {
+   $scope.spinner = true;
+   if ($scope.picImage == response_pic_name) {
+    send_data_after_upload();
+   } else {
+    upload($scope.picImage, 'https://protected-badlands-3499.herokuapp.com/locfile');
+   }
+  }
 
-    function send_data_after_upload() {
-        console.log(uploadResponseFileName);
-        var phoneNumber = $scope.phone_code + "-" + $scope.phone_no;
-        if (LocationIdFlag === 0) {
-            var query = storeinfoLocationsIdFactory.update({}, {
-                'locationid': userData.locations[0],
-                'lname': $scope.lname,
-                'lwots': dayArr_for_schedule_view,
-                'ldesc': $scope.ldesc,
-                'lemail': $scope.lemail,
-                'laddr': $scope.laddr,
-                'llogo': uploadResponseFileName,
-                'lpostcode': $scope.lpostcode,
-                'lcity': $scope.lcity,
-                'lstate': $scope.lstate,
-                'lcountry': $scope.lcountry,
-                'lphone': phoneNumber,
-                'llt': $scope.llt,
-                'ldateclosed': dateArray,
-                'lmessage': $scope.lmessage,
-                'lclosed': $scope.lclosed
-            });
-            query.$promise.then(function(data) {
-                $scope.spinner = false;
-                localStorageService.set('storeInfo', data);
-                 $state.go('dashboard.productList');
-            });
-        } else {
-            var query = storeinfoFactory.save({
-                'locationId': userData.locations[0],
-                'lname': $scope.lname,
-                'lwots': dayArr_for_schedule_view,
-                'ldesc': $scope.ldesc,
-                'lemail': $scope.lemail,
-                'llogo': uploadResponseFileName,
-                'laddr': $scope.laddr,
-                'lpostcode': $scope.lpostcode,
-                'lcity': $scope.lcity,
-                'ldateclosed': dateArray,
-                'lstate': $scope.lstate,
-                'lcountry': $scope.lcountry,
-                'lphone': phoneNumber,
-                'llt': $scope.llt,
-                'lmessage': $scope.lmessage,
-                'lclosed': $scope.lclosed
-            });
-            query.$promise.then(function(data) {
-                $scope.spinner = false;
-                userData.locations = [data.data._id];
-                localStorageService.set('userData', userData);
-                 $state.go('dashboard.productList');
-            });
-        }
+  function send_data_after_upload() {
+   console.log(uploadResponseFileName);
+   var phoneNumber = $scope.phone_code + "-" + $scope.phone_no;
+   if (LocationIdFlag === 0) {
+    var query = storeinfoLocationsIdFactory.update({}, {
+     'locationid': userData.locations[0],
+     'lname': $scope.lname,
+     'lwots': dayArr_for_schedule_view,
+     'ldesc': $scope.ldesc,
+     'lemail': $scope.lemail,
+     'laddr': $scope.laddr,
+     'llogo': uploadResponseFileName,
+     'lpostcode': $scope.lpostcode,
+     'lcity': $scope.lcity,
+     'lstate': $scope.lstate,
+     'lcountry': $scope.lcountry,
+     'lphone': phoneNumber,
+     'llt': $scope.llt,
+     'ldateclosed': dateArray,
+     'lmessage': $scope.lmessage,
+     'lclosed': $scope.lclosed
+    });
+    query.$promise.then(function(data) {
+     $scope.spinner = false;
+     localStorageService.set('storeInfo', data);
+     $state.go('dashboard.productList');
+    });
+   } else {
+    var query = storeinfoFactory.save({
+     'locationId': userData.locations[0],
+     'lname': $scope.lname,
+     'lwots': dayArr_for_schedule_view,
+     'ldesc': $scope.ldesc,
+     'lemail': $scope.lemail,
+     'llogo': uploadResponseFileName,
+     'laddr': $scope.laddr,
+     'lpostcode': $scope.lpostcode,
+     'lcity': $scope.lcity,
+     'ldateclosed': dateArray,
+     'lstate': $scope.lstate,
+     'lcountry': $scope.lcountry,
+     'lphone': phoneNumber,
+     'llt': $scope.llt,
+     'lmessage': $scope.lmessage,
+     'lclosed': $scope.lclosed
+    });
+    query.$promise.then(function(data) {
+     $scope.spinner = false;
+     userData.locations = [data.data._id];
+     localStorageService.set('userData', userData);
+     $state.go('dashboard.productList');
+    });
+   }
+  }
+  $scope.tsave = function() {
+   $scope.show_scheduled_table = true;
+   var day = $scope.day;
+   var openingTime = $scope.opening_selected_hour;
+   var closingTime = $scope.closing_selected_hour;
+   var json;
+   json = {
+    'day': day,
+    'opening_time': openingTime,
+    'closing_time': closingTime
+   }
+   dayArr_for_schedule_view.unshift(json);
+   $scope.day_in_schedule_view = dayArr_for_schedule_view;
+  }
+  $scope.removeTimes = function(index) {
+   var idx = dayArr_for_schedule_view.indexOf(index);
+   dayArr_for_schedule_view.splice(idx, 1);
+   if ($scope.day_in_schedule_view.length == 0) {
+    $scope.show_scheduled_table = false;
+   } else {
+    $scope.show_scheduled_table = true;
+   }
+  }
+  var countryCode = [];
+  var countryName = [];
+  for (var i = 0; i < country.length; i++) {
+   countryCode.push(country[i].code);
+   countryName.push(country[i].name);
+  }
+  $scope.dropdown_country = countryName;
+  $scope.dropdown_code = countryCode;
+  $scope.country_selected = function() {
+   for (var i = 0; i < country.length; i++) {
+    if ($scope.lcountry == country[i].name) {
+     $scope.phone_code = country[i].code;
     }
-    $scope.tsave = function() {
-       $scope.show_scheduled_table=true;
-        var day = $scope.day;
-        var openingTime = $scope.opening_selected_hour;
-        var closingTime = $scope.closing_selected_hour;
-        var json;
-        if ((angular.isDefined(openingTime)) && (angular.isDefined(closingTime))) {
-        } else {
-            if (angular.isDefined(openingTime)) {} else {
-                var ot = new Date();
-                openingTime = String(ot).substring(16, 21);
-            }
-            if (angular.isDefined(closingTime)) {} else {
-                var ct = new Date();
-                closingTime = String(ct).substring(16, 21);
-            }
-        }
-        json = {
-            'day': day,
-            'opening_time': openingTime,
-            'closing_time': closingTime
-        }
-        dayArr_for_schedule_view.unshift(json);
-        $scope.day_in_schedule_view = dayArr_for_schedule_view;
-    }
-    $scope.removeTimes = function(index) {
-        var idx = dayArr_for_schedule_view.indexOf(index);
-        dayArr_for_schedule_view.splice(idx, 1);
-         if($scope.day_in_schedule_view.length==0){
-                $scope.show_scheduled_table=false;
-            }else{
-                 $scope.show_scheduled_table=true;
-            }
-    }
-    var countryCode = [];
-    var countryName = [];
-    for (var i = 0; i < country.length; i++) {
-        countryCode.push(country[i].code);
-        countryName.push(country[i].name);
-    }
-    $scope.dropdown_country = countryName;
-    $scope.dropdown_code = countryCode;
-    $scope.country_selected = function() {
-        for (var i = 0; i < country.length; i++) {
-            if ($scope.lcountry == country[i].name) {
-                $scope.phone_code = country[i].code;
-            }
-        }
-    }
-    var uploadResponseFileName;
-    function upload(file, url) {
-        Upload.upload({
-            url: url,
-            data: {
-                fileName: file
-            }
-        }).then(function(resp) {
-            uploadResponseFileName = resp.data.filename;
-            console.log(uploadResponseFileName);
-            send_data_after_upload();
+   }
+  }
+  var uploadResponseFileName;
 
-        }, function(resp) {
+  function upload(file, url) {
+   Upload.upload({
+    url: url,
+    data: {
+     fileName: file
+    }
+   }).then(function(resp) {
+    uploadResponseFileName = resp.data.filename;
+    console.log(uploadResponseFileName);
+    send_data_after_upload();
 
-        }, function(evt) {
-            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-        });
+   }, function(resp) {
 
-    };
-  
-}
+   }, function(evt) {
+    var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+   });
+
+  };
+
+ }
 })();

@@ -10,7 +10,8 @@
             $scope.spinner = "true";
             var query = signupFactory.save({email: $scope.email, password: $scope.password});
             query.$promise.then(function(data) {
-                if (data.success == "true")
+
+                if (data.success == true)
                 {
                     $scope.info = "Registration successfull";
                     $scope.spinner = false;

@@ -19,14 +19,14 @@
                 <form class="form-horizontal ng-pristine ng-valid" role="form">
                     <div class="form-group">
 
-                       <div class="col-sm-12">
-                       <span class="file-input btn btn-blue btn-file">Browse...
+                        <div class="col-sm-12">
+                            <span class="file-input btn btn-blue btn-file">Browse...
                        <input type="file" ngf-select="" ng-model="picImage" name="fileName" ngf-accept="'image/*'" ngf-resize="{width: 400, height: 400, quality: 0.9}">
                        </span>
-                       <br>
-                       <img ngf-src="picImage" ngf-resize="{width: 400, height: 400, quality: 0.9}" >
-                       </div>
-                   </div>
+                            <br>
+                            <img ngf-src="picImage" ngf-resize="{width: 400, height: 400, quality: 0.9}">
+                        </div>
+                    </div>
 
                     <div class="form-group-separator"></div>
                     <div class="col-sm-12">
@@ -71,7 +71,7 @@
                                     </select>
                                 </div>
                             </div>
-                        </div>  
+                        </div>
                     </div>
                     <div class="form-group-separator"></div>
                     <div class="form-group">
@@ -88,16 +88,15 @@
                                     </span>
                                 </div>
                             </div>
-                        </div>  
+                        </div>
                     </div>
                     <div class="form-group">
                         <div class="row">
                             <div class="col-sm-6">
                                 <label>
-                                    <input type="checkbox" class="cbr cbr-info" ng-model="showInStore">
-                                    Show products in store
+                                    <input type="checkbox" class="cbr cbr-info" ng-model="showInStore"> Show products in store
                                 </label>
-                            </div> 
+                            </div>
                             <div class="col-sm-12">
                                 <br>
                                 <button ng-show="saveProduct" class="btn btn-blue" ng-click="addProduct()">Save <span ng-show="spinner"><i class="fa fa-spin fa-spinner"></i></span></button>
