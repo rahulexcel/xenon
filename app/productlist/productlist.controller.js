@@ -19,7 +19,7 @@
                 $scope.spinner = false;
                 $scope.displayProductList = productlistService.productlist($scope.catArr, data1);
                 $scope.catSpinner = false;
-                if ($scope.catArr[0].level == 0) {
+                if ($scope.catArr[0] && $scope.catArr[0].level == 0) {
                     $scope.catArr.shift();
                 }
                 $scope.displaycatArr = categorylistService.categorylist($scope.catArr, data1);
@@ -35,9 +35,10 @@
                 productListApi();
             });
         }
-        $scope.editProduct = function(id) {
-            $rootScope.editProductId = id;
-            localStorageService.set('editProductId', id);
+        $scope.editProduct = function(productId, productcatId) {
+            console.log(productcatId);
+            localStorageService.set('editProductId', productId);
+            localStorageService.set('editProductcatId', productcatId);
             $state.go('dashboard.addProduct');
         };
         $scope.deleteProduct = function(id, index) {
@@ -47,6 +48,7 @@
         };
         $scope.addProductPage = function() {
             delete $localStorage.editProductId;
+            delete $localStorage.editProductcatId;
             $state.go('dashboard.addProduct');
         };
 
@@ -148,7 +150,7 @@
         }
 
         $scope.addCategory = function() {
-            $scope.catArr.push({"catname": $scope.categoryName, "lid": lid, "catproducts": [], "index": 1});
+            $scope.displaycatArr.push({"catname": $scope.categoryName, "lid": lid, "catproducts": [], "index": 1});
             var query = addCategoryFactory.save({}, {
                 "catname": $scope.categoryName,
                 "lid": lid,
