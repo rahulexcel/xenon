@@ -123,9 +123,9 @@
             }
         }).
     state('dashboard.reset', {
-            url: '/reset',
-            templateUrl: "app/resetpassword/reset.html",
-            // controller: 'ForgotPasswordCtrl',
+            url: '/reset/e392f411c7bab60848b6dc5fbebf08184ece5780',
+            templateUrl: "app/resetpassword/resetpassword.html",
+            controller: 'ResetPasswordCtrl',
             resolve: {
                 resources: function($ocLazyLoad){
                     return $ocLazyLoad.load([

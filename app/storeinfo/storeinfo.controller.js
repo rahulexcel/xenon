@@ -38,7 +38,7 @@
    });
    query.$promise.then(function(data) {
     On_refresh_data = data;
-    console.log(data);
+    console.log(data.lphone);
     localStorageService.set('storeInfo', data);
     localStorageService.set('storeInfo', data);
     $scope.spinner = false;
@@ -51,7 +51,6 @@
     $scope.lcity = data.lcity;
     $scope.lstate = data.lstate;
     $scope.lcountry = data.lcountry;
-    $scope.lphone = data.lphone;
     $scope.llt = data.llt;
     $scope.lmessage = data.lmessage;
     $scope.highlightDays = data.ldateclosed;
@@ -76,9 +75,7 @@
      }
     }
     $scope.phone_code = response_phone_no.substring(plus, dash);
-    if (angular.isDefined(response_phone_no.substring(dash + 1, response_phone_no.length))) {
      $scope.phone_no = response_phone_no.substring(dash + 1, response_phone_no.length);
-    }
     dayArr_for_schedule_view = $scope.day_in_schedule_view;
     var closed = data.ldateclosed;
     dateArray = dateArray.concat(closed);
@@ -107,8 +104,7 @@
     return true;
    } else {
     return false;
-   }
-
+   }    
   }
   $scope.lsave = function(picImageurl) {
    $scope.spinner = true;
@@ -118,7 +114,6 @@
     upload($scope.picImage, 'https://protected-badlands-3499.herokuapp.com/locfile');
    }
   }
-
   function send_data_after_upload() {
    console.log(uploadResponseFileName);
    var phoneNumber = $scope.phone_code + "-" + $scope.phone_no;
@@ -186,6 +181,9 @@
    }
    dayArr_for_schedule_view.unshift(json);
    $scope.day_in_schedule_view = dayArr_for_schedule_view;
+   $scope.opening_selected_hour='';
+   $scope.closing_selected_hour="";
+   $scope.day='';
   }
   $scope.removeTimes = function(index) {
    var idx = dayArr_for_schedule_view.indexOf(index);
@@ -195,6 +193,7 @@
    } else {
     $scope.show_scheduled_table = true;
    }
+
   }
   var countryCode = [];
   var countryName = [];
@@ -212,7 +211,6 @@
    }
   }
   var uploadResponseFileName;
-
   function upload(file, url) {
    Upload.upload({
     url: url,
