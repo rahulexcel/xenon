@@ -19,7 +19,7 @@
                 $scope.spinner = false;
                 $scope.displayProductList = productlistService.productlist($scope.catArr, data1);
                 $scope.catSpinner = false;
-                if ($scope.catArr[0].level == 0) {
+                if ($scope.catArr[0] && $scope.catArr[0].level == 0) {
                     $scope.catArr.shift();
                 }
                 $scope.displaycatArr = categorylistService.categorylist($scope.catArr, data1);
@@ -148,7 +148,7 @@
         }
 
         $scope.addCategory = function() {
-            $scope.catArr.push({"catname": $scope.categoryName, "lid": lid, "catproducts": [], "index": 1});
+            $scope.displaycatArr.push({"catname": $scope.categoryName, "lid": lid, "catproducts": [], "index": 1});
             var query = addCategoryFactory.save({}, {
                 "catname": $scope.categoryName,
                 "lid": lid,
