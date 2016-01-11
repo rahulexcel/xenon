@@ -8,15 +8,6 @@
         var userData = localStorageService.get('userData');
         var lid = userData.locations[0];
         var service = {};
-        service.getCategoryList = function() {
-            var query = categoryListFactory.query({
-                "locationId": lid,
-            }, {});
-            query.$promise.then(function(categoryList) {
-                def.resolve(categoryList);
-            });
-            return def.promise;
-        };
         service.updateCategoryList = function(selectedCategoryArray, productId) {
             //console.log(selectedCategoryArray);
             var myObject = JSON.parse(selectedCategoryArray);

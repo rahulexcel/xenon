@@ -3,20 +3,26 @@
 
     angular.module('xenon-app')
             .controller('addProductController', addProductController);
-    function addProductController($scope, addProductService, addProductFactory, Upload, localStorageService, $rootScope, productListFactory, productFactory, $state, imageUploadFactory) {
+    function addProductController($scope, categoryListFactory, addProductService, addProductFactory, Upload, localStorageService, $rootScope, productListFactory, productFactory, $state, imageUploadFactory) {
         console.log("Add Product Page");
-        addProductService.getCategoryList().then(function(categorylist) {
-            console.log(categorylist);
-            if (categorylist[0].level == 0) {
-                categorylist.shift();
-            }
-            $scope.categorylist = categorylist;
-        });
-
+        var userData = localStorageService.get('userData');
+        var lid = userData.locations[0];
         var after_load_image_response;
         var flag_for_cheking_add_or_edit = 0;
+        $scope.formSpinner = true;
         var editProductId = localStorageService.get('editProductId');
-        if (editProductId) {
+        var query = categoryListFactory.query({
+                "locationId": lid,
+            }, {});
+            query.$promise.then(function(categoryList) {
+            console.log(categoryList);
+            if (categoryList[0].level == 0) {
+                categoryList.shift();
+            }
+            $scope.categorylist = categoryList;
+            $scope.formSpinner = false;
+            if (editProductId) {
+            var editProductcatId = localStorageService.get('editProductcatId');
             flag_for_cheking_add_or_edit = 1;
             $scope.formSpinner = true;
             $scope.editForm = false;
@@ -32,6 +38,8 @@
                 $scope.productName = data.pname;
                 $scope.productDescription = data.pdesc;
                 $scope.productPrice = data.price;
+                $scope.showInStore = data.pinvdaily;
+                $scope.selectedCategoryId =  editProductcatId;
                 if (data.pinv == -1) {
                     $scope.productQuantity = 'Infinite';
                 } else {
@@ -45,6 +53,10 @@
             $scope.saveProduct = true;
             $scope.editForm = true;
         }
+        });
+
+        
+        
         $scope.infinite = function() {
             $scope.productQuantity = 'Infinite';
         };
@@ -58,8 +70,6 @@
             }
         };
         function edit_product_after_uploader_response() {
-            var userData = localStorageService.get('userData');
-            var lid = userData.locations[0];
             if ($scope.productQuantity == 'Infinite' || $scope.productQuantity == undefined) {
                 $scope.apiproductQuantity = -1;
             } else {
@@ -71,7 +81,7 @@
                 "pdesc": $scope.productDescription,
                 "price": $scope.productPrice,
                 "pinv": $scope.apiproductQuantity,
-                "pinvdaily": false,
+                "pinvdaily": $scope.showInStore,
                 "pcal": false,
                 "pimages": uploadResponseFileName,
                 "pfeatures": false,
@@ -107,7 +117,7 @@
                 "pdesc": $scope.productDescription,
                 "price": $scope.productPrice,
                 "pinv": $scope.apiproductQuantity,
-                "pinvdaily": false,
+                "pinvdaily": $scope.showInStore,
                 "pcal": false,
                 "pimages": uploadResponseFileName,
                 "pfeatures": false,

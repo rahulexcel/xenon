@@ -12,7 +12,7 @@
                 <h4 class="panel-title">Store info:</h4>
             </div>
             <div class="panel-body">
-                <form role="form" class="form-horizontal">
+                <form role="form" class="form-horizontal" name='store'>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Store Description</label>
                         <div class="col-sm-10">
@@ -135,7 +135,7 @@
                                                         <strong>Select Day:</strong>
                                                     </label>
                                                     
-                                                        <select class="form-control" ng-model="day">
+                                                        <select class="form-control" ng-model="day" name="day" required>
                                                             <option  
                                                                   ng-repeat="row in dropdown_days" value="{{row}}" ng-if="showOptions(row)">{{row}}</option>
                                                         </select>
@@ -145,7 +145,7 @@
                                                     <label class="control-label" for="full_name">
                                                         <strong>Opening time:</strong>
                                                     </label>
-                                                    <select class="form-control" ng-model="opening_selected_hour">
+                                                    <select class="form-control" ng-model="opening_selected_hour" name="open" required>
                                                         <option  
                                                                   ng-repeat="row in openingtime_hour
                                                                    track by $index"  value="{{row}}">{{row}}</option>
@@ -155,15 +155,16 @@
                                                     <label class="control-label" for="full_name" >
                                                         <strong>Closing time:</strong>
                                                     </label>
-                                                    <select class="form-control" ng-model="closing_selected_hour">
+                                                    <select class="form-control" ng-model="closing_selected_hour" name="close" required>
                                                         <option  
                                                                   ng-repeat="row in closingtime_hour
                                                                    track by $index">{{row}}</option>
                                                     </select>
+
                                                 </div>
                                                 <div class="col-sm-3" >
                                                     <div style="margin-top:23px">
-                                                        <button class="btn btn-blue" ng-click="tsave();">Add 
+                                                        <button class="btn btn-blue" ng-click="tsave()" ng-disabled="store.day.$invalid||store.open.$invalid||store.close.$invalid">Add 
                                                                 </button>
                                                     </div>
                                                 </div>

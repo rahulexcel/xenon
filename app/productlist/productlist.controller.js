@@ -35,9 +35,10 @@
                 productListApi();
             });
         }
-        $scope.editProduct = function(id) {
-            $rootScope.editProductId = id;
-            localStorageService.set('editProductId', id);
+        $scope.editProduct = function(productId, productcatId) {
+            console.log(productcatId);
+            localStorageService.set('editProductId', productId);
+            localStorageService.set('editProductcatId', productcatId);
             $state.go('dashboard.addProduct');
         };
         $scope.deleteProduct = function(id, index) {
@@ -47,6 +48,7 @@
         };
         $scope.addProductPage = function() {
             delete $localStorage.editProductId;
+            delete $localStorage.editProductcatId;
             $state.go('dashboard.addProduct');
         };
 
