@@ -28,18 +28,6 @@
                 },
             }
         }).
-    state('dashboard.category', {
-            url: '/category',
-            templateUrl: "app/productcategory/productcategory.html",
-            controller: 'categoryController',
-            resolve: {
-                resources: function($ocLazyLoad){
-                    return $ocLazyLoad.load([
-                        ASSETS.forms.jQueryValidate,
-                    ]);
-                },
-            }
-        }).
     state('dashboard.singup', {
             url: '/signup',
             templateUrl: "app/signup/signup.html",
@@ -137,7 +125,19 @@
     state('dashboard.reset', {
             url: '/reset',
             templateUrl: "app/resetpassword/reset.html",
-            controller: 'ResetCtrl',
+            // controller: 'ForgotPasswordCtrl',
+            resolve: {
+                resources: function($ocLazyLoad){
+                    return $ocLazyLoad.load([
+                        ASSETS.forms.jQueryValidate,
+                    ]);
+                },
+            }
+        }).
+     state('dashboard.forgot', {
+            url: '/forgot',
+            templateUrl: "app/forgotpassword/forgotpassword.html",
+            controller: 'ForgotPasswordCtrl',
             resolve: {
                 resources: function($ocLazyLoad){
                     return $ocLazyLoad.load([

@@ -2,9 +2,9 @@
     'use strict';
     angular
         .module('xenon.controllers')
-        .controller('ResetCtrl', ResetCtrl);
+        .controller('ForgotPasswordCtrl', ForgotPasswordCtrl);
 
-    function ResetCtrl($scope, forgotFactory, $rootScope) {
+    function ForgotPasswordCtrl($scope, forgotFactory, $rootScope) {
         $scope.reset = function() {
             $scope.spinner = "true";
             var query = forgotFactory.save({

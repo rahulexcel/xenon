@@ -18,5 +18,8 @@
         $scope.goSignUp = function() {
             $state.go('dashboard.singup');
         };
+         $scope.goReset = function() {
+            $state.go('dashboard.reset');
+        };
     }
 })();
