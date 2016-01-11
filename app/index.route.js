@@ -137,7 +137,7 @@
     state('dashboard.reset', {
             url: '/reset',
             templateUrl: "app/resetpassword/reset.html",
-            controller: 'LoginLightCtrl',
+            controller: 'ResetCtrl',
             resolve: {
                 resources: function($ocLazyLoad){
                     return $ocLazyLoad.load([
