@@ -9,8 +9,10 @@
         var lid = userData.locations[0];
         var after_load_image_response;
         var flag_for_cheking_add_or_edit = 0;
+       
         $scope.formSpinner = true;
         var editProductId = localStorageService.get('editProductId');
+        var uploadResponseFileName;
         var query = categoryListFactory.query({
                 "locationId": lid,
             }, {});
@@ -30,11 +32,12 @@
             $scope.saveProduct = false;
             var query = productListFactory.singleProduct({"productId": editProductId});
             query.$promise.then(function(data) {
-                console.log(data);
+                
+               
                 if (angular.isDefined(data.pimages[0])) {
                     $scope.picImage = 'http://s3.amazonaws.com/ordermagic/' + data.pimages[0];
                 }
-                after_load_image_response = $scope.picImage;
+                after_load_image_response =$scope.picImage;
                 $scope.productName = data.pname;
                 $scope.productDescription = data.pdesc;
                 $scope.productPrice = data.price;
@@ -67,13 +70,15 @@
   } else {
    uploadService.send($scope.picImage, 'prodfile')
                    .then(function(response) {
-                     after_load_image_response=response.filename;
+                     uploadResponseFileName=response.filename;
                       edit_product_after_uploader_response();
          console.log(response)
        });
   }
         };
-        function edit_product_after_uploader_response() {
+
+
+         function edit_product_after_uploader_response() {
             if ($scope.productQuantity == 'Infinite' || $scope.productQuantity == undefined) {
                 $scope.apiproductQuantity = -1;
             } else {
@@ -87,7 +92,7 @@
                 "pinv": $scope.apiproductQuantity,
                 "pinvdaily": $scope.showInStore,
                 "pcal": false,
-                "pimages": after_load_image_response,
+                "pimages": uploadResponseFileName,
                 "pfeatures": false,
                 "lid": lid,
                 "pcatid": $scope.selectedCategoryId
@@ -105,7 +110,8 @@
   } else {
    uploadService.send($scope.picImage, 'prodfile')
                    .then(function(response) {
-                     after_load_image_response=response.filename;
+                    console.log(response);
+                     uploadResponseFileName=response.filename;
                       send_data_after_uploader_response();
          console.log(response)
        });
@@ -127,7 +133,7 @@
                 "pinv": $scope.apiproductQuantity,
                 "pinvdaily": $scope.showInStore,
                 "pcal": false,
-                "pimages": after_load_image_response,
+                "pimages": uploadResponseFileName,
                 "pfeatures": false,
                 "lid": lid,
                 "pcatid": $scope.selectedCategoryId
