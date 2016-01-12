@@ -2,7 +2,7 @@
     'use strict';
     angular.module('xenon-app')
         .factory('dropdownService', dropdownService);
-    function dropdownService(country, countryData) {
+    function dropdownService(countryData) {
         var service = {};
         service.Daydropdown = function() {
             var Daydropdown=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
