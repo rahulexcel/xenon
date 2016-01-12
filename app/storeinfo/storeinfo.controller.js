@@ -112,7 +112,7 @@
    if ($scope.picImage == response_pic_name) {
     send_data_after_upload();
    } else {
-    uploadService.send($scope.picImage,'locfile')
+    uploadService.send($scope.picImage, 'locfile')
                     .then(function(response) {
                       uploadResponseFileName=response.filename;
                       send_data_after_upload();
