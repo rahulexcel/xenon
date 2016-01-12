@@ -173,6 +173,14 @@
                 productListApi();
             });
         };
+
+        $scope.productImage = function(productImageArray){
+            if(productImageArray.length > 0){
+                return 'http://s3.amazonaws.com/ordermagic/'+productImageArray[0];
+            } else {
+                return '';
+            }
+        };
         function updateCategory(categoryId, productIds) {
             $scope.saveCategoryTreeStructure = true;
             // console.log(categoryId);

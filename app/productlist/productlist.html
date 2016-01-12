@@ -55,7 +55,7 @@
                                                         <div class="row">
                                                             <div class="col-xs-4"><p class="pad-top-5">
                                                             <span ng-show="{{product.pimages.length >0}}">
-                                                            <img width="50" height="50" src="http://s3.amazonaws.com/ordermagic/{{product.pimages[0]}}"></span> {{product.pname}}</p></div>
+                                                            <img width="50" height="50" ng-src="{{productImage(product.pimages)}}"></span> {{product.pname}}</p></div>
                                                             <!-- Html Code for showing product details in category -->
                                                             <div class="col-xs-4"><!-- Qty - {{ (product.pinv == -1) ? "Infinite" : product.pinv}} -->
                                                             <p class="pad-top-5">
@@ -93,7 +93,7 @@
                                             <div class="uk-nestable-item">
                                                 <div class="row">
                                                     <div class="col-xs-4">
-                                                    <span ng-show="{{product.pimages.length > 0}}"><img width="50" height="50" src="http://s3.amazonaws.com/ordermagic/{{product.pimages[0]}}"></span> {{product.pname}}</div>
+                                                    <span ng-show="{{product.pimages.length > 0}}"><img width="50" height="50" ng-src="{{productImage(product.pimages)}}"></span> {{product.pname}}</div>
                                                     <div class="col-xs-4">{{ (product.pinv == -1) ? "Infinite" : product.pinv}}</div>
                                                     <div class="col-xs-4">{{product.price}} 
                                                         <a class="pull-right btn btn-danger btn-xs" data-nodrag="" ng-click="remove(this);
