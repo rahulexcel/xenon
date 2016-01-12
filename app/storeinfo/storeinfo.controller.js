@@ -4,20 +4,17 @@
   .module('xenon.controllers')
   .controller('storeinfoCtrl', storeinfoCtrl);
 
- function storeinfoCtrl($scope, $log, FileUploader, dropdownService, $state, storeinfoFactory, $timeout, calanderService, localStorageService, Upload, storeinfoLocationsFactory, storeinfoLocationsIdFactory, country, storeinfoLocFile) {
+ function storeinfoCtrl($scope, $log, FileUploader,uploadService, dropdownService, $state, storeinfoFactory, $timeout, calanderService, localStorageService, Upload, storeinfoLocationsFactory, storeinfoLocationsIdFactory, country, storeinfoLocFile) {
   var dateArray = [];
   var responseDateArr = [];
   var i;
-  var DateFlag = 0;
   var LocationIdFlag = 0;
   var userData = localStorageService.get("userData");
   var locationId = userData.locations[0];
-  var openingTime;
-  var closingTime;
   var dayArr_for_schedule_view = [];
   var response_phone_no;
   var response_pic_name;
-  var On_refresh_data;
+  var uploadResponseFileName;
   $scope.dropdown_days = dropdownService.Daydropdown();
   $scope.openingtime_hour = dropdownService.Timedropdown();
   $scope.closingtime_hour = dropdownService.Timedropdown();
@@ -38,7 +35,6 @@
     'locationid': userData.locations[0]
    });
    query.$promise.then(function(data) {
-    On_refresh_data = data;
     console.log(data.lphone);
     localStorageService.set('storeInfo', data);
     localStorageService.set('storeInfo', data);
@@ -112,12 +108,17 @@
     return false;
    }    
   }
-  $scope.lsave = function(picImageurl) {
+  $scope.lsave = function(picImageurl) { 
    $scope.spinner = true;
    if ($scope.picImage == response_pic_name) {
     send_data_after_upload();
    } else {
-    upload($scope.picImage, 'https://protected-badlands-3499.herokuapp.com/locfile');
+    uploadService.send($scope.picImage)
+                    .then(function(response) {
+                      uploadResponseFileName=response.filename;
+                      send_data_after_upload();
+          console.log(response)
+        });
    }
   }
   function send_data_after_upload() {
@@ -209,21 +210,5 @@
     }
    }
   }
-  var uploadResponseFileName;
-  function upload(file, url) {
-   Upload.upload({
-    url: url,
-    data: {
-     fileName: file
-    }
-   }).then(function(resp) {
-    uploadResponseFileName = resp.data.filename;
-    console.log(uploadResponseFileName);
-    send_data_after_upload();
-   }, function(resp) {
-   }, function(evt) {
-    var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-   });
-  };
  }
 })();

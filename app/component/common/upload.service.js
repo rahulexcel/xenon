@@ -5,12 +5,12 @@
         .factory('uploadService',
             uploadService
         );
-    function uploadService($q, $http) {
+    function uploadService($q, $http, Upload) {
         return {
             send: function(file) {
                 console.log(file);
                 var def = $q.defer();
-                $http({
+                 Upload.upload({
                     url:'https://protected-badlands-3499.herokuapp.com/locfile',
                     data: {
                       fileName:file
