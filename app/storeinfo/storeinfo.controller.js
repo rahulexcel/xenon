@@ -21,6 +21,7 @@
   $scope.dropdown_days = dropdownService.Daydropdown();
   $scope.openingtime_hour = dropdownService.Timedropdown();
   $scope.closingtime_hour = dropdownService.Timedropdown();
+  $scope.dropdown_country= dropdownService.countryDropdown();
   if (angular.isDefined(locationId)) {
    On_refresh();
   } else {
@@ -62,6 +63,7 @@
      $scope.show_scheduled_table = true;
     }
     response_phone_no = data.lphone;
+    console.log(data.lphone);
     if (angular.isDefined(data.llogo)) {
      $scope.picImage = 'http://s3.amazonaws.com/ordermagic/' + data.llogo;
     }
@@ -75,7 +77,11 @@
      }
     }
     $scope.phone_code = response_phone_no.substring(plus, dash);
+    if(response_phone_no.substring(dash + 1, response_phone_no.length)=='undefined'){
+      $scope.phone_no="";
+    }else{
      $scope.phone_no = response_phone_no.substring(dash + 1, response_phone_no.length);
+   }
     dayArr_for_schedule_view = $scope.day_in_schedule_view;
     var closed = data.ldateclosed;
     dateArray = dateArray.concat(closed);
@@ -195,18 +201,11 @@
    }
 
   }
-  var countryCode = [];
-  var countryName = [];
-  for (var i = 0; i < country.length; i++) {
-   countryCode.push(country[i].code);
-   countryName.push(country[i].name);
-  }
-  $scope.dropdown_country = countryName;
-  $scope.dropdown_code = countryCode;
   $scope.country_selected = function() {
    for (var i = 0; i < country.length; i++) {
     if ($scope.lcountry == country[i].name) {
      $scope.phone_code = country[i].code;
+     console.log(country[i].code);
     }
    }
   }
@@ -221,14 +220,10 @@
     uploadResponseFileName = resp.data.filename;
     console.log(uploadResponseFileName);
     send_data_after_upload();
-
    }, function(resp) {
-
    }, function(evt) {
     var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
    });
-
   };
-
  }
 })();

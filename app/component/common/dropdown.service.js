@@ -2,7 +2,7 @@
     'use strict';
     angular.module('xenon-app')
         .factory('dropdownService', dropdownService);
-    function dropdownService() {
+    function dropdownService(country) {
         var service = {};
         service.Daydropdown = function() {
             var Daydropdown=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
@@ -18,6 +18,17 @@
                }
                return hour;
         }
+         service.countryDropdown = function(){
+             // var countryCode = [];
+              var countryName = [];
+              for (var i = 0; i < country.length; i++) {
+              // countryCode.push(country[i].code);
+               countryName.push(country[i].name);
+                   }
+  
+            return countryName;
+        }
+
         return service;
     }
 })();

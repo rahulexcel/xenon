@@ -7,7 +7,7 @@
         $scope.reset = function() {
             $scope.spinner = "true";
             var query = resetFactory.save({
-                token: 'e392f411c7bab60848b6dc5fbebf08184ece5780',
+                token:'87e56afaaa585553bdfaee1563c50a66b423d0f5',
                 password:$scope.password
             });
             query.$promise.then(function(data) {
