@@ -15,11 +15,14 @@
                 <li ng-click="goSignUp()">
                     <a href="">SIGN UP</a>
                 </li>
-                  <li ng-click="goReset()">
-                    <a href="">RESET</a>
-                </li>
             </ul>
             <ul class="nav navbar-nav navbar-right" ng-show="userNavMenu">
+                <li>
+                    <a href="#/dashboard/productOrders">ORDERS</a>
+                </li>
+                <li>
+                    <a href="#/dashboard/productList">PRODUCTS</a>
+                </li>
                 <li>
                     <a href="" data-toggle="dropdown" class="dropdown-toggle" style="font-size:13px">ACCOUNT
                         <b class="caret"></b>
@@ -36,14 +39,8 @@
                         </li>
                     </ul>
                 </li>
-                <li>
-                    <a href="#/dashboard/productOrders">PRODUCT ORDERS</a>
-                </li>
-                <li>
-                    <a href="#/dashboard/productList">PRODUCTS</a>
-                </li>
                 <li ng-click="logout()">
-                    <a>LOGOUT</a>
+                    <a style="cursor:pointer;">LOGOUT</a>
                 </li>
             </ul>
         </div>

@@ -100,8 +100,8 @@ tr.angular-ui-tree-empty {
 }
 
 .btn-circle {
-  width: 25px;
-  height: 25px;
+  width: 10px;
+  height: 10px;
   text-align: center;
   padding: 4px 0;
   font-size: 12px;
@@ -125,5 +125,8 @@ tr.angular-ui-tree-empty {
   border-radius: 35px;
 }
 .pad-top-5{
+  margin-top: 5px!important;
+}
+.mar-top-5{
   margin-top: 5px!important;
 }

@@ -3,7 +3,8 @@
  angular
   .module('xenon.controllers')
   .controller('storeinfoCtrl', storeinfoCtrl);
- function storeinfoCtrl($scope, $log, FileUploader,uploadService, dropdownService, $state, storeinfoFactory, $timeout, calanderService, localStorageService, Upload, storeinfoLocationsFactory, storeinfoLocationsIdFactory, countryData, storeinfoLocFile) {
+
+ function storeinfoCtrl($scope, $log, countryData, FileUploader,uploadService, dropdownService, $state, storeinfoFactory, $timeout, calanderService, localStorageService, Upload, storeinfoLocationsFactory, storeinfoLocationsIdFactory, country, storeinfoLocFile) {
   var dateArray = [];
   var responseDateArr = [];
   var i;
@@ -202,10 +203,10 @@
 
   }
   $scope.country_selected = function() {
-   for (var i = 0; i < country.length; i++) {
-    if ($scope.lcountry == country[i].name) {
-     $scope.phone_code = country[i].code;
-     console.log(country[i].code);
+   for (var i = 0; i < countryData.length; i++) {
+    if ($scope.lcountry == countryData[i].name.common) {
+     $scope.phone_code = countryData[i].callingCode;
+     console.log(countryData[i].callingCode);
     }
    }
   }
