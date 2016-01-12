@@ -7,11 +7,11 @@
         );
     function uploadService($q, $http, Upload) {
         return {
-            send: function(file) {
+            send: function(file, api) {
                 console.log(file);
                 var def = $q.defer();
                  Upload.upload({
-                    url:'https://protected-badlands-3499.herokuapp.com/locfile',
+                    url:'https://protected-badlands-3499.herokuapp.com/'+api,
                     data: {
                       fileName:file
                      },
