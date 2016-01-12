@@ -8,10 +8,10 @@
     function uploadService($q, $http, Upload) {
         return {
             send: function(file) {
-                console.log(file);
+                console.log(file, api);
                 var def = $q.defer();
                  Upload.upload({
-                    url:'https://protected-badlands-3499.herokuapp.com/locfile',
+                    url:'https://protected-badlands-3499.herokuapp.com/'+api,
                     data: {
                       fileName:file
                      },

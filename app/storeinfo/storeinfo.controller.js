@@ -3,8 +3,7 @@
  angular
   .module('xenon.controllers')
   .controller('storeinfoCtrl', storeinfoCtrl);
-
- function storeinfoCtrl($scope, $log, FileUploader,uploadService, dropdownService, $state, storeinfoFactory, $timeout, calanderService, localStorageService, Upload, storeinfoLocationsFactory, storeinfoLocationsIdFactory, country, storeinfoLocFile) {
+ function storeinfoCtrl($scope, $log, FileUploader,uploadService, dropdownService, $state, storeinfoFactory, $timeout, calanderService, localStorageService, Upload, storeinfoLocationsFactory, storeinfoLocationsIdFactory, countryData, storeinfoLocFile) {
   var dateArray = [];
   var responseDateArr = [];
   var i;
@@ -113,7 +112,7 @@
    if ($scope.picImage == response_pic_name) {
     send_data_after_upload();
    } else {
-    uploadService.send($scope.picImage)
+    uploadService.send($scope.picImage,'locfile')
                     .then(function(response) {
                       uploadResponseFileName=response.filename;
                       send_data_after_upload();
