@@ -4,23 +4,21 @@
   .module('xenon.controllers')
   .controller('storeinfoCtrl', storeinfoCtrl);
 
- function storeinfoCtrl($scope, $log, FileUploader, dropdownService, $state, storeinfoFactory, $timeout, calanderService, localStorageService, Upload, storeinfoLocationsFactory, storeinfoLocationsIdFactory, country, storeinfoLocFile) {
+ function storeinfoCtrl($scope, $log, FileUploader,uploadService, dropdownService, $state, storeinfoFactory, $timeout, calanderService, localStorageService, Upload, storeinfoLocationsFactory, storeinfoLocationsIdFactory, country, storeinfoLocFile) {
   var dateArray = [];
   var responseDateArr = [];
   var i;
-  var DateFlag = 0;
   var LocationIdFlag = 0;
   var userData = localStorageService.get("userData");
   var locationId = userData.locations[0];
-  var openingTime;
-  var closingTime;
   var dayArr_for_schedule_view = [];
   var response_phone_no;
   var response_pic_name;
-  var On_refresh_data;
+  var uploadResponseFileName;
   $scope.dropdown_days = dropdownService.Daydropdown();
   $scope.openingtime_hour = dropdownService.Timedropdown();
   $scope.closingtime_hour = dropdownService.Timedropdown();
+  $scope.dropdown_country= dropdownService.countryDropdown();
   if (angular.isDefined(locationId)) {
    On_refresh();
   } else {
@@ -37,7 +35,6 @@
     'locationid': userData.locations[0]
    });
    query.$promise.then(function(data) {
-    On_refresh_data = data;
     console.log(data.lphone);
     localStorageService.set('storeInfo', data);
     localStorageService.set('storeInfo', data);
@@ -62,6 +59,7 @@
      $scope.show_scheduled_table = true;
     }
     response_phone_no = data.lphone;
+    console.log(data.lphone);
     if (angular.isDefined(data.llogo)) {
      $scope.picImage = 'http://s3.amazonaws.com/ordermagic/' + data.llogo;
     }
@@ -75,7 +73,11 @@
      }
     }
     $scope.phone_code = response_phone_no.substring(plus, dash);
+    if(response_phone_no.substring(dash + 1, response_phone_no.length)=='undefined'){
+      $scope.phone_no="";
+    }else{
      $scope.phone_no = response_phone_no.substring(dash + 1, response_phone_no.length);
+   }
     dayArr_for_schedule_view = $scope.day_in_schedule_view;
     var closed = data.ldateclosed;
     dateArray = dateArray.concat(closed);
@@ -106,12 +108,17 @@
     return false;
    }    
   }
-  $scope.lsave = function(picImageurl) {
+  $scope.lsave = function(picImageurl) { 
    $scope.spinner = true;
    if ($scope.picImage == response_pic_name) {
     send_data_after_upload();
    } else {
-    upload($scope.picImage, 'https://protected-badlands-3499.herokuapp.com/locfile');
+    uploadService.send($scope.picImage)
+                    .then(function(response) {
+                      uploadResponseFileName=response.filename;
+                      send_data_after_upload();
+          console.log(response)
+        });
    }
   }
   function send_data_after_upload() {
@@ -195,40 +202,13 @@
    }
 
   }
-  var countryCode = [];
-  var countryName = [];
-  for (var i = 0; i < country.length; i++) {
-   countryCode.push(country[i].code);
-   countryName.push(country[i].name);
-  }
-  $scope.dropdown_country = countryName;
-  $scope.dropdown_code = countryCode;
   $scope.country_selected = function() {
    for (var i = 0; i < country.length; i++) {
     if ($scope.lcountry == country[i].name) {
      $scope.phone_code = country[i].code;
+     console.log(country[i].code);
     }
    }
   }
-  var uploadResponseFileName;
-  function upload(file, url) {
-   Upload.upload({
-    url: url,
-    data: {
-     fileName: file
-    }
-   }).then(function(resp) {
-    uploadResponseFileName = resp.data.filename;
-    console.log(uploadResponseFileName);
-    send_data_after_upload();
-
-   }, function(resp) {
-
-   }, function(evt) {
-    var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-   });
-
-  };
-
  }
 })();

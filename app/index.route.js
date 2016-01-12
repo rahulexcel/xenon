@@ -123,7 +123,7 @@
             }
         }).
     state('dashboard.reset', {
-            url: '/reset/e392f411c7bab60848b6dc5fbebf08184ece5780',
+            url: '/reset/3f962ba188383621c8c44fec0bfe5dd8638d342f',
             templateUrl: "app/resetpassword/resetpassword.html",
             controller: 'ResetPasswordCtrl',
             resolve: {
