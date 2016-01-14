@@ -3,7 +3,9 @@
  angular
   .module('xenon.controllers')
   .controller('storeinfoCtrl', storeinfoCtrl);
- function storeinfoCtrl($scope, $log, countryData, FileUploader,uploadService, dropdownService, $state, storeinfoFactory, $timeout, calanderService, localStorageService, Upload, storeinfoLocationsFactory, storeinfoLocationsIdFactory, storeinfoLocFile) {
+ function storeinfoCtrl($scope, $log, userValidate, countryData, FileUploader,uploadService, dropdownService, $state, storeinfoFactory, $timeout, calanderService, localStorageService, Upload, storeinfoLocationsFactory, storeinfoLocationsIdFactory, storeinfoLocFile) {
+  console.log('Store info');
+  userValidate.validUserController();
   var dateArray = [];
   var responseDateArr = [];
   var i;

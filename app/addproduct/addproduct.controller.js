@@ -3,8 +3,9 @@
 
     angular.module('xenon-app')
             .controller('addProductController', addProductController);
-    function addProductController($scope, uploadService, categoryListFactory, addProductService, addProductFactory, Upload, localStorageService, $rootScope, productListFactory, productFactory, $state, imageUploadFactory) {
+    function addProductController($scope, uploadService, userValidate, categoryListFactory, addProductService, addProductFactory, Upload, localStorageService, $rootScope, productListFactory, productFactory, $state, imageUploadFactory) {
         console.log("Add Product Page");
+        userValidate.validUserController();
         var userData = localStorageService.get('userData');
         var lid = userData.locations[0];
         var after_load_image_response;

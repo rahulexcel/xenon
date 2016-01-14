@@ -3,8 +3,9 @@
 
     angular.module('xenon-app')
             .controller('productOrdersController', productOrdersController);
-    function productOrdersController($scope, addOrderFactory, localStorageService, orderListFactory, $rootScope, $state, orderDetailsFactory) {
+    function productOrdersController($scope, userValidate, addOrderFactory, localStorageService, orderListFactory, $rootScope, $state, orderDetailsFactory) {
         console.log("Product Orders Page");
+        userValidate.validUserController();
         var userData = localStorageService.get('userData');
         var eid = userData.eid;
         var lid = userData.locations[0];

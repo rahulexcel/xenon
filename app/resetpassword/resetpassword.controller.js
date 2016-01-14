@@ -4,6 +4,7 @@
         .module('xenon.controllers')
         .controller('ResetPasswordCtrl', ResetPasswordCtrl);
     function ResetPasswordCtrl($scope, resetFactory, $rootScope) {
+        console.log('Reset Controller');
         $scope.reset = function() {
             $scope.spinner = "true";
             var query = resetFactory.save({

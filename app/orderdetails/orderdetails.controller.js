@@ -3,8 +3,9 @@
 
     angular.module('xenon-app')
             .controller('orderDetailsController', orderDetailsController);
-    function orderDetailsController($scope, $rootScope, orderDetailsFactory, $state, orderDetailsService, localStorageService) {
+    function orderDetailsController($scope, $rootScope, userValidate, orderDetailsFactory, $state, orderDetailsService, localStorageService) {
         console.log("Order Details Page");
+        userValidate.validUserController();
         console.log("Single Order id " + $rootScope.singleOrderId);
         if ($rootScope.singleOrderId) {
             var query = orderDetailsFactory.get({"orderId": $rootScope.singleOrderId});

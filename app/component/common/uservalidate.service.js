@@ -12,12 +12,27 @@
                    $rootScope.navMenu = false;
                } else {
                    console.log('nhi');
-                   $location.path('/login');
+                  // $location.path('/login');
+                   //$state.go('dashboard.login');
+                   $rootScope.userNavMenu = false;
+                   $rootScope.navMenu = true;
+               }                
+           },
+           validUserController: function() {
+               var userData = localStorageService.get('userData');
+               if (userData) {
+                   console.log('Controller hai');
+                   $rootScope.userNavMenu = true;
+                   $rootScope.navMenu = false;
+               } else {
+                   console.log('Controller  nhi');
+                  $location.path('/login');
                    //$state.go('dashboard.login');
                    $rootScope.userNavMenu = false;
                    $rootScope.navMenu = true;
                }                
            }
+
        }
    }
 

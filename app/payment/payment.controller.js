@@ -3,8 +3,9 @@
 
     angular.module('xenon-app')
             .controller('paymentController', paymentController);
-    function paymentController($scope, paymentFactory, localStorageService) {
+    function paymentController($scope, userValidate, paymentFactory, localStorageService) {
         console.log("Payment Page");
+        userValidate.validUserController();
         var query = paymentFactory.get();
         query.$promise.then(function(data) {
             console.log(data);
