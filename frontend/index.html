@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="xenon-frontend">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Xenon</title>
+        <link rel="stylesheet" href="assets/css/fonts/fontawesome/css/font-awesome.min.css">
+        <link rel="stylesheet" href="assets/css/bootstrap.css">
+        <link rel="stylesheet" href="assets/custom.css">
+    </head>
+    <body>
+<!--lib files-->
+    <script src="lib/angular/angular.js"></script>
+    <script src="lib/angular-ui/angular-ui-router.min.js"></script>
+     <script src="lib/angular/angular-resource.min.js"></script>
+    <!--custom js files-->
+       <script src='app/index.module.js'></script>
+       <script src='app/index.route.js'></script>
+       <script src='app/index.constant.js'></script> 
+
+       <script src='app/front/frontend.controller.js'></script>
+       <script src='app/front/locations.factory.js'></script> 
+       <script src='app/front/category.factory.js'></script> 
+        <script src='app/front/products.factory.js'></script> 
+         <script src='app/component/services/array.service.js'></script> 
+        
+
+<div ui-view ></div>
+</body>
+</html>
