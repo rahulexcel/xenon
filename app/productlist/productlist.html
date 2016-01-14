@@ -1,0 +1,169 @@
+<div class="row">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <h1 class="panel-title" style="padding-top:14px;"><strong>Categories <span ng-show="saveCategoryTreeStructure"><i class="fa fa-spin fa-spinner"></i></span></strong></h1>
+                    </div>
+                    <div class="col-sm-2 col-sm-offset-2">
+                        <a class="btn btn-info pull-right" ng-click="addProductPage()">Add Product</a>
+                    </div>
+                    <div class="col-sm-2">
+                        <a href="" class="btn btn-info pull-right" data-toggle="modal" data-target="#myModal">Add Category</a>
+                    </div>
+                </div>
+
+            </div>
+            <div class="panel-body" style="padding-top:0px;">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h1 class="text-center"><span ng-show="catSpinner"><i class="fa fa-spin fa-spinner"></i></span></h1>
+                        <alert type="danger" ng-show="alertDanger" id="alertDanger">
+                            You can not drop here
+                        </alert>
+                        <alert type="success" ng-show="alertDanger" id="alertDanger">
+                            Edit the product to assign it to a category
+                        </alert>
+                        <div ui-tree>
+                            <div ui-tree="treeOptions" data-nodrop-enabled="{{noDrop}}" data-empty-placeholder-enabled="false">
+                                <ol ui-tree-nodes ng-model="displaycatArr" id="tree-root">
+                                    <ul id="nestable-list-1" class="uk-nestable">
+                                        <li data-item="Item 1" data-item-id="a" ui-tree-node ng-repeat="Arr in displaycatArr" ui-tree-node>
+                                            <div class="uk-nestable-item">
+                                                <div class=""><strong>{{Arr.catname}}</strong> <a class="pull-right btn btn-danger btn-xs" data-nodrag="" ng-click="remove(this);
+                                                        deleteCategory(Arr._id)">
+                                                        <i class="fa fa-times"></i>
+                                                    </a>
+                                                    <!-- Html code For editing Category -->
+                                                    <!-- <a class="pull-right btn btn-secondary btn-xs" data-nodrag="" ng-click="updateCategory(Arr._id)">
+                                                        <i class="fa fa-pencil"></i>
+                                                    </a> -->
+                                                    <button ng-click="toggle(this)" style="float:right;" data-nodrag="" ng-if="Arr.products && Arr.products.length > 0" class="btn btn-info btn-xs"><span
+                                                            class="glyphicon"
+                                                            ng-class="{
+                                                      'glyphicon-chevron-right': collapsed,
+                                                      'glyphicon-chevron-down': !collapsed
+                                                    }"></span></button>  
+                                                </div>
+                                            </div>
+
+                                            <ul ui-tree-nodes="" ng-model="Arr.products" ng-class="{hidden: collapsed}">
+                                                <li ng-repeat="product in Arr.products" ui-tree-node style="margin-bottom:10px;">
+                                                    <div ui-tree-handle>
+                                                        <div class="row">
+                                                            <div class="col-xs-4"><p class="pad-top-5">
+                                                            <!-- Html code for image show -->
+                                                            <!-- <span ng-show="{{product.pimages.length >0}}">
+                                                            <img width="50" height="50" ng-src="{{productImage(product.pimages)}}"></span> --> {{product.pname}}</p></div>
+                                                            <!-- Html Code for showing product details in category -->
+                                                            <div class="col-xs-4"><!-- Qty - {{ (product.pinv == -1) ? "Infinite" : product.pinv}} -->
+                                                            <p class="pad-top-5">
+<i class="mar-top-5" ng-class="product.pinvdaily ? 'pull-right btn btn-success btn-circle' : 'pull-right btn btn-danger btn-circle'"></i></p>
+                                                            </div>
+                                                            <div class="col-xs-4"><!-- {{product.price}} --> <p class="pad-top-5"><a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="remove(this);
+                                                                        deleteProduct(product._id)"><span
+                                                                        class="glyphicon glyphicon-remove"></span></a>
+                                                                <a class="pull-right btn btn-success btn-xs" data-nodrag="" ng-click="editProduct(product._id, product.pcatid)">
+                                                                    <i class="fa fa-pencil"></i>
+                                                                </a></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </ol>
+                            </div>
+                        </div>
+                        <hr/>
+                        <h4 ng-if="displayProductList.length > 0"><strong>Products</strong></h4>                        
+                        <!-- <div class="row" ng-if="displayProductList.length > 0">
+                            <div class="col-xs-4"><strong>Name</strong></div>
+                            <div class="col-xs-4"><strong>Quantity</strong></div>
+                            <div class="col-xs-4"><strong>Price</strong></div>
+                        </div> -->
+
+                        <div ui-tree>
+                            <div ui-tree="productTreeOption" data-empty-placeholder-enabled="false">
+                                <ol ui-tree-nodes ng-model="displayProductList">
+                                    <ul id="nestable-list-1" class="uk-nestable">
+                                        <li data-item="Item 1" data-item-id="a" ui-tree-node ng-repeat="product in displayProductList" ui-tree-node>
+                                            <div class="uk-nestable-item">
+                                                <div class="row">
+                                                    <div class="col-xs-4">
+                                                    <!-- Html code for image show -->
+                                                    <!-- <span ng-show="{{product.pimages.length > 0}}"><img width="50" height="50" ng-src="{{productImage(product.pimages)}}"></span> --> {{product.pname}}</div>
+                                                    <div class="col-xs-4">
+                                                        <p class="pad-top-5">
+<i class="mar-top-5" ng-class="product.pinvdaily ? 'pull-right btn btn-success btn-circle' : 'pull-right btn btn-danger btn-circle'"></i></p>
+                                                    <!-- {{ (product.pinv == -1) ? "Infinite" : product.pinv}} --></div>
+                                                    <div class="col-xs-4">
+
+                                                    <!-- {{product.price}} --> 
+                                                        <a class="pull-right btn btn-danger btn-xs" data-nodrag="" ng-click="remove(this);
+                                                                deleteProduct(product._id)">
+                                                            <i class="fa fa-times"></i>
+                                                        </a>
+                                                        <a class="pull-right btn btn-success btn-xs" data-nodrag="" ng-click="editProduct(product._id, product.pcatid)">
+                                                            <i class="fa fa-pencil"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Add Category</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <label class="control-label" for="full_name">
+                            <strong>Name</strong>
+                        </label>
+                        <input class="form-control" name="full_name" id="full_name" data-validate="required" ng-model="categoryName" />
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" ng-click="addCategory()" data-dismiss="modal">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/ng-template" id="nodes_renderer.html">
+    <div ui-tree-handle class="tree-node tree-node-content">
+    <a class="btn btn-success btn-xs" ng-if="node.nodes && node.nodes.length > 0" data-nodrag ng-click="toggle(this)"><span
+    class="glyphicon"
+    ng-class="{
+    'glyphicon-chevron-right': collapsed,
+    'glyphicon-chevron-down': !collapsed
+    }"></span></a>
+    {{node.title}}
+    <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="remove(this)"><span
+    class="glyphicon glyphicon-remove"></span></a>
+    <a class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="newSubItem(this)" style="margin-right: 8px;"><span
+    class="glyphicon glyphicon-plus"></span></a>
+    </div>
+    <ol ui-tree-nodes="" ng-model="node.nodes" ng-class="{hidden: collapsed}">
+    <li ng-repeat="node in node.nodes" ui-tree-node ng-include="'nodes_renderer.html'">
+    </li>
+    </ol>
+</script>
