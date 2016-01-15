@@ -45,7 +45,7 @@ body{
 
 }
 .menu-section-title{
-	border-bottom:5px solid #45233e;
+	border-bottom:5px solid #bbbdc0;
 	
 }
 .menu-item{
@@ -95,6 +95,7 @@ display: inline-block;
 	display: flex;
 	align:center;	
 
+
 }
 .rightmenufooter{
 padding:20px 0px 20px 0px;
@@ -107,8 +108,9 @@ font-weight: bold;
   font-size: 50px;
   height: 50px;
   width: 50px;
- margin-left:170px;
- margin-top:50px;
+  margin:0 auto;
+ /*margin-left:170px;*/
+ margin-top:194px;
 }
 
 /* Put your css in here */
@@ -118,8 +120,17 @@ span {
 }
 
 .selected-class-name {
-background-color: #ffc713;
+background-color: #EFF1F5;
 }
 .selected-class-name .sidebar:hover {
-background-color: #ffc713!important;
+background-color: #EFF1F5!important;
+}
+.border_bottom{
+		border-bottom: 2px solid #bbbdc0;
+}
+.sum{
+	padding-left: 22px;
+}
+.spinner{
+	margin: 50px; 
 }

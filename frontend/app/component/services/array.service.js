@@ -15,11 +15,11 @@
             }
             Send_Array.push(obj);
             }
-            //console.log(Send_Array);
+           
             return Send_Array;
         }
         service.getProduct = function(response_products, category) {
-          //console.log(category);
+       
           var Send_Array=[];
           for(var i=0; i<response_products.length; i++){
             for(var k=0; k< category.length; k++){
@@ -31,25 +31,44 @@
          return Send_Array;
         }
         service.showAllService = function(category, products) {
-           for(var i=0; i<category.length; i++){
-            console.log(category[i]._id);
+            var Send_Array=[];
+         
+           var obj={};
+           
+          for(var i=0; i<category.length; i++){
+            var arr=[];
+            var arr1=[];
+             for(var k=0; k<products.length; k++){
+             if(products[k].pcatid==category[i]._id){
+                arr.push(products[k].pname);
+                arr1.push(products[k].price);
+
+             
+                }
+            }
+            var prdct=[];
+            for (var k=0;k<arr.length;k++){
+              var obj1={
+                'pname':arr[k],
+                'price':arr1[k]
+              }
+              prdct.push(obj1);
+            }
+            obj={
+                'name': category[i].catname,
+              'products':prdct
+            
+                }
+                Send_Array.push(obj);
+                
            }
-          for(var i=0; i<products.length; i++){
-            if(category[i]._id==products[i].id){
-          console.log(products[i].pname);  
-      }
+           
+      
+console.log(Send_Array);
+       
+       return Send_Array;
           }
-          console.log(products);
-         //  var Send_Array=[];
-         //  for(var i=0; i<response_products.length; i++){
-         //    for(var k=0; k< category.length; k++){
-         //        if(category[k]==response_products[i]._id){
-         //           Send_Array.push(response_products[i]);
-         //        }
-         //    }
-         //  }
-         // return Send_Array;
-        }
+        
         return service;
     }
 })();
