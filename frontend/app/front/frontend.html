@@ -1,0 +1,161 @@
+ 
+<h1 style=" text-align: center;">
+    <span ng-show="spinner">
+        <i class="fa fa-spin fa-spinner spin-big"></i>
+    </span>
+</h1>
+<div class="container" ng-show="spinner_closed">
+    <div class="topContainer">
+        <div class="row bgwhite">
+            <div class="col-sm-3">
+                <div class="image">
+                    <img ng-src="{{picImage}}" class='logo'>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div>
+                        <h3 class="text-center heading">{{location_name}}</h3>
+                        <p class="text-center">{{location_desc}}</p>
+                        <p class="text-center">{{location_addr}},{{location_lcity}},{{location_lcountry}},{{location_lpostcode}},{{location_lstate}},{{location_lcountry}}|{{location_openingtime}}-{{location_closingtime}}</p>
+                    </div>
+                </div>
+                <div class="col-sm-3"></div>
+            </div>
+            <div class='row to-do'>
+                <div class="col-sm-8 bgwhite leftCtnr">
+                    <div class='row left'>
+                        <div class="col-sm-4">
+                            <div ng-repeat="row in ctegories" ng-click="category_selected(row); itemClicked($index)" ng-class="{ 'selected-class-name': $index == selectedIndex }">
+                                <div class="sidebar">
+                                    <p class="heading active">{{row.name}}</p>
+                                    <p ng-hide='true'>{{row.id}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-8">
+                            <div ng-show="all_clicked">
+                                <div ng-repeat='row in All_products'>
+                                    <header class="menu-section-title">
+                                        <h3 class="heading">{{row.name}}</h3>
+                                        <p>{{row.name}}</p>
+                                    </header>
+                                    <div class="menu-item" ng-repeat="row1 in row.products" ng-click="show_in_cart(row1)">
+                                        <div class="col-sm-8">
+                                            <h4 class="heading">{{row1.pname}}</h4>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="pull-right">
+                                         {{row1.price}}
+                                            
+                                                <i class="fa fa-shopping-cart fa-fw"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div ng-show="category_clicked">
+                                <header class="menu-section-title">
+                                    <h3 class="heading">{{category}}</h3>
+                                    <p>{{category}}</p>
+                                    <input type="hidden" ng-model="cat_id">
+                                    </header>
+                                    <div class="menu-item" ng-repeat="row in products" ng-click="show_in_cart(row)">
+                                        <div class="col-sm-8">
+                                            <h4 class="heading">{{row.pname}}</h4>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="pull-right">
+                                       {{row.price}}&euro;   
+                                            
+                                                <i class="fa fa-shopping-cart fa-fw"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 bgwhite rightCtnr">
+                        <div class="nav nav-tabs" role="tablist"></div>
+                        <div class="leftCtnr_heading text-center">
+                       Please put something in the basket.
+                        </div>
+                        <div class="leftCtnr_body">
+                            <div class="border_bottom">
+                                <div class="Rightmenu-item" ng-repeat="row in cart track by $index" >
+                                    <div class="col-sm-8">
+                                        <p> {{row.name}}</p>
+                                    </div>
+                                    <div class="col-sm-4"></div>
+                                    <div class="col-sm-4">
+                                        <div class="col-sm-2">
+                                       {{row.price}}&euro;   
+                                      </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sum">
+                            <h4 class="heading">Total={{total_price}}</h4>
+
+                          </div>
+                        <div class='col-sm-12 rightmenufooter text-center'>
+                                       ORDER IN ADVANCE
+                                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="container"><div class="topContainer"><div class="row bgwhite"><div class="col-sm-3"><div class="image"><img ng-src="{{picImage}}" class='logo'></div></div><div class="col-sm-6"><div ng-show="spinner_close"><h3 class="text-center heading">{{location_name}}</h3><p class="text-center">{{location_desc}}</p><p class="text-center">{{location_addr}},{{location_lcity}},{{location_lcountry}},{{location_lpostcode}},{{location_lstate}},{{location_lcountry}}|{{location_openingtime}}-{{location_closingtime}}</p></div></div><div class="col-sm-3"></div></div><div class='row to-do'><div class="col-sm-8 bgwhite leftCtnr"><div><ul class="nav nav-tabs" role="tablist"><li class="leftCtnr-tab-menu"><a href="#home" class="heading">Home</a></li></ul></div><div class='row left'><div class="col-sm-4"><div ng-repeat="row in ctegories" ng-click="category_selected(row); itemClicked($index)" ng-class="{ 'selected-class-name': $index == selectedIndex }"><div class="sidebar"><p class="heading active">{{row.name}}</p><p ng-hide='true'>{{row.id}}</p></div></div></div><div class="col-sm-8"><header class="menu-section-title"><h3 class="heading">{{category}}</h3><p>{{category}}</p><input type="hidden" ng-model="cat_id"></header><div><span ng-show="spinner"><i class="fa fa-spin fa-spinner spin-big"></i></span></div><div class="menu-item" ng-repeat="row in products"><div class="col-sm-8"><h4 class="heading">{{row.pname}}</h4></div><div class="col-sm-4"><div class="pull-right">
+                                       {{row.price}}&euro;   
+                                            <i class="fa fa-shopping-cart fa-fw"></i></div></div></div></div></div></div><div class="col-sm-4 bgwhite rightCtnr"><div class="nav nav-tabs" role="tablist"></div><div class="leftCtnr_heading text-center">
+                       this is a hading of left container
+                        </div><div class="leftCtnr_body"><div class="Rightmenu-item" ng-repeat="row in demo track by $index"><div class="col-sm-8"><p> {{row}}</p></div><div class="col-sm-4"></div><div class="col-sm-4"><div class="col-sm-2">
+                                       {{$index+1}}&euro;   
+                                      </div></div></div></div><div class='col-sm-12 rightmenufooter text-center'>
+                                        adshadgdashgdsahdg
+                                    </div></div></div></div></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ -->
