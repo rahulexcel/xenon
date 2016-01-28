@@ -18,7 +18,7 @@
 	padding:20px; 
 }
 .to-do{
-	padding-top: 10px;
+	padding-top: 15px;
 }
 .bgwhite{
 	background-color: white;
@@ -312,4 +312,45 @@ display:none;
 .prod_img{
 width: 84px;
  height: 94px;	
+ padding-right: 5px;
+}
+
+.no-pad-left{
+	padding-left: 0px!important;
+}
+.no-pad-right{
+	padding-right: 0px!important;
+}
+.no-pad{
+	padding: 0px!important;
+}
+.intl-tel-input{
+	width: 100%!important;
+}
+#card_details .input-lg{
+	padding-top: 10px!important;
+	padding-bottom: 10px!important;
+	padding-left: 12px!important;
+	padding-right: 16px!important;
+}
+#card_details input{
+	max-width: 46%!important;
+	display: inline;
+}
+#card_details input:last-child{
+	margin-top: 15px;
+}
+.jp-card{
+	min-width: auto!important;
+}
+.back-menu{
+	margin-left: 13px;
+	display: none;
+}
+.back-menu1{
+	margin-left: 13px;
+	display: none;
+}
+.subtotal{
+	 margin-bottom: 17px;
 }

@@ -7,8 +7,12 @@
         var response_products;
         var response_categories;
         $scope.spinner = true;
-          $scope.class="left_menu_not_display";
-             $scope.cart_shown="cart_not_display";
+        $scope.class = "left_menu_display";
+        $scope.cart_shown="cart_not_display";
+        $scope.product_menu = "product_menu_not_display";
+        $scope.backCatMenu = false;
+          //$scope.class="left_menu_not_display";
+           //  $scope.cart_shown="cart_not_display";
     $scope.changeClassLeftMenu = function(){
 
         if ($scope.class === "left_menu_display"){
@@ -17,16 +21,30 @@
             $scope.class = "left_menu_display";
         }
     };
-     $scope.changeClassCart = function(){
-        if ($scope.product_menu === "product_menu_display"){
-            $scope.product_menu = "product_menu_not_display";
-            $scope.cart_shown="cart_display";
-        }else{
-         
-             $scope.cart_shown="cart_not_display";
-            $scope.product_menu = "product_menu_display";
+    $scope.backToCatList = function(){
+        console.log('back to cat list');
+        $scope.class = "left_menu_display";
+        $scope.product_menu = "product_menu_not_display";
+        $scope.cart_shown="cart_not_display";
+        $scope.backCatMenu = false;
     }
-    };
+    $scope.backToProductList = function(){
+        console.log('back to product list');
+        $scope.backCatMenu = true;
+        $scope.backProductMenu = false;
+        $scope.product_menu = "product_menu_display";
+        $scope.cart_shown="cart_not_display";
+    }
+    //  $scope.changeClassCart = function(){
+    //     if ($scope.product_menu === "product_menu_display"){
+    //         $scope.product_menu = "product_menu_not_display";
+    //         $scope.cart_shown="cart_display";
+    //     }else{
+         
+    //          $scope.cart_shown="cart_not_display";
+    //         $scope.product_menu = "product_menu_display";
+    // }
+   // };
 
        //timeStorage.set('a', 1, 0.01);
         $scope.dropdown_days = dropdownService.Timedropdown();
@@ -111,9 +129,11 @@
 
 
         $scope.category_selected = function(category) {
-               $scope.cart_shown="cart_not_display";
-             $scope.class = "left_menu_not_display";
-              $scope.product_menu = "product_menu_display";
+            $scope.cart_shown="cart_not_display";
+            $scope.class = "left_menu_not_display";
+            $scope.product_menu = "product_menu_display";
+            $scope.backCatMenu = true;
+            $scope.backProductMenu = false;
           
 
             $scope.all_clicked = true;
@@ -134,7 +154,7 @@
         $scope.selectedIndex = 0;
         $scope.itemClicked = function($index) {
             $scope.selectedIndex = $index;
-           // $scope.cart_shown="cart_display";
+            //$scope.cart_shown="cart_display";
         };
         var cart_array = [];
         var cart_obj = [];
@@ -146,7 +166,9 @@
         var product_name;
         $scope.show_in_cart = function(selected_product) {
            $scope.cart_shown="cart_display";
-              $scope.product_menu = "product_menu_not_display";
+            $scope.product_menu = "product_menu_not_display";
+            $scope.backCatMenu = false;
+            $scope.backProductMenu = true;
             var flag1 = 1;
             var count = 1;
             var flag = 1;

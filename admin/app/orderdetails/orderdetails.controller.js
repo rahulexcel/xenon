@@ -29,9 +29,9 @@
         }
 
         // $scope.deleteOrder = function(){
-        // 	console.log($rootScope.singleOrderId);
-        // 	var query = orderDetailsFactory.deleteOrder({"orderId":$rootScope.singleOrderId});
-        // 	query.$promise.then(function(data) {
+        //  console.log($rootScope.singleOrderId);
+        //  var query = orderDetailsFactory.deleteOrder({"orderId":$rootScope.singleOrderId});
+        //  query.$promise.then(function(data) {
         //                 console.log(data);
         //                 $state.go('dashboard.productOrders');
         //             });
