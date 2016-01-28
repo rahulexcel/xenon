@@ -133,7 +133,7 @@
                                     <div class="col-sm-6" ng-show="existing_card">
                                      <form id="payment-form" name="userForm" novalidate>
                                         <div class="form-group" ng-class="{ 'has-error': userForm.name.$touched && userForm.name.$invalid }">
-                                            <input type="number" class="form-control input-lg" maxlength="20" data-stripe="number" ng-model="cardnumber" name="number" placeholder="Card number" ng-blur="card_error()"  ng-minlength="16"required>
+                                            <input  type="text" class="form-control input-lg" maxlength="20" data-stripe="number" ng-model="cardnumber" name="number" placeholder="Card number" ng-blur="card_error()"  ng-minlength="16"required>
                                              <div class="help-block" ng-messages="userForm.number.$error" ng-if="userForm.number.$touched">
         <p ng-message="minlength">Card number is too short.</p>
        
@@ -254,7 +254,7 @@
                                   
                                     <div class="row">
                                         <div ng-repeat='row in cart'>
-                                            <div class="col-sm-12">
+                                            <div class="col-sm-12 col-xs-12">
                                                 <div class="pull-left">
                                                         {{row.count}}&nbsp;X&nbsp;
                                                         <span style="color:rgb(239,110,84)">{{row.name}}</span>

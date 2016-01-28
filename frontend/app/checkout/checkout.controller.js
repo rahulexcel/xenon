@@ -163,7 +163,8 @@
                         countrycode: country_code[0].dialCode,
                         currency: $localStorage.shippingdata.currency.toLowerCase(),
                         phone: $scope.phone_no,
-                        delivery_details_formerymode: $localStorage.shippingdata.deliverymode
+                        deliverymode: $localStorage.shippingdata.deliverymode,
+                        deliverytime:$localStorage.shippingdata.timestamp
                     });
                     query3.$promise.then(function(response) {
                         console.log(response);
@@ -230,6 +231,7 @@
 
         }
         $scope.existingcharge=function(){
+            // updatecustomer();
             var country_code = angular.element($("#mobile-number").intlTelInput("getSelectedCountryData"));
            var savedcard = existingcharge.save({
                         customerid: customer_id, 

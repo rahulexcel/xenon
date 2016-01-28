@@ -275,6 +275,7 @@ $scope.total_price=arrayService.getTotalprice($scope.cart);
                                 methodName:$scope.method,
                                 deliverymode: mode,
                               shipping_time: $scope.time,
+                              timestamp:timeService.getTimestamp($scope.time),
                                currency: $scope.currency};
                      timeStorage.set('shippingdata', data, 1);           
 
