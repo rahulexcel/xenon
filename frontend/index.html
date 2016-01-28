@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="xenon-frontend">
+    <head>
+        <meta charset="utf-8">
+       <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <title>Xenon</title>
+        <link rel="stylesheet" href="assets/css/fonts/fontawesome/css/font-awesome.min.css">
+        <link rel="stylesheet" href="assets/css/bootstrap.css">
+        <link rel="stylesheet" href="assets/custom.css">
+          <link rel="stylesheet" href="assets/custom.css">
+          <link rel="stylesheet" href="assets/custom1.css">
+           <link rel="stylesheet" href="assets/intlTelInput.css">
+
+   
+<!--lib files-->
+   <script src="lib/jquery/jquery.js"></script>
+   <script src="lib/jquery/intlTelInput.js"></script>
+    <script src="lib/angular/angular.js"></script>
+      <script src="lib/custom/ng-messages.js"></script>
+    <script src="lib/angular-ui/angular-ui-router.min.js"></script>
+     <script src="lib/angular/angular-resource.min.js"></script>
+       <script src="lib/custom/ng-storage.js"></script>
+         <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+            <script src="lib/custom/angular-credit-cards.js"></script>
+             <script src="lib/custom/card.js"></script>
+               <script src="lib/custom/ng-file-upload.min.js"></script>
+
+
+  
+
+
+    <!--custom js files-->
+       <script src='app/index.module.js'></script>
+         <script src='app/index.run.js'></script>
+         <script src='app/component/services/validateroutes.service.js'></script>
+       <script src='app/index.route.js'></script>
+       <script src='app/index.constant.js'></script> 
+       <script src='app/front/order.factory.js'></script> 
+       <script src='app/front/frontend.controller.js'></script>
+       <script src='app/front/locations.factory.js'></script> 
+       <script src='app/front/category.factory.js'></script> 
+        <script src='app/front/products.factory.js'></script> 
+         <script src='app/component/services/array.service.js'></script> 
+           <script src='app/component/services/dropdown.service.js'></script> 
+             <script src='app/component/services/timestamp.service.js'></script> 
+   <script src='app/checkout/checkout.controller.js'></script>
+    <script src='app/checkout/cauthreq.factory.js'></script>
+      <script src='app/component/directive/card.directive.js'></script> 
+        <script src='app/checkout/newcharge.factory.js'></script>
+         <script src='app/checkout/cauth.factory.js'></script>
+          <script src='app/checkout/customer.factory.js'></script>
+           <script src='app/component/services/timestorage.service.js'></script> 
+
+
+ </head>
+    <body>
+        
+
+<div ui-view ></div>
+</body>
+</html>

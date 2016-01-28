@@ -1,0 +1,51 @@
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <i class="fa-bars"></i>
+            </button>
+            <img src="assets/images/logo-white-bg@2x.png"  alt="" class="navbar-brand"/>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right" ng-show="navMenu">
+                <li ng-click="goLogin(); changeClass()">
+                    <a href="" ng-class="changeClassIs ? red : black">LOG IN</a>
+                </li>
+                <li ng-click="goSignUp()">
+                    <a href="">SIGN UP</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right" ng-show="userNavMenu">
+                <li>
+                    <a href="#/dashboard/productOrders">ORDERS</a>
+                </li>
+                <li>
+                    <a href="#/dashboard/productList">PRODUCTS</a>
+                </li>
+                <li>
+                    <a href="" data-toggle="dropdown" class="dropdown-toggle" style="font-size:13px">ACCOUNT
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="#/dashboard/setting">SETTING</a>
+                        </li>
+                        <li>
+                            <a href="#/dashboard/payment">PAYMENT</a>
+                        </li>
+                        <li>
+                            <a href="#/dashboard/storeinfo">STORE INFO</a>
+                        </li>
+                    </ul>
+                </li>
+                <li ng-click="logout()">
+                    <a style="cursor:pointer;">LOGOUT</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <ui-view class="main-content-view"></ui-view>
+</div>

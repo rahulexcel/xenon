@@ -1,0 +1,219 @@
+
+ <div class="all">
+ <h1  ng-show="spinner" style="text-align: center;">
+    <span>
+        <i class="fa fa-spin fa-spinner spin-big"></i>
+    </span>
+</h1>
+<div class="container" ng-show="spinner_closed" style="margin-top:1.5em;margin-bottom:1.5em;">
+    <div class="topContainer">
+        <div class="row bgwhite TOP">
+            <div class="col-sm-3 col-xs-12">
+                <div class="image">
+                    <img ng-src="{{picImage}}" class='img-thumbnail img-responsive logo'>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-xs-12 text-center">
+                    <h3 class="heading topheading">{{location_name}} 
+                            <p class="store-desc" style="padding-top:5px;">{{location_desc}}</p>
+                            <p class="store-desc">{{location_addr}}, {{location_lcity}}, {{location_lcountry}}, {{location_lpostcode}}, {{location_lstate}},{{location_lcountry}} | {{location_openingtime}}-{{location_closingtime}}</p>
+                        </h3>
+                    </div>
+                   
+                </div>
+                <div class='row to-do'>
+
+                    <div class="col-sm-8 bgwhite leftCtnr">
+                       <span class="pull-left" style="color:red" ng-show="Order_not_placed">Your Cart is Empty. Please select items for your cart</span>
+
+                       
+                            
+                             <!-- <span class="pull-left "><i class='glyphicon glyphicon-th-list fa-lg' ng-click="changeClassLeftMenu()"></i></span> -->
+                             
+                              
+                       
+                       
+
+                        <div class='row left'>
+                         <div ng-class="class" class="">
+                                 
+                        <!--  <button ng-click="changeClass()">Change Class</button>  -->   
+                            <div class="col-sm-3" class="text-center" style="padding-top: 14px;"> 
+                                <div ng-repeat="row in ctegories" ng-click="category_selected(row); itemClicked($index)" ng-class="{ 'selected-class-name': $index == selectedIndex }">
+                                    <div class="sidebar" style="padding-left:1.8em;">
+                                        <p class="heading active">{{row.name}}</p>
+
+                                        <!-- <p ng-hide='true'>{{row.id}}</p> -->
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                            <div ng-class="product_menu">
+                            <div class="col-sm-9">
+                                <div ng-show="all_clicked" class="aligned-center" id="allProduct">
+                                    <div ng-repeat='row in All_products'>
+                                        <header class="menu-section-title">
+                                            <h3 class="heading">{{row.name}}
+                                                <span class="pull-right back-menu" ng-show="backCatMenu"><i class='glyphicon glyphicon-chevron-left fa-lg' ng-click="backToCatList()"></i></span>
+                              <span class="pull-right back-menu" ng-show="backProductMenu"><i class='glyphicon glyphicon-chevron-left fa-lg' ng-click="backToProductList()"></i></span>
+                                            </h3>
+                                            <p class='no-pad'>{{row.name}}</p>
+
+                                        </header>
+                                        <div class="menu-item" ng-repeat="row1 in row.products" ng-click="show_in_cart(row1)">
+                                        <div ng-repeat='image in row1.image' class="col-xs-6 no-pad-left vcenter">
+                                               <img ng-src="http://s3.amazonaws.com/ordermagic/{{image}}" class="img-responsive center-image">
+                                        </div>
+                                            <div class="col-sm-6  col-xs-4 no-pad no-pad-left vcenter productName">
+                                                <h4 class="heading">{{row1.pname}} 
+                                                        <span class="prod-desc">{{row1.desc}}</span>
+                                                    </h4>
+                                                </div>
+                                                
+                                                <div class="col-sm-4 col-sm-offset-2 no-pad vcenter col-xs-8 productPrice">
+                                                    <div class="pull-right">
+                                                        <strong class="heading">{{row1.price}} {{currency}} <i class="glyphicon glyphicon-plus fa-fw"></i></strong>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div ng-show="category_clicked">
+                                        <header class="menu-section-title">
+                                            <h3 class="heading no-pad">{{category}}
+                                                <span class="pull-right back-menu" ng-show="backCatMenu"><i class='glyphicon glyphicon-chevron-left fa-lg' ng-click="backToCatList()"></i></span>
+                              <span class="pull-right back-menu" ng-show="backProductMenu"><i class='glyphicon glyphicon-chevron-left fa-lg' ng-click="backToProductList()"></i></span>
+                                            </h3>
+                                            <p class='no-pad'>{{category}}</p>
+                                            <input type="hidden" ng-model="cat_id">
+                                            </header>
+                                            <div class="menu-item" ng-repeat="row in products" ng-click="show_in_cart(row)" id="allProduct">
+                                            <div ng-repeat='image in row.pimages' class="col-xs-6 no-pad-left vcenter">
+                                               <img ng-src="http://s3.amazonaws.com/ordermagic/{{image}}" class="img-responsive center-image">
+                                            </div>
+                                                <div class="col-sm-6  col-xs-4 no-pad no-pad-left vcenter productName">
+                                                    <h4 class="heading">{{row.pname}}
+                                                        <br>
+                                                            <span class="prod-desc">{{row.pdesc}}</span>
+                                                        </h4>
+                                                    </div>
+                                                     
+                                                    <div class="col-sm-4 col-sm-offset-2 no-pad vcenter col-xs-8 productPrice">
+                                                        <div class="pull-right">
+                                                            <strong class="heading">{{row.price}} {{currency}}</strong>
+                                                            <i class="glyphicon glyphicon-plus fa-fw"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                               <div ng-class="cart_shown">
+                                <div class="col-sm-4 bgwhite rightCtnr">
+                                    <div class="text-center" style="padding-top: 20px;">
+                                        <span class=" bold"> YOUR CART
+                                            <span class="pull-right back-menu1" ng-show="backCatMenu"><i class='glyphicon glyphicon-chevron-left fa-lg' ng-click="backToCatList()"></i></span>
+                              <span class="pull-right back-menu1" ng-show="backProductMenu"><i class='glyphicon glyphicon-chevron-left fa-lg' ng-click="backToProductList()"></i></span>
+                                        </span>
+                                        <div class="dropdown">
+                                            <div class="form-group">
+                                                <select class="form-control input-lg text-center"  ng-model="method">
+                                                    <option ng-repeat="row in delivery_method" value="{{row}}">{{row}}</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <select class="form-control input-lg"  ng-model="time">
+                                                    <option  
+                                                                  ng-repeat="row in dropdown_days" value="{{row}}">{{row}}</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="cart">
+                                                <div class="cartheader">
+                                                    <span class="bold"> YOUR ORDER</span>
+                                                    <div class="cartheader-message" >
+                                                        <span ng-style="{'display' : (cart.length>0) ? 'none' : 'block'}"> 
+                                       You haven’t added anything to your cart yet! Start adding your favourite dishes
+                                       </span>          
+                                                        <div class="row">
+                                                            <div ng-repeat='row in cart'>
+                                                                <div class="col-sm-12 col-xs-12 no-pad">
+                                                                    <div class="pull-left">
+                                                                         <div>
+                                                                                {{row.count}}X
+                                                                 
+                                                                            <span style="color:rgb(239,110,84)">{{row.name}}</span>
+                                                                           </div>
+                                                                        
+                                                                    </div>
+                                                                    <div class="pull-right" style="color:rgb(239,110,84)">
+                                                                         {{row.price}}{{currency}} 
+                                                                          <span ng-click="remove_product_from_cart(row)"  >
+                                                                        <i class="glyphicon glyphicon-remove "></i>
+                                                                    </span> 
+                                                                    </div>
+
+                                                                </div>
+                                                               <!--  <div class="col-sm-6 col-xs-6">
+                                                                <div class="pull-right" style="color:rgb(239,110,84)">
+                                                                 {{row.price}}{{currency}}  
+                                                               
+                                          
+    
+                                                                    <span ng-click="remove_product_from_cart(row)"  >
+                                                                        <i class="glyphicon glyphicon-remove "></i>
+                                                                    </span>
+                                                                    </div>
+                                                                       </div> -->
+                                                                </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="cart-containt">
+                                                    <div class="row">
+                                                        <div class="col-sm-6 col-xs-6"style="
+    padding-bottom: 17px;
+">
+                                                            <div class="pull-left">
+                                                                <div> &nbsp;&nbsp;&nbsp;Subtotal</div>
+                                                                <div class="bold" style="
+    font-size: medium;
+    padding-top: 20px;
+    padding-left:6px;
+"
+>Total</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6 col-xs-6">
+                                                            <div class="pull-right">
+                                                                <div>{{total_price}} {{currency}}</div>
+                                                                <div class="bold"style="
+    font-size: medium;     padding-right: 11px;  padding-top: 20px;
+
+">{{total_price}} {{currency}} </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class='col-sm-12 col-xs-12 rightmenufooter text-center'  ng-style="{'background-color' : (cart.length>0) ? 'rgb(239, 110, 84)' : '#bbbdc0'}" ng-click="sendOrder()">
+                                     
+                                     CHECKOUT 
+                                                            
+                                                            <span ng-show="checkout_clicked">
+                                                                <i class="fa fa-spin fa-spinner"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                        
