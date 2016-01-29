@@ -66,7 +66,7 @@
                         $scope.smscode = "";
                         $scope.existing_card_show_cvc = true;
                         $scope.show_sms_code_enter = true;
-                        timeStorage.set('token', 1, 0.01);
+                        
                     }
                 });
             }
@@ -85,7 +85,7 @@
             smscodesubmittion.$promise.then(function(response) {
                 customer_id = response.customerid;
                 customer_token = response.token;
-                timeStorage.set('token', customer_token, 1);
+                timeStorage.set('token', response.token, 1);
                 console.log(customer_token);
                 console.log(response);
                 if (response.smscode == false) {

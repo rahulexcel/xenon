@@ -4,9 +4,10 @@
             .factory('putCustomer', putCustomer);
 
     function putCustomer($resource, Configurations, $localStorage) {
-          var currentUser = $localStorage.token;
+          // var currentUser = $localStorage.token;
+       var currentUser =   timeStorage.get('token');
           console.log(currentUser);
-          console.log(currentUser);
+       
          //$httpProvider.interceptors.push('myInterceptor');
            //config.headers['Authorization'] = 'Bearer ' + currentUser;
         return $resource(Configurations.Hostserver + '/customer/:customerid', {
