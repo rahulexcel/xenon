@@ -171,8 +171,8 @@
             $scope.productInCart = $scope.productInCart +1;
            //$scope.cart_shown="cart_display";
             //$scope.product_menu = "product_menu_not_display";
-            $scope.backCatMenu = false;
-            $scope.backProductMenu = true;
+            $scope.backCatMenu = true;
+            $scope.backProductMenu = false;
             var flag1 = 1;
             var count = 1;
             var flag = 1;
@@ -218,6 +218,7 @@ $scope.total_price=arrayService.getTotalprice($scope.cart);
         }
 
         $scope.remove_product_from_cart = function(product) {
+            $scope.productInCart = $scope.productInCart -1;
           //console.log(cart_obj);
           //  console.log(product);
             var idx = $scope.cart.indexOf(product);
@@ -299,7 +300,9 @@ $scope.total_price=arrayService.getTotalprice($scope.cart);
             console.log('click on cart');
             $scope.cart_shown="cart_display";
             $scope.product_menu = "product_menu_not_display";
-
+            $scope.class = "left_menu_not_display";
+            $scope.backCatMenu = false;
+            $scope.backProductMenu = true;
         }
 
     }

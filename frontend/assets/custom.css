@@ -195,7 +195,7 @@ background-color: rgb(239, 110, 84)!important;
 }
 .topheading{
 	margin-bottom: 2px;
-	padding-top: 14px;
+	/*padding-top: 14px;*/
 }
 .store-desc{
 	font-size: 14px;
@@ -377,6 +377,11 @@ width: 84px;
 	display: none;
 }
 .sticky-cart {
-    padding-left: 80%;
+    padding-right: 1%;
     color: #000;
+}
+.navbar-brand-image img{
+	max-width:40px;
+	max-height:40px;
+	padding-left: 10px;
 }
