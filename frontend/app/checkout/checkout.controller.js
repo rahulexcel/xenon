@@ -3,8 +3,9 @@
     angular.module('xenon-frontend')
         .controller('checkoutCtrl', checkoutCtrl);
 
-    function checkoutCtrl(validate, $scope, timeStorage, existingcharge, customercard, $localStorage, putCustomer, cauth, newcharge, arrayService, locations, cauthreq, locationID) {
+    function checkoutCtrl(validate, $scope,$rootScope,  timeStorage, existingcharge, customercard, $localStorage, putCustomer, cauth, newcharge, arrayService, locations, cauthreq, locationID) {
         validate.order_placed();
+
         $scope.data_recevied = true;
         $scope.order_not_success = true;
         $scope.orderid = $localStorage.Orders_response.orderid;
@@ -87,7 +88,12 @@
             smscodesubmittion.$promise.then(function(response) {
                 customer_id = response.customerid;
                 customer_token = response.token;
-                timeStorage.set('token', response.token, 1);
+                // delete $localStorage.smstoken;
+                 $localStorage.smstoken = response.token;
+                 $localStorage.smstoken1=response.token;
+                 ///$rootScope.smstoken=response.token;
+                 //putCustomer.getsmscode(response.token);
+                // $localStorage.set('token', response.token, 1);
                 console.log(customer_token);
                 console.log(response);
                 if (response.smscode == false) {
@@ -140,8 +146,9 @@
         }
         $scope.update_customer_information = function() {
             $scope.update_spinner = true;
+            console.log($localStorage.smstoken1);
             var country_code = angular.element($("#mobile-number").intlTelInput("getSelectedCountryData"));
-            var updateCustomer = putCustomer.update({}, {
+            var updateCustomer = putCustomer.update($localStorage.smstoken1).query({}, {
                 customerid: customer_id,
                 firstname: $scope.first_name,
                 email: $scope.stripeEmail,
@@ -150,6 +157,7 @@
                 postcode: $scope.postcode
             
             });
+            $rootScope.smstoken=$localStorage.smstoken;
             updateCustomer.$promise.then(function(response) {
                 console.log(response);
                 $scope.update_spinner = false;
@@ -268,7 +276,7 @@
             });
         }
         function existinguser(response) {
-            var customerCard = customercard.update({}, {
+            var customerCard = customercard.update($localStorage.smstoken1).query({}, {
                 customerid: customer_id,
                 exp_month: $scope.cc_monthnew,
                 exp_year: $scope.cc_yearnew,

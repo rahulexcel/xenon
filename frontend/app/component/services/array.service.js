@@ -103,6 +103,7 @@ return parseFloat(sum).toFixed(2);
         service.closingTime = function(closingTime) {
                       
         }
+      
         return service;
     }
 })();
