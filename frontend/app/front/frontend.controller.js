@@ -61,7 +61,7 @@
                 locationID: locationID.locationID
             });
             query.$promise.then(function(data) {
-               // console.log(data);
+                console.log(data);
                 $scope.currency = data.lcurrency;
                 $rootScope.currency = data.lcurrency;
                $scope.dropdown_days.unshift(dropdownService.Selected(data.llt));
@@ -77,6 +77,7 @@
                 $scope.location_lcountry = data.lcountry;
                 $scope.location_lpostcode = data.lpostcode;
                 $scope.location_lstate = data.lstate;
+                $scope.location_lphone = arrayService.getPhoneNo(data.lphone);
                 $scope.location_openingtime = data.lwots[0].opening_time;
                 $scope.location_closingtime = data.lwots[0].closing_time;
                 $scope.all_clicked = true;

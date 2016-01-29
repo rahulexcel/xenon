@@ -252,6 +252,17 @@ padding-bottom: 12px;
 	    font-weight:bold;
  
 }
+.bold1{
+	
+		font-family: "Avenir Heavy",Arial,sans-serif;
+	    line-height: 1.4;
+	    text-transform: uppercase;
+	    font-size: large;
+	    padding-bottom: 15px;
+	    display: inline-block;
+	    /*font-weight:bold;*/
+ 
+}
 .product_menu{
 	display:none;
 }
@@ -279,7 +290,7 @@ padding-bottom: 12px;
 	padding: 10px;
 }
 .btn-info{
-    background-color: rgb(239, 110, 84)!important;
+    /*background-color: rgb(239, 110, 84)!important;*/
     border-color:rgb(239, 110, 84);
 }
 .btn-info:hover{
@@ -353,4 +364,8 @@ width: 84px;
 }
 .subtotal{
 	 margin-bottom: 17px;
+}
+.cart-details{
+	max-width: 50%;
+	text-align: left;
 }

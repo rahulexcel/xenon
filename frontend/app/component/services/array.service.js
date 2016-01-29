@@ -30,6 +30,17 @@
           }
          return Send_Array;
         }
+        service.getPhoneNo = function(fullPhoneNo) {
+        var phoneNo;
+          for (var i = 0; i < fullPhoneNo.length; i++) {
+             if (fullPhoneNo[i] == '-') {
+              var dash = i;
+             }
+            }
+            phoneNo = fullPhoneNo.substring(dash+1, fullPhoneNo.length);
+            console.log(phoneNo);
+         return phoneNo;
+        }
         service.showAllService = function(category, products) {
             var Send_Array=[];
          
