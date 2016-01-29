@@ -50,21 +50,13 @@
                                                 )"><span ng-show="codespinner">
                                             <i class="fa fa-spin fa-spinner"></i>
                                         </span>Verify</span>
-
-                                    <!--  </div> -->
                                 </div>
-
                             </div> 
                         </div> 
-
                         <hr class="separator">
                         <div class="formcontainer">
                             <span class="bold">2.DELIVERY DETAILS</span>
                               <div class="row padbot" ng-show="delivery_details_disabled_form">
-                                <span ng-show="never">
-                                    <input type="text" ng-model="orderid"  />
-                                </span>
-                                
                                 <div class="col-sm-6">
                                          <div class="form-group">
                                         <input type="text" class="form-control input-lg" ng-model="dis_first_name" disabled>
@@ -94,60 +86,51 @@
                                         <span class="btn btn-info btn-lg" ng-click="edit_customer_information()"> <span ng-show="update_spinner">
                                                     <i class="fa fa-spin fa-spinner"></i>
                                                 </span>Edit</span>
-                                    </div>
-                                  
-                                     
+                                    </div>     
                                 </div>
                             </div>
                             <div class="row padbot" ng-show="delivery_details_form">
-                                <span ng-show="never">
-                                    <input type="text" ng-model="orderid"  />
-                                </span>
-
+                            <form name="detailsform">
                                 <div class="col-sm-6">
-                                    <div class="form-group" ng-class="{ 'has-error': userForm.name.$touched && userForm.name.$invalid }">
+                                    <div class="form-group" ng-class="{ 'has-error': detailsform.name.$touched && detailsform.name.$invalid }">
                                         <input type="text" class="form-control input-lg" ng-model="first_name" placeholder="First name" name="f_n" ng-blur="f_n()" required>
-                                        <div class="help-block" ng-messages="userForm.f_n.$error" ng-if="userForm.f_n.$touched">
+                                        <div class="help-block" ng-messages="detailsform.f_n.$error" ng-if="detailsform.f_n.$touched">
                                             <p ng-message="minlength">Your name is too short.</p>
                                             <p ng-message="maxlength">Your name is too long.</p>
                                             <p ng-message="required">Your name is required.</p>
                                         </div>
                                        
                                     </div>
-                                    <div class="form-group" ng-class="{ 'has-error': userForm.name.$touched && userForm.name.$invalid }">
+                                    <div class="form-group" ng-class="{ 'has-error': detailsform.name.$touched && detailsform.name.$invalid }">
                                         <input type="text" class="form-control input-lg" ng-model="last_name" placeholder="Last name" name="l_n" ng-blur='names_found()'required>
-                                        <!--   <span ng-show="userForm.l_n.$invalid&& !userForm.l_n.$pristine">Looking for a valid name</span> -->
-                                        <div class="help-block" ng-messages="userForm.l_n.$error" ng-if="userForm.l_n.$touched">
+                                        <div class="help-block" ng-messages="detailsform.l_n.$error" ng-if="detailsform.l_n.$touched">
                                             <p ng-message="minlength">Your name is too short.</p>
                                             <p ng-message="maxlength">Your name is too long.</p>
                                             <p ng-message="required">Your name is required.</p>
                                         </div>
                                     </div>
-                                    <div class="form-group" ng-class="{ 'has-error': userForm.name.$touched && userForm.name.$invalid }">
+                                    <div class="form-group" ng-class="{ 'has-error': detailsform.name.$touched && detailsform.name.$invalid }">
                                         <input type="email" class="form-control input-lg" name="stripeEmail" ng-model="stripeEmail" placeholder="Email" ng-blur="emailerror()" required>
-                                        <div class="help-block" ng-messages="userForm.stripeEmail.$error" ng-if="userForm.stripeEmail.$touched">
+                                        <div class="help-block" ng-messages="detailsform.stripeEmail.$error" ng-if="detailsform.stripeEmail.$touched">
                                             <p ng-message="minlength">Your name is too short.</p>
                                             <p ng-message="maxlength">Your name is too long.</p>
                                             <p ng-message="required">Your email is required.</p>
                                         </div>
-                                        <span ng-show="userForm.stripeEmail.$invalid && !userForm.stripeEmail.$pristine">Looking for a valid email-id</span>
+                                        <span ng-show="detailsform.stripeEmail.$invalid && !detailsform.stripeEmail.$pristine">Looking for a valid email-id</span>
                                     </div>
-
                                 </div>
                                 <div class="col-sm-6">
-                                    <div class="form-group" ng-class="{ 'has-error': userForm.name.$touched && userForm.name.$invalid }">
+                                    <div class="form-group" ng-class="{ 'has-error': detailsform.name.$touched && detailsform.name.$invalid }">
                                         <input type="text" class="form-control input-lg" name="addr" ng-model="addr" placeholder="Address" ng-blur="addr_error()"required>
-                                        <!--  <span ng-show="userForm.addr.$invalid&& !userForm.addr.$pristine">Looking for a valid address</span> -->
-                                        <div class="help-block" ng-messages="userForm.addr.$error" ng-if="userForm.addr.$touched">
+                                        <div class="help-block" ng-messages="detailsform.addr.$error" ng-if="detailsform.addr.$touched">
                                             <p ng-message="minlength">Your name is too short.</p>
                                             <p ng-message="maxlength">Your name is too long.</p>
                                             <p ng-message="required">Your Address is required.</p>
                                         </div>
                                     </div>
-                                    <div class="form-group" ng-class="{ 'has-error': userForm.name.$touched && userForm.name.$invalid }">
+                                    <div class="form-group" ng-class="{ 'has-error': detailsform.name.$touched && detailsform.name.$invalid }">
                                         <input type="text" class="form-control input-lg" name=" postcode" ng-model="postcode" placeholder="Postcode" ng-blur="postcode_error"required>
-                                        <!--    <span ng-show="userForm.postcode.$invalid&& !userForm.postcode.$pristine">Looking for a valid postcode</span> -->
-                                        <div class="help-block" ng-messages="userForm.postcode.$error" ng-if="userForm.postcode.$touched">
+                                        <div class="help-block" ng-messages="detailsform.detailsform.$error" ng-if="detailsform.postcode.$touched">
                                             <p ng-message="minlength">Your name is too short.</p>
                                             <p ng-message="maxlength">Your name is too long.</p>
                                             <p ng-message="required">Your postcode is required.</p>
@@ -166,6 +149,7 @@
                                     </div>
 
                                 </div>
+                                </form>
                             </div>
                         </div>
                         <hr class="separator">
@@ -187,10 +171,10 @@
                                         </div>
                                         <div class="form-group" ng-class="{ 'has-error': userForm.name.$touched && userForm.name.$invalid }">
                                             <div class="form-inline" id="card_details">
-                                                <input type="number" maxlength="2" data-stripe="exp-month" class="form-control input-lg" ng-model="cc_month" cc-exp-month name="expiry" placeholder="MM" ng-blur="exp_month_error()" required>
+                                                <input type="text" maxlength="2" data-stripe="exp-month" class="form-control input-lg" ng-model="cc_month" cc-exp-month name="expiry" placeholder="MM" ng-blur="exp_month_error()" required>
                                                 <span> / </span>
-                                                <input type="number" maxlength="4" data-stripe="exp-year" class="form-control input-lg" ng-model="cc_year" cc-exp-year name="expiry" placeholder="YYYY" ng-blur="exp_year_error()" required/>
-                                                <input type="number" class="form-control input-lg" maxlength="4" data-stripe="cvc" ng-model="CVC" cc-cvc name="cvc" placeholder="CVC" ng-blur="cvc_error()"required>
+                                                <input type="text" maxlength="4" data-stripe="exp-year" class="form-control input-lg" ng-model="cc_year" cc-exp-year name="expiry" placeholder="YYYY" ng-blur="exp_year_error()" required/>
+                                                <input type="text" class="form-control input-lg" maxlength="4" data-stripe="cvc" ng-model="CVC" cc-cvc name="cvc" placeholder="CVC" ng-blur="cvc_error()"required>
                                             </div>
                                             <span ng-show="userForm.expiry.$invalid && !userForm.expiry.$pristine">Looking for a valid expiry date</span>
                                             <span ng-show="userForm.cvc.$invalid && !userForm.cvc.$pristine">Looking for a valid CVC</span>
@@ -220,7 +204,7 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-6" ng-show="newcard">
-                                    <form name="newcardform">
+                                    <form name="newcardform" id="cardnew">
                                         <div class="form-group" ng-class="{ 'has-error': newcardform.name.$touched && newcardform.name.$invalid }">
                                             <input type="text" class="form-control input-lg" size="20" data-stripe="number" ng-model="newcardnumber" placeholder="Card number" ng-blur="card_error()" ng-minlength="16" required>
                                             <div class="help-block" ng-messages="newcardform.number.$error" ng-if="newcardform.number.$touched">
@@ -253,7 +237,7 @@
                                                     <i class="fa fa-spin fa-spinner"></i>
                                                 </span>Submit</button>
                                         </div>
-
+                                   </form>  
                                 </div>
                             </div>
                         </div>
@@ -319,7 +303,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
