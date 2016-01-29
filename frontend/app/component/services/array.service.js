@@ -97,6 +97,12 @@ console.log(Send_Array);
 //console.log(parseFloat(sum).toFixed(2));
 return parseFloat(sum).toFixed(2);
         }
+        service.openingTime = function(openingTime) {
+                      
+        }
+        service.closingTime = function(closingTime) {
+                      
+        }
         return service;
     }
 })();

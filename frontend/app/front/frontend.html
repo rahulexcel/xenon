@@ -123,11 +123,17 @@
                                                     <option ng-repeat="row in delivery_method" value="{{row}}">{{row}}</option>
                                                 </select>
                                             </div>
-                                            <div class="form-group">
-                                                <select class="form-control input-lg"  ng-model="time">
+                                            <div class="form-inline">
+                                            <div class="form-group" style="width:100%">
+                                                <select class="form-control input-lg time-dropdown"  ng-model="time">
                                                     <option  
                                                                   ng-repeat="row in dropdown_days" value="{{row}}">{{row}}</option>
                                                 </select>
+                                                <select class="form-control input-lg time-dropdown"  ng-model="time">
+                                                    <option  
+                                                                  ng-repeat="row in dropdown_days" value="{{row}}">{{row}}</option>
+                                                </select>
+                                            </div>
                                             </div>
 
                                             <div class="cart">

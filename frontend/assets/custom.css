@@ -290,7 +290,7 @@ padding-bottom: 12px;
 	padding: 10px;
 }
 .btn-info{
-    /*background-color: rgb(239, 110, 84)!important;*/
+    background-color: rgb(239, 110, 84)!important;
     border-color:rgb(239, 110, 84);
 }
 .btn-info:hover{
@@ -368,4 +368,7 @@ width: 84px;
 .cart-details{
 	max-width: 50%;
 	text-align: left;
+}
+.time-dropdown{
+	width: 49%!important;
 }
