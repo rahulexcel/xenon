@@ -15,6 +15,11 @@
             'update':{
                 method:'PUT',
                 params:{
+               //  'firstname': '@firstname',
+               //  'email': '@email',
+               // 'lastname': '@lastname',
+               //  'streetaddr':'@streetaddr',
+               //  'postcode': '@postcode'
                     
             },
             headers:{'Authorization':'Bearer ' + currentUser}

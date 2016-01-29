@@ -89,6 +89,7 @@
         function check_local_storage(){
             if(angular.isDefined($localStorage.Orders_sent)){
                 $scope.cart=$localStorage.Orders_sent;
+                $scope.total_price=$localStorage.shippingdata.total_price;
                    
             }
         }
@@ -277,7 +278,8 @@ $scope.total_price=arrayService.getTotalprice($scope.cart);
                                 deliverymode: mode,
                               shipping_time: $scope.time,
                               timestamp:timeService.getTimestamp($scope.time),
-                               currency: $scope.currency};
+                               currency: $scope.currency,
+                               total_price:$scope.total_price     };
                      timeStorage.set('shippingdata', data, 1);           
 
                      // $rootScope.shipping_time=$scope.time;

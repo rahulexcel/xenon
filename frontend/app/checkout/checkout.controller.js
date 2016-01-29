@@ -2,6 +2,7 @@
     'use strict';
     angular.module('xenon-frontend')
         .controller('checkoutCtrl', checkoutCtrl);
+
     function checkoutCtrl(validate, $scope, timeStorage, existingcharge, customercard, $localStorage, putCustomer, cauth, newcharge, arrayService, locations, cauthreq, locationID) {
         validate.order_placed();
         $scope.data_recevied = true;
@@ -15,10 +16,10 @@
         $scope.shipping_time = $localStorage.shippingdata.shipping_time;
         var on_load_response;
         var existing_customer;
-        var smscode_response;
+        var smscode_response = false;
         var customer_id;
         var customer_token;
-        $scope.smscode="12";
+
         var query = locations.get({
             locationID: locationID.locationID
         });
@@ -61,11 +62,11 @@
                     $scope.phone_spinner = false;
                     if (response.customer === false) {
                         verify_delivery_mode();
-                        $scope.existing_card=true;
+                        $scope.existing_card = true;
 
                     } else {
-                      $scope.smscode="";
-                       $scope.existing_card_show_cvc = true;
+                        $scope.smscode = "";
+                        $scope.existing_card_show_cvc = true;
                         $scope.show_sms_code_enter = true;
                         timeStorage.set('token', 1, 0.01);
                     }
@@ -73,7 +74,7 @@
             }
         }
 
-       
+
         $scope.sms_code_submitted = function() {
             var country_code = angular.element($("#mobile-number").intlTelInput("getSelectedCountryData"));
             console.log($scope.smscode);
@@ -92,16 +93,16 @@
                 if (response.smscode == false) {
                     $scope.code_error = response.data;
                 } else {
-                    $scope.first_name = response.firstname,
-                    $scope.last_name = response.lastname,
-                    $scope.postcode = response.postcode,
-                    $scope.addr = response.address,
-                    $scope.cc_month = response.card_exp_month;
+                    $scope.dis_first_name = response.firstname,
+                        $scope.dis_last_name = response.lastname,
+                        $scope.dis_postcode = response.postcode,
+                        $scope.dis_addr = response.address,
+                        $scope.cc_month = response.card_exp_month;
                     $scope.cc_year = response.card_exp_year;
                     $scope.cardnumber = "xxxx" + " " + "xxxx" + " " + "xxxx" + " " + "xxxx" + " " + response.card_last4;
-                    $scope.stripeEmail = response.email;
+                    $scope.dis_email = response.email;
                     $scope.fullname = response.firstname + " " + response.lastname;
-                    smscode_response=response;
+                    smscode_response = response.smscode;
                     verify_delivery_mode();
                 }
 
@@ -110,24 +111,65 @@
             });
 
         }
-         function verify_delivery_mode() {
+
+        function verify_delivery_mode() {
             if ($localStorage.shippingdata.deliverymode === 1) {
+
                 $scope.payment_details_form = true;
             } else {
-                $scope.delivery_details_form = true;
+                if (smscode_response == true) {
+                    $scope.delivery_details_disabled_form = true;
+                } else {
+                    $scope.delivery_details_form = true;
+                }
+
                 $scope.payment_details_form = true;
-                // $scope.existing_card_show_cvc = true;
+
+
             }
         }
+        $scope.edit_customer_information = function() {
+            $scope.delivery_details_disabled_form = false;
+            $scope.delivery_details_form = true;
+            if ($scope.delivery_details_form === true) {
+                $scope.update_button = true;
+
+
+            }
+
+        }
+        $scope.update_customer_information = function() {
+            $scope.update_spinner = true;
+            var country_code = angular.element($("#mobile-number").intlTelInput("getSelectedCountryData"));
+            var updateCustomer = putCustomer.update({}, {
+                customerid: customer_id,
+                firstname: $scope.first_name,
+                email: $scope.stripeEmail,
+                lastname: $scope.last_name,
+                streetaddr: $scope.addr,
+                postcode: $scope.postcode
+            
+            });
+            updateCustomer.$promise.then(function(response) {
+                console.log(response);
+                $scope.update_spinner = false;
+
+            });
+
+
+
+        }
+        var $form;
         $scope.newcharge = function() {
             $scope.payment_spinner = true;
             console.log(smscode_response);
             console.log($scope.payment_errors);
+            $form = $('#payment-form');
             $('#payment-form').submit(function(event) {
-              // alert();
+                // alert();
                 var $form = $(this);
                 $scope.payment_spinner = false;
-                // Disable the submit button to prevent repeated clicks
+
                 $form.find('button').prop('disabled', false);
                 Stripe.card.createToken($form, stripeResponseHandler);
                 // Prevent the form from submitting with the default action
@@ -136,7 +178,7 @@
         }
 
         function stripeResponseHandler(status, response) {
-            var $form = $('#payment-form');
+            // var $form = $('#payment-form');
             $scope.new = false;
             if (response.error) {
                 $scope.payment_spinner = false;
@@ -147,122 +189,95 @@
             } else {
                 console.log(response.id);
                 console.log($localStorage.shippingdata.currency.toLowerCase());
-                var country_code = angular.element($("#mobile-number").intlTelInput("getSelectedCountryData"));
                 if (existing_customer === true) {
-                              update_customer();
-                           }
-                   // $scope.updatebutton = true;
+                    existinguser(response);
+                }
+                // $scope.updatebutton = true;
                 else {
-                    var query3 = newcharge.save({
-                        orderid: $localStorage.Orders_response.orderid,
-                        stripeToken: response.id,
-                        firstname: $scope.first_name,
-                        stripeEmail: $scope.stripeEmail,
-                        lastname: $scope.last_name,
-                        addr: $scope.addr,
-                        postcode: $scope.postcode,
-                        city: $scope.city,
-                        countrycode: country_code[0].dialCode,
-                        currency: $localStorage.shippingdata.currency.toLowerCase(),
-                        phone: $scope.phone_no,
-                        deliverymode: $localStorage.shippingdata.deliverymode,
-                        deliverytime:$localStorage.shippingdata.timestamp
-                    });
-                    query3.$promise.then(function(response) {
-                        console.log(response);
-                        if (response.paid === true) {
-                            $scope.order_not_success = false;
-                            $scope.success_message = true;
-                            $localStorage.$reset();
-                             $scope.payment_spinner = false;
-                        }else{
-                        $scope.payment_spinner = false;
-                      }
-                    });
-
+                    newuser(response);
 
                 }
-
-                // response contains id and card, which contains additional card details
                 var token = response.id;
-                // Insert the token into the form so it gets submitted to the server
                 $form.append($('<input type="hidden" name="stripeToken" />').val(token));
-                // and submit
                 console.log(token);
-                
             }
         }
-
-       function update_customer(){
-        var updateCustomer =  putCustomer.update({},{
-                                       customerid:customer_id,
-                                       //token:customer_token,
-                                       orderid:$localStorage.Orders_response.orderid,
-                                        // stripeToken:response.id,
-                                        firstname: $scope.first_name,
-                                        stripeEmail:$scope.stripeEmail,
-                                        lastname: $scope.last_name,
-                                        addr: $scope.addr,
-                                        postcode: $scope.postcode,
-                                        city:$scope.city,
-                                        countrycode:country_code[0].dialCode,
-                                        currency:$localStorage.shippingdata.currency.toLowerCase(),
-                                        phone:$scope.phone_no,
-                                        deliverymode:$localStorage.shippingdata.deliverymode
-                                          });
-                             updateCustomer.$promise.then(function(response) { 
-                                  console.log(response);
-                                  if(response.paid===true){
-                                    $scope.order_not_success=false;
-                                    $scope.success_message=true;
-                                    $localStorage.$reset();
-                                  }
-                                  $scope.payment_spinner=false;
-                             });
-
-       }
-
         $scope.names_found = function() {
             $scope.fullname = $scope.first_name + ' ' + $scope.last_name;
         }
-         var newcardflag=0;
+        var newcardflag = 0;
         $scope.user_is_adding_new_card = function() {
             $scope.existing_card_show_cvc = false;
             $scope.newcard = true;
-            newcardflag=1;
+            newcardflag = 1;
 
         }
-        $scope.existingcharge=function(){
-            // updatecustomer();
+        $scope.existingcharge = function() {
             var country_code = angular.element($("#mobile-number").intlTelInput("getSelectedCountryData"));
-           var savedcard = existingcharge.save({
-                        customerid: customer_id, 
-                        orderid: $localStorage.Orders_response.orderid
-                      
-                    });
-                    savedcard.$promise.then(function(response) {
-                        console.log(response);
-                          update_customer();
-                        $scope.payment_spinner = false;
-                    });
-    
+            var savedcard = existingcharge.save({
+                customerid: customer_id,
+                orderid: $localStorage.Orders_response.orderid
+            });
+            savedcard.$promise.then(function(response) {
+                console.log(response);
 
+                $scope.payment_spinner = false;
+            });
         }
-           
-       $scope.cardnew=function(){
-          var customerCard =  customercard.update({},{
-                                        customerid: customer_id, 
-                                        object: "card",
-                                        exp_month: $scope.cc_monthnew,
-                                        exp_year: $scope.cc_yearnew,
-                                        number: $scope.newcardnumber,
-                                        cvc: $scope.CVCnew
-                                          });
-                             customerCard.$promise.then(function(response) { 
-                                  console.log(response);
-                                    update_customer();
-                                
-                             });
-       }
+        $scope.cardnew = function() {
+            $form = $('#cardnew');
+            $('#cardnew').submit(function(event) {
+                // alert();
+                var $form = $(this);
+                $scope.payment_spinner = false;
+
+                $form.find('button').prop('disabled', false);
+                Stripe.card.createToken($form, stripeResponseHandler);
+                // Prevent the form from submitting with the default action
+                return true;
+            });
+        }
+
+        function newuser(response) {
+            var country_code = angular.element($("#mobile-number").intlTelInput("getSelectedCountryData"));
+            var query3 = newcharge.save({
+                orderid: $localStorage.Orders_response.orderid,
+                stripeToken: response.id,
+                firstname: $scope.first_name,
+                stripeEmail: $scope.stripeEmail,
+                lastname: $scope.last_name,
+                addr: $scope.addr,
+                postcode: $scope.postcode,
+                city: $scope.city,
+                countrycode: country_code[0].dialCode,
+                currency: $localStorage.shippingdata.currency.toLowerCase(),
+                phone: $scope.phone_no,
+                deliverymode: $localStorage.shippingdata.deliverymode,
+                deliverytime: $localStorage.shippingdata.timestamp
+            });
+            query3.$promise.then(function(response) {
+                console.log(response);
+                if (response.paid === true) {
+                    $scope.order_not_success = false;
+                    $scope.success_message = true;
+                    $localStorage.$reset();
+                    $scope.payment_spinner = false;
+                } else {
+                    $scope.payment_spinner = false;
+                }
+            });
+        }
+        function existinguser(response) {
+            var customerCard = customercard.update({}, {
+                customerid: customer_id,
+                exp_month: $scope.cc_monthnew,
+                exp_year: $scope.cc_yearnew,
+                number: $scope.newcardnumber,
+                cvc: $scope.CVCnew
+            });
+            customerCard.$promise.then(function(response) {
+                console.log(response);
+            });
+        }
     }
 })();
