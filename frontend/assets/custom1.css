@@ -369,6 +369,10 @@ display:none;
 .subtotal{
 	 padding-bottom: 17px;
 }
+
+.time-dropdown{
+	width: 100%!important;
+}
 }
 @media only screen and (max-width: 480px){
  #allProduct .productName h4{
