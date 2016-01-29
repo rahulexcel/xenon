@@ -12,6 +12,7 @@
                                      $rootScope.Order_not_placed = false;
                                      $rootScope.spinner=false;
                                         }, 5000);
+                                   }
                 if (toState.url !== "/frontend") {
                     if (angular.isDefined($localStorage.Orders_response)) {}
                         else{
@@ -20,7 +21,7 @@
                         }
                         
                     }
-                }
+                
             });
 }}
 }

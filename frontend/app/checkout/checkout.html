@@ -14,7 +14,7 @@
                     </div>
                    
                 </div>
-        <form id="payment-form" name="userForm" novalidate>
+      
             <div class='row to-do'>
                 <div>
                     <div class="col-sm-8 bgwhite leftCtnr">
@@ -130,9 +130,10 @@
                                     <div class="col-sm-6">
                                         <div class='card-wrapper form-group'></div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-6" ng-show="existing_card">
+                                     <form id="payment-form" name="userForm" novalidate>
                                         <div class="form-group" ng-class="{ 'has-error': userForm.name.$touched && userForm.name.$invalid }">
-                                            <input type="number" class="form-control input-lg" maxlength="20" data-stripe="number" ng-model="cardnumber" name="number" placeholder="Card number" ng-blur="card_error()"  ng-minlength="16"required>
+                                            <input  type="text" class="form-control input-lg" maxlength="20" data-stripe="number" ng-model="cardnumber" name="number" placeholder="Card number" ng-blur="card_error()"  ng-minlength="16"required>
                                              <div class="help-block" ng-messages="userForm.number.$error" ng-if="userForm.number.$touched">
         <p ng-message="minlength">Card number is too short.</p>
        
@@ -173,12 +174,61 @@
                             <i class="fa fa-spin fa-spinner"></i>
                         </span>Submit</button>
                                         </div>
+                                        </form>
                                     </div>
+                                     <div class="col-sm-6" ng-show="existing_card_show_cvc">
+                                <input type="text" class="form-control input-lg" size="4" data-stripe="cvc" ng-model="CVC" cc-cvc name="cvc" placeholder="CVC" ng-blur="cvc_error()" required>
+                                <div class="pull-left form-group">
+                                    <span style="color:rgb(239,110,84) cursor:pointer;" ng-click="user_is_adding_new_card()">Add new card </span>
+                                </div>
+                                <div class="form-group pull-right">
+                                    <button class="btn btn-info btn-lg" ng-click="existingcharge()"> <span ng-show="payment_spinner">
+                            <i class="fa fa-spin fa-spinner"></i>
+                        </span>Submit</button>
+                                </div>
+                            </div>
+                           <div class="col-sm-6" ng-show="newcard">
+                                <form name="newcardform">
+                                    <div class="form-group" ng-class="{ 'has-error': newcardform.name.$touched && newcardform.name.$invalid }">
+                                        <input type="text" class="form-control input-lg" size="20" data-stripe="number" ng-model="newcardnumber" placeholder="Card number" ng-blur="card_error()" ng-minlength="16" required>
+                                        <div class="help-block" ng-messages="newcardform.number.$error" ng-if="newcardform.number.$touched">
+                                            <p ng-message="minlength">Card number is too short.</p>
+
+                                            <p ng-message="required">Card number is required.</p>
+                                        </div>
+
+
+                                    </div>
+                                    <div class="form-group" ng-class="{ 'has-error': newcardform.name.$touched && newcardform.name.$invalid }">
+                                        <div class="form-inline">
+                                            <input type="text" size="2" data-stripe="exp-month" class="form-control input-lg" ng-model="cc_monthnew" cc-exp-month  placeholder="MM" ng-blur="exp_month_error()" required>
+                                            <span> / </span>
+                                            <input type="text" size="4" data-stripe="exp-year" class="form-control input-lg" ng-model="cc_yearnew" cc-exp-year  placeholder="YYYY" ng-blur="exp_year_error()" required/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <input type="text" class="form-control input-lg" size="4" data-stripe="cvc" ng-model="CVCnew" cc-cvc placeholder="CVC" ng-blur="cvc_error()" required>
+                                        </div>
+                                        <span ng-show="newcardform.expiry.$invalid&& !newcardform.expiry.$pristine">Looking for a valid expiry date</span>
+                                        <span ng-show="newcardform.cvc.$invalid&& !newcardform.cvc.$pristine">Looking for a valid CVC</span>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="text" class="form-control input-lg"  ng-model="fullnamenew" placeholder="Name on card" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <span class="payment-errors" style="color: red" ng-bind="payment_errors"></span>
+                                    </div>
+                                    <div class="form-group pull-right">
+                                        <button class="btn btn-info btn-lg" ng-click="cardnew()" ng-disabled="newcardform.first_name.$invalid||newcardform.cvc.$invalid||newcardform.expiry.$invalid||newcardform.number.$invalid||newcardform.postcode.$invalid||newcardform.addr.$invalid||newcardform.stripeEmail.$invalid||newcardform.f_n.$invalid||newcardform.l_n.$invalid" ng-style="{'background-color' : (disabled==true) ? 'rgb(239, 110, 84              )' : '#bbbdc0'}"> <span ng-show="payment_spinner">
+                            <i class="fa fa-spin fa-spinner"></i>
+                        </span>Submit</button>
+                                    </div>
+                          
+                            </div>
+                            </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                
                 <div class="col-sm-4 bgwhite">
                     <div class="row" style="padding-top:22px;">
                     <div class="col-sm-12">
@@ -233,7 +283,7 @@
                                 </div>
                               </div>
                             </div>
-                          </form>
+                        
                         </div>
                       </div>
                     </div>

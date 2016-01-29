@@ -6,6 +6,7 @@
     function putCustomer($resource, Configurations, $localStorage) {
           var currentUser = $localStorage.token;
           console.log(currentUser);
+          console.log(currentUser);
          //$httpProvider.interceptors.push('myInterceptor');
            //config.headers['Authorization'] = 'Bearer ' + currentUser;
         return $resource(Configurations.Hostserver + '/customer/:customerid', {
