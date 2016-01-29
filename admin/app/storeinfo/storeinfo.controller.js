@@ -3,10 +3,7 @@
  angular
   .module('xenon.controllers')
   .controller('storeinfoCtrl', storeinfoCtrl);
-
- function storeinfoCtrl($scope, $log, userValidate, countryData, FileUploader,uploadService, dropdownService, $state, storeinfoFactory, $timeout, calanderService, localStorageService, Upload, storeinfoLocationsFactory, storeinfoLocationsIdFactory, storeinfoLocFile) {
-  console.log('Store info');
-  userValidate.validUserController();
+ function storeinfoCtrl($scope, $log, countryData, FileUploader,uploadService, dropdownService, $state, storeinfoFactory, $timeout, calanderService, localStorageService, Upload, storeinfoLocationsFactory, storeinfoLocationsIdFactory,  storeinfoLocFile) {
   var dateArray = [];
   var responseDateArr = [];
   var i;
@@ -85,8 +82,11 @@
     dateArray = dateArray.concat(closed);
     for (i = 0; i < closed.length; i++) {
      var responseDate = closed[i].split('-').reverse();
+     console.log(responseDate);
      var responseTimestamp = new Date(responseDate).getTime();
      responseDateArr.push(responseTimestamp);
+     console.log(responseTimestamp);
+
     }
     $scope.selectedDays = responseDateArr;
    });

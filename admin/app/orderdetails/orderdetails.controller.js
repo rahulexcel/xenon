@@ -3,9 +3,8 @@
 
     angular.module('xenon-app')
             .controller('orderDetailsController', orderDetailsController);
-    function orderDetailsController($scope, $rootScope, userValidate, orderDetailsFactory, $state, orderDetailsService, localStorageService) {
+    function orderDetailsController($scope, $rootScope, orderDetailsFactory, $state, orderDetailsService, localStorageService) {
         console.log("Order Details Page");
-        userValidate.validUserController();
         console.log("Single Order id " + $rootScope.singleOrderId);
         if ($rootScope.singleOrderId) {
             var query = orderDetailsFactory.get({"orderId": $rootScope.singleOrderId});
@@ -30,9 +29,9 @@
         }
 
         // $scope.deleteOrder = function(){
-        // 	console.log($rootScope.singleOrderId);
-        // 	var query = orderDetailsFactory.deleteOrder({"orderId":$rootScope.singleOrderId});
-        // 	query.$promise.then(function(data) {
+        //  console.log($rootScope.singleOrderId);
+        //  var query = orderDetailsFactory.deleteOrder({"orderId":$rootScope.singleOrderId});
+        //  query.$promise.then(function(data) {
         //                 console.log(data);
         //                 $state.go('dashboard.productOrders');
         //             });

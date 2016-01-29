@@ -3,9 +3,8 @@
 
     angular.module('xenon-app')
             .controller('settingController', settingController);
-    function settingController($scope, countryData, userValidate, dropdownService, storeinfoLocationsIdFactory, localStorageService) {
+    function settingController($scope, countryData, dropdownService, storeinfoLocationsIdFactory, localStorageService) {
         console.log("Setting Page");
-        userValidate.validUserController();
         var userData = localStorageService.get("userData");
         var locationid = userData.locations[0];
         $scope.countryName =  dropdownService.countryDropdown();

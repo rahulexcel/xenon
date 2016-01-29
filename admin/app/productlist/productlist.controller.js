@@ -3,8 +3,7 @@
 
     angular.module('xenon-app')
             .controller('productListController', productListController);
-    function productListController($scope, $timeout, $localStorage, userValidate, uploadService, categorylistService, categoryListFactory, addCategoryFactory, categoryFactory, productlistService, storeinfoLocationsIdFactory, productListFactory, productFactory, localStorageService, $rootScope, $state) {
-        userValidate.validUserController();
+    function productListController($scope, $timeout, $localStorage, uploadService, categorylistService, categoryListFactory, addCategoryFactory, categoryFactory, productlistService, storeinfoLocationsIdFactory, productListFactory, productFactory, localStorageService, $rootScope, $state) {
         $scope.spinner = true;
         $scope.catSpinner = true;
         $scope.saveCategoryTreeStructure = false;

@@ -5,6 +5,8 @@
             controller('navbarController', navbarController);
     function navbarController($scope, $rootScope, ajaxRequest, loginFactory, localStorageService, $log, $state)
     {
+        console.log($state.current.name);
+       
         $log.debug('Navbar Controller');
         $scope.logout = function() {
             localStorageService.removeAll();
@@ -18,8 +20,7 @@
         $scope.goSignUp = function() {
             $state.go('dashboard.singup');
         };
-         $scope.goReset = function() {
-            $state.go('dashboard.reset');
-        };
+        
+
     }
 })();

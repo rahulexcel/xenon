@@ -4,6 +4,7 @@ angular.module('xenon-app')
   .factory('myInterceptor', function (localStorageService) {
             var requestInterceptor = {
                 request: function (config) {
+                  console.log(config);
                   var currentUser = localStorageService.get('userData');
               if (currentUser) {
                 var accessToken = currentUser.token;
