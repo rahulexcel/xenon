@@ -11,6 +11,7 @@
         $scope.cart_shown="cart_not_display";
         $scope.product_menu = "product_menu_not_display";
         $scope.backCatMenu = false;
+        $scope.productInCart = 0;
           //$scope.class="left_menu_not_display";
            //  $scope.cart_shown="cart_not_display";
     $scope.changeClassLeftMenu = function(){
@@ -167,8 +168,9 @@
         var pr_total;
         var product_name;
         $scope.show_in_cart = function(selected_product) {
-           $scope.cart_shown="cart_display";
-            $scope.product_menu = "product_menu_not_display";
+            $scope.productInCart = $scope.productInCart +1;
+           //$scope.cart_shown="cart_display";
+            //$scope.product_menu = "product_menu_not_display";
             $scope.backCatMenu = false;
             $scope.backProductMenu = true;
             var flag1 = 1;
@@ -291,6 +293,12 @@ $scope.total_price=arrayService.getTotalprice($scope.cart);
                  $state.go('checkout');
 
             });
+
+        }
+        $scope.clickOnCart = function(){
+            console.log('click on cart');
+            $scope.cart_shown="cart_display";
+            $scope.product_menu = "product_menu_not_display";
 
         }
 

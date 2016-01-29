@@ -372,3 +372,11 @@ width: 84px;
 .time-dropdown{
 	width: 49%!important;
 }
+
+.cart-container{
+	display: none;
+}
+.sticky-cart {
+    padding-left: 80%;
+    color: #000;
+}

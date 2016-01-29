@@ -1,4 +1,8 @@
-
+<nav class="navbar navbar-fixed-top cart-container">
+  <div class="container">
+    <span class="sticky-cart" ng-click="clickOnCart()" ng-if="(productInCart)" style="font-size:24px;"><i class="fa fa-shopping-cart"></i> {{productInCart}}</span>
+  </div>
+</nav>
  <div class="all">
  <h1  ng-show="spinner" style="text-align: center;">
     <span>
@@ -51,11 +55,11 @@
                             <div ng-class="product_menu">
                             <div class="col-sm-9">
                                 <div ng-show="all_clicked" class="aligned-center" id="allProduct">
+                                <span class="pull-right back-menu" ng-show="backCatMenu"><i class='glyphicon glyphicon-chevron-left fa-lg' ng-click="backToCatList()"></i></span>
+                              <span class="pull-right back-menu" ng-show="backProductMenu"><i class='glyphicon glyphicon-chevron-left fa-lg' ng-click="backToProductList()"></i></span>
                                     <div ng-repeat='row in All_products'>
                                         <header class="menu-section-title">
                                             <h3 class="heading">{{row.name}}
-                                                <span class="pull-right back-menu" ng-show="backCatMenu"><i class='glyphicon glyphicon-chevron-left fa-lg' ng-click="backToCatList()"></i></span>
-                              <span class="pull-right back-menu" ng-show="backProductMenu"><i class='glyphicon glyphicon-chevron-left fa-lg' ng-click="backToProductList()"></i></span>
                                             </h3>
                                             <p class='no-pad'>{{row.name}}</p>
 
@@ -113,7 +117,7 @@
                                <div ng-class="cart_shown">
                                 <div class="col-sm-4 bgwhite rightCtnr">
                                     <div class="text-center" style="padding-top: 20px;">
-                                        <span class=" bold">
+                                        <span class=" bold">&nbsp;
                                             <span class="pull-right back-menu1" ng-show="backCatMenu"><i class='glyphicon glyphicon-chevron-left fa-lg' ng-click="backToCatList()"></i></span>
                               <span class="pull-right back-menu1" ng-show="backProductMenu"><i class='glyphicon glyphicon-chevron-left fa-lg' ng-click="backToProductList()"></i></span>
                                         </span>
