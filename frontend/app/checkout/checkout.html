@@ -90,7 +90,7 @@
                                 </div>
                             </div>
                             <div class="row padbot" ng-show="delivery_details_form">
-                            <form name="detailsform">
+                                <form name="detailsform">
                                 <div class="col-sm-6 no-pad-left-right">
                                     <div class="form-group" ng-class="{ 'has-error': detailsform.name.$touched && detailsform.name.$invalid }">
                                         <input type="text" class="form-control input-lg" ng-model="first_name" placeholder="First name" name="f_n" ng-blur="f_n()" required>
@@ -143,7 +143,7 @@
                                         <input type="text" class="form-control input-lg" name="country" ng-model="country" placeholder="Country"  disabled>
                                     </div>
                                     <div class="form-group pull-right" ng-show="update_button">
-                                         <button class="btn btn-info btn-lg" ng-click="update_customer_information()"> <span ng-show="update_spinner">
+                                         <button class="btn btn-info btn-lg" ng-click="update_customer_information()" ng-disabled="detailsform.f_n.$invalid||detailsform.l_n.$invalid||detailsform.stripeEmail.$invalid||detailsform.addr.$invalid||detailsform.postcode.$invalid"> <span ng-show="update_spinner">
                                                     <i class="fa fa-spin fa-spinner"></i>
                                                 </span>Update</button>
                                     </div>
@@ -159,6 +159,7 @@
                                 <div class="col-sm-6">
                                     <div ng-show="existing_card" class='card-wrapper1 form-group'></div>
                                     <div ng-show="newcard" class='card-wrapper form-group'></div>
+                                    <div ng-show="never" class='card-wrapper2 form-group'></div>
                                 </div>
                                 <div class="col-sm-6 no-pad-left-right" ng-show="existing_card">
                                     <form id="payment-form" name="userForm" novalidate>
@@ -194,6 +195,7 @@
                                     </form>
                                 </div>
                                 <div class="col-sm-6 no-pad-left-right" ng-show="existing_card_show_cvc">
+                                <form name="existing" id="exist">
                                       <div class="form-group">
                                             <input type="text" class="form-control input-lg" ng-model="existingcardnumber"  disabled>
                                         </div>
@@ -202,7 +204,7 @@
                                                 <input type="text" class="form-control input-lg"  ng-model="existingexpmonth" disabled>
                                                 <span> / </span>
                                                 <input type="text" class="form-control input-lg"  ng-model="existingcc_yearnew" disabled/>
-                                               <input type="text" class="form-control input-lg"  ng-model="existingCVC" disabled>
+                                               <input type="text" class="form-control input-lg"  ng-model="existingCVC" name="cvc" placeholder="CVC" ng-minlength="3" required>
                                  
                                        </div>
                                            
@@ -215,10 +217,11 @@
                                         <span style="color:rgb(239,110,84) cursor:pointer;" ng-click="user_is_adding_new_card()">Add new card </span>
                                     </div>
                                     <div class="form-group pull-right">
-                                        <button class="btn btn-info btn-lg" ng-click="existingcharge()"> <span ng-show="payment_spinner">
+                                        <button class="btn btn-info btn-lg" ng-click="existingcharge()" ng-disabled="existing.cvc.$invalid"> <span ng-show="payment_spinner">
                                                 <i class="fa fa-spin fa-spinner"></i>
                                             </span>Submit</button>
                                     </div>
+                                    </form>
                                 </div>
                                 <div class="col-sm-6 no-pad-left-right" ng-show="newcard">
                                     <form name="newcardform" id="cardnew">
@@ -347,6 +350,9 @@
 });
 $('#cardnew').card({
 container: '.card-wrapper', 
+});
+$('#exist').card({
+container: '.card-wrapper2', 
 });
 </script>
 <script type="text/javascript">

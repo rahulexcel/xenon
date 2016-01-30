@@ -98,12 +98,8 @@
             smscodesubmittion.$promise.then(function(response) {
                 customer_id = response.customerid;
                 customer_token = response.token;
-                // delete $localStorage.smstoken;
                  $localStorage.smstoken = response.token;
                  $localStorage.smstoken1=response.token;
-                 ///$rootScope.smstoken=response.token;
-                 //putCustomer.getsmscode(response.token);
-                // $localStorage.set('token', response.token, 1);
                 console.log(customer_token);
                 console.log(response);
                 if (response.smscode == false) {
@@ -239,7 +235,7 @@
             });
             savedcard.$promise.then(function(response) {
                 console.log(response);
-
+                  after_payment(response);
                 $scope.payment_spinner = false;
             });
         }
@@ -276,15 +272,8 @@
             });
             query3.$promise.then(function(response) {
                 console.log(response);
-                if (response.paid === true) {
-                    $scope.orderNo = $localStorage.Orders_response.orderid;
-                    $scope.order_not_success = false;
-                    $scope.success_message = true;
-                    $localStorage.$reset();
-                    $scope.payment_spinner = false;
-                } else {
-                    $scope.payment_spinner = false;
-                }
+                after_payment(response);
+               
             });
         }
         function existinguser(response) {
@@ -301,6 +290,16 @@
         }
         $scope.changeBackgrounfColor = function(){
             console.log('changeBackgrounfColor');
+        }
+        function after_payment(response){
+         if (response.paid === true) {
+                    $scope.order_not_success = false;
+                    $scope.success_message = true;
+                    $localStorage.$reset();
+                    $scope.payment_spinner = false;
+                } else {
+                    $scope.payment_spinner = false;
+                }
         }
     }
 })();
