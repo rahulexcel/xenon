@@ -5,7 +5,7 @@
 
     function checkoutCtrl(validate, $scope,$rootScope,  timeStorage, existingcharge, customercard, $localStorage, putCustomer, cauth, newcharge, arrayService, locations, cauthreq, locationID) {
         validate.order_placed();
-
+        $scope.location_desc_part2_show = false;
         $scope.data_recevied = true;
         $scope.order_not_success = true;
         $scope.orderid = $localStorage.Orders_response.orderid;
@@ -30,7 +30,16 @@
             $scope.city = data.lcity;
             $scope.currency = data.lcurrency;
             $scope.location_name = data.lname;
-            $scope.location_desc = data.ldesc;
+            // $scope.location_desc = data.ldesc;
+            console.log(data.ldesc.split(' ').length);
+            if(data.ldesc.split(' ').length > 20){
+                console.log('calling service');
+                $scope.location_desc_part1 = data.ldesc.substring(0, 80);
+                $scope.location_desc_part2 = data.ldesc.substring(80, data.ldesc.length);
+            } else{
+                $scope.location_desc_part1 = data.ldesc;
+                $scope.location_desc_part2_show = true;
+            }
             $scope.picImage = 'http://s3.amazonaws.com/ordermagic/' + data.llogo;
             $scope.location_addr = data.laddr;
             $scope.location_lcity = data.lcity;

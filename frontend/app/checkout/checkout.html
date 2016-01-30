@@ -8,7 +8,7 @@
                </div>
                <div class="col-sm-6 col-xs-12 text-center">
                    <h3 class="heading topheading">{{location_name}} 
-                           <p class="store-desc" style="padding-top:5px;">{{location_desc}}</p>
+                           <p class="store-desc" style="padding-top:5px;">{{location_desc_part1}}<span ng-click="location_desc_part2_show = true" ng-hide="location_desc_part2_show">...</span><span ng-show="location_desc_part2_show">{{location_desc_part2}}</span></p>
                            <p class="store-desc">{{location_addr}}, {{location_lcity}},  {{location_lpostcode}}, {{location_lstate}}, <i class="glyphicon glyphicon-earphone"></i> {{location_lphone}} | {{location_openingtime}}-{{location_closingtime}}</p>
                        </h3>
                    </div>
