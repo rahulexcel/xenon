@@ -55,8 +55,7 @@
                
                 $scope.dropdown_minutes = dropdownService.minutesdropdown(data.llt);
                  $scope.dropdown_days = dropdownService.Timedropdown();
-                 $scope.minutes=$scope.dropdown_minutes[0].toString();
-                   updatetime(data);
+                 $scope.minutes=$scope.dropdown_minutes[0].toString();  
                // $scope.dropdown_days.unshift(dropdownService.Selected(data.llt));
                 $scope.time =dropdownService.Selected(data.llt);  
                 //console.log();
@@ -82,6 +81,7 @@
                 $scope.all_clicked = true;
                 get_category();
                 check_local_storage();
+                 updatetime(data);
 
             });
         }
