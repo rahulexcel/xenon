@@ -162,7 +162,7 @@
                                 <div class="col-sm-6" ng-show="existing_card">
                                     <form id="payment-form" name="userForm" novalidate>
                                         <div class="form-group" ng-class="{ 'has-error': userForm.name.$touched && userForm.name.$invalid }">
-                                            <input  type="text" size="16" class="form-control input-lg" maxlength="20" data-stripe="number" ng-model="cardnumber" name="number" placeholder="Card number" ng-blur="card_error()"  ng-minlength="16"required>
+                                            <input  type="text" class="form-control input-lg" maxlength="20" data-stripe="number" ng-model="cardnumber" name="number" placeholder="Card number" ng-blur="card_error()"  ng-minlength="16"required>
                                             <div class="help-block" ng-messages="userForm.number.$error" ng-if="userForm.number.$touched">
                                                 <p ng-message="minlength">Card number is too short.</p>
 
@@ -171,9 +171,9 @@
                                         </div>
                                         <div class="form-group" ng-class="{ 'has-error': userForm.name.$touched && userForm.name.$invalid }">
                                             <div class="form-inline" id="card_details">
-                                                <input type="text" size="2" maxlength="2" data-stripe="exp-month" class="form-control input-lg" ng-model="cc_month" cc-exp-month name="expiry" placeholder="MM" ng-blur="exp_month_error()" required>
+                                                <input type="text" maxlength="2" data-stripe="exp-month" class="form-control input-lg" ng-model="cc_month" cc-exp-month name="expiry" placeholder="MM" ng-blur="exp_month_error()" required>
                                                 <span> / </span>
-                                                <input type="text" size="4" maxlength="4" data-stripe="exp-year" class="form-control input-lg" ng-model="cc_year" cc-exp-year name="expiry" placeholder="YYYY" ng-blur="exp_year_error()" required/>
+                                                <input type="text" maxlength="4" data-stripe="exp-year" class="form-control input-lg" ng-model="cc_year" cc-exp-year name="expiry" placeholder="YYYY" ng-blur="exp_year_error()" required/>
                                                 <input type="text" class="form-control input-lg" maxlength="4" data-stripe="cvc" ng-model="CVC" cc-cvc name="cvc" placeholder="CVC" ng-blur="cvc_error()"required>
                                             </div>
                                             <span ng-show="userForm.expiry.$invalid && !userForm.expiry.$pristine">Looking for a valid expiry date</span>
@@ -193,8 +193,24 @@
                                     </form>
                                 </div>
                                 <div class="col-sm-6" ng-show="existing_card_show_cvc">
-                                    <input type="text" class="form-control input-lg" size="4" data-stripe="cvc" ng-model="CVC" cc-cvc name="cvc" placeholder="CVC" ng-blur="cvc_error()" required>
-                                    <div class="pull-left form-group">
+                                      <div class="form-group">
+                                            <input type="text" class="form-control input-lg" ng-model="existingcardnumber"  disabled>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="form-inline">
+                                                <input type="text" class="form-control input-lg"  ng-model="existingexpmonth" disabled>
+                                                <span> / </span>
+                                                <input type="text" class="form-control input-lg"  ng-model="existingcc_yearnew" disabled/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                               <input type="text" class="form-control input-lg"  ng-model="existingCVC" disabled>
+                                 
+                                       </div>
+                                           
+                                        </div>
+
+                                        <div class="form-group">
+                                            <input type="text" class="form-control input-lg"  ng-model="existingfullname"  disabled>
+                                        </div>
+                                          <div class="pull-left form-group">
                                         <span style="color:rgb(239,110,84) cursor:pointer;" ng-click="user_is_adding_new_card()">Add new card </span>
                                     </div>
                                     <div class="form-group pull-right">
