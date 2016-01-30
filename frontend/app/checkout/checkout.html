@@ -19,7 +19,7 @@
                <div>
                    <div class="col-sm-8 bgwhite leftCtnr">
                          <div class="text-center" ng-show="success_message" style="padding:130px;">
-                           <span  class="bold">
+                           <span class="bold">
                            Thank You {{fullname}}! We have registered your order and will soon start to prepare it for you. You will receive an email confirming from us shortly.
                          </div>
                        <div class='row left' ng-show="order_not_success">
@@ -31,7 +31,7 @@
                                    <div class="form-group" style="width:100%">
                                    <div class="row">
                                        <div class="col-md-10 col-xs-12 no-pad">
-                                           <input type="tel" class="form-control input-lg" id="phone" ng-model="phone_no" style="width:100%" placeholder="Phone number" name="phone" required />
+                                           <input type="tel" class="form-control input-lg" id="mobile-number" ng-model="phone_no" style="width:100%" placeholder="Phone number" name="phone" required />
                                            <!-- <input type="tel" id="phone" /> -->
                                        </div>
                                        <div class="col-md-2 col-xs-12 no-pad mar-top-5">
@@ -188,7 +188,7 @@
                                             <span class="payment-errors" style="color: red" ng-bind="payment_errors"></span>
                                         </div>
                                         <div class="form-group pull-right">
-                                            <button class="btn btn-info btn-lg" ng-click="newcharge()" ng-disabled="userForm.first_name.$invalid || userForm.cvc.$invalid || userForm.expiry.$invalid || userForm.number.$invalid || userForm.postcode.$invalid || userForm.addr.$invalid || userForm.stripeEmail.$invalid || userForm.f_n.$invalid || userForm.l_n.$invalid" ng-style="{'background-color' : (disabled == true) ? 'rgb(239, 110, 84              )' : '#bbbdc0'}"> <span ng-show="payment_spinner">
+                                            <button class="btn btn-info btn-lg" ng-click="newcharge()" ng-disabled="userForm.first_name.$invalid || userForm.cvc.$invalid || userForm.expiry.$invalid || userForm.number.$invalid || userForm.postcode.$invalid || userForm.addr.$invalid || userForm.stripeEmail.$invalid || userForm.f_n.$invalid || userForm.l_n.$invalid"> <span ng-show="payment_spinner">
                                                     <i class="fa fa-spin fa-spinner"></i>
                                                 </span>Submit</button>
                                         </div>
@@ -327,7 +327,7 @@
 </div>
 
 <script>
-    $("#phone").intlTelInput({
+    $("#mobile-number").intlTelInput({
   initialCountry: "auto",
   geoIpLookup: function(callback) {
     $.get('http://ipinfo.io', function() {}, "jsonp").always(function(resp) {
