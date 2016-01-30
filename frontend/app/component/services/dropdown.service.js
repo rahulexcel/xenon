@@ -8,6 +8,7 @@
         var service = {};
         var selected_hour;
         var first_hour;
+        var selected_mintue;
         service.Daydropdown = function() {
             var Daydropdown = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
             return Daydropdown;
@@ -39,23 +40,25 @@
             var minutesInterval = new Date().getMinutes();
             var time;
             console.log(minutesInterval+llt);
-            minutesInterval=minutesInterval;
             if (minutesInterval + llt > 60) {
                 minutes_is_more = 1;
-                minutesInterval= 60 -minutesInterval;
-
+                console.log(minutesInterval);
+                minutesInterval= minutesInterval+llt-60;
+                console.log(minutesInterval);
                 //minutes.push(minutesInterval);
             }else{
+                minutesInterval=minutesInterval+llt;
             //minutes.push(minutesInterval + llt);
           }
+          minutes.push(minutesInterval);
             for (var i = 0; i < 4; i++) {
-
                 minutesInterval = minutesInterval+15;
                 if(minutesInterval<60){
                 minutes.push(minutesInterval);
               }
             }
             console.log(minutes);
+            selected_mintue=minutes[0].toString();
             return minutes;
         }
         service.Selected = function(llt) {
@@ -70,7 +73,7 @@
 
 service.selectedMinutes = function(data) {
           
-            return data[0].toString();
+            return  selected_mintue;
 
 }
         return service;
