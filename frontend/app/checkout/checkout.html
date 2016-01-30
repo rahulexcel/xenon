@@ -31,7 +31,8 @@
                                    <div class="form-group" style="width:100%">
                                    <div class="row">
                                        <div class="col-md-10 col-xs-12 no-pad">
-                                           <input type="tel" class="form-control input-lg" id="mobile-number" ng-model="phone_no" style="width:100%" placeholder="Phone number" name="phone" required />
+                                           <input type="tel" class="form-control input-lg" id="phone" ng-model="phone_no" style="width:100%" placeholder="Phone number" name="phone" required />
+                                           <!-- <input type="tel" id="phone" /> -->
                                        </div>
                                        <div class="col-md-2 col-xs-12 no-pad mar-top-5">
                                            <span class="btn btn-info btn-lg btn-block" ng-style="{'background-color': submitBackgroundCol,'border-color':submitBorderCol}" ng-click="phone_no_submitted(
@@ -264,12 +265,12 @@
 
             <div class="col-sm-4 bgwhite">
                 <div class="row" style="padding-top:22px;">
-                    <div class="col-sm-12">
-                        <span class="medium pull-left">Shipping method</span>
-                        <span class="medium pull-right">{{shipping_method}}</span>
+                    <div class="col-sm-6">
+                        <!-- <span class="medium pull-left">Shipping method</span> -->
+                        <span class="medium pull-left">{{shipping_method}}</span>
                     </div>
-                    <div class="col-sm-12">
-                        <span class="medium pull-left">Shipping time</span>
+                    <div class="col-sm-6">
+                        <!-- <span class="medium pull-left">Shipping time</span> -->
                         <span class="medium pull-right">{{shipping_time}}</span>
                     </div>
 
@@ -326,7 +327,15 @@
 </div>
 
 <script>
-    $("#mobile-number").intlTelInput({});
+    $("#phone").intlTelInput({
+  initialCountry: "auto",
+  geoIpLookup: function(callback) {
+    $.get('http://ipinfo.io', function() {}, "jsonp").always(function(resp) {
+      var countryCode = (resp && resp.country) ? resp.country : "";
+      callback(countryCode);
+    });
+  }
+});
 </script>
 <script type="text/javascript">
     // This identifies your website in the createToken call below
