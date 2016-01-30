@@ -50,7 +50,8 @@
             $scope.data_recevied = false;
         });
         $scope.phone_no_submitted = function() {
-
+            $scope.submitBackgroundCol = '#d3d3d3';
+            $scope.submitBorderCol = '#d3d3d3';
             if (angular.isDefined($scope.phone_no)) {
                 $scope.phone_spinner = true;
                 var country_code = angular.element($("#mobile-number").intlTelInput("getSelectedCountryData"));
@@ -84,6 +85,8 @@
 
 
         $scope.sms_code_submitted = function() {
+            $scope.verifyBackgroundCol = '#d3d3d3';
+            $scope.verifyBorderCol = '#d3d3d3';
             var country_code = angular.element($("#mobile-number").intlTelInput("getSelectedCountryData"));
             console.log($scope.smscode);
             $scope.codespinner = true;
@@ -293,6 +296,9 @@
             customerCard.$promise.then(function(response) {
                 console.log(response);
             });
+        }
+        $scope.changeBackgrounfColor = function(){
+            console.log('changeBackgrounfColor');
         }
     }
 })();
