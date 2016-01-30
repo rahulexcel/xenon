@@ -30,10 +30,8 @@
             $scope.city = data.lcity;
             $scope.currency = data.lcurrency;
             $scope.location_name = data.lname;
-            // $scope.location_desc = data.ldesc;
             console.log(data.ldesc.split(' ').length);
             if(data.ldesc.split(' ').length > 20){
-                console.log('calling service');
                 $scope.location_desc_part1 = data.ldesc.substring(0, 80);
                 $scope.location_desc_part2 = data.ldesc.substring(80, data.ldesc.length);
             } else{
@@ -47,8 +45,8 @@
             $scope.location_lpostcode = data.lpostcode;
             $scope.location_lstate = data.lstate;
             $scope.location_lphone = arrayService.getPhoneNo(data.lphone);
-            $scope.location_openingtime = data.lwots[0].opening_time;
-            $scope.location_closingtime = data.lwots[0].closing_time;
+            $scope.location_openingtime = arrayService.openingTime(data.lwots[0].opening_time);
+            $scope.location_closingtime = arrayService.closingTime(data.lwots[0].closing_time);
             $scope.data_recevied = false;
         });
         $scope.phone_no_submitted = function() {

@@ -5,5 +5,6 @@ var app = angular.module('xenon-frontend', [
     'ui.router',
     'ngStorage',
      'credit-cards',
-     "ngMessages"
+     "ngMessages",
+     'gavruk.card'
 ]);

@@ -174,7 +174,7 @@
                                                 <input type="text" maxlength="2" data-stripe="exp-month" class="form-control input-lg" ng-model="cc_month" cc-exp-month name="expiry" placeholder="MM" ng-blur="exp_month_error()" required>
                                                 <span> / </span>
                                                 <input type="text" maxlength="4" data-stripe="exp-year" class="form-control input-lg" ng-model="cc_year" cc-exp-year name="expiry" placeholder="YYYY" ng-blur="exp_year_error()" required/>
-                                                <input type="text" class="form-control input-lg" maxlength="4" data-stripe="cvc" ng-model="CVC" cc-cvc name="cvc" placeholder="CVC" ng-blur="cvc_error()"required>
+                                                <input type="text" class="form-control input-lg" maxlength="3" data-stripe="cvc" ng-model="CVC" cc-cvc name="cvc" placeholder="CVC" ng-blur="cvc_error()"required>
                                             </div>
                                             <span ng-show="userForm.expiry.$invalid && !userForm.expiry.$pristine">Looking for a valid expiry date</span>
                                             <span ng-show="userForm.cvc.$invalid && !userForm.cvc.$pristine">Looking for a valid CVC</span>
@@ -236,7 +236,7 @@
                                                 <input type="text" size="2" data-stripe="exp-month" class="form-control input-lg" ng-model="cc_monthnew" cc-exp-month  placeholder="MM" ng-blur="exp_month_error()" required>
                                                 <span> / </span>
                                                 <input type="text" size="4" data-stripe="exp-year" class="form-control input-lg" ng-model="cc_yearnew" cc-exp-year  placeholder="YYYY" ng-blur="exp_year_error()" required/>
-                                                <input type="text" class="form-control input-lg" size="4" data-stripe="cvc" ng-model="CVCnew" cc-cvc placeholder="CVC" ng-blur="cvc_error()" required>
+                                                <input type="text" class="form-control input-lg" size="3" data-stripe="cvc" ng-model="CVCnew" cc-cvc placeholder="CVC" ng-blur="cvc_error()" required>
                                             </div>
                                             <span ng-show="newcardform.expiry.$invalid && !newcardform.expiry.$pristine">Looking for a valid expiry date</span>
                                             <span ng-show="newcardform.cvc.$invalid && !newcardform.cvc.$pristine">Looking for a valid CVC</span>

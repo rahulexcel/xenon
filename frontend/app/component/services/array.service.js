@@ -98,10 +98,24 @@ console.log(Send_Array);
 return parseFloat(sum).toFixed(2);
         }
         service.openingTime = function(openingTime) {
-                      
+            var time = openingTime;
+            var hours = Number(time.match(/^(\d+)/)[1]);
+            var AMPM = time.match(/\s(.*)$/)[1];
+            if (AMPM == "PM" && hours < 12) hours = hours + 12;
+            if (AMPM == "AM" && hours == 12) hours = hours - 12;
+            var sHours = hours.toString();
+            if (hours < 10) sHours = "0" + sHours;
+            return sHours+':00';
         }
         service.closingTime = function(closingTime) {
-                      
+            var time = closingTime;
+            var hours = Number(time.match(/^(\d+)/)[1]);
+            var AMPM = time.match(/\s(.*)$/)[1];
+            if (AMPM == "PM" && hours < 12) hours = hours + 12;
+            if (AMPM == "AM" && hours == 12) hours = hours - 12;
+            var sHours = hours.toString();
+            if (hours < 10) sHours = "0" + sHours;
+            return sHours+':00';
         }
       
         return service;
