@@ -224,7 +224,7 @@
                                 <div class="col-sm-6 no-pad-left-right" ng-show="newcard">
                                     <form name="newcardform" id="cardnew">
                                         <div class="form-group" ng-class="{ 'has-error': newcardform.name.$touched && newcardform.name.$invalid }">
-                                            <input type="text" class="form-control input-lg" size="20" data-stripe="number" ng-model="newcardnumber" placeholder="Card number" ng-blur="card_error()" ng-minlength="16" required>
+                                            <input type="text" class="form-control input-lg" size="20" data-stripe="number" ng-model="newcardnumber" placeholder="Card number" ng-blur="card_error()" ng-minlength="16" name="number" required>
                                             <div class="help-block" ng-messages="newcardform.number.$error" ng-if="newcardform.number.$touched">
                                                 <p ng-message="minlength">Card number is too short.</p>
 
@@ -235,17 +235,17 @@
                                         </div>
                                         <div class="form-group" ng-class="{ 'has-error': newcardform.name.$touched && newcardform.name.$invalid }">
                                             <div class="form-inline" id="card_details">
-                                                <input type="text" size="2" data-stripe="exp-month" class="form-control input-lg" ng-model="cc_monthnew" cc-exp-month  placeholder="MM" ng-blur="exp_month_error()" required>
+                                                <input type="text" size="2" data-stripe="exp-month" class="form-control input-lg" ng-model="cc_monthnew" cc-exp-month  placeholder="MM" ng-blur="exp_month_error()" name="expiry" required>
                                                 <span> / </span>
-                                                <input type="text" size="4" data-stripe="exp-year" class="form-control input-lg" ng-model="cc_yearnew" cc-exp-year  placeholder="YYYY" ng-blur="exp_year_error()" required/>
-                                                <input type="text" class="form-control input-lg" size="3" data-stripe="cvc" ng-model="CVCnew" cc-cvc placeholder="CVC" ng-blur="cvc_error()" required>
+                                                <input type="text" size="4" data-stripe="exp-year" class="form-control input-lg" ng-model="cc_yearnew" cc-exp-year  placeholder="YYYY" ng-blur="exp_year_error()" name="expiry" required/>
+                                                <input type="text" class="form-control input-lg" size="3" data-stripe="cvc" ng-model="CVCnew" cc-cvc placeholder="CVC" name="cvc" ng-blur="cvc_error()" required>
                                             </div>
                                             <span ng-show="newcardform.expiry.$invalid && !newcardform.expiry.$pristine">Looking for a valid expiry date</span>
                                             <span ng-show="newcardform.cvc.$invalid && !newcardform.cvc.$pristine">Looking for a valid CVC</span>
                                         </div>
 
                                         <div class="form-group">
-                                            <input type="text" class="form-control input-lg"  ng-model="fullnamenew" placeholder="Name on card" required>
+                                            <input type="text" class="form-control input-lg"  ng-model="fullnamenew" placeholder="Name on card" name="name" required>
                                         </div>
                                         <div class="form-group">
                                             <span class="payment-errors" style="color: red" ng-bind="payment_errors"></span>
@@ -344,17 +344,9 @@
 </script>
 <script>
    $('#payment-form').card({
-    // a selector or DOM element for the container
-    // where you want the card to appear
-    container: '.card-wrapper1', // *required*
-
-    // all of the other options from above
+    container: '.card-wrapper1', 
 });
-    $('#cardnew').card({
-    // a selector or DOM element for the container
-    // where you want the card to appear
-    container: '.card-wrapper', // *required*
-
-    // all of the other options from above
+$('#cardnew').card({
+container: '.card-wrapper', 
 });
 </script>
