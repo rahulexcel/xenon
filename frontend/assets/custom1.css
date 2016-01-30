@@ -391,6 +391,10 @@ display:none;
 .sidebar .heading{
 	font-size: 16px;
 }
+.no-pad-left-right{
+	padding-left: 0px;
+	padding-right: 0px;
+}
 }
 @media only screen and (max-width: 480px){
  #allProduct .productName h4{
