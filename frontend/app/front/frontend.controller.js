@@ -256,7 +256,7 @@ $scope.total_price=arrayService.getTotalprice($scope.cart);
                 'lid': locationID.locationID,
                 'products': product_order_array,
                 'deliverymode': mode,
-                'time': timeService.getTimestamp($scope.time),
+                'time': timeService.getTimestamp($scope.time, $scope.minutes),
                 'total': $scope.total_price
             });
             query2.$promise.then(function(response) {
@@ -293,7 +293,7 @@ $scope.total_price=arrayService.getTotalprice($scope.cart);
             $scope.backProductMenu = true;
         }
         function updatetime(data){
-        $interval(function (d) {
+        $interval(function (data) {
                $scope.dropdown_minutes = dropdownService.minutesdropdown(data.llt);
                  $scope.dropdown_days = dropdownService.Timedropdown();
                  $scope.minutes=dropdownService.selectedMinutes($scope.dropdown_minutes);
