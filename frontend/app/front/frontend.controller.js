@@ -7,6 +7,7 @@
         var response_products;
         var response_categories;
         $scope.spinner = true;
+        $scope.location_desc_part2_show = false;
         $scope.class = "left_menu_display";
         $scope.cart_shown="cart_not_display";
         $scope.product_menu = "product_menu_not_display";
@@ -62,7 +63,13 @@
                  // dropdownService.Selected(data.llt);
                 console.log($scope.time);
                 $scope.location_name = data.lname;
-                $scope.location_desc = data.ldesc;
+                if(data.ldesc.split(' ').length > 20){
+                    $scope.location_desc_part1 = data.ldesc.substring(0, 80);
+                    $scope.location_desc_part2 = data.ldesc.substring(80, data.ldesc.length);
+                } else{
+                    $scope.location_desc_part1 = data.ldesc;
+                    $scope.location_desc_part2_show = true;
+                }
                 $scope.picImage = 'http://s3.amazonaws.com/ordermagic/' + data.llogo;
                 $scope.location_addr = data.laddr;
                 $scope.location_lcity = data.lcity;
@@ -70,8 +77,8 @@
                 $scope.location_lpostcode = data.lpostcode;
                 $scope.location_lstate = data.lstate;
                 $scope.location_lphone = arrayService.getPhoneNo(data.lphone);
-                $scope.location_openingtime = data.lwots[0].opening_time;
-                $scope.location_closingtime = data.lwots[0].closing_time;
+                $scope.location_openingtime = arrayService.openingTime(data.lwots[0].opening_time);
+                $scope.location_closingtime = arrayService.closingTime(data.lwots[0].closing_time);
                 $scope.all_clicked = true;
                 get_category();
                 check_local_storage();
