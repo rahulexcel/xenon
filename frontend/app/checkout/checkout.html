@@ -19,11 +19,12 @@
                <div>
                    <div class="col-sm-8 bgwhite leftCtnr">
                          <div class="text-center" ng-show="success_message" style="padding:130px;">
+                         <h2 class="order-no">#{{orderNo}}</h2>
                            <span  class="bold">
-                           Thank You {{fullname}}! We have registered your order and will soon start to prepare it for you. You will receive an email confirming from us shortly.
+                           Thank You {{fullname}}! We have registered your order and will soon start to prepare it for you. You will receive an email confirming from us shortly.</span><br><br>
+                           <a class="btn btn-info" href="#/frontend">Go To Home Page</a>
                          </div>
                        <div class='row left' ng-show="order_not_success">
-                                      
                            <div class="form-inline " role="form" name="contact">
                                <div class="formcontainer">
                                 <span class="bold">1.VERIFY ORDER</span>
@@ -31,7 +32,7 @@
                                    <div class="form-group" style="width:100%">
                                    <div class="row">
                                        <div class="col-md-10 col-xs-12 no-pad">
-                                           <input type="tel" class="form-control input-lg" id="phone" ng-model="phone_no" style="width:100%" placeholder="Phone number" name="phone" required />
+                                           <input type="tel" class="form-control input-lg" id="mobile-number" ng-model="phone_no" style="width:100%" placeholder="Phone number" name="phone" required />
                                            <!-- <input type="tel" id="phone" /> -->
                                        </div>
                                        <div class="col-md-2 col-xs-12 no-pad mar-top-5">
@@ -84,14 +85,12 @@
                                     </div>
                                     
                                         <div class="form-group pull-right">
-                                        <span class="btn btn-info btn-lg" ng-click="edit_customer_information()"> <span ng-show="update_spinner">
-                                                    <i class="fa fa-spin fa-spinner"></i>
-                                                </span>Edit</span>
+                                        <span class="btn btn-info btn-lg" ng-click="edit_customer_information()"> Edit</span>
                                     </div>     
                                 </div>
                             </div>
                             <div class="row padbot" ng-show="delivery_details_form">
-                            <form name="detailsform">
+                                <form name="detailsform">
                                 <div class="col-sm-6 no-pad-left-right">
                                     <div class="form-group" ng-class="{ 'has-error': detailsform.name.$touched && detailsform.name.$invalid }">
                                         <input type="text" class="form-control input-lg" ng-model="first_name" placeholder="First name" name="f_n" ng-blur="f_n()" required>
@@ -144,7 +143,7 @@
                                         <input type="text" class="form-control input-lg" name="country" ng-model="country" placeholder="Country"  disabled>
                                     </div>
                                     <div class="form-group pull-right" ng-show="update_button">
-                                         <button class="btn btn-info btn-lg" ng-click="update_customer_information()"> <span ng-show="update_spinner">
+                                         <button class="btn btn-info btn-lg" ng-click="update_customer_information()" ng-disabled="detailsform.f_n.$invalid||detailsform.l_n.$invalid||detailsform.stripeEmail.$invalid||detailsform.addr.$invalid||detailsform.postcode.$invalid"> <span ng-show="update_spinner">
                                                     <i class="fa fa-spin fa-spinner"></i>
                                                 </span>Update</button>
                                     </div>
@@ -160,6 +159,7 @@
                                 <div class="col-sm-6">
                                     <div ng-show="existing_card" class='card-wrapper1 form-group'></div>
                                     <div ng-show="newcard" class='card-wrapper form-group'></div>
+                                    <div ng-show="never" class='card-wrapper2 form-group'></div>
                                 </div>
                                 <div class="col-sm-6 no-pad-left-right" ng-show="existing_card">
                                     <form id="payment-form" name="userForm" novalidate>
@@ -188,13 +188,14 @@
                                             <span class="payment-errors" style="color: red" ng-bind="payment_errors"></span>
                                         </div>
                                         <div class="form-group pull-right">
-                                            <button class="btn btn-info btn-lg" ng-click="newcharge()" ng-disabled="userForm.first_name.$invalid || userForm.cvc.$invalid || userForm.expiry.$invalid || userForm.number.$invalid || userForm.postcode.$invalid || userForm.addr.$invalid || userForm.stripeEmail.$invalid || userForm.f_n.$invalid || userForm.l_n.$invalid" ng-style="{'background-color' : (disabled == true) ? 'rgb(239, 110, 84              )' : '#bbbdc0'}"> <span ng-show="payment_spinner">
+                                            <button class="btn btn-info btn-lg" ng-click="newcharge()" ng-disabled="userForm.first_name.$invalid || userForm.cvc.$invalid || userForm.expiry.$invalid || userForm.number.$invalid || userForm.postcode.$invalid || userForm.addr.$invalid || userForm.stripeEmail.$invalid || userForm.f_n.$invalid || userForm.l_n.$invalid"> <span ng-show="payment_spinner">
                                                     <i class="fa fa-spin fa-spinner"></i>
                                                 </span>Submit</button>
                                         </div>
                                     </form>
                                 </div>
                                 <div class="col-sm-6 no-pad-left-right" ng-show="existing_card_show_cvc">
+                                <form name="existing" id="exist">
                                       <div class="form-group">
                                             <input type="text" class="form-control input-lg" ng-model="existingcardnumber"  disabled>
                                         </div>
@@ -203,7 +204,7 @@
                                                 <input type="text" class="form-control input-lg"  ng-model="existingexpmonth" disabled>
                                                 <span> / </span>
                                                 <input type="text" class="form-control input-lg"  ng-model="existingcc_yearnew" disabled/>
-                                               <input type="text" class="form-control input-lg"  ng-model="existingCVC" disabled>
+                                               <input type="text" class="form-control input-lg"  ng-model="existingCVC" name="cvc" placeholder="CVC" ng-minlength="3" required>
                                  
                                        </div>
                                            
@@ -216,10 +217,11 @@
                                         <span style="color:rgb(239,110,84) cursor:pointer;" ng-click="user_is_adding_new_card()">Add new card </span>
                                     </div>
                                     <div class="form-group pull-right">
-                                        <button class="btn btn-info btn-lg" ng-click="existingcharge()"> <span ng-show="payment_spinner">
+                                        <button class="btn btn-info btn-lg" ng-click="existingcharge()" ng-disabled="existing.cvc.$invalid"> <span ng-show="payment_spinner">
                                                 <i class="fa fa-spin fa-spinner"></i>
                                             </span>Submit</button>
                                     </div>
+                                    </form>
                                 </div>
                                 <div class="col-sm-6 no-pad-left-right" ng-show="newcard">
                                     <form name="newcardform" id="cardnew">
@@ -327,7 +329,7 @@
 </div>
 
 <script>
-    $("#phone").intlTelInput({
+    $("#mobile-number").intlTelInput({
   initialCountry: "auto",
   geoIpLookup: function(callback) {
     $.get('http://ipinfo.io', function() {}, "jsonp").always(function(resp) {
@@ -348,5 +350,8 @@
 });
 $('#cardnew').card({
 container: '.card-wrapper', 
+});
+$('#exist').card({
+container: '.card-wrapper2', 
 });
 </script>
