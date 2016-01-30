@@ -145,6 +145,7 @@
             }
         }
         $scope.edit_customer_information = function() {
+
             $scope.delivery_details_disabled_form = false;
             $scope.delivery_details_form = true;
             if ($scope.delivery_details_form === true) {
@@ -155,7 +156,7 @@
 
         }
         $scope.update_customer_information = function() {
-            $scope.update_spinner = true;
+           $scope.update_spinner=true;
             console.log($localStorage.smstoken1);
             var country_code = angular.element($("#mobile-number").intlTelInput("getSelectedCountryData"));
             var updateCustomer = putCustomer.update($localStorage.smstoken1).query({}, {
@@ -276,6 +277,7 @@
             query3.$promise.then(function(response) {
                 console.log(response);
                 if (response.paid === true) {
+                    $scope.orderNo = $localStorage.Orders_response.orderid;
                     $scope.order_not_success = false;
                     $scope.success_message = true;
                     $localStorage.$reset();
