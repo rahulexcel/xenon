@@ -103,11 +103,11 @@
                         $scope.dis_last_name = response.lastname,
                         $scope.dis_postcode = response.postcode,
                         $scope.dis_addr = response.address,
-                        $scope.cc_month = response.card_exp_month;
-                    $scope.cc_year = response.card_exp_year;
-                    $scope.cardnumber = "xxxx" + " " + "xxxx" + " " + "xxxx" + " " + "xxxx" + " " + response.card_last4;
+                        $scope.existingexpmonth = response.card_exp_month;
+                    $scope.existingcc_yearnew = response.card_exp_year;
+                    $scope.existingcardnumber = "xxxx" + " " + "xxxx" + " " + "xxxx" + " " + "xxxx" + " " + response.card_last4;
                     $scope.dis_email = response.email;
-                    $scope.fullname = response.firstname + " " + response.lastname;
+                    $scope.existingfullname = response.firstname + " " + response.lastname;
                     smscode_response = response.smscode;
                     verify_delivery_mode();
                 }

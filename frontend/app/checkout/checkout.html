@@ -57,7 +57,7 @@
                         <div class="formcontainer">
                             <span class="bold">2.DELIVERY DETAILS</span>
                               <div class="row padbot" ng-show="delivery_details_disabled_form">
-                                <div class="col-sm-6 no-pad-left no-pad-right">
+                                <div class="col-sm-6">
                                          <div class="form-group">
                                         <input type="text" class="form-control input-lg" ng-model="dis_first_name" disabled>
                                         </div>
@@ -68,7 +68,7 @@
                                         <input type="email" class="form-control input-lg" ng-model="dis_email" disabled>
                                     </div>
                                 </div>
-                                <div class="col-sm-6 no-pad-left no-pad-right">
+                                <div class="col-sm-6">
                                     <div class="form-group">
                                         <input type="text" class="form-control input-lg" ng-model="dis_addr" disabled>   
                                     </div>
@@ -91,7 +91,7 @@
                             </div>
                             <div class="row padbot" ng-show="delivery_details_form">
                             <form name="detailsform">
-                                <div class="col-sm-6 no-pad-left no-pad-right">
+                                <div class="col-sm-6">
                                     <div class="form-group" ng-class="{ 'has-error': detailsform.name.$touched && detailsform.name.$invalid }">
                                         <input type="text" class="form-control input-lg" ng-model="first_name" placeholder="First name" name="f_n" ng-blur="f_n()" required>
                                         <div class="help-block" ng-messages="detailsform.f_n.$error" ng-if="detailsform.f_n.$touched">
@@ -119,7 +119,7 @@
                                         <span ng-show="detailsform.stripeEmail.$invalid && !detailsform.stripeEmail.$pristine">Looking for a valid email-id</span>
                                     </div>
                                 </div>
-                                <div class="col-sm-6 no-pad-left no-pad-right">
+                                <div class="col-sm-6">
                                     <div class="form-group" ng-class="{ 'has-error': detailsform.name.$touched && detailsform.name.$invalid }">
                                         <input type="text" class="form-control input-lg" name="addr" ng-model="addr" placeholder="Address" ng-blur="addr_error()"required>
                                         <div class="help-block" ng-messages="detailsform.addr.$error" ng-if="detailsform.addr.$touched">
@@ -156,10 +156,10 @@
                         <div class="formcontainer">
                             <span class="bold">2.PAYMENT DETAILS</span>
                             <div class="row padbot" ng-show="payment_details_form">
-                                <div class="col-sm-6 no-pad-left no-pad-right">
+                                <div class="col-sm-6">
                                     <div class='card-wrapper form-group'></div>
                                 </div>
-                                <div class="col-sm-6 no-pad-left no-pad-right" ng-show="existing_card">
+                                <div class="col-sm-6" ng-show="existing_card">
                                     <form id="payment-form" name="userForm" novalidate>
                                         <div class="form-group" ng-class="{ 'has-error': userForm.name.$touched && userForm.name.$invalid }">
                                             <input  type="text" class="form-control input-lg" maxlength="20" data-stripe="number" ng-model="cardnumber" name="number" placeholder="Card number" ng-blur="card_error()"  ng-minlength="16"required>
@@ -192,7 +192,7 @@
                                         </div>
                                     </form>
                                 </div>
-                                <div class="col-sm-6 no-pad-left no-pad-right" ng-show="existing_card_show_cvc">
+                                <div class="col-sm-6" ng-show="existing_card_show_cvc">
                                       <div class="form-group">
                                             <input type="text" class="form-control input-lg" ng-model="existingcardnumber"  disabled>
                                         </div>
@@ -202,9 +202,7 @@
                                                 <span> / </span>
                                                 <input type="text" class="form-control input-lg"  ng-model="existingcc_yearnew" disabled/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                <input type="text" class="form-control input-lg"  ng-model="existingCVC" disabled>
-                                    <div class="pull-left form-group">
-                                        <span style="color:rgb(239,110,84) cursor:pointer;" ng-click="user_is_adding_new_card()">Add new card </span>
-                                    </div>
+                                 
                                        </div>
                                            
                                         </div>
@@ -212,14 +210,16 @@
                                         <div class="form-group">
                                             <input type="text" class="form-control input-lg"  ng-model="existingfullname"  disabled>
                                         </div>
-                                       
+                                          <div class="pull-left form-group">
+                                        <span style="color:rgb(239,110,84) cursor:pointer;" ng-click="user_is_adding_new_card()">Add new card </span>
+                                    </div>
                                     <div class="form-group pull-right">
                                         <button class="btn btn-info btn-lg" ng-click="existingcharge()"> <span ng-show="payment_spinner">
                                                 <i class="fa fa-spin fa-spinner"></i>
                                             </span>Submit</button>
                                     </div>
                                 </div>
-                                <div class="col-sm-6 no-pad-left no-pad-right" ng-show="newcard">
+                                <div class="col-sm-6" ng-show="newcard">
                                     <form name="newcardform" id="cardnew">
                                         <div class="form-group" ng-class="{ 'has-error': newcardform.name.$touched && newcardform.name.$invalid }">
                                             <input type="text" class="form-control input-lg" size="20" data-stripe="number" ng-model="newcardnumber" placeholder="Card number" ng-blur="card_error()" ng-minlength="16" required>
