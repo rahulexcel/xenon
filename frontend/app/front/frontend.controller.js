@@ -3,7 +3,7 @@
     angular.module('xenon-frontend')
         .controller('frontendCtrl', frontendCtrl);
 
-    function frontendCtrl($scope, locations, timeStorage,$window, locationID, $localStorage, category, $rootScope, products, Order, $state, arrayService, dropdownService, timeService) {
+    function frontendCtrl($scope, locations, timeStorage,$window, locationID, $localStorage, category, $rootScope, products, Order, $state, arrayService, dropdownService, timeService, $interval) {
         var response_products;
         var response_categories;
         $scope.spinner = true;
@@ -12,8 +12,6 @@
         $scope.product_menu = "product_menu_not_display";
         $scope.backCatMenu = false;
         $scope.productInCart = 0;
-          //$scope.class="left_menu_not_display";
-           //  $scope.cart_shown="cart_not_display";
     $scope.changeClassLeftMenu = function(){
 
         if ($scope.class === "left_menu_display"){
@@ -36,21 +34,10 @@
         $scope.product_menu = "product_menu_display";
         $scope.cart_shown="cart_not_display";
     }
-    //  $scope.changeClassCart = function(){
-    //     if ($scope.product_menu === "product_menu_display"){
-    //         $scope.product_menu = "product_menu_not_display";
-    //         $scope.cart_shown="cart_display";
-    //     }else{
-         
-    //          $scope.cart_shown="cart_not_display";
-    //         $scope.product_menu = "product_menu_display";
-    // }
-   // };
 
-       //timeStorage.set('a', 1, 0.01);
-        $scope.dropdown_days = dropdownService.Timedropdown();
-       // $scope.time=dropdownService.Selected($scope.dropdown_days);
-        //console.log(dropdownService.Selected());
+       
+
+      
         $scope.delivery_method = dropdownService.delivery_method();
 
         $scope.method = "Delivery";
@@ -64,12 +51,16 @@
             query.$promise.then(function(data) {
                 console.log(data);
                 $scope.currency = data.lcurrency;
-                $rootScope.currency = data.lcurrency;
-               $scope.dropdown_days.unshift(dropdownService.Selected(data.llt));
-                $scope.time = dropdownService.Selected(data.llt);
+               
+                $scope.dropdown_minutes = dropdownService.minutesdropdown(data.llt);
+                 $scope.dropdown_days = dropdownService.Timedropdown();
+                 $scope.minutes=$scope.dropdown_minutes[0].toString();
+                   updatetime(data);
+               // $scope.dropdown_days.unshift(dropdownService.Selected(data.llt));
+                $scope.time =dropdownService.Selected(data.llt);  
+                //console.log();
+                 // dropdownService.Selected(data.llt);
                 console.log($scope.time);
-                //$scope.spinner=false;
-                // $scope.spinner_close=true;
                 $scope.location_name = data.lname;
                 $scope.location_desc = data.ldesc;
                 $scope.picImage = 'http://s3.amazonaws.com/ordermagic/' + data.llogo;
@@ -101,8 +92,6 @@
             });
             query1.$promise.then(function(data1) {
                 response_categories = data1;
-                //console.log(data1);
-
                 $scope.ctegories = arrayService.getArrayService(response_categories);
                 product_api();
             });
@@ -114,7 +103,6 @@
             });
             query2.$promise.then(function(data2) {
                 response_products = data2;
-               // console.log(data2); 
                 show_all();
                 $scope.spinner = false;
                 $scope.spinner_closed = true;
@@ -268,7 +256,7 @@ $scope.total_price=arrayService.getTotalprice($scope.cart);
                 'lid': locationID.locationID,
                 'products': product_order_array,
                 'deliverymode': mode,
-                'time': timeService.getTimestamp($scope.time),
+                'time': timeService.getTimestamp($scope.time, $scope.minutes),
                 'total': $scope.total_price
             });
             query2.$promise.then(function(response) {
@@ -304,6 +292,15 @@ $scope.total_price=arrayService.getTotalprice($scope.cart);
             $scope.backCatMenu = false;
             $scope.backProductMenu = true;
         }
+        function updatetime(data){
+        $interval(function (data) {
+               $scope.dropdown_minutes = dropdownService.minutesdropdown(data.llt);
+                 $scope.dropdown_days = dropdownService.Timedropdown();
+                 $scope.minutes=dropdownService.selectedMinutes($scope.dropdown_minutes);
+                  console.log(data.llt);
+                $scope.time =dropdownService.Selected(data.llt);  
+            }, 300000);
+    }
 
     }
 })();

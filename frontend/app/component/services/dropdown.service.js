@@ -2,85 +2,77 @@
     'use strict';
     angular.module('xenon-frontend')
         .factory('dropdownService', dropdownService);
+
     function dropdownService() {
+        var minutes_is_more = 0;
         var service = {};
+        var selected_hour;
+        var first_hour;
         service.Daydropdown = function() {
-            var Daydropdown=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+            var Daydropdown = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
             return Daydropdown;
         }
-        service.Timedropdown = function(){
-           var hour = [];
-            // var current=new Date().toLocaleTimeString().replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, "$1$3");
-                   var current=new Date().getHours();
-                
-                  var time;
-                 for (var i = current+1; i <=23 ; i++) {
-                         time=i+':'+'00';
-                         hour.push(time);     
-                      //console.log("found");
+        service.Timedropdown = function() {
+            var hour = [];
+            console.log(minutes_is_more);
+            var current = new Date().getHours();
+            var time;
+            if (minutes_is_more == 1) {
+                for (var i = current + 1; i <= 23; i++) {
+                    time = i;
+                    hour.push(time);
                 }
-                hour.push('00:00');
-             
-   // }
-   console.log(hour);
-    console.log(current);
-    
-    //   // var ampm=current.substring(colon+4, colon+6);
-    //   // var current_hour=current.substring(0, colon)
-    //    console.log(ampm);
-    //    var C_H=parseInt(current_hour);
-    //   if(ampm==="AM"){
+                selected_hour = hour[0];
+            } else {
+                for (var i = current; i <= 23; i++) {
+                    time = i;
+                    hour.push(time);
+                }
+                selected_hour = hour[0];
 
-    //      for (var i = C_H+1; i <= 12; i++) {
-    //             hour.push(i + ':'+ "00" +" " +'AM');
-    //            }
-
-    //             for (var k = 1; k <= 12; k++) {
-    //            hour.push(k + ':'+ "00" +" " +'PM');
-    //            }
-    //   }else{
-        
-    //     //console.log(parseInt(current_hour)+1);
-    //       for (var k = C_H+1; k <= 12; k++) {
-    //            hour.push(k + ':'+ "00" +" " +'PM');
-    //            }
-    //       for (var i = 1; i <= 12; i++) {
-    //             hour.push(i + ':'+ "00" +" " +'AM');
-    //            }
-
-              
-     // }
-
-
-
-              
-           
-               return hour;
+            }
+            console.log(selected_hour);
+            return hour;
         }
-         service.Selected = function(llt){
-            console.log(llt);
-         
-               var current=new Date().getHours();
-                 
-       // return current+llt;     
-    
-   // console.log(current);
-       //var ampm=current.substring(colon+4, colon+6)
-    
-      //console.log(ampm);
-      //var selected_time=current.substring(0, colon)+":"+llt+" "+ampm;
-     //
-          console.log(current+":"+llt);
-       return current+":"+llt;
+        service.minutesdropdown = function(llt) {
+            var minutes = [];
+            var minutesInterval = new Date().getMinutes();
+            var time;
+            console.log(minutesInterval+llt);
+            minutesInterval=minutesInterval;
+            if (minutesInterval + llt > 60) {
+                minutes_is_more = 1;
+                minutesInterval= 60 -minutesInterval;
+
+                //minutes.push(minutesInterval);
+            }else{
+            //minutes.push(minutesInterval + llt);
+          }
+            for (var i = 0; i < 4; i++) {
+
+                minutesInterval = minutesInterval+15;
+                if(minutesInterval<60){
+                minutes.push(minutesInterval);
+              }
+            }
+            console.log(minutes);
+            return minutes;
         }
-         service.delivery_method = function(){
-              var method = ['Delivery', "Pickup"];
-            
-               return method;
+        service.Selected = function(llt) {
+            console.log(selected_hour.toString());
+            return selected_hour.toString();
+
+        }
+        service.delivery_method = function() {
+            var method = ['Delivery', "Pickup"];
+            return method;
         }
 
-        
+service.selectedMinutes = function(data) {
+          
+            return data[0].toString();
 
+}
         return service;
     }
 })();
