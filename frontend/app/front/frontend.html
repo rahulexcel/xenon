@@ -25,7 +25,7 @@
                    </div>
                </div>
                <div class="col-sm-6 col-xs-12 text-center">
-                   <h3 class="heading topheading">{{location_name}} 
+                   <h3 class="heading topheading"><span class="not-show-main-logo">{{location_name}}</span> 
                            <p class="store-desc" style="padding-top:5px;">{{location_desc_part1}}<span ng-click="location_desc_part2_show = true" ng-hide="location_desc_part2_show">...</span><span ng-show="location_desc_part2_show">{{location_desc_part2}}</span></p>
                            <p class="store-desc">{{location_addr}}, {{location_lcity}},  {{location_lpostcode}}, {{location_lstate}}, <i class="glyphicon glyphicon-earphone"></i> {{location_lphone}} | {{location_openingtime}}-{{location_closingtime}}</p>
                        </h3>
@@ -50,7 +50,7 @@
                                  
                         <!--  <button ng-click="changeClass()">Change Class</button>  -->   
                             <div class="col-sm-3" class="text-center" style="padding-top: 14px;"> 
-                                <div ng-repeat="row in ctegories" ng-click="category_selected(row); itemClicked($index)" ng-class="{ 'selected-class-name': $index == selectedIndex }">
+                                <div ng-repeat="row in ctegories" ng-click="category_selected(row); itemClicked($index);" ng-class="{ 'selected-class-name': $index == selectedIndex && sidebarInMobile }">
                                     <div class="sidebar" style="padding-left:1.8em;">
                                         <p class="heading active">{{row.name}}</p>
 
@@ -232,5 +232,3 @@
                             </div>
                         </div>
                     </div>
-
-                        

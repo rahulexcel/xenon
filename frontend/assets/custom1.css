@@ -375,7 +375,7 @@ display:none;
 }
 .cart-container{
 	display: block;
-	background: #EFF1F5;
+	background: #fff;
 	padding-top: 2px;
 }
 .nav-store-name{
@@ -394,6 +394,10 @@ display:none;
 .no-pad-left-right{
 	padding-left: 0px;
 	padding-right: 0px;
+}
+.sidebar-in-mobile{
+	color: rgb(131, 130, 138);
+	 background-color: #fff;
 }
 }
 @media only screen and (max-width: 480px){
