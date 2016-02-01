@@ -18,16 +18,11 @@
            <div class='row to-do'>
                <div>
                    <div class="col-sm-8 bgwhite leftCtnr">
-                         <div class="text-center" ng-show="success_message" style="padding:130px;">
-<<<<<<< HEAD
+                         <div class="text-center" ng-show="success_message" style="padding:130px;">   
                          <h2 class="order-no">#{{orderNo}}</h2>
                            <span  class="bold">
                            Thank You {{fullname}}! We have registered your order and will soon start to prepare it for you. You will receive an email confirming from us shortly.</span><br><br>
                            <a class="btn btn-info" href="#/frontend">Go To Home Page</a>
-=======
-                           <span class="bold">
-                           Thank You {{fullname}}! We have registered your order and will soon start to prepare it for you. You will receive an email confirming from us shortly.
->>>>>>> dd507d3cd084708568e635d219315052fd43e4da
                          </div>
                        <div class='row left' ng-show="order_not_success">
                            <div class="form-inline " role="form" name="contact">
@@ -193,7 +188,7 @@
                                             <span class="payment-errors" style="color: red" ng-bind="payment_errors"></span>
                                         </div>
                                         <div class="form-group pull-right">
-                                            <button class="btn btn-info btn-lg" ng-click="newcharge()" ng-disabled="userForm.first_name.$invalid || userForm.cvc.$invalid || userForm.expiry.$invalid || userForm.number.$invalid || userForm.postcode.$invalid || userForm.addr.$invalid || userForm.stripeEmail.$invalid || userForm.f_n.$invalid || userForm.l_n.$invalid"> <span ng-show="payment_spinner">
+                                            <button class="btn btn-info btn-lg" ng-click="newcharge()" ng-disabled="userForm.first_name.$invalid || userForm.cvc.$invalid || userForm.expiry.$invalid || userForm.number.$invalid || userForm.postcode.$invalid || userForm.addr.$invalid || userForm.stripeEmail.$invalid || userForm.f_n.$invalid || userForm.l_n.$invalid"> <span ng-show="payment_spinner1" id="button">
                                                     <i class="fa fa-spin fa-spinner"></i>
                                                 </span>Submit</button>
                                         </div>
@@ -252,13 +247,13 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <input type="text" class="form-control input-lg"  ng-model="fullnamenew" placeholder="Name on card" name="name" required>
+                                            <input type="text" class="form-control input-lg"  ng-model="fullnamenew" placeholder="Name on card" name="fullname" required>
                                         </div>
                                         <div class="form-group">
                                             <span class="payment-errors" style="color: red" ng-bind="payment_errors"></span>
                                         </div>
                                         <div class="form-group pull-right">
-                                            <button class="btn btn-info btn-lg" ng-click="cardnew()" ng-disabled="newcardform.first_name.$invalid || newcardform.cvc.$invalid || newcardform.expiry.$invalid || newcardform.number.$invalid || newcardform.postcode.$invalid || newcardform.addr.$invalid || newcardform.stripeEmail.$invalid || newcardform.f_n.$invalid || newcardform.l_n.$invalid" ng-style="{'background-color' : (disabled == true) ? 'rgb(239, 110, 84              )' : '#bbbdc0'}"> <span ng-show="payment_spinner">
+                                            <button class="btn btn-info btn-lg" ng-click="cardnew()" ng-disabled="newcardform.fullname.$invalid || newcardform.cvc.$invalid || newcardform.expiry.$invalid || newcardform.number.$invalid || newcardform.postcode.$invalid || newcardform.addr.$invalid || newcardform.stripeEmail.$invalid || newcardform.f_n.$invalid || newcardform.l_n.$invalid" ng-style="{'background-color' : (disabled == true) ? 'rgb(239, 110, 84              )' : '#bbbdc0'}"> <span ng-show="payment_spinner">
                                                     <i class="fa fa-spin fa-spinner"></i>
                                                 </span>Submit</button>
                                         </div>

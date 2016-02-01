@@ -3,7 +3,7 @@
     angular.module('xenon-frontend')
         .controller('checkoutCtrl', checkoutCtrl);
 
-    function checkoutCtrl(validate, $scope,$rootScope,  timeStorage, existingcharge, customercard, $localStorage, putCustomer, cauth, newcharge, arrayService, locations, cauthreq, locationID) {
+    function checkoutCtrl(validate, $scope,$rootScope,  timeStorage, existingcharge, customercard, $localStorage, putCustomer, cauth, newcharge1, arrayService, locations, cauthreq, locationID) {
         validate.order_placed();
         $scope.location_desc_part2_show = false;
         $scope.data_recevied = true;
@@ -15,6 +15,7 @@
         $scope.currency = $localStorage.shippingdata.currency;
         $scope.shipping_method = $localStorage.shippingdata.methodName;
         $scope.shipping_time = $localStorage.shippingdata.shipping_time;
+
         var on_load_response;
         var existing_customer;
         var smscode_response = false;
@@ -170,31 +171,28 @@
                 $scope.update_spinner = false;
 
             });
-
-
-
         }
-        var $form;
-        $scope.newcharge = function() {
-            $scope.payment_spinner = true;
-            console.log(smscode_response);
-            console.log($scope.payment_errors);
-            $form = $('#payment-form');
-            $('#payment-form').submit(function(event) {
+          $('#payment-form').submit(function(event) {
                 // alert();
                 var $form = $(this);
                 $scope.payment_spinner = false;
-
-                $form.find('button').prop('disabled', false);
+                $form.find('#button').prop('disabled', false);
                 Stripe.card.createToken($form, stripeResponseHandler);
                 // Prevent the form from submitting with the default action
                 return false;
             });
+        var $form;
+        $scope.newcharge = function() {
+            $scope.payment_spinner1 = true;
+            console.log(smscode_response);
+            console.log($scope.payment_errors);
+            // $form = $('#payment-form');
+          
         }
 
         function stripeResponseHandler(status, response) {
             // var $form = $('#payment-form');
-            $scope.new = false;
+           console.log("stripe is callig now");
             if (response.error) {
                 $scope.payment_spinner = false;
                 // Show the errors on the form
@@ -242,20 +240,17 @@
         $scope.cardnew = function() {
             $form = $('#cardnew');
             $('#cardnew').submit(function(event) {
-                // alert();
                 var $form = $(this);
-                $scope.payment_spinner = false;
-
+                $scope.payment_spinner = true;
                 $form.find('button').prop('disabled', false);
                 Stripe.card.createToken($form, stripeResponseHandler);
-                // Prevent the form from submitting with the default action
                 return true;
             });
         }
 
         function newuser(response) {
             var country_code = angular.element($("#mobile-number").intlTelInput("getSelectedCountryData"));
-            var query3 = newcharge.save({
+            var query3 = newcharge1.save({
                 orderid: $localStorage.Orders_response.orderid,
                 stripeToken: response.id,
                 firstname: $scope.first_name,
@@ -272,7 +267,7 @@
             });
             query3.$promise.then(function(response) {
                 console.log(response);
-                after_payment(response);
+                // after_payment(response);
                
             });
         }
@@ -285,7 +280,9 @@
                 cvc: $scope.CVCnew
             });
             customerCard.$promise.then(function(response) {
+                $scope.payment_spinner=false;
                 console.log(response);
+                after_payment(response);
             });
         }
         $scope.changeBackgrounfColor = function(){
