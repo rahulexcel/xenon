@@ -95,6 +95,9 @@ display:block;
 .rightCtnr{
 /*	display: none;*/
 }
+.fa-lg{
+	/*font-size: 13px!important;*/
+}
 .menu-section-title{
 	border-bottom:5px solid #bbbdc0;
 	
@@ -104,6 +107,7 @@ display:block;
 	align:center;
 	border-bottom: 1px solid #d8d8d8;
 	min-height: 95px;
+	padding:16px;
 
 }
 .menu-item:hover{
