@@ -5,9 +5,14 @@
             <span class="navbar-brand-image">
       <img src="{{picImage}}">
        <span class="nav-store-name">{{location_name}}</span>
+<<<<<<< HEAD
             <span class="sticky-cart pull-right" ng-click="clickOnCart()" ng-if="(productInCart)" style="font-size:24px;"><i class="fa fa-shopping-cart"></i> {{productInCart}}</span>
             </span>
         </div>
+=======
+        <span class="sticky-cart pull-right" ng-click="clickOnCart()" ng-if="(productInCart)" style="font-size:24px;color:red;padding-right:10px;"><i class="fa fa-shopping-cart"></i> <!-- {{productInCart}} --></span>
+      </span>
+>>>>>>> 0618f22ae3557487593b174e3870ef82d42f27d1
     </div>
     <!-- /.container-fluid -->
 </nav>
@@ -17,16 +22,17 @@
         <i class="fa fa-spin fa-spinner spin-big"></i>
     </span>
 </h1>
-    <div class="container" ng-show="spinner_closed" style="margin-top:1.5em;margin-bottom:1.5em;">
-        <div class="topContainer">
-            <div class="row bgwhite TOP">
-                <div class="col-sm-3 col-xs-12 not-show-main-logo">
-                    <div class="image">
-                        <img ng-src="{{picImage}}" class='img-thumbnail img-responsive logo'>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-xs-12 text-center">
-                    <h3 class="heading topheading"><span class="not-show-main-logo">{{location_name}}</span> 
+
+<div class="container" ng-show="spinner_closed" style="margin-top:1.5em;margin-bottom:1.5em;">
+    <div class="topContainer topContainerInMobile">
+        <div class="row bgwhite TOP">
+           <div class="col-sm-3 col-xs-12 not-show-main-logo">
+               <div class="image">
+                   <img ng-src="{{picImage}}" class='img-thumbnail img-responsive logo'>
+                   </div>
+               </div>
+               <div class="col-sm-6 col-xs-12 text-center">
+                   <h3 class="heading topheading"><span class="not-show-main-logo">{{location_name}}</span> 
                            <p class="store-desc" style="padding-top:5px;">{{location_desc_part1}}<span ng-click="location_desc_part2_show = true" ng-hide="location_desc_part2_show">...</span><span ng-show="location_desc_part2_show">{{location_desc_part2}}</span></p>
                            <p class="store-desc">{{location_addr}}, {{location_lcity}},  {{location_lpostcode}}, {{location_lstate}}, <i class="glyphicon glyphicon-earphone"></i> {{location_lphone}} | {{location_openingtime}}-{{location_closingtime}}</p>
                        </h3>

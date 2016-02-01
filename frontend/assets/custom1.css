@@ -399,6 +399,9 @@ display:none;
 	color: rgb(131, 130, 138);
 	 background-color: #fff;
 }
+.topContainerInMobile{
+	margin-top: 28px;
+}
 }
 @media only screen and (max-width: 480px){
  #allProduct .productName h4{
