@@ -154,7 +154,7 @@
                         </div>
                         <hr class="separator">
                         <div class="formcontainer">
-                            <span class="bold">2.PAYMENT DETAILS</span>
+                            <span class="bold">3.PAYMENT DETAILS</span>
                             <div class="text-center">
                               <form ng-show="payment_by_mobile">
                                 <script
@@ -189,7 +189,7 @@
                                                 <input type="text" maxlength="2" data-stripe="exp-month" class="form-control input-lg" ng-model="cc_month" cc-exp-month name="expiry" placeholder="MM" ng-blur="exp_month_error()" required>
                                                 <span> / </span>
                                                 <input type="text" maxlength="4" data-stripe="exp-year" class="form-control input-lg" ng-model="cc_year" cc-exp-year name="expiry" placeholder="YYYY" ng-blur="exp_year_error()" required/>
-                                                <input type="text" class="form-control input-lg" maxlength="3" data-stripe="cvc" ng-model="CVC" cc-cvc name="cvc" placeholder="CVC" ng-blur="cvc_error()"required>
+                                                <input type="text" class="form-control input-lg" maxlength="3" data-stripe="cvc" ng-model="CVC"  placeholder="CVC" ng-blur="cvc_error()" ng-maxlength="3" name="cvc" required>
                                             </div>
                                             <span ng-show="userForm.expiry.$invalid && !userForm.expiry.$pristine">Looking for a valid expiry date</span>
                                             <span ng-show="userForm.cvc.$invalid && !userForm.cvc.$pristine">Looking for a valid CVC</span>
@@ -201,7 +201,7 @@
                                             <span class="payment-errors" style="color: red" ng-bind="payment_errors"></span>
                                         </div>
                                         <div class="form-group pull-right">
-                                            <button class="btn btn-info btn-lg" ng-click="newcharge()" ng-disabled="userForm.first_name.$invalid || userForm.cvc.$invalid || userForm.expiry.$invalid || userForm.number.$invalid || userForm.postcode.$invalid || userForm.addr.$invalid || userForm.stripeEmail.$invalid || userForm.f_n.$invalid || userForm.l_n.$invalid"> <span ng-show="payment_spinner1" id="button">
+                                            <button class="btn btn-info btn-lg" ng-click="newcharge()" ng-disabled="userForm.first_name.$invalid || userForm.cvc.$invalid ||userForm.cvc.$error || userForm.expiry.$invalid || userForm.number.$invalid || userForm.postcode.$invalid || userForm.addr.$invalid || userForm.stripeEmail.$invalid || userForm.f_n.$invalid || userForm.l_n.$invalid"> <span ng-show="payment_spinner" id="button">
                                                     <i class="fa fa-spin fa-spinner"></i>
                                                 </span>Submit</button>
                                         </div>
