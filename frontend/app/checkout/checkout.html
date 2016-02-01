@@ -154,17 +154,17 @@
                         </div>
                         <hr class="separator">
                         <div class="formcontainer">
-                            <span class="bold">2.PAYMENT DETAILS</span>
+                            <span class="bold">3.PAYMENT DETAILS</span>
                             <div class="text-center">
                               <form ng-show="payment_by_mobile">
                                 <script
                                   src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                                   data-key="pk_test_s9jIizZdUfhjMplDPtyMFAN7"
-                                  data-amount="2000"
                                   data-name="Xenon"
                                   data-description="{{total_price}} {{currency}}"
-                                  data-image="/128x128.png"
-                                  data-locale="auto">
+                                  data-locale="auto"
+                                  data-value="{{total_price}}"
+                                  data-currency="{{currency}}">
                                 </script>
                               </form>
                             </div>
