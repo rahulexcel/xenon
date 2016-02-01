@@ -271,8 +271,7 @@
             query3.$promise.then(function(response) {
                 after_payment(response);
             });
-        }
-       
+        }   
         $scope.changeBackgrounfColor = function() {
             console.log('changeBackgrounfColor');
         }
@@ -287,9 +286,8 @@
                 $scope.payment_spinner = false;
             }
         }
-$scope.pay_by_new_card=function(){
-
-      $scope.pay_by_new_card_spinner=true;
+        $scope.pay_by_new_card=function(){
+           $scope.pay_by_new_card_spinner=true;
             var country_code = angular.element($("#mobile-number").intlTelInput("getSelectedCountryData"));
             var savedcard = existingcharge.save({
                 customerid: customer_id,
@@ -300,8 +298,7 @@ $scope.pay_by_new_card=function(){
                 after_payment(response);
                  $scope.pay_by_new_card_spinner=false;
             });
-}
-
+        }
     var handler = StripeCheckout.configure({
     key: 'pk_test_6pRNASCoBOKtIshFeQd4XMUh',
     // image: '/img/pay.png',
