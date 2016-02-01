@@ -283,5 +283,45 @@
                 $scope.payment_spinner = false;
             }
         }
+
+
+
+    var handler = StripeCheckout.configure({
+    key: 'pk_test_6pRNASCoBOKtIshFeQd4XMUh',
+    // image: '/img/pay.png',
+    locale: 'auto',
+    token: function(response) {
+      console.log(response);
+      verifyCustomer(response);
+      // Use the token to create the charge with a server-side script.
+      // You can access the token ID with `token.id`
+    }
+  });
+
+  $('#mobilePaymentButton').on('click', function(e) {
+    // Open Checkout with further options
+    handler.open({
+      name: 'Xenon',
+      description: '2 widgets',
+      amount: 2000
+    });
+    e.preventDefault();
+  });
+
+  // Close Checkout on page navigation
+  $(window).on('popstate', function() {
+    handler.close();
+  });
+  function verifyCustomer(response){
+    if (existing_customer === true) {
+                    existinguser(response);
+                }
+                // $scope.updatebutton = true;
+                else {
+                    newuser(response);
+                }
+  }
+
+
     }
 })();

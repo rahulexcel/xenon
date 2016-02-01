@@ -154,18 +154,8 @@
                         <hr class="separator">
                         <div class="formcontainer">
                             <span class="bold">3.PAYMENT DETAILS</span>
-                            <div class="text-center">
-                              <form ng-show="payment_by_mobile">
-                                <script
-                                  src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                                  data-key="pk_test_s9jIizZdUfhjMplDPtyMFAN7"
-                                  data-name="Xenon"
-                                  data-description="{{total_price}} {{currency}}"
-                                  data-locale="auto"
-                                  data-value="{{total_price}}"
-                                  data-currency="{{currency}}">
-                                </script>
-                              </form>
+                            <div class="text-center" ng-show="payment_by_mobile">
+                              <button class="btn btn-lg btn-info" id="mobilePaymentButton">Pay</button>
                             </div>
                             <div class="row padbot" ng-show="payment_details_form" id="">
                                 <div class="col-sm-6">
@@ -200,10 +190,14 @@
                                             <span class="payment-errors" style="color: red" ng-bind="payment_errors"></span>
                                         </div>
                                         <div class="form-group pull-right">
+<<<<<<< HEAD
                                          <button class="btn btn-info btn-lg" ng-click="newcharge()" ng-disabled="userForm.name.$invalid || userForm.cvc.$invalid || userForm.expiry.$invalid || userForm.number.$invalid" ng-show="button_when_pickup_mode"> <span ng-show="payment_spinner" id="button">
                                                     <i class="fa fa-spin fa-spinner"></i>
                                                 </span>Submit</button>
                                             <button class="btn btn-info btn-lg" ng-click="newcharge()" ng-disabled="userForm.name.$invalid || userForm.cvc.$invalid || userForm.expiry.$invalid || userForm.number.$invalid ||detailsform.f_n.$invalid||detailsform.l_n.$invalid||detailsform.stripeEmail.$invalid||detailsform.addr.$invalid||detailsform.postcode.$invalid" ng-show="button_when_delivery_mode"> <span ng-show="payment_spinner" id="button">
+=======
+                                            <button class="btn btn-info btn-lg" ng-click="newcharge()" ng-disabled="userForm.name.$invalid || userForm.cvc.$invalid || userForm.expiry.$invalid || userForm.number.$invalid ||detailsform.f_n.$invalid||detailsform.l_n.$invalid||detailsform.stripeEmail.$invalid||detailsform.addr.$invalid||detailsform.postcode.$invalid"> <span ng-show="payment_spinner" id="button">
+>>>>>>> 2d41e126a36f5d9204e35030ceb44364fde2b024
                                                     <i class="fa fa-spin fa-spinner"></i>
                                                 </span>Submit</button>
                                         </div>
