@@ -148,9 +148,14 @@
                
             }
         }
-
+        $scope.sidebarInMobile = true;
+        if(jQuery.browser.mobile){
+            console.log('mobile');
+            $scope.sidebarInMobile = false;
+        }
         $scope.selectedIndex = 0;
         $scope.itemClicked = function($index) {
+        $scope.sidebarInMobile = true;
             $scope.selectedIndex = $index;
             //$scope.cart_shown="cart_display";
         };
