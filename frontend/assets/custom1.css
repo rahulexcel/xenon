@@ -377,6 +377,8 @@ display:none;
 	display: block;
 	background: #fff;
 	padding-top: 2px;
+	margin-left: 15px;
+	margin-right: 15px;
 }
 .nav-store-name{
 	padding-left: 24%;
@@ -401,6 +403,9 @@ display:none;
 }
 .topContainerInMobile{
 	margin-top: 28px;
+}
+.pad-5-mobile{
+	margin-top: 5px;
 }
 }
 @media only screen and (max-width: 480px){
