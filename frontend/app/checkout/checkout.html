@@ -201,7 +201,7 @@
                                             <span class="payment-errors" style="color: red" ng-bind="payment_errors"></span>
                                         </div>
                                         <div class="form-group pull-right">
-                                            <button class="btn btn-info btn-lg" ng-click="newcharge()" ng-disabled="userForm.first_name.$invalid || userForm.cvc.$invalid || userForm.expiry.$invalid || userForm.number.$invalid || userForm.postcode.$invalid || userForm.addr.$invalid || userForm.stripeEmail.$invalid || userForm.f_n.$invalid || userForm.l_n.$invalid"> <span ng-show="payment_spinner">
+                                            <button class="btn btn-info btn-lg" ng-click="newcharge()" ng-disabled="userForm.first_name.$invalid || userForm.cvc.$invalid || userForm.expiry.$invalid || userForm.number.$invalid || userForm.postcode.$invalid || userForm.addr.$invalid || userForm.stripeEmail.$invalid || userForm.f_n.$invalid || userForm.l_n.$invalid"> <span ng-show="payment_spinner1" id="button">
                                                     <i class="fa fa-spin fa-spinner"></i>
                                                 </span>Submit</button>
                                         </div>
@@ -260,13 +260,13 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <input type="text" class="form-control input-lg"  ng-model="fullnamenew" placeholder="Name on card" name="name" required>
+                                            <input type="text" class="form-control input-lg"  ng-model="fullnamenew" placeholder="Name on card" name="fullname" required>
                                         </div>
                                         <div class="form-group">
                                             <span class="payment-errors" style="color: red" ng-bind="payment_errors"></span>
                                         </div>
                                         <div class="form-group pull-right">
-                                            <button class="btn btn-info btn-lg" ng-click="cardnew()" ng-disabled="newcardform.first_name.$invalid || newcardform.cvc.$invalid || newcardform.expiry.$invalid || newcardform.number.$invalid || newcardform.postcode.$invalid || newcardform.addr.$invalid || newcardform.stripeEmail.$invalid || newcardform.f_n.$invalid || newcardform.l_n.$invalid" ng-style="{'background-color' : (disabled == true) ? 'rgb(239, 110, 84              )' : '#bbbdc0'}"> <span ng-show="payment_spinner">
+                                            <button class="btn btn-info btn-lg" ng-click="cardnew()" ng-disabled="newcardform.fullname.$invalid || newcardform.cvc.$invalid || newcardform.expiry.$invalid || newcardform.number.$invalid || newcardform.postcode.$invalid || newcardform.addr.$invalid || newcardform.stripeEmail.$invalid || newcardform.f_n.$invalid || newcardform.l_n.$invalid" ng-style="{'background-color' : (disabled == true) ? 'rgb(239, 110, 84              )' : '#bbbdc0'}"> <span ng-show="payment_spinner">
                                                     <i class="fa fa-spin fa-spinner"></i>
                                                 </span>Submit</button>
                                         </div>
