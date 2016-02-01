@@ -286,14 +286,7 @@ $scope.total_price=arrayService.getTotalprice($scope.cart);
                               timestamp:timeService.getTimestamp($scope.time, $scope.minutes),
                                currency: $scope.currency,
                                total_price:$scope.total_price     };
-                     timeStorage.set('shippingdata', data, 1);           
-
-                     // $rootScope.shipping_time=$scope.time;
-                       //$rootScope.shipping_method=$scope.method;
-                // $localStorage.Orders_response = response;
-                // $localStorage.Orders_sent = $scope.cart;
-                // $localStorage.currency = $scope.currency;
-                // $localStorage.deliverymode=mode;
+                     timeStorage.set('shippingdata', data, 1);        
                  $state.go('checkout');
 
             });
@@ -310,10 +303,8 @@ $scope.total_price=arrayService.getTotalprice($scope.cart);
        
         function updatetime(data){
         $interval(function () {
-            llt=data.llt;
-
             console.log(data);
-               $scope.dropdown_minutes = dropdownService.minutesdropdown(data.llt);
+                $scope.dropdown_minutes = dropdownService.minutesdropdown(llt);
                  $scope.dropdown_days = dropdownService.Timedropdown();
                  $scope.minutes=dropdownService.selectedMinutes($scope.dropdown_minutes);
                   console.log(data.llt);

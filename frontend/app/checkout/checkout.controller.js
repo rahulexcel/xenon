@@ -104,7 +104,7 @@
                     $scope.dis_first_name = response.firstname,
                         $scope.dis_last_name = response.lastname,
                         $scope.dis_postcode = response.postcode,
-                        $scope.dis_addr = response.address,
+                        $scope.dis_addr = response.streetaddr,
                         $scope.existingexpmonth = response.card_exp_month;
                     $scope.existingcc_yearnew = response.card_exp_year;
                     $scope.existingcardnumber = "xxxx" + " " + "xxxx" + " " + "xxxx" + " " + "xxxx" + " " + response.card_last4;
@@ -177,24 +177,32 @@
                 return false;
             });
         });
-        jQuery(function($) {
-            $('#cardnew').submit(function(event) {
-                $form = $(this);
-                $form.find('button').prop('disabled', false);
-                Stripe.card.createToken($form, stripeResponseHandler);
-                return false;
-            });
-        });
         $scope.newcharge = function() {
             $scope.payment_spinner = true;
         }
         $scope.cardnew = function() {
             $scope.payment_spinner = true;
+            var customerCard = customercard.update($localStorage.smstoken1).query({}, {
+                customerid: customer_id,
+                exp_month: $scope.cc_monthnew,
+                exp_year: $scope.cc_yearnew,
+                number: $scope.newcardnumber,
+                cvc: $scope.CVCnew
+            });
+            customerCard.$promise.then(function(response) {
+                $scope.payment_spinner = false;
+                 if(response.updated===true){
+                    $scope.newcard_update_button=false;
+                    $scope.new_card_submit_button=true;
+                 }
+            
+            });
         }
+        
         function stripeResponseHandler(status, response) {
-            // var $form = $('#payment-form');
+           
             if (response.error) {
-                // Show the errors on the form
+                
                 $form.find('.fa-spinner').css("display","none" );
                 $form.find('.payment-errors').text(response.error.message);
                 $form.find('button').prop('disabled', false);
@@ -220,6 +228,7 @@
         $scope.user_is_adding_new_card = function() {
             $scope.existing_card_show_cvc = false;
             $scope.newcard = true;
+            $scope.newcard_update_button=true;
             newcardflag = 1;
         }
         $scope.existingcharge = function() {
@@ -256,20 +265,7 @@
                 after_payment(response);
             });
         }
-        function existinguser(response) {
-            var customerCard = customercard.update($localStorage.smstoken1).query({}, {
-                customerid: customer_id,
-                exp_month: $scope.cc_monthnew,
-                exp_year: $scope.cc_yearnew,
-                number: $scope.newcardnumber,
-                cvc: $scope.CVCnew
-            });
-            customerCard.$promise.then(function(response) {
-                $scope.payment_spinner = false;
-                console.log(response);
-             after_payment(response);
-            });
-        }
+       
         $scope.changeBackgrounfColor = function() {
             console.log('changeBackgrounfColor');
         }
@@ -283,7 +279,19 @@
                 $scope.payment_spinner = false;
             }
         }
-
+$scope.pay_by_new_card=function(){
+      $scope.payment_spinner=true;
+            var country_code = angular.element($("#mobile-number").intlTelInput("getSelectedCountryData"));
+            var savedcard = existingcharge.save({
+                customerid: customer_id,
+                orderid: $localStorage.Orders_response.orderid
+            });
+            savedcard.$promise.then(function(response) {
+                console.log(response);
+                after_payment(response);
+                $scope.payment_spinner = false;
+            });
+}
 
 
     var handler = StripeCheckout.configure({
