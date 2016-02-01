@@ -70,11 +70,15 @@
                     if (response.customer === false) {
                         verify_delivery_mode();
                         $scope.existing_card = true;
+                        $scope.existing_card_show_cvc=false;
+                        $scope.newcard=false;
 
                     } else {
                         $scope.smscode = "";
                         $scope.existing_card_show_cvc = true;
                         $scope.show_sms_code_enter = true;
+                        $scope.existing_card=false;
+                        $scope.newcard=false;
 
                     }
                 });
@@ -132,8 +136,10 @@
 
                 if (smscode_response == true) {
                     $scope.delivery_details_disabled_form = true;
+                    $scope.delivery_details_form=false;
                 } else {
                     $scope.delivery_details_form = true;
+                     $scope.delivery_details_disabled_form = false;
                 }
 
                 $scope.payment_details_form = true;
@@ -227,6 +233,7 @@
         var newcardflag = 0;
         $scope.user_is_adding_new_card = function() {
             $scope.existing_card_show_cvc = false;
+            $scope.existing_card=false;
             $scope.newcard = true;
             $scope.newcard_update_button=true;
             newcardflag = 1;
@@ -280,7 +287,8 @@
             }
         }
 $scope.pay_by_new_card=function(){
-      $scope.payment_spinner=true;
+
+      $scope.pay_by_new_card_spinner=true;
             var country_code = angular.element($("#mobile-number").intlTelInput("getSelectedCountryData"));
             var savedcard = existingcharge.save({
                 customerid: customer_id,
@@ -289,10 +297,9 @@ $scope.pay_by_new_card=function(){
             savedcard.$promise.then(function(response) {
                 console.log(response);
                 after_payment(response);
-                $scope.payment_spinner = false;
+                 $scope.pay_by_new_card_spinner=false;
             });
 }
-
 
     var handler = StripeCheckout.configure({
     key: 'pk_test_6pRNASCoBOKtIshFeQd4XMUh',
