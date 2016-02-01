@@ -40,7 +40,7 @@
             var minutesInterval = new Date().getMinutes();
             var time;
             console.log(minutesInterval+llt);
-            if (minutesInterval + llt > 60) {
+            if (minutesInterval + llt > 59) {
                 minutes_is_more = 1;
                 console.log(minutesInterval);
                 minutesInterval= minutesInterval+llt-60;
@@ -53,7 +53,7 @@
           minutes.push(minutesInterval);
             for (var i = 0; i < 4; i++) {
                 minutesInterval = minutesInterval+15;
-                if(minutesInterval<60){
+                if(minutesInterval<59){
                 minutes.push(minutesInterval);
               }
             }
@@ -75,6 +75,23 @@ service.selectedMinutes = function(data) {
           
             return  selected_mintue;
 
+}
+service.currenttime = function(data) {
+          console.log(selected_hour);
+            return  selected_hour.toString();
+
+}
+service.changedMinutes = function(data) {
+    var minutes=[];
+    var num=0;
+      minutes.push("00");
+    for(var i=1; i<=3; i++){
+   num=num+15;
+   minutes.push(num);
+    }         
+  
+    console.log(minutes); 
+return minutes;
 }
         return service;
     }

@@ -13,6 +13,7 @@
         $scope.product_menu = "product_menu_not_display";
         $scope.backCatMenu = false;
         $scope.productInCart = 0;
+         var llt;
     $scope.changeClassLeftMenu = function(){
 
         if ($scope.class === "left_menu_display"){
@@ -51,8 +52,9 @@
             });
             query.$promise.then(function(data) {
                 console.log(data);
+                    updatetime(data);
+                     llt=data.llt;
                 $scope.currency = data.lcurrency;
-               
                 $scope.dropdown_minutes = dropdownService.minutesdropdown(data.llt);
                  $scope.dropdown_days = dropdownService.Timedropdown();
                  $scope.minutes=$scope.dropdown_minutes[0].toString();  
@@ -81,7 +83,8 @@
                 $scope.all_clicked = true;
                 get_category();
                 check_local_storage();
-                 updatetime(data);
+             
+                 console.log(data);
 
             });
         }
@@ -299,8 +302,12 @@ $scope.total_price=arrayService.getTotalprice($scope.cart);
             $scope.backCatMenu = false;
             $scope.backProductMenu = true;
         }
+       
         function updatetime(data){
-        $interval(function (data) {
+        $interval(function () {
+            llt=data.llt;
+
+            console.log(data);
                $scope.dropdown_minutes = dropdownService.minutesdropdown(data.llt);
                  $scope.dropdown_days = dropdownService.Timedropdown();
                  $scope.minutes=dropdownService.selectedMinutes($scope.dropdown_minutes);
@@ -308,6 +315,23 @@ $scope.total_price=arrayService.getTotalprice($scope.cart);
                 $scope.time =dropdownService.Selected(data.llt);  
             }, 300000);
     }
+
+  $scope.hour_changing=function(){
+    if($scope.time===dropdownService.currenttime()){
+        console.log(llt);
+         $scope.dropdown_minutes = dropdownService.minutesdropdown(llt);
+         $scope.minutes=dropdownService.selectedMinutes($scope.dropdown_minutes);
+        console.log("changed");
+    }else{
+        
+        $scope.dropdown_minutes=dropdownService.changedMinutes();
+        $scope.minutes="00";
+        console.log("not changed");
+    }
+    console.log($scope.time);
+  }
+
+
 
     }
 })();
