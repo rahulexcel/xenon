@@ -160,11 +160,11 @@
                                 <script
                                   src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                                   data-key="pk_test_s9jIizZdUfhjMplDPtyMFAN7"
-                                  data-amount="2000"
                                   data-name="Xenon"
                                   data-description="{{total_price}} {{currency}}"
-                                  data-image="/128x128.png"
-                                  data-locale="auto">
+                                  data-locale="auto"
+                                  data-value="{{total_price}}"
+                                  data-currency="{{currency}}">
                                 </script>
                               </form>
                             </div>
