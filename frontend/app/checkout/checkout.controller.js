@@ -278,6 +278,7 @@
         }
         function after_payment(response) {
             if (response.paid === true) {
+                $scope.orderNo = $localStorage.Orders_response.orderid;
                 $scope.order_not_success = false;
                 $scope.success_message = true;
                 $localStorage.$reset();

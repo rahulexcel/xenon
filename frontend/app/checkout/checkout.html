@@ -11,14 +11,16 @@
                            <p class="store-desc" style="padding-top:5px;">{{location_desc_part1}}<span ng-click="location_desc_part2_show = true" ng-hide="location_desc_part2_show">...</span><span ng-show="location_desc_part2_show">{{location_desc_part2}}</span></p>
                            <p class="store-desc">{{location_addr}}, {{location_lcity}},  {{location_lpostcode}}, {{location_lstate}}, <i class="glyphicon glyphicon-earphone"></i> {{location_lphone}} | {{location_openingtime}}-{{location_closingtime}}</p>
                        </h3>
-            </div>
-        </div>
-        <div class='row to-do'>
-            <div>
-                <div class="col-sm-8 bgwhite leftCtnr">
-                    <div class="text-center" ng-show="success_message" style="padding:130px;">
-                        <h2 class="order-no">#{{orderNo}}</h2>
-                        <span class="bold">
+                   </div>
+                  
+               </div>
+     
+           <div class='row to-do'>
+               <div>
+                   <div class="col-sm-8 bgwhite leftCtnr">
+                         <div class="text-center" ng-show="success_message" style="padding:130px;">
+                         <h2 class="order-no"># {{orderNo}}</h2>
+                           <span  class="bold">
                            Thank You {{fullname}}! We have registered your order and will soon start to prepare it for you. You will receive an email confirming from us shortly.</span><br><br>
                         <a class="btn btn-info" href="#/frontend">Go To Home Page</a>
                     </div>
@@ -46,7 +48,7 @@
                                     <p style="color:red">{{code_error}}</p>
                                     <!-- <div class="col-xs-4"> -->
                                     <input type="text" class="form-control" ng-model="smscode" name="smscode" required>
-                                    <span class="btn btn-info" ng-style="{'background-color': verifyBackgroundCol,'border-color':verifyBorderCol}" ng-disabled="userForm.smscode.$invalid" ng-click="sms_code_submitted(
+                                    <span class="btn btn-info pad-5-mobile" ng-style="{'background-color': verifyBackgroundCol,'border-color':verifyBorderCol}" ng-disabled="userForm.smscode.$invalid" ng-click="sms_code_submitted(
                                                 )"><span ng-show="codespinner">
                                             <i class="fa fa-spin fa-spinner"></i>
                                         </span>Verify</span>
@@ -153,7 +155,7 @@
                         <div class="formcontainer">
                             <span class="bold">3.PAYMENT DETAILS</span>
                             <div class="text-center" ng-show="payment_by_mobile">
-                                <button class="btn btn-lg btn-info" id="mobilePaymentButton" ng-disabled="detailsform.f_n.$invalid||detailsform.l_n.$invalid||detailsform.stripeEmail.$invalid||detailsform.addr.$invalid||detailsform.postcode.$invalid">Pay</button>
+                              <button class="btn btn-lg btn-info btn-block" id="mobilePaymentButton">Pay</button>
                             </div>
                             <div class="row padbot" ng-show="payment_details_form" id="">
                                 <div class="col-sm-6">
