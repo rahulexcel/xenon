@@ -119,12 +119,17 @@
         }
         function verify_delivery_mode() {
             if ($localStorage.shippingdata.deliverymode === 1) {
+                $scope.button_when_pickup_mode=true;
+                $scope.button_when_delivery_mode=false;
                 $scope.payment_details_form = true;
                 if (jQuery.browser.mobile) {
                     $scope.payment_details_form = false;
                     $scope.payment_by_mobile = true;
                 }
             } else {
+                 $scope.button_when_pickup_mode=false;
+                $scope.button_when_delivery_mode=true;
+
                 if (smscode_response == true) {
                     $scope.delivery_details_disabled_form = true;
                 } else {
@@ -182,8 +187,6 @@
         });
         $scope.newcharge = function() {
             $scope.payment_spinner = true;
-            console.log(smscode_response);
-            console.log($scope.payment_errors);
         }
         $scope.cardnew = function() {
             $scope.payment_spinner = true;
@@ -220,6 +223,7 @@
             newcardflag = 1;
         }
         $scope.existingcharge = function() {
+            $scope.payment_spinner=true;
             var country_code = angular.element($("#mobile-number").intlTelInput("getSelectedCountryData"));
             var savedcard = existingcharge.save({
                 customerid: customer_id,
@@ -249,8 +253,7 @@
                 deliverytime: $localStorage.shippingdata.timestamp
             });
             query3.$promise.then(function(response) {
-                console.log(response);
-                //after_payment(response);
+                after_payment(response);
             });
         }
         function existinguser(response) {
@@ -264,7 +267,7 @@
             customerCard.$promise.then(function(response) {
                 $scope.payment_spinner = false;
                 console.log(response);
-                after_payment(response);
+             after_payment(response);
             });
         }
         $scope.changeBackgrounfColor = function() {

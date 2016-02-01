@@ -147,7 +147,6 @@
                                                     <i class="fa fa-spin fa-spinner"></i>
                                                 </span>Update</button>
                                     </div>
-
                                 </div>
                                 </form>
                             </div>
@@ -191,7 +190,14 @@
                                             <span class="payment-errors" style="color: red" ng-bind="payment_errors"></span>
                                         </div>
                                         <div class="form-group pull-right">
+<<<<<<< HEAD
+                                         <button class="btn btn-info btn-lg" ng-click="newcharge()" ng-disabled="userForm.name.$invalid || userForm.cvc.$invalid || userForm.expiry.$invalid || userForm.number.$invalid" ng-show="button_when_pickup_mode"> <span ng-show="payment_spinner" id="button">
+                                                    <i class="fa fa-spin fa-spinner"></i>
+                                                </span>Submit</button>
+                                            <button class="btn btn-info btn-lg" ng-click="newcharge()" ng-disabled="userForm.name.$invalid || userForm.cvc.$invalid || userForm.expiry.$invalid || userForm.number.$invalid ||detailsform.f_n.$invalid||detailsform.l_n.$invalid||detailsform.stripeEmail.$invalid||detailsform.addr.$invalid||detailsform.postcode.$invalid" ng-show="button_when_delivery_mode"> <span ng-show="payment_spinner" id="button">
+=======
                                             <button class="btn btn-info btn-lg" ng-click="newcharge()" ng-disabled="userForm.name.$invalid || userForm.cvc.$invalid || userForm.expiry.$invalid || userForm.number.$invalid ||detailsform.f_n.$invalid||detailsform.l_n.$invalid||detailsform.stripeEmail.$invalid||detailsform.addr.$invalid||detailsform.postcode.$invalid"> <span ng-show="payment_spinner" id="button">
+>>>>>>> 2d41e126a36f5d9204e35030ceb44364fde2b024
                                                     <i class="fa fa-spin fa-spinner"></i>
                                                 </span>Submit</button>
                                         </div>
@@ -207,7 +213,8 @@
                                                 <input type="text" class="form-control input-lg"  ng-model="existingexpmonth" disabled>
                                                 <span> / </span>
                                                 <input type="text" class="form-control input-lg"  ng-model="existingcc_yearnew" disabled/>
-                                               <input type="text" class="form-control input-lg"  ng-model="existingCVC" name="cvc" placeholder="CVC" ng-minlength="3" required>
+                                               <input type="text" class="form-control input-lg"  maxlength="3" ng-model="existingCVC" name="cvc" placeholder="CVC" ng-minlength="3" required>
+                                              
                                  
                                        </div>
                                            
@@ -220,7 +227,9 @@
                                         <span style="color:rgb(239,110,84) cursor:pointer;" ng-click="user_is_adding_new_card()">Add new card </span>
                                     </div>
                                     <div class="form-group pull-right">
-                                        <button class="btn btn-info btn-lg" ng-click="existingcharge()" ng-disabled="existing.cvc.$invalid"> <span ng-show="payment_spinner">
+                                        <button class="btn btn-info btn-lg" ng-click="existingcharge()" ng-disabled="existing.cvc.$invalid"> 
+                                        <span ng-show="payment_spinner">
+
                                                 <i class="fa fa-spin fa-spinner"></i>
                                             </span>Submit</button>
                                     </div>
@@ -243,7 +252,7 @@
                                                 <input type="text" size="2" data-stripe="exp-month" class="form-control input-lg" ng-model="cc_monthnew" cc-exp-month  placeholder="MM" ng-blur="exp_month_error()" name="expiry" required>
                                                 <span> / </span>
                                                 <input type="text" size="4" data-stripe="exp-year" class="form-control input-lg" ng-model="cc_yearnew" cc-exp-year  placeholder="YYYY" ng-blur="exp_year_error()" name="expiry" required/>
-                                                <input type="text" class="form-control input-lg" size="3" data-stripe="cvc" ng-model="CVCnew" cc-cvc placeholder="CVC" name="cvc" ng-blur="cvc_error()" required>
+                                                <input type="text" class="form-control input-lg"  data-stripe="cvc" ng-model="CVCnew" placeholder="CVC" name="cvc" ng-blur="cvc_error()" maxlength="3"  ng-minlength="3" required>
                                             </div>
                                             <span ng-show="newcardform.expiry.$invalid && !newcardform.expiry.$pristine">Looking for a valid expiry date</span>
                                             <span ng-show="newcardform.cvc.$invalid && !newcardform.cvc.$pristine">Looking for a valid CVC</span>
