@@ -128,6 +128,10 @@
             if ($localStorage.shippingdata.deliverymode === 1) {
 
                 $scope.payment_details_form = true;
+                if(jQuery.browser.mobile){
+                    $scope.payment_details_form = false;
+                    $scope.payment_by_mobile = true;
+                }
             } else {
                 if (smscode_response == true) {
                     $scope.delivery_details_disabled_form = true;
@@ -136,7 +140,10 @@
                 }
 
                 $scope.payment_details_form = true;
-
+                if(jQuery.browser.mobile){
+                    $scope.payment_details_form = false;
+                    $scope.payment_by_mobile = true;
+                }
 
             }
         }
