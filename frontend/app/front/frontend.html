@@ -5,7 +5,7 @@
       <span class="navbar-brand-image">
       <img src="{{picImage}}">
        <span class="nav-store-name">{{location_name}}</span>
-        <span class="sticky-cart pull-right" ng-click="clickOnCart()" ng-if="(productInCart)" style="font-size:24px;"><i class="fa fa-shopping-cart"></i> {{productInCart}}</span>
+        <span class="sticky-cart pull-right" ng-click="clickOnCart()" ng-if="(productInCart)" style="font-size:24px;color:red;padding-right:10px;"><i class="fa fa-shopping-cart"></i> <!-- {{productInCart}} --></span>
       </span>
     </div>
   </div><!-- /.container-fluid -->
@@ -17,7 +17,7 @@
     </span>
 </h1>
 <div class="container" ng-show="spinner_closed" style="margin-top:1.5em;margin-bottom:1.5em;">
-    <div class="topContainer">
+    <div class="topContainer topContainerInMobile">
         <div class="row bgwhite TOP">
            <div class="col-sm-3 col-xs-12 not-show-main-logo">
                <div class="image">
