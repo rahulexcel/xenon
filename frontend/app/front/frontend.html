@@ -39,7 +39,7 @@
 
                        
                             
-                             <!-- <span class="pull-left "><i class='glyphicon glyphicon-th-list fa-lg' ng-click="changeClassLeftMenu()"></i></span> -->
+                
                              
                               
                        
@@ -136,7 +136,7 @@
                                             </div>
                                             <div class="form-inline">
                                             <div class="form-group" style="width:100%">
-                                                <select class="form-control input-lg time-dropdown"  ng-model="time">
+                                                <select class="form-control input-lg time-dropdown" ng-change="hour_changing()" ng-model="time">
                                                     <option  
                                                                   ng-repeat="row in dropdown_days" value="{{row}}">{{row}}</option>
                                                 </select>
