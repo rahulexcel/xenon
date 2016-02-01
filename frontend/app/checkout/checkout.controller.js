@@ -330,9 +330,16 @@ $scope.pay_by_new_card=function(){
   });
   function verifyCustomer(response){
     if (existing_customer === true) {
-                    existinguser(response);
+                    var country_code = angular.element($("#mobile-number").intlTelInput("getSelectedCountryData"));
+                    var savedcard = existingcharge.save({
+                        customerid: customer_id,
+                        orderid: $localStorage.Orders_response.orderid
+                    });
+                    savedcard.$promise.then(function(response) {
+                        console.log(response);
+                        after_payment(response);
+                    });
                 }
-                // $scope.updatebutton = true;
                 else {
                     newuser(response);
                 }

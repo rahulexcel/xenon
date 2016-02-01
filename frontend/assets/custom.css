@@ -369,8 +369,8 @@ width: 84px;
 	max-width: 50%;
 	text-align: left;
 }
-.time-dropdown{
-	width: 49%!important;
+.time-dropdown select{
+	width: 100%!important;
 }
 
 .cart-container{
@@ -388,4 +388,14 @@ width: 84px;
 .order-no{
 	color: rgb(239,110,84);
 	font-weight: bold;
+}
+.poweredByFooter h4{
+	display: inline-block;
+	font-size: 14px;
+}
+.poweredByFooter img{
+	width: 30%;
+}
+.poweredByFooterInMobile{
+	display: none;
 }

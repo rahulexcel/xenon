@@ -287,6 +287,9 @@ padding-bottom: 12px;
 	    font-weight:bold;
  
 }
+.bold1{
+	padding-top: 15px;
+}
 .dropdown{
 	
 	  padding: 20px;
@@ -371,7 +374,7 @@ display:none;
 }
 
 .time-dropdown{
-	width: 100%!important;
+	width: 50%!important;
 }
 .cart-container{
 	display: block;
@@ -407,6 +410,23 @@ display:none;
 .pad-5-mobile{
 	margin-top: 5px;
 }
+
+.poweredByFooter{
+	display: none;
+}
+.poweredByFooterInMobile{
+	display: block;
+	text-align: left;
+}
+.poweredByFooterInMobile h4{
+	display: inline-block;
+	font-size: 14px;
+}
+.poweredByFooterInMobile img{
+	width: 30%;
+}
+
+
 }
 @media only screen and (max-width: 480px){
  #allProduct .productName h4{

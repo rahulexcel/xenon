@@ -134,16 +134,21 @@
                                                     <option ng-repeat="row in delivery_method" value="{{row}}">{{row}}</option>
                                                 </select>
                                             </div>
+
                                             <div class="form-inline">
                                             <div class="form-group" style="width:100%">
-                                                <select class="form-control input-lg time-dropdown" ng-change="hour_changing()" ng-model="time">
+                                            <div class="col-md-6 col-xs-6 time-dropdown no-pad-left no-pad-right">
+                                                <select class="form-control input-lg" ng-change="hour_changing()" ng-model="time">
                                                     <option  
                                                                   ng-repeat="row in dropdown_days" value="{{row}}">{{row}}</option>
                                                 </select>
-                                                <select class="form-control input-lg time-dropdown"  ng-model="minutes">
+                                                </div>
+                                                <div class="col-md-6 col-xs-6 time-dropdown no-pad-left no-pad-right">
+                                                <select class="form-control input-lg"  ng-model="minutes">
                                                     <option  
                                                                   ng-repeat="row in dropdown_minutes" value="{{row}}">{{row}}</option>
                                                 </select>
+                                                </div>
                                             </div>
                                             </div>
 
@@ -222,6 +227,11 @@
                                                                 <i class="fa fa-spin fa-spinner"></i>
                                                             </span>
                                                         </div>
+
+                                                        <div class='col-sm-12 col-xs-12 text-center poweredByFooter'>
+                                                        <h4 style="margin-bottom:0px;">Powered by</h4>
+                                                        <img src="img/powered.png" />
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -229,6 +239,10 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class='col-sm-12 col-xs-12 text-center poweredByFooterInMobile no-pad-left'>
+                                                        <h4 style="margin-bottom:0px;">Powered by</h4>
+                                                        <img src="img/powered.png" />
+                                                        </div>
                             </div>
                         </div>
                     </div>
