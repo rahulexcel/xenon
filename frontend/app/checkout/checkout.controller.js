@@ -57,6 +57,7 @@
             $scope.show_sms_code_enter=false;
             $scope.submitBackgroundCol = '#d3d3d3';
             $scope.submitBorderCol = '#d3d3d3';
+            smscode_response=false;
             if (angular.isDefined($scope.phone_no)) {
                 $scope.phone_spinner = true;
                 var country_code = angular.element($("#mobile-number").intlTelInput("getSelectedCountryData"));
@@ -71,9 +72,13 @@
                     existing_customer = response.customer;
                     if(response.error===true){
                    $scope.phone_error="Invalid contact number";     
-                    }else{
+                    }
                     if (response.customer === true) {
-                        // $scope.updatebutton = true;
+                         $scope.smscode = "";
+                        $scope.existing_card_show_cvc = true;
+                        $scope.show_sms_code_enter = true;
+                        $scope.existing_card=false;
+                        $scope.newcard=false;
                     }
                     console.log(response);
                     $scope.phone_spinner = false;
@@ -83,16 +88,8 @@
                         $scope.existing_card_show_cvc=false;
                         $scope.newcard=false;
 
-
-                    } else {
-                        $scope.smscode = "";
-                        $scope.existing_card_show_cvc = true;
-                        $scope.show_sms_code_enter = true;
-                        $scope.existing_card=false;
-                        $scope.newcard=false;
-
-                    }
-                }
+                    } 
+                
                 });
             }
         }
@@ -192,14 +189,16 @@
         jQuery(function($) {
             $('#payment-form').submit(function(event) {
                 $form = $(this);
-                $form.find('button').prop('disabled', false);
+                $form.find('#spinner_on_error').css("display","inline-block");  
+                $form.find('.payment-errors').text(" ");
+                $form.find('button').prop('disabled', true);
                 Stripe.card.createToken($form, stripeResponseHandler);
                 return false;
             });
         });
-        $scope.newcharge = function() {
-             $form.find('.payment-errors').text(" ");
-            $scope.payment_spinner = true;
+        $scope.newcharge = function() { 
+            $scope.new_charge_spinner=true;
+            // $scope.payment_spinner_new_charge = true;
         }
         $scope.cardnew = function() {
             $scope.payment_spinner = true;
@@ -216,17 +215,19 @@
                     $scope.newcard_update_button=false;
                     $scope.new_card_submit_button=true;
                  }
+                 if(response.authentication===false){
+                    $scope.authentication_error=response.message;
+                 }
             
             });
         }
         
         function stripeResponseHandler(status, response) {
-           
             if (response.error) {
-                
-                $form.find('.fa-spinner').css("display","none" );
+              
                 $form.find('.payment-errors').text(response.error.message);
                 $form.find('button').prop('disabled', false);
+                $form.find('#spinner_on_error').css("display","none");
             } else {
                 console.log(response.id);
                 console.log($localStorage.shippingdata.currency.toLowerCase());
@@ -256,7 +257,8 @@
         $scope.existingcharge = function() {
             $scope.payment_spinner=true;
             var country_code = angular.element($("#mobile-number").intlTelInput("getSelectedCountryData"));
-            var savedcard = existingcharge.save({
+            var savedcard = existingcharge.update($localStorage.smstoken1).query({}, {
+            
                 customerid: customer_id,
                 orderid: $localStorage.Orders_response.orderid
             });
@@ -351,7 +353,6 @@
 
 var totalItemInCart = arrayService.totalItemInCart($scope.cart);
   $('#mobilePaymentButton').on('click', function(e) {
-    $scope.payByMobileSpinner = true;   
     if(angular.isDefined($scope.stripeEmail)){
         var Email =$scope.stripeEmail;
     }

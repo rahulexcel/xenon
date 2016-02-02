@@ -402,3 +402,6 @@ width: 84px;
 .poweredByFooterInMobile{
 	display: none;
 }
+.new_charge_spinner{
+	display:none;
+}
