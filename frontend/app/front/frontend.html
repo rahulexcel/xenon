@@ -45,15 +45,6 @@
 
                     <div class="col-sm-8 bgwhite leftCtnr">
                        <span class="pull-left" style="color:red" ng-show="Order_not_placed">Your Cart is Empty. Please select items for your cart</span>
-
-                       
-                            
-                
-                             
-                              
-                       
-                       
-
                         <div class='row left'>
                          <div ng-class="class" class="">
                                  
@@ -85,7 +76,7 @@
                                         <div ng-repeat='image in row1.image' class="col-xs-6 no-pad-left vcenter">
                                                <img ng-src="http://s3.amazonaws.com/ordermagic/{{image}}" class="img-responsive center-image">
                                         </div>
-                                            <div class="col-sm-6  col-xs-8 no-pad vcenter productName">
+                                            <div class="col-sm-6  col-xs-10 no-pad vcenter productName">
                                                 <h4 class="heading">{{row1.pname}} 
                                                         <span class="prod-desc">{{row1.desc}}</span>
                                                     </h4>
@@ -93,7 +84,9 @@
                                                 
                                                 <div class="col-sm-4 col-sm-offset-2 no-pad vcenter col-xs-8 productPrice">
                                                     <div class="pull-right">
-                                                        <strong class="heading">{{row1.price}} {{currency}} <i class="glyphicon glyphicon-plus fa-fw"></i></strong>
+                                                       <span class="heading">{{row1.price}} {{currency}} 
+                                                         <i class="glyphicon glyphicon-plus fa-fw plus-in-computer" ></i> <i class="glyphicon glyphicon-plus fa-fw plus-in-mobile"></i>
+                                                         </span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -112,7 +105,7 @@
                                             <div ng-repeat='image in row.pimages' class="col-xs-6 no-pad-left vcenter">
                                                <img ng-src="http://s3.amazonaws.com/ordermagic/{{image}}" class="img-responsive center-image">
                                             </div>
-                                                <div class="col-sm-6  col-xs-4 no-pad  vcenter productName">
+                                                <div class="col-sm-6  col-xs-10 no-pad  vcenter productName">
                                                     <h4 class="heading">{{row.pname}}
                                                         <br>
                                                             <span class="prod-desc">{{row.pdesc}}</span>
