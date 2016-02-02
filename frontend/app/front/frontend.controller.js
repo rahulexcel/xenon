@@ -304,11 +304,16 @@ $scope.total_price=arrayService.getTotalprice($scope.cart);
         function updatetime(data){
         $interval(function () {
             console.log(data);
-                $scope.dropdown_minutes = dropdownService.minutesdropdown(llt);
+               $scope.dropdown_minutes = dropdownService.minutesdropdown(llt);
                  $scope.dropdown_days = dropdownService.Timedropdown();
-                 $scope.minutes=dropdownService.selectedMinutes($scope.dropdown_minutes);
-                  console.log(data.llt);
-                $scope.time =dropdownService.Selected(data.llt);  
+                 $scope.minutes=$scope.dropdown_minutes[0].toString();  
+               // $scope.dropdown_days.unshift(dropdownService.Selected(data.llt));
+                $scope.time =dropdownService.Selected(llt);  
+                // $scope.dropdown_minutes = dropdownService.minutesdropdown(llt);
+                //  $scope.dropdown_days = dropdownService.Timedropdown();
+                //  $scope.minutes=dropdownService.selectedMinutes($scope.dropdown_minutes);
+                //   console.log(data.llt);
+                // $scope.time =dropdownService.Selected(data.llt);  
             }, 300000);
     }
 

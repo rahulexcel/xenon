@@ -48,6 +48,13 @@
             $scope.data_recevied = false;
         });
         $scope.phone_no_submitted = function() {
+            $scope.phone_error="";
+            $scope.delivery_details_disabled_form=false;
+            $scope.delivery_details_form=false;
+            $scope.payment_details_form=false;
+            $scope.existing_card_show_cvc=false;
+            $scope.newcard=false;
+            $scope.show_sms_code_enter=false;
             $scope.submitBackgroundCol = '#d3d3d3';
             $scope.submitBorderCol = '#d3d3d3';
             if (angular.isDefined($scope.phone_no)) {
@@ -62,6 +69,9 @@
                 });
                 query2.$promise.then(function(response) {
                     existing_customer = response.customer;
+                    if(response.error===true){
+                   $scope.phone_error="Invalid contact number";     
+                    }else{
                     if (response.customer === true) {
                         // $scope.updatebutton = true;
                     }
@@ -81,6 +91,7 @@
                         $scope.newcard=false;
 
                     }
+                }
                 });
             }
         }
@@ -106,15 +117,16 @@
                     $scope.code_error = response.data;
                 } else {
                     $scope.dis_first_name = response.firstname,
-                        $scope.dis_last_name = response.lastname,
-                        $scope.dis_postcode = response.postcode,
-                        $scope.dis_addr = response.streetaddr,
-                        $scope.existingexpmonth = response.card_exp_month;
+                    $scope.dis_last_name = response.lastname,
+                    $scope.dis_postcode = response.postcode,
+                    $scope.dis_addr = response.streetaddr,
+                    $scope.existingexpmonth = response.card_exp_month;
                     $scope.existingcc_yearnew = response.card_exp_year;
                     $scope.existingcardnumber = "xxxx" + " " + "xxxx" + " " + "xxxx" + " " + "xxxx" + " " + response.card_last4;
                     $scope.dis_email = response.email;
                     $scope.existingfullname = response.firstname + " " + response.lastname;
                     smscode_response = response.smscode;
+                      $scope.show_sms_code_enter = false;
                     verify_delivery_mode();
                 }
                 $scope.codespinner = false;
@@ -184,6 +196,7 @@
             });
         });
         $scope.newcharge = function() {
+             $form.find('.payment-errors').text(" ");
             $scope.payment_spinner = true;
         }
         $scope.cardnew = function() {
@@ -252,7 +265,9 @@
             });
         }
         function newuser(response) {
+
             var country_code = angular.element($("#mobile-number").intlTelInput("getSelectedCountryData"));
+        if ($localStorage.shippingdata.deliverymode === 2) {
             var query3 = newcharge.save({
                 orderid: $localStorage.Orders_response.orderid,
                 stripeToken: response.id,
@@ -271,6 +286,27 @@
             query3.$promise.then(function(response) {
                 after_payment(response);
             });
+        }
+        if($localStorage.shippingdata.deliverymode === 1){
+             var query3 = newcharge.save({
+                orderid: $localStorage.Orders_response.orderid,
+                stripeToken: response.id,
+                firstname: $scope.first_name,
+                stripeEmail: $scope.stripeEmail,
+                lastname: $scope.last_name,
+                addr: $scope.addr,
+                postcode: $scope.postcode,
+                city: $scope.city,
+                countrycode: country_code[0].dialCode,
+                currency: $localStorage.shippingdata.currency.toLowerCase(),
+                phone: $scope.phone_no,
+                deliverymode: $localStorage.shippingdata.deliverymode,
+                pickuptime: $localStorage.shippingdata.timestamp
+            });
+            query3.$promise.then(function(response) {
+                after_payment(response);
+            });
+        }
         }   
         $scope.changeBackgrounfColor = function() {
             console.log('changeBackgrounfColor');
