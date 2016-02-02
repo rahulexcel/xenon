@@ -57,6 +57,7 @@
             $scope.show_sms_code_enter=false;
             $scope.submitBackgroundCol = '#d3d3d3';
             $scope.submitBorderCol = '#d3d3d3';
+            smscode_response=false;
             if (angular.isDefined($scope.phone_no)) {
                 $scope.phone_spinner = true;
                 var country_code = angular.element($("#mobile-number").intlTelInput("getSelectedCountryData"));
