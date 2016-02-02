@@ -380,14 +380,16 @@ var totalItemInCart = arrayService.totalItemInCart($scope.cart);
   function verifyCustomer(response){
     if (existing_customer === true) {
                     var country_code = angular.element($("#mobile-number").intlTelInput("getSelectedCountryData"));
-                    var savedcard = existingcharge.save({
-                        customerid: customer_id,
-                        orderid: $localStorage.Orders_response.orderid
-                    });
-                    savedcard.$promise.then(function(response) {
-                        console.log(response);
-                        after_payment(response);
-                    });
+            var savedcard = existingcharge.update($localStorage.smstoken1).query({}, {
+            
+                customerid: customer_id,
+                orderid: $localStorage.Orders_response.orderid
+            });
+            savedcard.$promise.then(function(response) {
+                console.log(response);
+                after_payment(response);
+                $scope.payment_spinner = false;
+            });
                 }
                 else {
                     newuser(response);

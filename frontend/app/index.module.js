@@ -6,5 +6,6 @@ var app = angular.module('xenon-frontend', [
     'ngStorage',
      'credit-cards',
      "ngMessages",
-     'gavruk.card'
+     'gavruk.card',
+     'angular-notification-icons'
 ]);

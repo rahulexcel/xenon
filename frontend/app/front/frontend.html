@@ -2,11 +2,20 @@
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
+    <div class="col-xs-4 no-pad-left">
       <span class="navbar-brand-image">
-      <img src="{{picImage}}">
-       <span class="nav-store-name">{{location_name}}</span>
-        <span class="sticky-cart pull-right" ng-click="clickOnCart()" ng-if="(productInCart)" style="font-size:24px;color:rgb(239, 110, 84);padding-right:10px;"><i class="fa fa-shopping-cart"></i> {{productInCart}}</span>
-      </span>
+      <img src="{{picImage}}"></span>
+    </div>
+    <div class="col-xs-8 no-pad-left nav-store-name-container">
+      <span class="nav-store-name">{{location_name}}</span>
+        <!-- <span class="sticky-cart pull-right" ng-click="clickOnCart()" ng-if="(productInCart)" style="font-size:24px;color:rgb(239, 110, 84);padding-right:10px;"><i class="fa fa-shopping-cart"></i> {{productInCart}}</span> -->
+        <span class="sticky-cart pull-right" ng-click="clickOnCart()" ng-if="(productInCart)">
+          <notification-icon count="productInCart">
+            <i class="fa fa-shopping-cart fa-2x" style="color:rgb(239, 110, 84);"></i>
+          </notification-icon>
+        </span>
+        
+    </div>
     </div>
   </div><!-- /.container-fluid -->
 </nav>
@@ -27,7 +36,7 @@
                <div class="col-sm-6 col-xs-12 text-center">
                    <h3 class="heading topheading"><span class="not-show-main-logo">{{location_name}}</span> 
 <!--                            <p class="store-desc" style="padding-top:5px;">{{location_desc_part1}}<span ng-click="location_desc_part2_show = true" ng-hide="location_desc_part2_show">...</span><span ng-show="location_desc_part2_show">{{location_desc_part2}}</span></p> -->
-                           <p class="store-desc">{{location_addr}}, {{location_lcity}},  {{location_lpostcode}}, {{location_lstate}}, <i class="glyphicon glyphicon-earphone"></i> {{location_lphone}} | {{location_openingtime}}-{{location_closingtime}}</p>
+                           <p class="store-desc">{{location_addr}}, {{location_lcity}},  {{location_lpostcode}}, {{location_lstate}} <br><i class="glyphicon glyphicon-earphone"></i> {{location_lphone}} | {{location_openingtime}}-{{location_closingtime}}</p>
                        </h3>
                    </div>
                   

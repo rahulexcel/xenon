@@ -6,6 +6,7 @@
     function frontendCtrl($scope, locations, timeStorage,$window, locationID, $localStorage, category, $rootScope, products, Order, $state, arrayService, dropdownService, timeService, $interval) {
         var response_products;
         var response_categories;
+        $scope.customPending = 5;
         $scope.spinner = true;
         $scope.location_desc_part2_show = false;
         $scope.class = "left_menu_display";

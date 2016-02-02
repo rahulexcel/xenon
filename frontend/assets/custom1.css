@@ -234,6 +234,7 @@ background-color: rgb(239, 110, 84)!important;
 }
 .topheading{
 	margin-bottom: 18px;
+	margin-top: 18px;
 	padding-top: 0px;
 }
 .store-desc{
@@ -388,8 +389,10 @@ display:none;
 	margin-right: 15px;
 }
 .nav-store-name{
-	padding-left: 24%;
-	font-size: 18px;
+	font-size: 20px;
+}
+.nav-store-name-container{
+	line-height: 37px;
 }
 .navbar{
 	min-height: auto!important;
