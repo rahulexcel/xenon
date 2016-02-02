@@ -8,7 +8,6 @@
             </div>
             <div class="col-sm-6 col-xs-12 text-center">
                 <h3 class="heading topheading">{{location_name}} 
-                           <!-- <p class="store-desc" style="padding-top:5px;">{{location_desc_part1}}<span ng-click="location_desc_part2_show = true" ng-hide="location_desc_part2_show">...</span><span ng-show="location_desc_part2_show">{{location_desc_part2}}</span></p> -->
                            <p class="store-desc">{{location_addr}}, {{location_lcity}},  {{location_lpostcode}}, {{location_lstate}} <br><i class="glyphicon glyphicon-earphone"></i> {{location_lphone}} | {{location_openingtime}}-{{location_closingtime}}</p>
                        </h3>
                    </div>
@@ -155,7 +154,9 @@
                         <div class="formcontainer">
                             <span class="bold">3.PAYMENT DETAILS</span>
                             <div class="text-center" ng-show="payment_by_mobile">
-                              <button class="btn btn-lg btn-info btn-block" id="mobilePaymentButton"><span ng-show="payByMobileSpinner"><i class="fa fa-spin fa-spinner"></i></span> Pay</button>
+                              <button class="btn btn-lg btn-info btn-block" id="mobilePaymentButton" ><span ng-show="payByMobileSpinner"><i class="fa fa-spin fa-spinner"></i></span> Pay</button>
+                              
+                              
                             </div>
                             <div class="row padbot" ng-show="payment_details_form" id="">
                                 <div class="col-sm-6">
@@ -280,7 +281,7 @@
                 </div>
             </div>
 
-            <div class="col-sm-4 bgwhite">
+            <div class="col-sm-4 bgwhite no-pad-left-right">
                 <div class="row" style="padding-top:22px;">
                     <div class="col-sm-6">
                         <!-- <span class="medium pull-left">Shipping method</span> -->
@@ -308,7 +309,7 @@
 
                                 <div class="row">
                                     <div ng-repeat='row in cart'>
-                                        <div class="col-sm-12 col-xs-12">
+                                        <div class="col-sm-12 col-xs-12 pad-2-left-right">
                                             <div class="pull-left cart-details">
                                                 {{row.count}}&nbsp;X&nbsp;
                                                 <span style="color:rgb(239,110,84)">{{row.name}}</span>
