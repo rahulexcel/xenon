@@ -111,8 +111,18 @@ display:block;
 
 }
 .menu-item:hover{
-	background-color:#EFF1F5;
+background-color:#fff;
 cursor:pointer;
+}
+.menu-item:hover div img{
+	opacity: 1;
+}
+.menu-item:active {
+    background-color:#EFF1F5;
+	cursor:pointer;
+}
+.menu-item:active div img{
+	opacity: 0.5;
 }
 .fa-fw{
 	color:rgb(239, 110, 84);
@@ -364,7 +374,10 @@ display:none;
 	color: red;
 	margin-top: 5px;
 	/*margin-right: 12px;*/
-	font-size: 14px;
+	font-size: 16px;
+}
+.back-text{
+	font-size: 12px;
 }
 .back-menu1{
 	display: block!important;
@@ -389,8 +402,12 @@ display:none;
 .plus-in-mobile{
 	display:inline-block;
 	position:absolute;
-	top:16px;
+	top:20px;
 	left: 8px;
+}
+.product-price-heading{
+	position:relative;
+	top:-16px;
 }
 
 
@@ -413,10 +430,10 @@ display:none;
 	margin-top: 28px;
 }
 .nav-store-name{
-	font-size: 20px;
+	font-size: 16px;
 }
 .nav-store-name-container{
-	line-height: 37px;
+	line-height: 46px;
 }
 .navbar{
 	min-height: auto!important;
@@ -431,12 +448,16 @@ display:none;
 	padding-left: 0px;
 	padding-right: 0px;
 }
+.pad-2-left-right{
+	padding-left: 6px;
+	padding-right: 6px;	
+}
 .sidebar-in-mobile{
 	color: rgb(131, 130, 138);
 	 background-color: #fff;
 }
 .topContainerInMobile{
-	margin-top: 28px;
+	margin-top: 42px;
 }
 .pad-5-mobile{
 	margin-top: 5px;

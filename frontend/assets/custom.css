@@ -65,9 +65,12 @@
 	min-height: 95px;
 
 }
+.menu-item:hover div img{
+	opacity: .5;
+}
 .menu-item:hover{
 	background-color:#EFF1F5;
-cursor:pointer;
+	cursor:pointer;
 }
 .fa-fw{
 	color:rgb(239, 110, 84);
@@ -361,7 +364,7 @@ width: 84px;
 	 margin-bottom: 17px;
 }
 .cart-details{
-	max-width: 50%;
+	max-width: 70%;
 	text-align: left;
 }
 .time-dropdown{
@@ -380,7 +383,7 @@ width: 84px;
 }
 .angular-notifications-icon{
 	background: #689D21!important;
-	top: -5px!important;
+	top: -1px!important;
 	right: -16px!important;
 	min-width: 20px!important;
     height: 20px!important;
@@ -388,8 +391,11 @@ width: 84px;
     line-height: 21px!important;
 }
 .navbar-brand-image img{
-	max-width:40px;
-	max-height:40px;
+	max-width:50px;
+	max-height:50px;
+	padding-top: 2px;
+	padding-bottom: 3px;
+	padding-left: 4px;
 	/*padding-left: 10px;*/
 }
 .order-no{

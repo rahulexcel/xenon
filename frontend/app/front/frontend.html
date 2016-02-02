@@ -63,8 +63,8 @@
 
                             <div class="col-sm-9">
                                 <div ng-show="all_clicked" class="aligned-center" id="allProduct">
-                                <span class="pull-right back-menu" ng-show="backCatMenu" ><i class='glyphicon glyphicon-chevron-left fa-md' style="color:rgb(239,110,84)" ng-click="backToCatList()" ></i></span>
-                              <span class="pull-right back-menu" ng-show="backProductMenu"><i class='glyphicon glyphicon-chevron-left fa-md' ng-click="backToProductList()" style="color:rgb(239,110,84)"></i></span>
+                                <span class="pull-right back-menu" ng-show="backCatMenu" ng-click="backToCatList()" ><i class='glyphicon glyphicon-chevron-left fa-md' style="color:rgb(239,110,84)"></i> <span class="back-text">back</span></span>
+                              <span class="pull-right back-menu" ng-show="backProductMenu" ng-click="backToProductList()"><i class='glyphicon glyphicon-chevron-left fa-md' style="color:rgb(239,110,84)"></i> <span class="back-text">back</span></span>
                                     <div ng-repeat='row in All_products'>
                                         <header class="menu-section-title">
                                             <h3 class="heading">{{row.name}}
@@ -84,7 +84,7 @@
                                                 
                                                 <div class="col-sm-4 col-sm-offset-2 no-pad vcenter col-xs-8 productPrice">
                                                     <div class="pull-right">
-                                                       <span class="heading" style="position:relative;">{{row1.price}} {{currency}} 
+                                                       <span class="heading product-price-heading">{{row1.price}} {{currency}} 
                                                          <i class="glyphicon glyphicon-plus fa-fw plus-in-computer" ></i><br> <i class="glyphicon glyphicon-plus fa-fw plus-in-mobile"></i>
                                                          </span>
                                                     </div>
@@ -95,8 +95,8 @@
                                     <div ng-show="category_clicked">
                                         <header class="menu-section-title">
                                             <h3 class="heading no-pad">{{category}}
-                                                <span class="pull-right back-menu" ng-show="backCatMenu"><i class='glyphicon glyphicon-chevron-left fa-md ' ng-click="backToCatList()"></i></span>
-                              <span class="pull-right back-menu" ng-show="backProductMenu"><i class='glyphicon glyphicon-chevron-left fa-md' ng-click="backToProductList()"></i></span>
+                                                <span class="pull-right back-menu" ng-show="backCatMenu" ng-click="backToCatList()"><i class='glyphicon glyphicon-chevron-left fa-md '></i> <span class="back-text">back</span></span>
+                              <span class="pull-right back-menu" ng-show="backProductMenu" ng-click="backToProductList()"><i class='glyphicon glyphicon-chevron-left fa-md'></i> <span class="back-text">back</span></span>
                                             </h3>
                                             <p class='no-pad'>{{category}}</p>
                                             <input type="hidden" ng-model="cat_id">
@@ -114,7 +114,7 @@
                                                      
                                                     <div class="col-sm-4 col-sm-offset-2 no-pad vcenter col-xs-8 productPrice">
                                                     <div class="pull-right">
-                                                       <span class="heading" style="position:relative;">{{row.price}} {{currency}} 
+                                                       <span class="heading product-price-heading">{{row.price}} {{currency}} 
                                                          <i class="glyphicon glyphicon-plus fa-fw plus-in-computer" ></i><br> <i class="glyphicon glyphicon-plus fa-fw plus-in-mobile"></i>
                                                          </span>
                                                     </div>
@@ -129,8 +129,8 @@
                                 <div class="col-sm-4 bgwhite rightCtnr">
                                     <div class="text-center" style="padding-top: 20px;">
                                         <span class=" bold">&nbsp;
-                                            <span class="pull-right back-menu1" ng-show="backCatMenu"><i class='glyphicon glyphicon-chevron-left fa-md' ng-click="backToCatList()"></i></span>
-                              <span class="pull-right back-menu1" ng-show="backProductMenu"><i class='glyphicon glyphicon-chevron-left fa-md' ng-click="backToProductList()"></i></span>
+                                            <span class="pull-right back-menu1" ng-show="backCatMenu" ng-click="backToCatList()"><i class='glyphicon glyphicon-chevron-left fa-md'></i> <span class="back-text">back</span></span>
+                              <span class="pull-right back-menu1" ng-show="backProductMenu" ng-click="backToProductList()"><i class='glyphicon glyphicon-chevron-left fa-md'></i> <span class="back-text">back</span></span>
                                         </span>
                                         <div class="dropdown">
                                             <div class="form-group">

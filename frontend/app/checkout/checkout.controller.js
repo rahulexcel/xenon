@@ -354,6 +354,7 @@
 
 var totalItemInCart = arrayService.totalItemInCart($scope.cart);
   $('#mobilePaymentButton').on('click', function(e) {
+    $scope.payByMobileSpinner=true;
     if(angular.isDefined($scope.stripeEmail)){
         var Email =$scope.stripeEmail;
     }
