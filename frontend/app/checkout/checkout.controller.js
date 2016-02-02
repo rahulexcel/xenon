@@ -83,6 +83,7 @@
                         $scope.existing_card_show_cvc=false;
                         $scope.newcard=false;
 
+
                     } else {
                         $scope.smscode = "";
                         $scope.existing_card_show_cvc = true;
@@ -350,6 +351,7 @@
 
 var totalItemInCart = arrayService.totalItemInCart($scope.cart);
   $('#mobilePaymentButton').on('click', function(e) {
+    $scope.payByMobileSpinner = true;   
     if(angular.isDefined($scope.stripeEmail)){
         var Email =$scope.stripeEmail;
     }
