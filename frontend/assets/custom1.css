@@ -388,7 +388,9 @@ display:none;
 }
 .plus-in-mobile{
 	display:inline-block;
-
+	position:absolute;
+	top:16px;
+	left: 8px;
 }
 
 
@@ -405,6 +407,10 @@ display:none;
 	padding-top: 1px;
 	margin-left: 15px;
 	margin-right: 15px;
+	margin-bottom: 10px;
+}
+.mar-top-28-mbl{
+	margin-top: 28px;
 }
 .nav-store-name{
 	font-size: 20px;
