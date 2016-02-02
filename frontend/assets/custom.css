@@ -364,6 +364,9 @@ width: 84px;
 	max-width: 50%;
 	text-align: left;
 }
+.time-dropdown{
+	text-align: left;	
+}
 .time-dropdown select{
 	width: 100%!important;
 }
@@ -382,7 +385,7 @@ width: 84px;
 	min-width: 20px!important;
     height: 20px!important;
     padding-top: 0px!important;
-    line-height: 20px!important;
+    line-height: 21px!important;
 }
 .navbar-brand-image img{
 	max-width:40px;
