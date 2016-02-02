@@ -340,7 +340,8 @@
             });
         }
     var handler = StripeCheckout.configure({
-    key: 'pk_test_6pRNASCoBOKtIshFeQd4XMUh',
+    //key: 'pk_test_6pRNASCoBOKtIshFeQd4XMUh',
+   key:'pk_test_s9jIizZdUfhjMplDPtyMFAN7',
     // image: '/img/pay.png',
     locale: 'auto',
     token: function(response) {
