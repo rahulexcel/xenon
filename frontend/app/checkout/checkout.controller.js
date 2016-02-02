@@ -311,12 +311,17 @@
     }
   });
 
+var totalItemInCart = arrayService.totalItemInCart($scope.cart);
   $('#mobilePaymentButton').on('click', function(e) {
     // Open Checkout with further options
     handler.open({
-      name: 'Xenon',
-      description: '2 widgets',
-      amount: 2000
+      name: $scope.location_name,
+      description: totalItemInCart+' items',
+      amount: $scope.total_price,
+      currency:$localStorage.shippingdata.currency,
+      locale:'auto',
+      image:$scope.picImage,
+      email:''
     });
     e.preventDefault();
   });
