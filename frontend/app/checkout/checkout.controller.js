@@ -215,6 +215,9 @@
                     $scope.newcard_update_button=false;
                     $scope.new_card_submit_button=true;
                  }
+                 if(response.authentication===false){
+                    $scope.authentication_error=response.message;
+                 }
             
             });
         }
@@ -254,7 +257,8 @@
         $scope.existingcharge = function() {
             $scope.payment_spinner=true;
             var country_code = angular.element($("#mobile-number").intlTelInput("getSelectedCountryData"));
-            var savedcard = existingcharge.save({
+            var savedcard = existingcharge.update($localStorage.smstoken1).query({}, {
+            
                 customerid: customer_id,
                 orderid: $localStorage.Orders_response.orderid
             });
