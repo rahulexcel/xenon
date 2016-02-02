@@ -420,7 +420,8 @@ display:none;
 }
 .poweredByFooterInMobile{
 	display: block;
-	text-align: left;
+	padding-top: 10px;
+	text-align: center;
 }
 .poweredByFooterInMobile h4{
 	display: inline-block;

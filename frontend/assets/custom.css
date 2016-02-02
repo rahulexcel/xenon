@@ -389,6 +389,9 @@ width: 84px;
 	color: rgb(239,110,84);
 	font-weight: bold;
 }
+.poweredByFooter{
+	padding-top: 10px;
+}
 .poweredByFooter h4{
 	display: inline-block;
 	font-size: 14px;

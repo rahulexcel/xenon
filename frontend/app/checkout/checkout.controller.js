@@ -181,6 +181,7 @@
             updateCustomer.$promise.then(function(response) {
                 console.log(response);
                 $scope.update_spinner = false;
+                $scope.dis_email = null;
             });
         }
         var $form;
@@ -345,12 +346,24 @@
     }
   });
 
+var totalItemInCart = arrayService.totalItemInCart($scope.cart);
   $('#mobilePaymentButton').on('click', function(e) {
+    if(angular.isDefined($scope.stripeEmail)){
+        var Email =$scope.stripeEmail;
+    }
+    if(angular.isDefined($scope.dis_email) && $scope.dis_email != null){
+        var Email =$scope.dis_email;
+    }
     // Open Checkout with further options
     handler.open({
-      name: 'Xenon',
-      description: '2 widgets',
-      amount: 2000
+      name: $scope.location_name,
+      description: totalItemInCart+' items',
+      amount: $scope.total_price*100,
+      currency:$localStorage.shippingdata.currency,
+      locale:'auto',
+      image:$scope.picImage,
+      email:Email,
+      allowRememberMe:'false'
     });
     e.preventDefault();
   });

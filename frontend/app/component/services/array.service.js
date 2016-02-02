@@ -117,6 +117,15 @@ return parseFloat(sum).toFixed(2);
             if (hours < 10) sHours = "0" + sHours;
             return sHours+':00';
         }
+        service.totalItemInCart = function(cartData) {
+            console.log(cartData);
+            var totalItemInCart = 0;
+            for(var i=0;i<cartData.length;i++){
+              console.log(cartData[i].count);
+              totalItemInCart = totalItemInCart+cartData[i].count;
+            }
+            return totalItemInCart;
+        }
       
         return service;
     }
