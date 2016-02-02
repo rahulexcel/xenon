@@ -42,12 +42,6 @@
 .rightCtnr{
 	padding: 0px;
 	margin-left: 0px;
-   
-    
-  
-	/* position: absolute;
-	 padding-left:100px;
-	 padding-right: 0!important;*/
 }
 .heading{
 	/*color: black;*/
@@ -403,5 +397,11 @@ width: 84px;
 	display: none;
 }
 .new_charge_spinner{
+	display:none;
+}
+.plus-in-computer{
+	display: inline-block;
+}
+.plus-in-mobile{
 	display:none;
 }
