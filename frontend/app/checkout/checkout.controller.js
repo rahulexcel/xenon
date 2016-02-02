@@ -71,9 +71,13 @@
                     existing_customer = response.customer;
                     if(response.error===true){
                    $scope.phone_error="Invalid contact number";     
-                    }else{
+                    }
                     if (response.customer === true) {
-                        // $scope.updatebutton = true;
+                         $scope.smscode = "";
+                        $scope.existing_card_show_cvc = true;
+                        $scope.show_sms_code_enter = true;
+                        $scope.existing_card=false;
+                        $scope.newcard=false;
                     }
                     console.log(response);
                     $scope.phone_spinner = false;
@@ -83,15 +87,8 @@
                         $scope.existing_card_show_cvc=false;
                         $scope.newcard=false;
 
-                    } else {
-                        $scope.smscode = "";
-                        $scope.existing_card_show_cvc = true;
-                        $scope.show_sms_code_enter = true;
-                        $scope.existing_card=false;
-                        $scope.newcard=false;
-
-                    }
-                }
+                    } 
+                
                 });
             }
         }
@@ -190,14 +187,16 @@
         jQuery(function($) {
             $('#payment-form').submit(function(event) {
                 $form = $(this);
-                $form.find('button').prop('disabled', false);
+                $form.find('#spinner_on_error').css("display","inline-block");  
+                $form.find('.payment-errors').text(" ");
+                $form.find('button').prop('disabled', true);
                 Stripe.card.createToken($form, stripeResponseHandler);
                 return false;
             });
         });
-        $scope.newcharge = function() {
-             $form.find('.payment-errors').text(" ");
-            $scope.payment_spinner = true;
+        $scope.newcharge = function() { 
+            $scope.new_charge_spinner=true;
+            // $scope.payment_spinner_new_charge = true;
         }
         $scope.cardnew = function() {
             $scope.payment_spinner = true;
@@ -219,12 +218,11 @@
         }
         
         function stripeResponseHandler(status, response) {
-           
             if (response.error) {
-                
-                $form.find('.fa-spinner').css("display","none" );
+              
                 $form.find('.payment-errors').text(response.error.message);
                 $form.find('button').prop('disabled', false);
+                $form.find('#spinner_on_error').css("display","none");
             } else {
                 console.log(response.id);
                 console.log($localStorage.shippingdata.currency.toLowerCase());
