@@ -247,7 +247,6 @@ $scope.total_price=arrayService.getTotalprice($scope.cart);
         $scope.sendOrder = function() {
             $scope.checkout_clicked=true;
             var mode;
-
            // console.log($scope.method);
             if ($scope.method ==="Delivery") {
                 console.log("Delivery");
@@ -289,7 +288,6 @@ $scope.total_price=arrayService.getTotalprice($scope.cart);
                                total_price:$scope.total_price     };
                      timeStorage.set('shippingdata', data, 1);        
                  $state.go('checkout');
-
             });
 
         }
