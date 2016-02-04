@@ -1,12 +1,12 @@
 'use strict';
 
 var app = angular.module('xenon-frontend', [
-     'ngResource',
+    'ngResource',
     'ui.router',
     'ngStorage',
-     'credit-cards',
-     "ngMessages",
-     'gavruk.card',
-     'angular-notification-icons',
-     'pascalprecht.translate'
+    'credit-cards',
+    "ngMessages",
+    'gavruk.card',
+    'angular-notification-icons',
+    'pascalprecht.translate'
 ]);

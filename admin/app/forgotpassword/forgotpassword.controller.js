@@ -1,8 +1,8 @@
 (function() {
     'use strict';
     angular
-        .module('xenon.controllers')
-        .controller('ForgotPasswordCtrl', ForgotPasswordCtrl);
+            .module('xenon.controllers')
+            .controller('ForgotPasswordCtrl', ForgotPasswordCtrl);
 
     function ForgotPasswordCtrl($scope, forgotFactory, $rootScope) {
         $scope.reset = function() {
@@ -12,8 +12,8 @@
             });
             query.$promise.then(function(data) {
                 console.log(data);
-                $scope.spinner=false;
-             $scope.response=data.data;
+                $scope.spinner = false;
+                $scope.response = data.data;
             });
             $rootScope.isLoginPage = true;
             $rootScope.isLightLoginPage = true;

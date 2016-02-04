@@ -1,10 +1,10 @@
 (function() {
     'use strict';
     angular
-        .module('xenon.directives')
-        .directive("passwordVerify",
-            passwordVerify
-        );
+            .module('xenon.directives')
+            .directive("passwordVerify",
+                    passwordVerify
+                    );
 
     function passwordVerify() {
         return {
@@ -36,5 +36,6 @@
                 });
             }
         };
-    };
+    }
+    ;
 })();

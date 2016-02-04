@@ -5,32 +5,32 @@
             .factory('customercard', customercard);
 
     function customercard($resource, Configurations, $localStorage, timeStorage, $rootScope) {
-       
-           
-    return {
-    update: function (token) {
-        return $resource(Configurations.Hostserver + '/customercard/:customerid', {
-                  'customerid':'@customerid'
-        },{ 
-            'query':{
-                method:'PUT',
-                params:{
-                        cvc: "@cvc",
-                    exp_month: "@exp_month",
-                    exp_year: "@exp_year",
-                    number: "@number",
-                    object: "@object"
-                    
-            },
 
-            headers:{'Authorization':'Bearer ' + token}
+
+        return {
+            update: function(token) {
+                return $resource(Configurations.Hostserver + '/customercard/:customerid', {
+                    'customerid': '@customerid'
+                }, {
+                    'query': {
+                        method: 'PUT',
+                        params: {
+                            cvc: "@cvc",
+                            exp_month: "@exp_month",
+                            exp_year: "@exp_year",
+                            number: "@number",
+                            object: "@object"
+
+                        },
+                        headers: {'Authorization': 'Bearer ' + token}
+                    }
+
+                });
             }
+        };
 
-        });
-      }
-    };
-      
-    };
+    }
+    ;
 })();
 
 

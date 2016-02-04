@@ -1,9 +1,10 @@
 (function() {
     'use strict';
     angular.module('xenon-app')
-        .factory('imageUploadFactory', imageUploadFactory);
+            .factory('imageUploadFactory', imageUploadFactory);
 
     function imageUploadFactory($resource, Configurations) {
-        return $resource(Configurations.Hostserver+'/prodfile', {},{});
-    };
+        return $resource(Configurations.Hostserver + '/prodfile', {}, {});
+    }
+    ;
 })();

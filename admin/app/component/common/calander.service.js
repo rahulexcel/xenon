@@ -1,7 +1,7 @@
 (function() {
     'use strict';
     angular.module('xenon-app')
-        .factory('calanderService', calanderService);
+            .factory('calanderService', calanderService);
     function calanderService() {
         var service = {};
         service.getcalanderService = function(event, date, dateArray) {

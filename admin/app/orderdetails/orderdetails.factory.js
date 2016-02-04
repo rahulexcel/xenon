@@ -1,10 +1,10 @@
 (function() {
     'use strict';
     angular.module('xenon-app')
-        .factory('orderDetailsFactory', orderDetailsFactory);
+            .factory('orderDetailsFactory', orderDetailsFactory);
 
     function orderDetailsFactory($resource, Configurations) {
-        return $resource(Configurations.Hostserver+'/orders/:orderId', {},{
+        return $resource(Configurations.Hostserver + '/orders/:orderId', {}, {
             editOrder: {
                 method: 'PUT',
                 isArray: false,
@@ -16,5 +16,6 @@
                 url: Configurations.Hostserver + '/orders/:orderId'
             }
         });
-    };
+    }
+    ;
 })();

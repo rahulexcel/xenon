@@ -1,7 +1,7 @@
 (function() {
     'use strict';
     angular.module('xenon-app')
-        .factory('storeinfoLocationsIdFactory', storeinfoLocationsIdFactory);
+            .factory('storeinfoLocationsIdFactory', storeinfoLocationsIdFactory);
 
     function storeinfoLocationsIdFactory($resource, Configurations) {
         return $resource(Configurations.Hostserver + '/loc/:locationid', {
@@ -25,8 +25,8 @@
                     lclosetime: '@lclosetime'
                 }
             },
-            'update':{
-                method:'PUT',
+            'update': {
+                method: 'PUT',
                 params: {
                     lname: '@lname',
                     ldesc: '@ldesc',
@@ -46,5 +46,6 @@
 
         });
 
-    };
+    }
+    ;
 })();

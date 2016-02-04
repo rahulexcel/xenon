@@ -1,29 +1,29 @@
 (function() {
     'use strict';
     angular.module('xenon-app')
-        .run(function(userValidate, $rootScope, $state, localStorageService, $location, $timeout) {
-            userValidate.validUser();
-            $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
-                //event.preventDefault(); 
-               // console.log(toState.url);
-                if (toState.url !== "/storeinfo") {
-                    var userData = localStorageService.get("userData");
-                    if (angular.isDefined(userData)) {
-                        if (userData.locations.length == 0) {
-                            $location.path('/storeinfo');
-                             alertDanger();
-                             function alertDanger(){
+            .run(function(userValidate, $rootScope, $state, localStorageService, $location, $timeout) {
+                userValidate.validUser();
+                $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
+                    //event.preventDefault(); 
+                    // console.log(toState.url);
+                    if (toState.url !== "/storeinfo") {
+                        var userData = localStorageService.get("userData");
+                        if (angular.isDefined(userData)) {
+                            if (userData.locations.length == 0) {
+                                $location.path('/storeinfo');
+                                alertDanger();
+                                function alertDanger(){
                                     $rootScope.location_id_is_not_available = true;
-                                     $timeout(function() {
-                                     $rootScope.location_id_is_not_available = false;
-                                        }, 5000);
+                                    $timeout(function() {
+                                        $rootScope.location_id_is_not_available = false;
+                                    }, 5000);
                                 }
-                        }
-                        else{
-                            $rootScope.location_id_is_not_available=false;
+                            }
+                            else {
+                                $rootScope.location_id_is_not_available = false;
+                            }
                         }
                     }
-                }
-            });
-        })
+                });
+            })
 })();

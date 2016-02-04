@@ -1,7 +1,7 @@
 (function() {
     'use strict';
     angular.module('xenon-app')
-        .factory('categoryFactory', categoryFactory);
+            .factory('categoryFactory', categoryFactory);
 
     function categoryFactory($resource, Configurations) {
         return $resource(Configurations.Hostserver + '/cats/:catid', {
@@ -9,8 +9,9 @@
         }, {
             'Update': {
                 method: 'PUT',
-                url: Configurations.Hostserver+'/cats/:catid/:catproducts',
+                url: Configurations.Hostserver + '/cats/:catid/:catproducts',
             }
         });
-    };
+    }
+    ;
 })();

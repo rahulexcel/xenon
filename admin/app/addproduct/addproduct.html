@@ -19,14 +19,14 @@
                 <form class="form-horizontal ng-pristine ng-valid" role="form" ng-class="{'submitted': submitted}">
                     <div class="form-group">
 
-                       <div class="col-sm-12">
-                       <span class="file-input btn btn-blue btn-file1">Browse...
-                       <input type="file" ngf-select="" ng-model="picImage" name="fileName" ngf-accept="'image/*'" ngf-resize="{width: 400, height: 400, quality: 0.9}">
-                       </span>
-                       <br>
-                       <img ngf-src="picImage" ngf-resize="{width: 400, height: 400, quality: 0.9}" >
-                       </div>
-                   </div>
+                        <div class="col-sm-12">
+                            <span class="file-input btn btn-blue btn-file1">Browse...
+                                <input type="file" ngf-select="" ng-model="picImage" name="fileName" ngf-accept="'image/*'" ngf-resize="{width: 400, height: 400, quality: 0.9}">
+                            </span>
+                            <br>
+                            <img ngf-src="picImage" ngf-resize="{width: 400, height: 400, quality: 0.9}" >
+                        </div>
+                    </div>
 
                     <div class="form-group-separator"></div>
                     <div class="col-sm-12">
@@ -99,8 +99,10 @@
                                 </div> 
                                 <div class="col-sm-12">
                                     <br>
-                                    <button ng-show="saveProduct" class="btn btn-blue" ng-click="submitted= true; addProduct()">Save <span ng-show="spinner"><i class="fa fa-spin fa-spinner"></i></span></button>
-                                    <button ng-show="editThisProduct" class="btn btn-blue" ng-click=" submitted= true; editProduct()">Update <span ng-show="spinner"><i class="fa fa-spin fa-spinner"></i></span></button>
+                                    <button ng-show="saveProduct" class="btn btn-blue" ng-click="submitted = true;
+                                        addProduct()">Save <span ng-show="spinner"><i class="fa fa-spin fa-spinner"></i></span></button>
+                                    <button ng-show="editThisProduct" class="btn btn-blue" ng-click=" submitted = true;
+                                        editProduct()">Update <span ng-show="spinner"><i class="fa fa-spin fa-spinner"></i></span></button>
                                 </div>
                             </div>
                         </div>

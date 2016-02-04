@@ -33,7 +33,7 @@
                                         <li data-item="Item 1" data-item-id="a" ui-tree-node ng-repeat="Arr in displaycatArr" ui-tree-node>
                                             <div class="uk-nestable-item">
                                                 <div class=""><strong>{{Arr.catname}}</strong> <a class="pull-right btn btn-danger btn-xs" data-nodrag="" ng-click="remove(this);
-                                                        deleteCategory(Arr._id)">
+                                                            deleteCategory(Arr._id)">
                                                         <i class="fa fa-times"></i>
                                                     </a>
                                                     <!-- Html code For editing Category -->
@@ -54,20 +54,20 @@
                                                     <div ui-tree-handle>
                                                         <div class="row">
                                                             <div class="col-xs-4"><p class="pad-top-5">
-                                                            <!-- Html code for image show -->
-                                                            <!-- <span ng-show="{{product.pimages.length >0}}">
-                                                            <img width="50" height="50" ng-src="{{productImage(product.pimages)}}"></span> --> {{product.pname}}</p></div>
+                                                                    <!-- Html code for image show -->
+                                                                    <!-- <span ng-show="{{product.pimages.length >0}}">
+                                                                    <img width="50" height="50" ng-src="{{productImage(product.pimages)}}"></span> --> {{product.pname}}</p></div>
                                                             <!-- Html Code for showing product details in category -->
                                                             <div class="col-xs-4"><!-- Qty - {{ (product.pinv == -1) ? "Infinite" : product.pinv}} -->
-                                                            <p class="pad-top-5">
-<i class="mar-top-5" ng-class="product.pinvdaily ? 'pull-right btn btn-success btn-circle' : 'pull-right btn btn-danger btn-circle'"></i></p>
+                                                                <p class="pad-top-5">
+                                                                    <i class="mar-top-5" ng-class="product.pinvdaily ? 'pull-right btn btn-success btn-circle' : 'pull - right btn btn - danger btn - circle'"></i></p>
                                                             </div>
                                                             <div class="col-xs-4"><!-- {{product.price}} --> <p class="pad-top-5"><a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="remove(this);
                                                                         deleteProduct(product._id)"><span
-                                                                        class="glyphicon glyphicon-remove"></span></a>
-                                                                <a class="pull-right btn btn-success btn-xs" data-nodrag="" ng-click="editProduct(product._id, product.pcatid)">
-                                                                    <i class="fa fa-pencil"></i>
-                                                                </a></p>
+                                                                            class="glyphicon glyphicon-remove"></span></a>
+                                                                    <a class="pull-right btn btn-success btn-xs" data-nodrag="" ng-click="editProduct(product._id, product.pcatid)">
+                                                                        <i class="fa fa-pencil"></i>
+                                                                    </a></p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -94,17 +94,17 @@
                                             <div class="uk-nestable-item">
                                                 <div class="row">
                                                     <div class="col-xs-4">
-                                                    <!-- Html code for image show -->
-                                                    <!-- <span ng-show="{{product.pimages.length > 0}}"><img width="50" height="50" ng-src="{{productImage(product.pimages)}}"></span> --> {{product.pname}}</div>
+                                                        <!-- Html code for image show -->
+                                                        <!-- <span ng-show="{{product.pimages.length > 0}}"><img width="50" height="50" ng-src="{{productImage(product.pimages)}}"></span> --> {{product.pname}}</div>
                                                     <div class="col-xs-4">
                                                         <p class="pad-top-5">
-<i class="mar-top-5" ng-class="product.pinvdaily ? 'pull-right btn btn-success btn-circle' : 'pull-right btn btn-danger btn-circle'"></i></p>
-                                                    <!-- {{ (product.pinv == -1) ? "Infinite" : product.pinv}} --></div>
+                                                            <i class="mar-top-5" ng-class="product.pinvdaily ? 'pull-right btn btn-success btn-circle' : 'pull - right btn btn - danger btn - circle'"></i></p>
+                                                        <!-- {{ (product.pinv == -1) ? "Infinite" : product.pinv}} --></div>
                                                     <div class="col-xs-4">
 
-                                                    <!-- {{product.price}} --> 
+                                                        <!-- {{product.price}} --> 
                                                         <a class="pull-right btn btn-danger btn-xs" data-nodrag="" ng-click="remove(this);
-                                                                deleteProduct(product._id)">
+                                                                    deleteProduct(product._id)">
                                                             <i class="fa fa-times"></i>
                                                         </a>
                                                         <a class="pull-right btn btn-success btn-xs" data-nodrag="" ng-click="editProduct(product._id, product.pcatid)">
