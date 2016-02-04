@@ -13,12 +13,6 @@
                 var proposedLanguage = $translate.proposedLanguage() || $translate.use(used);
                 var preferredLanguage = $translate.preferredLanguage();
               
-            }
-        
-                
-            
-       
-           
-          
+            }  
         })
 })();

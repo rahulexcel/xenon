@@ -10,13 +10,17 @@
     <div class="col-xs-8 no-pad-left nav-store-name-container">
 
       <span class="nav-store-name"> {{location_name}}</span>
-        <!-- <span class="sticky-cart pull-right" ng-click="clickOnCart()" ng-if="(productInCart)" style="font-size:24px;color:rgb(239, 110, 84);padding-right:10px;"><i class="fa fa-shopping-cart"></i> {{productInCart}}</span> -->
+  
+        
+        
+       
+      
         <span class="sticky-cart pull-right" ng-click="clickOnCart()" ng-if="(productInCart)">
           <notification-icon count="productInCart">
             <i class="fa fa-shopping-cart fa-2x" style="color:rgb(239, 110, 84);"></i>
           </notification-icon>
         </span>
-        
+        <div id="options" class="pull-right"> </div>
     </div>
     </div>
   </div><!-- /.container-fluid -->
@@ -43,15 +47,12 @@
                            <p class="store-desc">{{location_addr}}, {{location_lcity}},  {{location_lpostcode}}, {{location_lstate}} <br><i class="glyphicon glyphicon-earphone"></i> {{location_lphone}} | {{location_openingtime}}-{{location_closingtime}}</p>
                        </h3>
                    </div>
-                   <div class="col-sm-3 col-xs-12">
-                    <!--  <select class="form-control input-lg select1" ng-model="localeId" ng-change="language.set(localeId, $event)">
-                                                    <option  
-                                                                 ng-repeat="(localeId, langName) in language.available" value="{{langName}}" >{{langName}}</option>
-                                                </select> -->
+                   <div class="col-sm-3 col-xs-12 text-center">
+                  
 
                     
- <div class="form-group">
-        <div id="options" ng-model="a" ng-change="language.set(localeId, $event)"> </div>
+ <div class="form-group heading topheading not-show-main-logo">
+        <div id="options1" style="margin-top:10px;"> </div>
     </div>
 
 

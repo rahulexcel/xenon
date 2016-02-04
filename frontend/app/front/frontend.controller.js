@@ -327,9 +327,9 @@ $scope.total_price=arrayService.getTotalprice($scope.cart);
     }
     console.log($scope.time);
   }
-  $('#options').flagStrap({
+  $('#options, #options1').flagStrap({
         countries: {
-               "ES": "Spanish",
+               "ES":"Spanish",
               "DE": "German",
               "FR": "French",
               "DK": "Danish",
@@ -338,18 +338,14 @@ $scope.total_price=arrayService.getTotalprice($scope.cart);
               "SE": "Swedish",
               "GB": "English"
         },
-         placeholder: {
-            value: "",
-            text: "Choose language"
-        },
-       
+         placeholder: false,    
    onSelect: function(value, element) {
+ $('div#options button span').text(" ");
     console.log(value);
           language.set(value);
-           
+       // console.log($scope.langname);           
         },
     });
-
-
+  // $('select option[value="SE"]').attr("selected",true);
     }
 })();

@@ -435,3 +435,14 @@ div#options button:hover{
 	
 	background-color:#fff!important;
 }
+div#options1 button{
+	border-color:#fff;
+
+}
+div#options1 button:hover{
+	
+	background-color:#fff!important;
+}
+div#options button span i{
+	color: transparent;
+}
