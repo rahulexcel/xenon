@@ -73,16 +73,16 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th style="text-align:center;">Product</th>
+                                    <th style="text-align:center;">Product Id</th>
                                     <th>Quantity</th>
-                                    <th>Price</th>
+                                    <th style="text-align:right;">Price</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr ng-repeat="order in orderDetails">
                                     <td>{{$index}}</td>
-                                    <td>{{order.pname}}</td>
-                                    <td>{{order.pinv}}</td>
+                                    <td>{{order.pid}}</td>
+                                    <td>{{order.qty}}</td>
                                     <td style="text-align:right"><strong>${{order.price}}</strong></td>
                                 </tr>
                                 <tr>
