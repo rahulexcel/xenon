@@ -21,6 +21,7 @@
                     <label class="control-label" for="passwd">Password</label>
                     <input type="password" class="form-control" name="passwd" id="password" autocomplete="off" ng-model="password"  ng-minlength="6"required/>
                 </div>
+                <span style="color:red">{{error}}</span>
                 <span style="color:red" ng-show="signupform.passwd.$error.minlength">
                     Password must be more then 6 character 
                 </span>

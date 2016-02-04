@@ -14,6 +14,7 @@
   var response_phone_no;
   var response_pic_name;
   var uploadResponseFileName;
+  $scope.llt = 10;
   $scope.dropdown_days = dropdownService.Daydropdown();
   $scope.openingtime_hour = dropdownService.Timedropdown();
   $scope.closingtime_hour = dropdownService.Timedropdown();

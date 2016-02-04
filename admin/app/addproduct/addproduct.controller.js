@@ -59,22 +59,25 @@
         });
 
         
-        
+        $scope.productQuantity = 'Infinite';
         $scope.infinite = function() {
             $scope.productQuantity = 'Infinite';
         };
         $scope.editProduct = function() {
+            if($scope.productName && $scope.productDescription){
             $scope.spinner = true;
-  if ($scope.picImage == after_load_image_response) {
-   edit_product_after_uploader_response();
-  } else {
-   uploadService.send($scope.picImage, 'prodfile')
-                   .then(function(response) {
-                     uploadResponseFileName=response.filename;
-                      edit_product_after_uploader_response();
-         console.log(response)
-       });
-  }
+              if ($scope.picImage == after_load_image_response) {
+               edit_product_after_uploader_response();
+              } else {
+               uploadService.send($scope.picImage, 'prodfile')
+                               .then(function(response) {
+                                 uploadResponseFileName=response.filename;
+                                  edit_product_after_uploader_response();
+                     console.log(response)
+                   });
+              }                
+            }
+
         };
 
 
@@ -104,18 +107,20 @@
         }
 
         $scope.addProduct = function() {
-            $scope.spinner = true;
-  if ($scope.picImage == after_load_image_response) {
-   send_data_after_uploader_response();
-  } else {
-   uploadService.send($scope.picImage, 'prodfile')
-                   .then(function(response) {
-                    console.log(response);
-                     uploadResponseFileName=response.filename;
-                      send_data_after_uploader_response();
-         console.log(response)
-       });
-  }
+            if($scope.productName && $scope.productDescription){
+                $scope.spinner = true;
+                  if ($scope.picImage == after_load_image_response) {
+                       send_data_after_uploader_response();
+                      } else {
+                       uploadService.send($scope.picImage, 'prodfile')
+                                       .then(function(response) {
+                                        console.log(response);
+                                         uploadResponseFileName=response.filename;
+                                          send_data_after_uploader_response();
+                             console.log(response)
+                           });
+                      }
+            }
         };
 
         function send_data_after_uploader_response() {

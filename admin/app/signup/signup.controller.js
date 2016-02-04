@@ -5,11 +5,15 @@
             .controller('signupCtrl', signupCtrl);
 
     function signupCtrl($scope, $rootScope, Configurations, signupFactory, $state, localStorageService, userValidate) {
-
+        console.log('signup controller');
         $scope.signup = function() {
             $scope.spinner = "true";
             var query = signupFactory.save({email: $scope.email, password: $scope.password});
             query.$promise.then(function(data) {
+                if(data.data = "User already exists!"){
+                    $scope.error = "User email already exists!";
+                    $scope.spinner = false;
+                }
                 if (data.success == true)
                 {
                     $scope.info = "Registration successfull";

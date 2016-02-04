@@ -28,6 +28,24 @@
   cursor: inherit;
   display: block;
 }
+.btn-file1 {
+  position: relative;
+  overflow: hidden;
+}
+.btn-file1 input[type=file] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 100%;
+  min-height: 100%;
+  font-size: 100px;
+  text-align: right;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  background: red;
+  cursor: inherit;
+  display: block;
+}
 input[readonly] {
   background-color: white !important;
   cursor: text !important;
@@ -130,3 +148,9 @@ tr.angular-ui-tree-empty {
 .mar-top-5{
   margin-top: 5px!important;
 }
+    .submitted .ng-invalid{
+        border: 1px solid red;
+    }
+    .submitted .btn-file {
+        border: 1px solid red;
+    }

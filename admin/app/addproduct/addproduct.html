@@ -16,11 +16,11 @@
 
             <div class="panel-body" ng-show="editForm">
                 <h4>Image (<small><em>Optional</em></small>)</h4>
-                <form class="form-horizontal ng-pristine ng-valid" role="form">
+                <form class="form-horizontal ng-pristine ng-valid" role="form" ng-class="{'submitted': submitted}">
                     <div class="form-group">
 
                        <div class="col-sm-12">
-                       <span class="file-input btn btn-blue btn-file">Browse...
+                       <span class="file-input btn btn-blue btn-file1">Browse...
                        <input type="file" ngf-select="" ng-model="picImage" name="fileName" ngf-accept="'image/*'" ngf-resize="{width: 400, height: 400, quality: 0.9}">
                        </span>
                        <br>
@@ -36,9 +36,9 @@
                                 <div class="col-sm-8">
                                     <strong>Title</strong>
                                     <p>
-                                        <input type="text" class="form-control" ng-model="productName">
+                                        <input type="text" class="form-control" ng-model="productName" required>
                                     </p>
-                                    <span>mrezshop.tictail.com/products/{{productName| spaceless}}</span>
+                                    <span style="margin-bottom:10px;display:block;"><!-- mrezshop.tictail.com/products/{{productName| spaceless}} --></span>
                                 </div>
                                 <div class="col-sm-4">
                                     <strong>Price</strong> <small>in NOK</small>
@@ -55,7 +55,7 @@
                                 <div class="col-sm-12">
                                     <strong>Description</strong>
                                     <p>
-                                        <textarea class="form-control" rows="5" ng-model="productDescription">
+                                        <textarea class="form-control" rows="5" ng-model="productDescription" required>
                                         </textarea>
                                     </p>
                                 </div>
@@ -99,8 +99,8 @@
                                 </div> 
                                 <div class="col-sm-12">
                                     <br>
-                                    <button ng-show="saveProduct" class="btn btn-blue" ng-click="addProduct()">Save <span ng-show="spinner"><i class="fa fa-spin fa-spinner"></i></span></button>
-                                    <button ng-show="editThisProduct" class="btn btn-blue" ng-click="editProduct()">Update <span ng-show="spinner"><i class="fa fa-spin fa-spinner"></i></span></button>
+                                    <button ng-show="saveProduct" class="btn btn-blue" ng-click="submitted= true; addProduct()">Save <span ng-show="spinner"><i class="fa fa-spin fa-spinner"></i></span></button>
+                                    <button ng-show="editThisProduct" class="btn btn-blue" ng-click=" submitted= true; editProduct()">Update <span ng-show="spinner"><i class="fa fa-spin fa-spinner"></i></span></button>
                                 </div>
                             </div>
                         </div>

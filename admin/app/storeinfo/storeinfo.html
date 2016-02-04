@@ -9,7 +9,7 @@
                 <h4 class="panel-title">Store info:</h4>
             </div>
             <div class="panel-body">
-                <form role="form" class="form-horizontal" name='store'>
+                <form role="form" class="form-horizontal" name='store' ng-class="{'submitted': submitted}" ng-submit="lsave(croppedDataUrl);">
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Store Description</label>
                         <div class="col-sm-10">
@@ -18,7 +18,7 @@
                                     <label class="control-label" for="full_name">
                                         <strong>Name</strong>
                                     </label>
-                                    <input class="form-control" name="full_name"   ng-model="lname" />
+                                    <input class="form-control" name="full_name"   ng-model="lname" required/>
                                 </div>
                                 <div class="col-sm-12">
                                     <label class="control-label" for="full_name">
@@ -35,7 +35,7 @@
                                             </label>
                                             <br/>
                                             <span class="file-input btn btn-blue btn-file">Browse...
-                                          <input type="file" ngf-select="" ng-model="picImage" name="fileName" ngf-accept="'image/*'"   ngf-resize="{width: 400, height: 400, quality: 0.9}" >
+                                          <input type="file" ngf-select="" ng-model="picImage" name="fileName" ngf-accept="'image/*'"   ngf-resize="{width: 400, height: 400, quality: 0.9}" required>
                                          </span>
                                             <br>
                                               <img ngf-src="picImage" ngf-resize="{width: 400, height: 400, quality: 0.9}" >
@@ -57,27 +57,27 @@
                                         
                                         
                                         </label>
-                                        <input class="form-control" name="full_name"  ng-model="lemail" />
+                                        <input class="form-control" name="full_name"  ng-model="lemail" required/>
                                         <label class="control-label" for="full_name">
                                             <strong>Store address</strong>
                                         </label>
-                                        <input class="form-control" name="full_name"   ng-model="laddr" />
+                                        <input class="form-control" name="full_name"   ng-model="laddr" required/>
                                         <label class="control-label" for="full_name">
                                             <strong>Post code</strong>
                                         </label>
-                                        <input class="form-control" name="full_name"  ng-model="lpostcode" />
+                                        <input class="form-control" name="full_name"  ng-model="lpostcode" required/>
                                         <label class="control-label" for="full_name">
                                             <strong>City</strong>
                                         </label>
-                                        <input class="form-control" name="full_name"  ng-model="lcity" />
+                                        <input class="form-control" name="full_name"  ng-model="lcity" required/>
                                         <label class="control-label" for="full_name">
                                             <strong>State</strong>
                                         </label>
-                                        <input class="form-control" name="full_name"   ng-model="lstate" />
+                                        <input class="form-control" name="full_name"   ng-model="lstate" required/>
                                         <label class="control-label" for="full_name">
                                             <strong>Country</strong>
                                         </label>
-                                        <select class="form-control"  ng-model="lcountry" ng-change="country_selected()">
+                                        <select class="form-control"  ng-model="lcountry" ng-change="country_selected()" required>
                                             <option ng-repeat="row in dropdown_country track by $index" value="{{row}}">{{row}}</option>
                                         </select>
                                     </select>
@@ -89,7 +89,7 @@
                                             <input class="form-control" ng-model="phone_code" disabled>
                                         </div>
                                         <div class='col-sm-10'>
-                                            <input class="form-control" name="full_name"  ng-model="phone_no" />
+                                            <input class="form-control" name="full_name"  ng-model="phone_no" required/>
                                         </div>
                                     </div>
                                 </div>
@@ -130,7 +130,7 @@
                                                         <strong>Select Day:</strong>
                                                     </label>
                                                     
-                                                        <select class="form-control" ng-model="day" name="day" required>
+                                                        <select class="form-control" ng-model="day" name="day">
                                                             <option  
                                                                   ng-repeat="row in dropdown_days" value="{{row}}" ng-if="showOptions(row)">{{row}}</option>
                                                         </select>
@@ -140,7 +140,7 @@
                                                     <label class="control-label" for="full_name">
                                                         <strong>Opening time:</strong>
                                                     </label>
-                                                    <select class="form-control" ng-model="opening_selected_hour" name="open" required>
+                                                    <select class="form-control" ng-model="opening_selected_hour" name="open">
                                                         <option  
                                                                   ng-repeat="row in openingtime_hour
                                                                    track by $index"  value="{{row}}">{{row}}</option>
@@ -150,7 +150,7 @@
                                                     <label class="control-label" for="full_name" >
                                                         <strong>Closing time:</strong>
                                                     </label>
-                                                    <select class="form-control" ng-model="closing_selected_hour" name="close" required>
+                                                    <select class="form-control" ng-model="closing_selected_hour" name="close">
                                                         <option  
                                                                   ng-repeat="row in closingtime_hour
                                                                    track by $index">{{row}}</option>
@@ -229,7 +229,7 @@
                                     <div class="col-sm-9 col-sm-offset-2">
                                         <div class="form-block">
                                             <div class="form-group">
-                                                <button class="btn btn-blue" ng-click="lsave(croppedDataUrl);">Save             
+                                                <button type="submit" class="btn btn-blue" ng-click="submitted= true;">Save             
                                                         
                                                     <span ng-show="spinner">
                                                         <i class="fa fa-spin fa-spinner"></i>
@@ -247,3 +247,6 @@
         </div>
     </div>
 </div>
+<style>
+
+</style>
