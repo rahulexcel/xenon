@@ -11,5 +11,8 @@
         $translateProvider.useSanitizeValueStrategy(null);
         $translateProvider.preferredLanguage('English');
         $translateProvider.usePostCompiling(true);
+   
+          
     }
+    
 })();

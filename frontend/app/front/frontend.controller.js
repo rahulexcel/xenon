@@ -87,7 +87,7 @@
                 $scope.all_clicked = true;
                 get_category();
                 check_local_storage();
-
+                language.get(data.lstorelang);            
                 console.log(data);
 
             });
