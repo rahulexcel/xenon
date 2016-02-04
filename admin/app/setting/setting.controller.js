@@ -35,7 +35,10 @@
                 'lcurrency': $scope.countryCurrency,
                 'ltax': $scope.tax,
                 'ltaxall': $scope.includeTax,
-                'lstorelang': $scope.transalation
+                'lstorelang': $scope.transalation,
+                'ldeliverymode': $scope.deliveryMode,
+                'ldeliveryprice': $scope.deliveryPrice,
+                'ldeliverytax': $scope.deliveryTax
             });
             query.$promise.then(function(data) {
                 console.log(data);

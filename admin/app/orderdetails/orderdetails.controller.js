@@ -8,9 +8,13 @@
         var singleOrderId = localStorageService.get('singleOrderId');
         console.log("Single Order id " + singleOrderId);
         if (singleOrderId) {
+            $scope.loadingSpinner = true;
+            $scope.hideMainContent = false;
             var query = orderDetailsFactory.get({"orderId": singleOrderId});
             var totalAmount = 0;
             query.$promise.then(function(data) {
+                $scope.loadingSpinner = false;
+                $scope.hideMainContent = true;
                 console.log(data);
                 $scope.orderDetails = data.products;
                 for (var i = 0; i < data.products.length; i++) {
