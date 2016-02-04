@@ -300,7 +300,6 @@
                 .append(buildHtmlSelect)
                 .append(buildDropDownButton)
                 .append(buildDropDownButtonItemList);
-
             // Check to see if the onSelect callback method is assigned / callable, bind the change event for broadcast
             if (plugin.settings.onSelect !== undefined && plugin.settings.onSelect instanceof Function) {
                 $(htmlSelect).change(function(event) {
@@ -309,7 +308,6 @@
                   
                 });
             }
-
             // Hide the actual HTML select
             $(htmlSelect).hide();
 
@@ -366,7 +364,6 @@
                 .addClass('flagstrap-selected-' + uniqueId)
                 .html($selectedLabel)
                 .append(selectedText);
-
             var button = $('<button/>')
                 .attr('type', 'button')
                 .attr('data-toggle', 'dropdown')
@@ -378,7 +375,6 @@
                 .addClass('caret')
                 .css('margin-left', plugin.settings.labelMargin)
                 .insertAfter(buttonLabel);
-
             return button;
 
         };
@@ -400,7 +396,6 @@
 
                 // Get original select option values and labels
                 var text = $(this).text();
-
                 var value = $(this).val();
 
                 // Build the flag icon
@@ -417,6 +412,7 @@
                     .html(flagIcon)
                     .append(text)
                     .on('click', function(e) {
+                        console.log(flagStrapItem[0].innerHTML);
                         $(htmlSelect).find('option').removeAttr('selected');
                         $(htmlSelect).find('option[value="' + $(this).data('val') + '"]').attr("selected", "selected");
                         $(htmlSelect).trigger('change');
