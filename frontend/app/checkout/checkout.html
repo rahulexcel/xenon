@@ -1,3 +1,4 @@
+
 <div class="container" style="margin-top:1.5em;margin-bottom:1.5em;">
     <div class="topContainer">
         <div class="row bgwhite TOP">
@@ -26,8 +27,8 @@
                     <div class='row left' ng-show="order_not_success">
                         <div class="form-inline " role="form" name="contact">
                             <div class="formcontainer">
-                                <span class="bold">1.VERIFY ORDER</span>
-                                <p>Please verify order with your phone number. This is also how we will reach out to you about status of your order.</p>
+                                <span class="bold" translate="Verify order"></span>
+                                <p translate="verify order msg"></p>
                                 <div class="form-group" style="width:100%">
                                     <div class="row">
                                         <div class="col-md-10 col-xs-12 no-pad">
@@ -56,7 +57,7 @@
                         </div>
                         <hr class="separator">
                         <div class="formcontainer">
-                            <span class="bold">2.DELIVERY DETAILS</span>
+                            <span class="bold" translate="deliverydetails">2.DELIVERY DETAILS</span>
                             <div class="row padbot" ng-show="delivery_details_disabled_form">
                                 <div class="col-sm-6 no-pad-left-right">
                                     <div class="form-group">
@@ -152,7 +153,7 @@
                         </div>
                         <hr class="separator">
                         <div class="formcontainer">
-                            <span class="bold">3.PAYMENT DETAILS</span>
+                            <span class="bold" translate="paymentdetails"></span>
                             <div class="text-center" ng-show="payment_by_mobile">
                               <button class="btn btn-lg btn-info btn-block" id="mobilePaymentButton" ><span ng-show="payByMobileSpinner"><i class="fa fa-spin fa-spinner"></i></span> Pay</button>
                               

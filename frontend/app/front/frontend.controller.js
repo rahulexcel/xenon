@@ -3,7 +3,8 @@
     angular.module('xenon-frontend')
         .controller('frontendCtrl', frontendCtrl);
 
-    function frontendCtrl($scope, locations, timeStorage,$window, locationID, $localStorage, category, $rootScope, products, Order, $state, arrayService, dropdownService, timeService, $interval) {
+    function frontendCtrl($scope, locations, timeStorage,$window,language, locationID, $localStorage, category, $rootScope, products, Order, $state, arrayService, dropdownService, timeService, $interval) {
+       
         var response_products;
         var response_categories;
         $scope.customPending = 5;
@@ -38,7 +39,9 @@
         $scope.cart_shown="cart_not_display";
     }
 
-       
+      $scope.showlist = function() {
+             $scope.list = !$scope.list;
+         }   
 
       
         $scope.delivery_method = dropdownService.delivery_method();
@@ -306,13 +309,7 @@ $scope.total_price=arrayService.getTotalprice($scope.cart);
                $scope.dropdown_minutes = dropdownService.minutesdropdown(llt);
                  $scope.dropdown_days = dropdownService.Timedropdown();
                  $scope.minutes=$scope.dropdown_minutes[0].toString();  
-               // $scope.dropdown_days.unshift(dropdownService.Selected(data.llt));
-                $scope.time =dropdownService.Selected(llt);  
-                // $scope.dropdown_minutes = dropdownService.minutesdropdown(llt);
-                //  $scope.dropdown_days = dropdownService.Timedropdown();
-                //  $scope.minutes=dropdownService.selectedMinutes($scope.dropdown_minutes);
-                //   console.log(data.llt);
-                // $scope.time =dropdownService.Selected(data.llt);  
+                $scope.time =dropdownService.Selected(llt);   
             }, 300000);
     }
 
@@ -330,7 +327,28 @@ $scope.total_price=arrayService.getTotalprice($scope.cart);
     }
     console.log($scope.time);
   }
-
+  $('#options').flagStrap({
+        countries: {
+               "ES": "Spanish",
+              "DE": "German",
+              "FR": "French",
+              "DK": "Danish",
+              "FI": "Finnish",
+              "NO": "Norwegian",
+              "SE": "Swedish",
+              "GB": "English"
+        },
+         placeholder: {
+            value: "",
+            text: "Choose language"
+        },
+       
+   onSelect: function(value, element) {
+    console.log(value);
+          language.set(value);
+           
+        },
+    });
 
 
     }

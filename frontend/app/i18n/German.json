@@ -1,0 +1,12 @@
+{
+	"Apple":"en",
+	"cart_empty_alert":"Dein Wagen ist leer. Bitte wählen Sie Einzelteile für Ihren Warenkorb",
+	"cart_empty_msg":"Sie haben noch nichts in Ihren Warenkorb aufgenommen! Starten Sie Ihre Lieblingsgerichte Hinzufügen",
+    "yourorder":"DEINE BESTELLUNG" ,
+     "verify order msg":"Bitte überprüfen, um mit Ihrer Telefonnummer . Dies ist auch, wie wir mit Ihnen über Status Ihrer Bestellung erreichen wird.",  
+    "Verify order":"1.Prüfen BESTELLEN",
+    "deliverydetails":"2.DELIVERY DETAILS",
+    "paymentdetails" :"3.Payment DETAILS"
+}  
+
+

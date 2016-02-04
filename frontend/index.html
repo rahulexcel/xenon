@@ -14,10 +14,13 @@
          <link rel="stylesheet" href="assets/custom.css">
          <link rel="stylesheet" href="assets/custom1.css">
           <link rel="stylesheet" href="assets/intlTelInput.css">
+          <link rel="stylesheet" href="assets/css/flagstrap.css">
 
   
 <!--lib files-->
   <script src="lib/jquery/jquery.js"></script>
+  <script src="lib/custom/bootstrap.js"></script>
+  <script src="lib/jquery/flagstrap.js"></script>
   <script src="lib/custom/jquery.card.js"></script>
   <script src="https://checkout.stripe.com/checkout.js"></script>
   <script src="lib/custom/detectmobilebrowser.js"></script>
@@ -29,15 +32,21 @@
       <script src="lib/custom/ng-storage.js"></script>
         <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
            <script src="lib/custom/angular-credit-cards.js"></script>
-              <script src="lib/custom/ng-file-upload.min.js"></script>
-
-
+           
+<!--for translation-->
+ <script src="lib/angular_translate/angular-translate.min.js"></script>
+<script src="lib/angular_translate/angular-translate-storage-local.min.js"></script>
+<script src="lib/angular_translate/angular-translate-loader-url.min.js"></script> 
+<script src="lib/angular_translate/angular-translate-loader-static-files.min.js"></script> 
  
 
 
    <!--custom js files-->
+
       <script src='app/index.module.js'></script>
+       <script src='app/index.config.js'></script>
         <script src='app/index.run.js'></script>
+
         <script src='app/component/services/validateroutes.service.js'></script>
       <script src='app/index.route.js'></script>
       <script src='app/index.constant.js'></script> 
@@ -58,6 +67,8 @@
           <script src='app/component/services/timestorage.service.js'></script>
               <script src='app/checkout/customercard.factory.js'></script>
                <script src='app/checkout/existingcharge.factory.js'></script>
+                 <script src='app/component/services/language.factory.js'></script>
+
 
 <script src='lib/angular-notification/angular-notification-icons.min.js'></script>
 <link rel="stylesheet" href="lib/angular-notification/angular-notification-icons.min.css">
