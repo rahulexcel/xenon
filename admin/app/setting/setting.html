@@ -1,3 +1,7 @@
+<script type="text/javascript">
+    var tz = jstz.determine();
+    console.log(tz.name());
+</script>
 <div class="row">
 
     <div class="col-sm-1"></div>
@@ -40,6 +44,17 @@
                                 <div class="col-sm-5">
                                     <strong>Delivery Mode</strong>
                                     <p>
+                                        <div class="form-block">
+                                            <label>
+                                                <input type="checkbox" class="cbr cbr-secondary">
+                                                Delivery
+                                            </label>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <label>
+                                                <input type="checkbox" class="cbr cbr-turquoise">
+                                                Pickup
+                                            </label>
+                                        </div>
                                     </p>
                                 </div>
                                 <div class="col-sm-5">

@@ -3,7 +3,7 @@
 
     angular.module('xenon-app')
             .controller('productOrdersController', productOrdersController);
-    function productOrdersController($scope, addOrderFactory, localStorageService, orderListFactory, $rootScope, $state, orderDetailsFactory) {
+    function productOrdersController($scope, addOrderFactory,$localStorage, localStorageService, orderListFactory, $rootScope, $state, orderDetailsFactory, seenOrderService) {
         console.log("Product Orders Page");
         var userData = localStorageService.get('userData');
         var eid = userData.eid;
@@ -14,8 +14,6 @@
         var totalAmount;
         var query = orderListFactory.query({"storeId": lid});
         query.$promise.then(function(data) {
-            $scope.spinner = false;
-
             for (var i = 0; i < data.length; i++) {
                 totalAmount = 0;
                 for (var j = 0; j < data[i].products.length; j++) {
@@ -25,7 +23,11 @@
                 data[i].totalamount = totalAmount;
                 // console.log(data[i]);
             }
-            $scope.orderList = data;
+            seenOrderService.newOrderList(data).then(function(newOrderList){
+                $scope.orderList = newOrderList;
+                console.log(newOrderList);
+                $scope.spinner = false;
+            });
         });
 
 
@@ -47,8 +49,9 @@
             });
         };
         $scope.orderId = function(orderId) {
-            console.log(orderId);
-            $rootScope.singleOrderId = orderId;
+            seenOrderService.seenOrder(orderId);
+            // console.log(orderId);
+            localStorageService.set('singleOrderId', orderId);
             $state.go('dashboard.orderDetails');
         };
         $scope.deleteOrder = function(orderId, index) {
