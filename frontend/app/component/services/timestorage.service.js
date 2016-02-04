@@ -1,13 +1,13 @@
-(function () {
+(function() {
     'use strict';
     angular.module('xenon-frontend')
             .factory('timeStorage', timeStorage)
     function  timeStorage($localStorage) {
         var timeStorage = {};
-        timeStorage.reset = function () {
+        timeStorage.reset = function() {
             $localStorage.$reset();
         };
-        timeStorage.cleanUp = function () {
+        timeStorage.cleanUp = function() {
             var cur_time = new Date().getTime();
             for (var i = 0; i < $localStorage.length; i++) {
                 var key = $localStorage.key(i);
@@ -21,13 +21,13 @@
                 }
             }
         };
-        timeStorage.remove = function (key) {
+        timeStorage.remove = function(key) {
             this.cleanUp();
             var time_key = key + '_expire';
             $localStorage[key] = false;
             $localStorage[time_key] = false;
         };
-        timeStorage.set = function (key, data, hours) {
+        timeStorage.set = function(key, data, hours) {
             this.cleanUp();
             $localStorage[key] = data;
             var time_key = key + '_expire';
@@ -35,7 +35,7 @@
             time = time + (hours * 1 * 60 * 60 * 1000);
             $localStorage[time_key] = time;
         };
-        timeStorage.get = function (key) {
+        timeStorage.get = function(key) {
             this.cleanUp();
             var time_key = key + "_expire";
             if (!$localStorage[time_key]) {
@@ -50,7 +50,8 @@
             return $localStorage[key];
         };
         return timeStorage;
-    };    
+    }
+    ;
 })();
 
     

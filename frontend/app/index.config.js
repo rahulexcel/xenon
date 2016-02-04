@@ -1,8 +1,8 @@
 (function() {
     'use strict';
     angular
-        .module('xenon-frontend')
-        .config(translateConfig);
+            .module('xenon-frontend')
+            .config(translateConfig);
     function translateConfig($translateProvider) {
         $translateProvider.useStaticFilesLoader({
             prefix: 'app/i18n/',

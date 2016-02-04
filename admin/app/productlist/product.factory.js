@@ -1,13 +1,13 @@
 (function() {
     'use strict';
     angular.module('xenon-app')
-        .factory('productFactory', productFactory);
+            .factory('productFactory', productFactory);
 
     function productFactory($resource, Configurations) {
-        return $resource(Configurations.Hostserver+'/prod/:prodId', {
-             'prodId': '@prodId'
-        },{
-        	editProduct: {
+        return $resource(Configurations.Hostserver + '/prod/:prodId', {
+            'prodId': '@prodId'
+        }, {
+            editProduct: {
                 method: 'PUT',
                 isArray: false,
                 url: Configurations.Hostserver + '/prod/:prodId'
@@ -18,5 +18,6 @@
                 url: Configurations.Hostserver + '/prod/:productId'
             }
         });
-    };
+    }
+    ;
 })();

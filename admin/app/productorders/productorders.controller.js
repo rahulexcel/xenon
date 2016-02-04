@@ -3,7 +3,7 @@
 
     angular.module('xenon-app')
             .controller('productOrdersController', productOrdersController);
-    function productOrdersController($scope, addOrderFactory,$localStorage, localStorageService, orderListFactory, $rootScope, $state, orderDetailsFactory, seenOrderService) {
+    function productOrdersController($scope, addOrderFactory, $localStorage, localStorageService, orderListFactory, $rootScope, $state, orderDetailsFactory, seenOrderService) {
         console.log("Product Orders Page");
         var userData = localStorageService.get('userData');
         var eid = userData.eid;
@@ -23,7 +23,7 @@
                 data[i].totalamount = totalAmount;
                 // console.log(data[i]);
             }
-            seenOrderService.newOrderList(data).then(function(newOrderList){
+            seenOrderService.newOrderList(data).then(function(newOrderList) {
                 $scope.orderList = newOrderList;
                 console.log(newOrderList);
                 $scope.spinner = false;
@@ -61,6 +61,7 @@
                 $scope.orderList.splice(index, 1);
             });
         };
-    };
+    }
+    ;
 
 })();

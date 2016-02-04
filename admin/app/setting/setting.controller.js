@@ -7,14 +7,14 @@
         console.log("Setting Page");
         var userData = localStorageService.get("userData");
         var locationid = userData.locations[0];
-        $scope.countryName =  dropdownService.countryDropdown();
+        $scope.countryName = dropdownService.countryDropdown();
         $scope.selectedCountry = function() {
-   for (var i = 0; i < countryData.length; i++) {
-    if ($scope.selectedCountryName == countryData[i].name.common) {
-     $scope.countryCurrency = countryData[i].currency;
-    }
-   }
-  };
+            for (var i = 0; i < countryData.length; i++) {
+                if ($scope.selectedCountryName == countryData[i].name.common) {
+                    $scope.countryCurrency = countryData[i].currency;
+                }
+            }
+        };
         var query = storeinfoLocationsIdFactory.get({}, {
             'locationid': locationid
         });
@@ -42,6 +42,7 @@
                 $scope.spinner = false;
             });
         };
-    };
+    }
+    ;
 
 })();

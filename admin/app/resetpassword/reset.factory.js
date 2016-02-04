@@ -1,8 +1,9 @@
 (function() {
     'use strict';
     angular.module('xenon-app')
-        .factory('resetFactory', resetFactory);
+            .factory('resetFactory', resetFactory);
     function resetFactory($resource, Configurations) {
-        return $resource(Configurations.Hostserver+'/reset/:token', {},{});
-    };
+        return $resource(Configurations.Hostserver + '/reset/:token', {}, {});
+    }
+    ;
 })();

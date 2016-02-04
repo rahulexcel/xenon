@@ -7,7 +7,7 @@
         $scope.spinner = true;
         $scope.catSpinner = true;
         $scope.saveCategoryTreeStructure = false;
-        
+
         var userData = localStorageService.get('userData');
         var lid = userData.locations[0];
         categoryListApi();
@@ -174,9 +174,9 @@
             });
         };
 
-        $scope.productImage = function(productImageArray){
-            if(productImageArray.length > 0){
-                return 'http://s3.amazonaws.com/ordermagic/'+productImageArray[0];
+        $scope.productImage = function(productImageArray) {
+            if (productImageArray.length > 0) {
+                return 'http://s3.amazonaws.com/ordermagic/' + productImageArray[0];
             } else {
                 return '';
             }

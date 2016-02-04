@@ -10,7 +10,7 @@
             $scope.spinner = "true";
             var query = signupFactory.save({email: $scope.email, password: $scope.password});
             query.$promise.then(function(data) {
-                if(data.data = "User already exists!"){
+                if (data.data = "User already exists!") {
                     $scope.error = "User email already exists!";
                     $scope.spinner = false;
                 }

@@ -8,7 +8,7 @@
 //         }, {
 //             'get': {
 //                 method: 'GET'
-                
+
 //             }
 //         });
 //     };
@@ -17,9 +17,10 @@
 (function() {
     'use strict';
     angular.module('xenon-app')
-        .factory('storeinfoLocFile', storeinfoLocFile);
+            .factory('storeinfoLocFile', storeinfoLocFile);
 
     function storeinfoLocFile($resource, Configurations) {
         return $resource(Configurations.Hostserver + '/loc', {}, {});
-    };
+    }
+    ;
 })();

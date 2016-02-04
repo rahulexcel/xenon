@@ -1,4 +1,4 @@
- (function() {
+(function() {
     'use strict';
     angular.module('xenon-app')
             .factory('localStorageService', localStorageService);
@@ -15,6 +15,7 @@
                 $localStorage.$reset();
             }
         }
-    };
+    }
+    ;
 
 })();

@@ -21,7 +21,7 @@
                     <div class="text-center" ng-show="success_message">
                         <h2 class="order-no"># {{orderNo}}</h2>
                         <span  class="bold"><span translate="thankyou">Thank You </span>{{fullname}}!<span translate="deliverymsg"> </span>
-                            </span><br><br>
+                        </span><br><br>
                         <a class="btn btn-info" href="#/frontend" translate="Go To Home Page"></a>
                     </div>
                     <div class='row left' ng-show="order_not_success">
@@ -95,7 +95,7 @@
                                         <div class="form-group" ng-class="{ 'has-error': detailsform.name.$touched && detailsform.name.$invalid }">
                                             <input type="text" class="form-control input-lg" ng-model="first_name" placeholder="{{ 'First name' | translate }}" name="f_n" ng-blur="f_n()" required>
                                             <div class="help-block" ng-messages="detailsform.f_n.$error" ng-if="detailsform.f_n.$touched">
-                              
+
                                                 <p ng-message="required" ><span translate="Your name is required."></span></p>
                                             </div>
 
@@ -103,14 +103,14 @@
                                         <div class="form-group" ng-class="{ 'has-error': detailsform.name.$touched && detailsform.name.$invalid }">
                                             <input type="text" class="form-control input-lg" ng-model="last_name" placeholder="{{ 'Last name' | translate }}" name="l_n" ng-blur='names_found()' required>
                                             <div class="help-block" ng-messages="detailsform.l_n.$error" ng-if="detailsform.l_n.$touched">
-                                              
+
                                                 <p ng-message="required" ><span translate="Your name is required."></span></p>
                                             </div>
                                         </div>
                                         <div class="form-group" ng-class="{ 'has-error': detailsform.name.$touched && detailsform.name.$invalid }">
                                             <input type="email" class="form-control input-lg" name="stripeEmail" ng-model="stripeEmail" placeholder="Email" ng-blur="emailerror()" required>
                                             <div class="help-block" ng-messages="detailsform.stripeEmail.$error" ng-if="detailsform.stripeEmail.$touched">
-                                             
+
                                                 <p ng-message="required" ><span translate="Your email is required."></span></p>
                                             </div>
                                             <span ng-show="detailsform.stripeEmail.$invalid && !detailsform.stripeEmail.$pristine" translate="Looking for a valid email-id"></span>
@@ -120,14 +120,14 @@
                                         <div class="form-group" ng-class="{ 'has-error': detailsform.name.$touched && detailsform.name.$invalid }">
                                             <input type="text" class="form-control input-lg" name="addr" ng-model="addr" placeholder="{{ 'Address' | translate }}" ng-blur="addr_error()" required>
                                             <div class="help-block" ng-messages="detailsform.addr.$error" ng-if="detailsform.addr.$touched">
-                                              
+
                                                 <p ng-message="required"><span translate="Your Address is required."></span></p>
                                             </div>
                                         </div>
                                         <div class="form-group" ng-class="{ 'has-error': detailsform.name.$touched && detailsform.name.$invalid }">
                                             <input type="text" class="form-control input-lg" name=" postcode" ng-model="postcode" placeholder="{{ 'Post code' | translate }}" ng-blur="postcode_error" required>
                                             <div class="help-block" ng-messages="detailsform.detailsform.$error" ng-if="detailsform.postcode.$touched">
-                                              
+
                                                 <p ng-message="required" ><span translate="Your postcode is required."></span></p>
                                             </div>
                                         </div>
