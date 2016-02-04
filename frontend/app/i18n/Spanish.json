@@ -1,0 +1,11 @@
+{
+	"Apple":"en",
+	"cart_empty_alert":"Tu carrito esta vacío. Por favor, seleccione elementos para su compra",
+	"cart_empty_msg":"Usted no ha añadido nada a su compra está vacía! Empezar a añadir sus platos favoritos",
+    "yourorder":"SU PEDIDO",
+     "verify order msg":"Por favor, compruebe orden con su número de teléfono. Este es también cómo vamos a llegar a ti sobre el estado de su pedido.",  
+    "Verify order":"1.ORDEN Verifique",
+    "deliverydetails":"2.DELIVERY DETALLES",
+    "paymentdetails" :"3.PAYMENT DETALLES"   
+
+}

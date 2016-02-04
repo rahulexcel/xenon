@@ -1,0 +1,10 @@
+{
+	"Apple":"en",
+	"cart_empty_alert":"Your Cart is Empty. Please select items for your cart",
+	"cart_empty_msg":"You haven’t added anything to your cart yet! Start adding your favourite dishes",
+    "yourorder":"YOUR ORDER" ,
+    "verify order msg":"Please verify order with your phone number. This is also how we will reach out to you about status of your order.",  
+    "Verify order":"1.VERIFY ORDER",
+    "deliverydetails":"2.DELIVERY DETAILS",
+    "paymentdetails" :"3.PAYMENT DETAILS"
+}

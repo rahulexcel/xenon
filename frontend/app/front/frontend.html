@@ -1,3 +1,4 @@
+                        
 <nav class="navbar navbar-fixed-top cart-container">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -7,7 +8,8 @@
       <img src="{{picImage}}"></span>
     </div>
     <div class="col-xs-8 no-pad-left nav-store-name-container">
-      <span class="nav-store-name">{{location_name}}</span>
+
+      <span class="nav-store-name"> {{location_name}}</span>
         <!-- <span class="sticky-cart pull-right" ng-click="clickOnCart()" ng-if="(productInCart)" style="font-size:24px;color:rgb(239, 110, 84);padding-right:10px;"><i class="fa fa-shopping-cart"></i> {{productInCart}}</span> -->
         <span class="sticky-cart pull-right" ng-click="clickOnCart()" ng-if="(productInCart)">
           <notification-icon count="productInCart">
@@ -34,17 +36,34 @@
                    </div>
                </div>
                <div class="col-sm-6 col-xs-12 text-center">
-                   <h3 class="heading topheading"><span class="not-show-main-logo">{{location_name}}</span> 
+                   <h3 class="heading topheading"><span class="not-show-main-logo">
+                    {{location_name}}</span> 
+                 
 <!--                            <p class="store-desc" style="padding-top:5px;">{{location_desc_part1}}<span ng-click="location_desc_part2_show = true" ng-hide="location_desc_part2_show">...</span><span ng-show="location_desc_part2_show">{{location_desc_part2}}</span></p> -->
                            <p class="store-desc">{{location_addr}}, {{location_lcity}},  {{location_lpostcode}}, {{location_lstate}} <br><i class="glyphicon glyphicon-earphone"></i> {{location_lphone}} | {{location_openingtime}}-{{location_closingtime}}</p>
                        </h3>
+                   </div>
+                   <div class="col-sm-3 col-xs-12">
+                    <!--  <select class="form-control input-lg select1" ng-model="localeId" ng-change="language.set(localeId, $event)">
+                                                    <option  
+                                                                 ng-repeat="(localeId, langName) in language.available" value="{{langName}}" >{{langName}}</option>
+                                                </select> -->
+
+                    
+ <div class="form-group">
+        <div id="options" ng-model="a" ng-change="language.set(localeId, $event)"> </div>
+    </div>
+
+
+                           
+   
                    </div>
                   
                </div>
                 <div class='row to-do'>
 
                     <div class="col-sm-8 bgwhite leftCtnr">
-                       <span class="pull-left" style="color:red" ng-show="Order_not_placed">Your Cart is Empty. Please select items for your cart</span>
+                       <span class="pull-left" style="color:red" ng-show="Order_not_placed" translate="cart_empty_alert" ></span>
                         <div class='row left'>
                          <div ng-class="class" class="">
                                  
@@ -141,16 +160,16 @@
 
                                             <div class="form-inline">
                                             <div class="form-group" style="width:100%">
-                                            <div class="col-md-6 col-xs-6 time-dropdown no-pad-left no-pad-right">
+                                            <div class="col-md-6 col-xs-6 time-dropdown no-pad-left">
                                             <span>Hour</span>
-                                                <select class="form-control input-lg" ng-change="hour_changing()" ng-model="time">
+                                                <select class="form-control input-lg select1" ng-change="hour_changing()" ng-model="time">
                                                     <option  
                                                                   ng-repeat="row in dropdown_days" value="{{row}}">{{row}}</option>
                                                 </select>
                                                 </div>
                                                 <div class="col-md-6 col-xs-6 time-dropdown no-pad-left no-pad-right">
                                                 <span>Minutes</span>
-                                                <select class="form-control input-lg"  ng-model="minutes">
+                                                <select class="form-control input-lg select2"  ng-model="minutes">
                                                     <option  
                                                                   ng-repeat="row in dropdown_minutes" value="{{row}}">{{row}}</option>
                                                 </select>
@@ -160,10 +179,9 @@
 
                                             <div class="cart">
                                                 <div class="cartheader">
-                                                    <span class="bold1"> YOUR ORDER</span>
+                                                    <span class="bold1" translate="yourorder"> </span>
                                                     <div class="cartheader-message" >
-                                                        <span ng-style="{'display' : (cart.length>0) ? 'none' : 'block'}"> 
-                                       You haven’t added anything to your cart yet! Start adding your favourite dishes
+                                                        <span ng-style="{'display' : (cart.length>0) ? 'none' : 'block'}" translate="cart_empty_msg"> 
                                        </span>          
                                                         <div class="row">
                                                             <div ng-repeat='row in cart'>
@@ -250,3 +268,10 @@
                             </div>
                         </div>
                     </div>
+
+
+
+
+
+
+

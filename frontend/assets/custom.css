@@ -370,7 +370,10 @@ width: 84px;
 .time-dropdown{
 	text-align: left;	
 }
-.time-dropdown select{
+.time-dropdown .select1{
+	width: 100%!important;
+}
+.time-dropdown .select2{
 	width: 100%!important;
 }
 
@@ -423,4 +426,12 @@ width: 84px;
 }
 .plus-in-mobile{
 	display:none;
+}
+div#options button{
+	border-color:#fff;
+
+}
+div#options button:hover{
+	
+	background-color:#fff!important;
 }

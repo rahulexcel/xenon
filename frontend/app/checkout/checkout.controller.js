@@ -3,6 +3,7 @@
     angular.module('xenon-frontend')
         .controller('checkoutCtrl', checkoutCtrl);
     function checkoutCtrl(validate, $scope, $rootScope, timeStorage, existingcharge, customercard, $localStorage, putCustomer, cauth, newcharge, arrayService, locations, cauthreq, locationID) {
+           
         validate.order_placed();
         $scope.location_desc_part2_show = false;
         $scope.data_recevied = true;
@@ -317,7 +318,7 @@
         }
         function after_payment(response) {
             if (response.paid === true) {
-                $scope.orderNo = $localStorage.Orders_response.orderid;
+                $scope.orderNo=response.ordernr;
                 $scope.order_not_success = false;
                 $scope.success_message = true;
                 $localStorage.$reset();

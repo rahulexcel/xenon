@@ -39,25 +39,75 @@
             var minutes = [];
             var minutesInterval = new Date().getMinutes();
             var time;
-            console.log(minutesInterval+llt);
-            if (minutesInterval + llt > 59) {
+            var sumllt=minutesInterval+llt;
+            var finalminutes=0;
+             console.log("previous="+sumllt);
+             for(var i=0; i<16; i++){
+                         if(sumllt%15!==0){
+                            sumllt++;
+                         }
+                    }
+                    console.log(sumllt);
+            if(sumllt>59){
+                sumllt=sumllt-60;
+                console.log(sumllt);
                 minutes_is_more = 1;
-                console.log(minutesInterval);
-                minutesInterval= minutesInterval+llt-60;
-                console.log(minutesInterval);
-                //minutes.push(minutesInterval);
+                   if(sumllt==15){
+                     minutes.push(15, 30, 45);
+                    }
+                    if(sumllt==30){
+                     minutes.push(30, 45);
+                    }
+                    if(sumllt==45){
+                     minutes.push(45);
+                    }
+                    if(sumllt==0){
+                        minutes.push('00', 15, 30, 45);
+                    }
             }else{
-                minutesInterval=minutesInterval+llt;
-            //minutes.push(minutesInterval + llt);
-          }
-          minutes.push(minutesInterval);
-            for (var i = 0; i < 4; i++) {
-                minutesInterval = minutesInterval+15;
-                if(minutesInterval<59){
-                minutes.push(minutesInterval);
-              }
-            }
+                    if(sumllt==15){
+                     minutes.push(15, 30, 45);
+                    }
+                    if(sumllt==30){
+                     minutes.push(30, 45);
+                    }
+                    if(sumllt==45){
+                     minutes.push(45);
+                    }
+                }
             console.log(minutes);
+      //       console.log(minutesInterval+llt);
+      //       if (minutesInterval + llt > 59) {
+      //           minutes_is_more = 1;
+      //           minutesInterval= minutesInterval+llt-60;
+      //           for(var i=0; i<15; i++){
+      //           if(minutesInterval%15!==0){
+
+                  
+      //          }
+
+      //     }
+      //           console.log(minutesInterval) ;
+      //       }else{
+      //           minutesInterval=minutesInterval+llt;
+      //          for(var i=0; i<15; i++){
+      //           if(minutesInterval%15!==0){
+      //               if(minutesInterval!==60){
+      //               minutesInterval++;      
+      //               }
+      //               // minutesInterval++;
+      //          }
+
+      //     }
+      // }
+      //     minutes.push(minutesInterval);
+      //       for (var i = 0; i < 4; i++) {
+      //           minutesInterval = minutesInterval+15;
+      //           if(minutesInterval<59){
+      //           minutes.push(minutesInterval);
+      //         }
+      //       }
+      //       console.log(minutes);
             selected_mintue=minutes[0].toString();
             return minutes;
         }
