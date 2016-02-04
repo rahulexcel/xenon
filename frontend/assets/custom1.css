@@ -478,8 +478,13 @@ display:none;
 .poweredByFooterInMobile img{
 	width: 30%;
 }
+div#options{
+	display: inline-block;
+}
 
-
+.flagstrap{
+	width:auto!important;
+}
 }
 @media only screen and (max-width: 480px){
  #allProduct .productName h4{

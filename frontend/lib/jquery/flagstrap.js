@@ -1,4 +1,4 @@
-(function ($) {
+(function($) {
 
     var defaults = {
         buttonSize: "btn-md",
@@ -257,21 +257,26 @@
         "ZW": "Zimbabwe"
     };
 
-    $.flagStrap = function (element, options, i) {
+    $.flagStrap = function(element, options, i) {
 
         var plugin = this;
 
         var uniqueId = generateId(8);
 
         plugin.countries = {};
-        plugin.selected = {value: null, text: null};
-        plugin.settings = {inputName: 'country-' + uniqueId};
+        plugin.selected = {
+            value: null,
+            text: null
+        };
+        plugin.settings = {
+            inputName: 'country-' + uniqueId
+        };
 
         var $container = $(element);
         var htmlSelectId = 'flagstrap-' + uniqueId;
         var htmlSelect = '#' + htmlSelectId;
 
-        plugin.init = function () {
+        plugin.init = function() {
 
             // Merge in global settings then merge in individual settings via data attributes
             plugin.countries = countries;
@@ -298,9 +303,10 @@
 
             // Check to see if the onSelect callback method is assigned / callable, bind the change event for broadcast
             if (plugin.settings.onSelect !== undefined && plugin.settings.onSelect instanceof Function) {
-                $(htmlSelect).change(function (event) {
+                $(htmlSelect).change(function(event) {
                     var element = this;
                     options.onSelect($(element).val(), element);
+                  
                 });
             }
 
@@ -308,16 +314,22 @@
             $(htmlSelect).hide();
 
         };
-
-        var buildHtmlSelect = function () {
+        var buildHtmlSelect = function() {
             var htmlSelectElement = $('<select/>').attr('id', htmlSelectId).attr('name', plugin.settings.inputName);
-
-            $.each(plugin.countries, function (code, country) {
-                var optionAttributes = {value: code};
+            $.each(plugin.countries, function(code, country) {
+                var optionAttributes = {
+                    value: code
+                };
                 if (plugin.settings.selectedCountry !== undefined) {
                     if (plugin.settings.selectedCountry === code) {
-                        optionAttributes = {value: code, selected: "selected"};
-                        plugin.selected = {value: code, text: country}
+                        optionAttributes = {
+                            value: code,
+                            selected: "selected"
+                        };
+                        plugin.selected = {
+                            value: code,
+                            text: country
+                        }
                     }
                 }
                 htmlSelectElement.append($('<option>', optionAttributes).text(country));
@@ -333,11 +345,14 @@
             return htmlSelectElement;
         };
 
-        var buildDropDownButton = function () {
-
-            var selectedText = $(htmlSelect).find('option').first().text();
-            var selectedValue = $(htmlSelect).find('option').first().val();
-
+        var buildDropDownButton = function() {
+            if ((localStorage.getItem('ngStorage-keyOfused') == null) || (localStorage.getItem('ngStorage-used') == null)) {
+                var selectedText = "English";
+                var selectedValue = "GB";
+            } else {
+                var selectedText = localStorage.getItem('ngStorage-used').replace(/['"]+/g, '');
+                var selectedValue = localStorage.getItem('ngStorage-keyOfused').replace(/['"]+/g, '');
+            }
             selectedText = plugin.selected.text || selectedText;
             selectedValue = plugin.selected.value || selectedValue;
 
@@ -368,7 +383,7 @@
 
         };
 
-        var buildDropDownButtonItemList = function () {
+        var buildDropDownButtonItemList = function() {
             var items = $('<ul/>')
                 .attr('id', 'flagstrap-drop-down-' + uniqueId + '-list')
                 .attr('aria-labelled-by', 'flagstrap-drop-down-' + uniqueId)
@@ -381,10 +396,11 @@
             }
 
             // Populate the bootstrap dropdown item list
-            $(htmlSelect).find('option').each(function () {
+            $(htmlSelect).find('option').each(function() {
 
                 // Get original select option values and labels
                 var text = $(this).text();
+
                 var value = $(this).val();
 
                 // Build the flag icon
@@ -400,7 +416,7 @@
                     .attr('data-val', $(this).val())
                     .html(flagIcon)
                     .append(text)
-                    .on('click', function (e) {
+                    .on('click', function(e) {
                         $(htmlSelect).find('option').removeAttr('selected');
                         $(htmlSelect).find('option[value="' + $(this).data('val') + '"]').attr("selected", "selected");
                         $(htmlSelect).trigger('change');
@@ -412,7 +428,9 @@
                 var listItem = $('<li/>').prepend(flagStrapItem);
 
                 // Append it to the drop down item list
+             
                 items.append(listItem);
+             
 
             });
 
@@ -437,9 +455,9 @@
 
     };
 
-    $.fn.flagStrap = function (options) {
+    $.fn.flagStrap = function(options) {
 
-        return this.each(function (i) {
+        return this.each(function(i) {
             if ($(this).data('flagStrap') === undefined) {
                 $(this).data('flagStrap', new $.flagStrap(this, options, i));
             }
