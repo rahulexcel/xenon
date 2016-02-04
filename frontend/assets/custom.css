@@ -446,3 +446,7 @@ div#options1 button:hover{
 div#options button span i{
 	color: transparent;
 }
+
+div#options{
+	display: none;
+}
