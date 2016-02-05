@@ -5,6 +5,6 @@
                Hostserver: 'https://protected-badlands-3499.herokuapp.com'
            })
            .constant('locationID', {
-               locationID: '56b339898d37ab1100a432e0'
+               locationID: '56b42cfa34ca681100566c78'
            });
 })();
