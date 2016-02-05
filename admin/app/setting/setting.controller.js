@@ -26,6 +26,9 @@
             $scope.tax = data.ltax;
             $scope.includeTax = data.ltaxall;
             $scope.transalation = data.lstorelang;
+            $scope.deliveryMode = data.ldeliverymode;
+            $scope.deliveryPrice = data.ldeliveryprice;
+            $scope.deliveryTax = data.ldeliverytax;
         });
         $scope.save = function() {
             $scope.spinner = true;
