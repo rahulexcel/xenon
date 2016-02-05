@@ -106,7 +106,8 @@
                                     <strong>Open to customers</strong>
                                 </label>
                                 <div class="form-block">
-                                    <input type="checkbox" checked="" class="iswitch-lg iswitch-info" ng-model="lclosed">
+                                    <input type="checkbox" checked="" class="iswitch-lg iswitch-info" ng-model="lclosed" ng-change="checkStoreSetting()">
+                                    <span style="color:red;" ng-show="checkStoreOpen">Store status cannot be switched on until payments is setup.</span>
                                 </div>
                             </div>
                         </div>

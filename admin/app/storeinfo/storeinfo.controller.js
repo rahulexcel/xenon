@@ -218,5 +218,19 @@
                 }
             }
         }
+        $scope.checkStoreSetting = function(){
+            // console.log('checkStoreSetting');
+            if(localStorageService.get('storeInfo')){
+                var storeInfo = localStorageService.get('storeInfo');
+                var lcompletedLength = storeInfo.lcompleted.length;
+                if(lcompletedLength <3){
+                    $scope.checkStoreOpen = true;
+                    $scope.lclosed = false; 
+                }
+            } else{
+                $scope.checkStoreOpen = true;
+                $scope.lclosed = false;                
+            }
+        }
     }
 })();

@@ -22,6 +22,7 @@
         });
         query.$promise.then(function(data) {
             console.log(data);
+           
             $scope.selectedCountryName = data.lcountry;
             console.log($scope.selectedCountryName);
             $scope.countryCurrency = data.lcurrency;
@@ -31,6 +32,10 @@
             $scope.deliveryMode = data.ldeliverymode;
             $scope.deliveryPrice = data.ldeliveryprice;
             $scope.deliveryTax = data.ldeliverytax;
+            console.log(data.lcountry);
+            $scope.selectedCountryName = data.lcountry;
+            $scope.countryCurrency = data.lcurrency;
+
         });
         $scope.save = function() {
             $scope.spinner = true;
@@ -48,6 +53,7 @@
             });
             query.$promise.then(function(data) {
                 console.log(data);
+                  localStorageService.set('storeInfo', data);
                 $scope.spinner = false;
             });
         };
