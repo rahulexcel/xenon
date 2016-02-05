@@ -28,6 +28,7 @@
             on_load_response = data;
             $scope.city = data.lcity;
             $scope.currency = data.lcurrency;
+             $scope.currencysymbol= arrayService.CurrencySymbol(data.lcurrency);
             $scope.location_name = data.lname;
             console.log(data.ldesc.split(' ').length);
             if (data.ldesc.split(' ').length > 20) {

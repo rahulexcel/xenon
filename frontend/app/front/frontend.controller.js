@@ -3,8 +3,9 @@
     angular.module('xenon-frontend')
             .controller('frontendCtrl', frontendCtrl);
 
-    function frontendCtrl($scope, locations, timeStorage, $window, language, locationID, $localStorage, category, $rootScope, products, Order, $state, arrayService, dropdownService, timeService, $interval) {
-
+    function frontendCtrl($scope, locations, timeStorage, $window, currencySymbol, language, locationID, $localStorage, category, $rootScope, products, Order, $state, arrayService, dropdownService, timeService, $interval) {
+  
+   
         var response_products;
         var response_categories;
         $scope.customPending = 5;
@@ -61,6 +62,7 @@
                  $scope.delivery_method = dropdownService.delivery_method(data.ldeliverymode);
                  $scope.method = dropdownService.delivery_method_selected($scope.delivery_method);
                 $scope.currency = data.lcurrency;
+                $scope.currencysymbol= arrayService.CurrencySymbol(data.lcurrency);
                 $scope.dropdown_minutes = dropdownService.minutesdropdown(data.llt);
                 $scope.dropdown_days = dropdownService.Timedropdown();
                 $scope.minutes = $scope.dropdown_minutes[0].toString();

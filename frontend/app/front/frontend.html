@@ -1,4 +1,4 @@
-                        
+                 
 <nav class="navbar navbar-fixed-top cart-container">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -108,7 +108,7 @@
 
                                             <div class="col-sm-4 col-sm-offset-2 no-pad vcenter col-xs-8 productPrice">
                                                 <div class="pull-right">
-                                                    <span class="heading product-price-heading">{{row1.price}} {{currency}} 
+                                                    <span class="heading product-price-heading">{{row1.price}} <!--{{currency}}-->{{currencysymbol}} 
                                                         <i class="glyphicon glyphicon-plus fa-fw plus-in-computer" ></i><br> <i class="glyphicon glyphicon-plus fa-fw plus-in-mobile"></i>
                                                     </span>
                                                 </div>
@@ -138,7 +138,7 @@
 
                                         <div class="col-sm-4 col-sm-offset-2 no-pad vcenter col-xs-8 productPrice">
                                             <div class="pull-right">
-                                                <span class="heading product-price-heading">{{row.price}} {{currency}} 
+                                                <span class="heading product-price-heading">{{row.price}} <!--{{currency}}-->{{currencysymbol}} 
                                                     <i class="glyphicon glyphicon-plus fa-fw plus-in-computer" ></i><br> <i class="glyphicon glyphicon-plus fa-fw plus-in-mobile"></i>
                                                 </span>
                                             </div>
@@ -200,7 +200,7 @@
 
                                                         </div>
                                                         <div class="pull-right" style="color:rgb(239,110,84)">
-                                                            {{row.price}}{{currency}} 
+                                                            {{row.price}}<!--{{currency}}-->{{currencysymbol}} 
                                                             <span ng-click="remove_product_from_cart(row)"  >
                                                                 <i class="glyphicon glyphicon-remove "></i>
                                                             </span> 
@@ -231,11 +231,11 @@
                                     </div>
                                     <div class="col-sm-6 col-xs-6">
                                         <div class="pull-right">
-                                            <div>{{total_price}} {{currency}}</div>
+                                            <div>{{total_price}} <!--{{currency}}-->{{currencysymbol}}</div>
                                             <div class="bold"style="
                                                  font-size: medium;     padding-right: 11px;  padding-top: 20px;
 
-                                                 ">{{total_price}} {{currency}} </div>
+                                                 ">{{total_price}} <!--{{currency}}-->{{currencysymbol}} </div>
                                         </div>
                                     </div>
                                     <div class='col-sm-12 col-xs-12 rightmenufooter text-center'  ng-style="{'background-color' : (cart.length > 0) ? 'rgb(239, 110, 84)' : '#bbbdc0'}" ng-click="sendOrder()" disabled>

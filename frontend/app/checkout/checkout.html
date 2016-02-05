@@ -301,7 +301,7 @@
                                             </div>
 
                                             <div class="pull-right" style=" color:rgb(239,110,84)">
-                                                {{row.price}}{{currency}}
+                                                {{row.price}}<!--{{currency}}-->{{currencysymbol}}
 
 
                                             </div>
@@ -312,11 +312,11 @@
                                     <div class="row">
                                         <div class="col-sm-12 subtotal pad-2-left-right">
                                             <div class="pull-left">Subtotal</div>
-                                            <div class="pull-right">{{total_price}} {{currency}}</div>
+                                            <div class="pull-right">{{total_price}} <!--{{currency}}-->{{currencysymbol}}</div>
                                         </div>
                                         <div class="col-sm-12 col-xs-12 pad-2-left-right">
                                             <div class="bold pull-left" translate="total"></div>
-                                            <div class="bold pull-right">{{total_price}} {{currency}}</div>
+                                            <div class="bold pull-right">{{total_price}} <!--{{currency}}-->{{currencysymbol}}</div>
                                         </div>
                                     </div>
                                 </div>
