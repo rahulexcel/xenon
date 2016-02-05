@@ -10,11 +10,12 @@
         }
         service.Timedropdown = function() {
             var hour = [];
-            for (var i = 1; i <= 12; i++) {
-                hour.push(i + ' ' + 'AM');
+            hour.push("00");
+            for (var i = 1; i <= 9; i++) {
+                hour.push("0"+i);
             }
-            for (var k = 1; k <= 12; k++) {
-                hour.push(k + ' ' + 'PM');
+              for (var i = 10; i <= 23; i++) {
+                hour.push(i);
             }
             return hour;
         }
