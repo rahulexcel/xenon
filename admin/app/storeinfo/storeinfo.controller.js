@@ -4,6 +4,8 @@
             .module('xenon.controllers')
             .controller('storeinfoCtrl', storeinfoCtrl);
     function storeinfoCtrl($scope, $log, countryData, FileUploader, uploadService, dropdownService, $state, storeinfoFactory, $timeout, calanderService, localStorageService, Upload, storeinfoLocationsFactory, storeinfoLocationsIdFactory, storeinfoLocFile) {
+        var tz = jstz.determine();
+        var timeZone = tz.name();
         var dateArray = [];
         var responseDateArr = [];
         var i;
@@ -145,7 +147,8 @@
                     'llt': $scope.llt,
                     'ldateclosed': dateArray,
                     'lmessage': $scope.lmessage,
-                    'lclosed': $scope.lclosed
+                    'lclosed': $scope.lclosed,
+                    'ltimezone': timeZone
                 });
                 query.$promise.then(function(data) {
                     $scope.spinner = false;
@@ -169,7 +172,8 @@
                     'lphone': phoneNumber,
                     'llt': $scope.llt,
                     'lmessage': $scope.lmessage,
-                    'lclosed': $scope.lclosed
+                    'lclosed': $scope.lclosed,
+                    'ltimezone': timeZone
                 });
                 query.$promise.then(function(data) {
                     $scope.spinner = false;

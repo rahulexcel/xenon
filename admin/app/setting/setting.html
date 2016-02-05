@@ -1,7 +1,3 @@
-<script type="text/javascript">
-    var tz = jstz.determine();
-    console.log(tz.name());
-</script>
 <div class="row">
 
     <div class="col-sm-1"></div>
@@ -20,9 +16,9 @@
                                     <strong>Store is located in</strong>
                                     <p>
                                         <select class="form-control" ng-model="selectedCountryName" ng-change="selectedCountry()">
-                                        <option ng-repeat="name in countryName track by $index" value="{{name}}">
-                                            {{name}}
-                                        </option>
+                                            <option ng-repeat="name in countryName track by $index" value="{{name}}">
+                                                {{name}}
+                                            </option>
                                         </select>
                                         <!-- <select class="form-control" id="country" name="country" ng-model="countryName">
                                         </select> -->
@@ -41,35 +37,35 @@
                         <label class="col-sm-2 control-label">Delivery Options</label>
                         <div class="col-sm-10">
                             <div class="row">
-                            <!-- div class="col-sm-5">
-                                   <strong>Delivery Mode</strong>
-                                   <p>
-                                   <div class="form-block">
-                                       <label>
-                                           <input type="checkbox" class="cbr cbr-secondary">
-                                           Delivery
-                                       </label>
-                                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                       <label>
-                                           <input type="checkbox" class="cbr cbr-turquoise">
-                                           Pickup
-                                       </label>
-                                   </div>
-                                   </p>
-                               </div> -->
+                                <!-- div class="col-sm-5">
+                                       <strong>Delivery Mode</strong>
+                                       <p>
+                                       <div class="form-block">
+                                           <label>
+                                               <input type="checkbox" class="cbr cbr-secondary">
+                                               Delivery
+                                           </label>
+                                           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                           <label>
+                                               <input type="checkbox" class="cbr cbr-turquoise">
+                                               Pickup
+                                           </label>
+                                       </div>
+                                       </p>
+                                   </div> -->
                                 <div class="col-sm-4 col-xs-4">
                                     <strong>Delivery Mode</strong>
                                     <p>
-                                        <div class="form-block">
-                                            <label>
-                                                <input type="radio" name="delivery" value="2" ng-model="deliveryMode">
-                                                Delivery
-                                            </label><br/>
-                                            <label>
-                                                <input type="radio" name="delivery" value="1" ng-model="deliveryMode">
-                                                Pickup
-                                            </label>
-                                        </div>
+                                    <div class="form-block">
+                                        <label>
+                                            <input type="radio" name="delivery" value="2" ng-model="deliveryMode">
+                                            Delivery
+                                        </label><br/>
+                                        <label>
+                                            <input type="radio" name="delivery" value="1" ng-model="deliveryMode">
+                                            Pickup
+                                        </label>
+                                    </div>
                                     </p>
                                 </div>
                                 <div class="col-sm-4 col-xs-4">
