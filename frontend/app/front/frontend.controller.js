@@ -44,9 +44,9 @@
         }
 
 
-        $scope.delivery_method = dropdownService.delivery_method();
+       
 
-        $scope.method = "Delivery";
+       
         $scope.category = 'View All';
         on_page_load();
 
@@ -58,6 +58,8 @@
                 console.log(data);
                 updatetime(data);
                 llt = data.llt;
+                 $scope.delivery_method = dropdownService.delivery_method(data.ldeliverymode);
+                 $scope.method = dropdownService.delivery_method_selected($scope.delivery_method);
                 $scope.currency = data.lcurrency;
                 $scope.dropdown_minutes = dropdownService.minutesdropdown(data.llt);
                 $scope.dropdown_days = dropdownService.Timedropdown();
@@ -85,9 +87,11 @@
                 $scope.location_openingtime = arrayService.openingTime(data.lwots[0].opening_time);
                 $scope.location_closingtime = arrayService.closingTime(data.lwots[0].closing_time);
                 $scope.all_clicked = true;
+             
                 get_category();
                 check_local_storage();
-                language.get(data.lstorelang);            
+                language.get(data.lstorelang);    
+                console.log(data.ldeliverymode);
                 console.log(data);
 
             });

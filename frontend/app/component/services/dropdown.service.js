@@ -116,11 +116,22 @@
             return selected_hour.toString();
 
         }
-        service.delivery_method = function() {
-            var method = ['Delivery', "Pickup"];
-            return method;
+        var modeSelected;
+        service.delivery_method = function(data) {
+         console.log(data);
+         var mode=[];
+         if(data==1){
+             mode.push("Pickup");
+                     
+        }else{
+            mode.push("Delivery");
         }
-
+        modeSelected=mode;
+        return mode;
+        }
+        service.delivery_method_selected=function(data){
+            return modeSelected.toString();
+        }
         service.selectedMinutes = function(data) {
 
             return  selected_mintue;
