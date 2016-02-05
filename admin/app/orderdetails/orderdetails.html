@@ -86,7 +86,7 @@
                                     <td>{{$index}}</td>
                                     <td>{{order.pid}}</td>
                                     <td>{{order.qty}}</td>
-                                    <td style="text-align:right"><strong>${{order.price}}</strong></td>
+                                    <td style="text-align:right"><strong>{{currencySymbole}}{{order.price}}</strong></td>
                                 </tr>
                                 <tr>
                                     <td></td>
@@ -99,10 +99,10 @@
                                         {{storeAddress}} <br>{{storeCountry}} <br> P: {{storePhone}} <br> {{storeName}} <br>{{storeEmail}}
                                     </td>
                                     <td colspan="2" style="text-align:right">
-                                        Sub - Total amount: <strong>${{totalAmount}}</strong><br>
+                                        Sub - Total amount: <strong>{{currencySymbole}}{{totalAmount}}</strong><br>
                                         VAT: <strong> 12.9%</strong><br>
                                         Discount: <strong>......</strong><br>
-                                        Grand Total: <strong>${{grandTotalAmount}}</strong><br>
+                                        Grand Total: <strong>{{currencySymbole}}{{grandTotalAmount}}</strong><br>
                                     </td>
                                 </tr>
                             </tbody>
