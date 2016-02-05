@@ -5,6 +5,8 @@
             .controller('settingController', settingController);
     function settingController($scope, countryData, dropdownService, storeinfoLocationsIdFactory, localStorageService) {
         console.log("Setting Page");
+        var tz = jstz.determine();
+        var timeZone = tz.name();
         var userData = localStorageService.get("userData");
         var locationid = userData.locations[0];
         $scope.countryName = dropdownService.countryDropdown();
@@ -41,7 +43,8 @@
                 'lstorelang': $scope.transalation,
                 'ldeliverymode': $scope.deliveryMode,
                 'ldeliveryprice': $scope.deliveryPrice,
-                'ldeliverytax': $scope.deliveryTax
+                'ldeliverytax': $scope.deliveryTax,
+                'ltimezone': timeZone
             });
             query.$promise.then(function(data) {
                 console.log(data);
