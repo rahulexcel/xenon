@@ -238,12 +238,12 @@
                                                  ">{{total_price}} <!--{{currency}}-->{{currencysymbol}} </div>
                                         </div>
                                     </div>
-                                    <div class='col-sm-12 col-xs-12 rightmenufooter text-center'  ng-style="{'background-color' : (cart.length > 0) ? 'rgb(239, 110, 84)' : '#bbbdc0'}" ng-click="sendOrder()" disabled>
+                                    <button class='col-sm-12 col-xs-12 rightmenufooter text-center'  ng-style="{'background-color' : (cart.length > 0 && !not_allow_checkout) ? 'rgb(239, 110, 84)' : '#bbbdc0'}" ng-click="sendOrder()" ng-disabled="not_allow_checkout" >
                                         CHECKOUT 
                                         <span ng-show="checkout_clicked">
                                             <i class="fa fa-spin fa-spinner"></i>
                                         </span>
-                                    </div>
+                                    </button>
 
                                     <div class='col-sm-12 col-xs-12 text-center poweredByFooter'>
                                         <h4 style="margin-bottom:0px;" translate="poweredby"></h4>

@@ -3,7 +3,7 @@
 
     angular.module('xenon-app')
             .controller('orderDetailsController', orderDetailsController);
-    function orderDetailsController($scope, $rootScope, orderDetailsFactory, $state, orderDetailsService, localStorageService, $localStorage) {
+    function orderDetailsController($scope, $rootScope, orderDetailsFactory, $state, orderDetailsService, localStorageService, $localStorage, arrayService) {
         console.log("Order Details Page");
         var singleOrderId = localStorageService.get('singleOrderId');
         console.log("Single Order id " + singleOrderId);
@@ -30,6 +30,7 @@
                 $scope.storeEmail = storeInfo.lemail;
                 $scope.storePhone = storeInfo.lphone;
                 $scope.storeName = storeInfo.lname;
+                $scope.currencySymbole = arrayService.CurrencySymbol($localStorage.storeInfo.data.lcurrency);
             });
         }
 

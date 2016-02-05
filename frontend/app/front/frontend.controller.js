@@ -4,11 +4,10 @@
             .controller('frontendCtrl', frontendCtrl);
 
     function frontendCtrl($scope, locations, timeStorage, $window, currencySymbol, language, locationID, $localStorage, category, $rootScope, products, Order, $state, arrayService, dropdownService, timeService, $interval) {
-  
-   
+
+
         var response_products;
         var response_categories;
-        $scope.customPending = 5;
         $scope.spinner = true;
         $scope.location_desc_part2_show = false;
         $scope.class = "left_menu_display";
@@ -17,6 +16,7 @@
         $scope.backCatMenu = false;
         $scope.productInCart = 0;
         var llt;
+        var OnpageLoadData;
         $scope.changeClassLeftMenu = function() {
 
             if ($scope.class === "left_menu_display") {
@@ -26,14 +26,14 @@
             }
         };
         $scope.backToCatList = function() {
-            console.log('back to cat list');
+          
             $scope.class = "left_menu_display";
             $scope.product_menu = "product_menu_not_display";
             $scope.cart_shown = "cart_not_display";
             $scope.backCatMenu = false;
         }
         $scope.backToProductList = function() {
-            console.log('back to product list');
+     
             $scope.backCatMenu = true;
             $scope.backProductMenu = false;
             $scope.product_menu = "product_menu_display";
@@ -45,9 +45,9 @@
         }
 
 
-       
 
-       
+
+
         $scope.category = 'View All';
         on_page_load();
 
@@ -56,13 +56,14 @@
                 locationID: locationID.locationID
             });
             query.$promise.then(function(data) {
-                console.log(data);
+               
                 updatetime(data);
+                OnpageLoadData=data;
                 llt = data.llt;
-                 $scope.delivery_method = dropdownService.delivery_method(data.ldeliverymode);
-                 $scope.method = dropdownService.delivery_method_selected($scope.delivery_method);
+                $scope.delivery_method = dropdownService.delivery_method(data.ldeliverymode);
+                $scope.method = dropdownService.delivery_method_selected($scope.delivery_method);
                 $scope.currency = data.lcurrency;
-                $scope.currencysymbol= arrayService.CurrencySymbol(data.lcurrency);
+                $scope.currencysymbol = arrayService.CurrencySymbol(data.lcurrency);
                 $scope.dropdown_minutes = dropdownService.minutesdropdown(data.llt);
                 $scope.dropdown_days = dropdownService.Timedropdown();
                 $scope.minutes = $scope.dropdown_minutes[0].toString();
@@ -70,7 +71,7 @@
                 $scope.time = dropdownService.Selected(data.llt);
                 //console.log();
                 // dropdownService.Selected(data.llt);
-                console.log($scope.time);
+               
                 $scope.location_name = data.lname;
                 if (data.ldesc.split(' ').length > 20) {
                     $scope.location_desc_part1 = data.ldesc.substring(0, 80);
@@ -86,15 +87,19 @@
                 $scope.location_lpostcode = data.lpostcode;
                 $scope.location_lstate = data.lstate;
                 $scope.location_lphone = arrayService.getPhoneNo(data.lphone);
-                $scope.location_openingtime = data.lwots[0].opening_time+":"+"00";
-                $scope.location_closingtime = data.lwots[0].closing_time+":"+"00";
+                $scope.location_openingtime = data.lwots[0].opening_time + ":" + "00";
+                $scope.location_closingtime = data.lwots[0].closing_time + ":" + "00";
                 $scope.all_clicked = true;
-             
+               
+            if(data.lcompleted.length<3){
+                $scope.not_allow_checkout=true;
+            }
+            
+
                 get_category();
                 check_local_storage();
-                language.get(data.lstorelang);    
-                console.log(data.ldeliverymode);
-                console.log(data);
+                language.get(data.lstorelang);
+              
 
             });
         }
@@ -132,10 +137,7 @@
 
         function show_all() {
             $scope.All_products = arrayService.showAllService(response_categories, response_products);
-            console.log($scope.All_products);
-            console.log(response_categories);
-            console.log(response_products);
-            // console.log($scope.All_products[1].products[0].image[0]);
+          
         }
 
 
@@ -157,13 +159,13 @@
                 $scope.category = category.name;
                 product_api();
                 $scope.products = arrayService.getProduct(response_products, category.id);
-                //console.log($scope.products);
+          
 
             }
         }
         $scope.sidebarInMobile = true;
         if (jQuery.browser.mobile) {
-            console.log('mobile');
+           
             $scope.sidebarInMobile = false;
         }
         $scope.selectedIndex = 0;
@@ -198,7 +200,7 @@
                 for (var j = 0; j < cart_array.length; j++) {
                     for (var i = 0; i < cart_obj.length; i++) {
                         if (cart_obj[i]._id == cart_array[j] && cart_obj[i]._id == selected_product._id) {
-                            //console.log("found");
+                        
                             cart_obj[i].count++;
                             cart_obj[i].price = selected_product.price * cart_obj[i].count;
                             flag = 0;
@@ -220,7 +222,7 @@
             var total = 0;
 
 
-            // console.log($scope.cart);
+            
 
             $scope.total_price = arrayService.getTotalprice($scope.cart);
 
@@ -232,10 +234,9 @@
 
         $scope.remove_product_from_cart = function(product) {
             $scope.productInCart = $scope.productInCart - 1;
-            //console.log(cart_obj);
-            //  console.log(product);
+           
             var idx = $scope.cart.indexOf(product);
-            ///console.log(idx);
+         
             if (product.count == 1) {
                 cart_obj.splice(idx, 1);
                 cart_array.splice(idx, 1);
@@ -246,8 +247,7 @@
                 product.count = product.count - 1;
                 var a = product.price / price_to_minus;
                 product.price = product.price - product.price / price_to_minus;
-                // console.log(product);
-                //$scope.total_price=$scope.total_price-product.price/price_to_minus;
+              
             }
             $scope.total_price = arrayService.getTotalprice($scope.cart);
 
@@ -256,18 +256,18 @@
         $scope.sendOrder = function() {
             $scope.checkout_clicked = true;
             var mode;
-            // console.log($scope.method);
+          
             if ($scope.method === "Delivery") {
-                console.log("Delivery");
+           
                 mode = 2;
             } else {
-                console.log("pickup");
+            
                 mode = 1;
             }
-            // console.log(mode);
+          
             var product_order_array = [];
             var product_order_obj = {};
-            //console.log($scope.cart);
+         
             for (var i = 0; i < $scope.cart.length; i++) {
                 product_order_obj = {
                     id: $scope.cart[i]._id,
@@ -275,7 +275,7 @@
                 }
                 product_order_array.push(product_order_obj);
             }
-            // console.log(product_order_array);
+         
             var query2 = Order.save({
                 'lid': locationID.locationID,
                 'products': product_order_array,
@@ -301,7 +301,7 @@
 
         }
         $scope.clickOnCart = function() {
-            console.log('click on cart');
+         
             $scope.cart_shown = "cart_display";
             $scope.product_menu = "product_menu_not_display";
             $scope.class = "left_menu_not_display";
@@ -311,7 +311,7 @@
 
         function updatetime(data) {
             $interval(function() {
-                console.log(data);
+             
                 $scope.dropdown_minutes = dropdownService.minutesdropdown(llt);
                 $scope.dropdown_days = dropdownService.Timedropdown();
                 $scope.minutes = $scope.dropdown_minutes[0].toString();
@@ -321,17 +321,17 @@
 
         $scope.hour_changing = function() {
             if ($scope.time === dropdownService.currenttime()) {
-                console.log(llt);
+             
                 $scope.dropdown_minutes = dropdownService.minutesdropdown(llt);
                 $scope.minutes = dropdownService.selectedMinutes($scope.dropdown_minutes);
-                console.log("changed");
+             
             } else {
 
                 $scope.dropdown_minutes = dropdownService.changedMinutes();
                 $scope.minutes = "00";
-                console.log("not changed");
+          
             }
-            console.log($scope.time);
+           
         }
         $('#options, #options1').flagStrap({
             countries: {
@@ -347,11 +347,11 @@
             placeholder: false,
             onSelect: function(value, element) {
                 $('div#options button span').text(" ");
-                console.log(value);
+         
                 language.set(value);
-                // console.log($scope.langname);           
+                    
             },
         });
-        // $('select option[value="SE"]').attr("selected",true);
+       
     }
 })();
