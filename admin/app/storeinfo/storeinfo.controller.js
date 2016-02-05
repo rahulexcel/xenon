@@ -176,6 +176,8 @@
             }
         }
         $scope.tsave = function() {
+            if($scope.day && $scope.opening_selected_hour && $scope.closing_selected_hour){
+             
             $scope.show_scheduled_table = true;
             var day = $scope.day;
             var openingTime = $scope.opening_selected_hour;
@@ -191,6 +193,7 @@
             $scope.opening_selected_hour = '';
             $scope.closing_selected_hour = "";
             $scope.day = '';
+            } 
         }
         $scope.removeTimes = function(index) {
             var idx = dayArr_for_schedule_view.indexOf(index);
