@@ -125,6 +125,7 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Opening times</label>
                                 <div class="col-sm-9">
+                                    
                                     <div class="row">
                                         <div class="col-sm-3">
                                             <label class="control-label" for="full_name">
@@ -153,15 +154,14 @@
                                             </label>
                                             <select class="form-control" ng-model="closing_selected_hour" name="close">
                                                 <option  
-                                                    ng-repeat="row in closingtime_hour
-                                                                                      track by $index">{{row}}</option>
+                                                    ng-repeat="row in closingtime_hour track by $index">{{row}}</option>
                                             </select>
 
                                         </div>
                                         <div class="col-sm-3" >
                                             <div style="margin-top:23px">
-                                                <button class="btn btn-blue" ng-click="tsave()" ng-disabled="store.day.$invalid || store.open.$invalid || store.close.$invalid">Add 
-                                                </button>
+                                                <span class="btn btn-blue" ng-click="tsave()" ng-disabled="store.day.$invalid || store.open.$invalid || store.close.$invalid">Add 
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
