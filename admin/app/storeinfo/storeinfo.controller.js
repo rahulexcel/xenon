@@ -3,7 +3,7 @@
     angular
             .module('xenon.controllers')
             .controller('storeinfoCtrl', storeinfoCtrl);
-    function storeinfoCtrl($scope, $log, countryData, FileUploader, uploadService, dropdownService, $state, storeinfoFactory, $timeout, calanderService, localStorageService, Upload, storeinfoLocationsFactory, storeinfoLocationsIdFactory, storeinfoLocFile) {
+    function storeinfoCtrl($scope, $log, countryData, FileUploader, arrayService, uploadService, dropdownService, $state, storeinfoFactory, $timeout, calanderService, localStorageService, Upload, storeinfoLocationsFactory, storeinfoLocationsIdFactory, storeinfoLocFile) {
         var tz = jstz.determine();
         var timeZone = tz.name();
         var dateArray = [];
@@ -66,20 +66,10 @@
                     $scope.picImage = 'http://s3.amazonaws.com/ordermagic/' + data.llogo;
                 }
                 response_pic_name = $scope.picImage;
-                for (var i = 0; i < response_phone_no.length; i++) {
-                    if (response_phone_no[i] == '+') {
-                        var plus = i;
-                    }
-                    if (response_phone_no[i] == '-') {
-                        var dash = i;
-                    }
-                }
-                $scope.phone_code = response_phone_no.substring(plus, dash);
-                if (response_phone_no.substring(dash + 1, response_phone_no.length) == 'undefined') {
-                    $scope.phone_no = "";
-                } else {
-                    $scope.phone_no = response_phone_no.substring(dash + 1, response_phone_no.length);
-                }
+
+                $scope.phone_code =data.lcountrycode;
+                $scope.phone_no=data.lphone;
+
                 dayArr_for_schedule_view = $scope.day_in_schedule_view;
                 var closed = data.ldateclosed;
                 dateArray = dateArray.concat(closed);
@@ -116,6 +106,7 @@
         }
         $scope.lsave = function(picImageurl) {
             $scope.spinner = true;
+            
             if ($scope.picImage == response_pic_name) {
                 send_data_after_upload();
             } else {
@@ -128,8 +119,7 @@
             }
         }
         function send_data_after_upload() {
-            console.log(uploadResponseFileName);
-            var phoneNumber = $scope.phone_code + "-" + $scope.phone_no;
+       
             if (LocationIdFlag === 0) {
                 var query = storeinfoLocationsIdFactory.update({}, {
                     'locationid': userData.locations[0],
@@ -143,7 +133,8 @@
                     'lcity': $scope.lcity,
                     'lstate': $scope.lstate,
                     'lcountry': $scope.lcountry,
-                    'lphone': phoneNumber,
+                    'lcountrycode':$scope.phone_code[0],
+                    'lphone': $scope.phone_no,
                     'llt': $scope.llt,
                     'ldateclosed': dateArray,
                     'lmessage': $scope.lmessage,
@@ -168,8 +159,9 @@
                     'lcity': $scope.lcity,
                     'ldateclosed': dateArray,
                     'lstate': $scope.lstate,
+                  'lcountrycode':$scope.phone_code[0],
                     'lcountry': $scope.lcountry,
-                    'lphone': phoneNumber,
+                   'lphone': $scope.phone_no,
                     'llt': $scope.llt,
                     'lmessage': $scope.lmessage,
                     'lclosed': $scope.lclosed,
