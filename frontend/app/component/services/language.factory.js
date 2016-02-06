@@ -2,7 +2,7 @@
     'use strict';
     angular.module('xenon-frontend')
             .factory('language', language);
-    function language($localStorage, $translate) {
+    function language($localStorage, $translate, $rootScope,$timeout) {
         var service = {};
         var countries = {
             "ES": "Spanish",
@@ -22,25 +22,26 @@
                     var selected = key;
                 }
             }
-            console.log(countries[selected]);
-            console.log(selected);
+            //console.log(countries[selected]);
+            //console.log(selected);
             $translate.use(countries[selected]);
             $localStorage['used'] = countries[selected];
             $localStorage['keyOfused'] = selected;
-            console.log(countries);
+            // console.log(countries);
         }
         service.get = function(value) {
-            console.log(value);
-            var selected;
             for (var key in countries)
             {
-                if (countries[key] == value)
-                    console.log(key);
+                if (countries[key] == value) {
+                    $localStorage['keyOfused'] = key;
+                }
             }
             $localStorage['used'] = value;
-            $localStorage['keyOfused'] = key;
-              $translate.use(value);
-
+//            $localStorage['keyOfused'] = key;
+            $translate.use(value);
+            $timeout(function(){  $rootScope.dataisset = true;},1000)
+          
+           
         }
 
         return service;
