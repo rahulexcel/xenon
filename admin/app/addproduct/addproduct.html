@@ -8,7 +8,7 @@
                         <h1 class="panel-title"><strong>Add Product</strong></h1>
                     </div>
                     <div class="col-sm-2 col-sm-offset-4">
-                        <button class="btn btn-blue btn-md pull-right" style="background-color:#ddd;" ng-click="back()">Back</button>
+                        <button class="btn btn-blue btn-md pull-right" style="background-color:#ddd;color:#0e62c7;" ng-click="back()">Back</button>
                     </div>
                 </div>
             </div>
@@ -41,7 +41,7 @@
                                     <span style="margin-bottom:10px;display:block;"><!-- mrezshop.tictail.com/products/{{productName| spaceless}} --></span>
                                 </div>
                                 <div class="col-sm-4">
-                                    <strong>Price</strong> <small>in NOK</small>
+                                    <strong>Price</strong> <small>in {{currency}}</small>
                                     <p>
                                         <input type="text" class="form-control" ng-model="productPrice">
                                     </p>
