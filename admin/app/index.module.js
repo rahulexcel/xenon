@@ -18,7 +18,8 @@ var app = angular.module('xenon-app', [
     'ui.tree',
     'ngImgCrop',
     // Added in v1.3
-    'FBAngular'
+    'FBAngular',
+    'ngMessages'
 ]);
 
 app.run(function()

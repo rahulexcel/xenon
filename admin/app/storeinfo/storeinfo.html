@@ -9,7 +9,7 @@
                 <h4 class="panel-title">Store info:</h4>
             </div>
             <div class="panel-body">
-                <form role="form" class="form-horizontal" name='store' ng-class="{'submitted': submitted}" ng-submit="lsave(croppedDataUrl);">
+                <form role="form" class="form-horizontal" name="store" ng-class="{'submitted': submitted}" ng-submit="lsave(croppedDataUrl);">
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Store Description</label>
                         <div class="col-sm-10">
@@ -18,7 +18,8 @@
                                     <label class="control-label" for="full_name">
                                         <strong>Name</strong>
                                     </label>
-                                    <input class="form-control" name="full_name"   ng-model="lname" required/>
+                                    <input class="form-control" name="storeName" ng-pattern="/^[a-zA-Z0-9]*$/"  ng-model="lname" required/>
+                                    <span style="color:red;" ng-show="store.storeName.$error.pattern">Please use alpha numeric only</span>
                                 </div>
                                 <div class="col-sm-12">
                                     <label class="control-label" for="full_name">
@@ -60,7 +61,8 @@
                                         <label class="control-label" for="full_name">
                                             <strong>Store address</strong>
                                         </label>
-                                        <input class="form-control" name="full_name"   ng-model="laddr" required/>
+                                        <input class="form-control" name="storeAddress" ng-model="laddr" ng-pattern="/^[a-zA-Z0-9]*$/" required/>
+                                        <p style="color:red;" ng-show="store.storeAddress.$error.pattern">Please use alpha numeric only</p>
                                         <label class="control-label" for="full_name">
                                             <strong>Post code</strong>
                                         </label>
@@ -68,11 +70,13 @@
                                         <label class="control-label" for="full_name">
                                             <strong>City</strong>
                                         </label>
-                                        <input class="form-control" name="full_name"  ng-model="lcity"/>
+                                        <input class="form-control" name="storeCity" ng-pattern="/^[a-zA-Z0-9]*$/"  ng-model="lcity"/>
+                                        <p style="color:red;" ng-show="store.storeCity.$error.pattern">Please use alpha numeric only</p>
                                         <label class="control-label" for="full_name">
                                             <strong>State</strong>
                                         </label>
-                                        <input class="form-control" name="full_name"   ng-model="lstate" />
+                                        <input class="form-control" name="storeState" ng-pattern="/^[a-zA-Z0-9]*$/"  ng-model="lstate" />
+                                        <p style="color:red;" ng-show="store.storeState.$error.pattern">Please use alpha numeric only</p>
                                         <label class="control-label" for="full_name">
                                             <strong>Country</strong>
                                         </label>
@@ -126,7 +130,7 @@
                                 <div class="col-sm-9 col-sm-offset-2">
                                     <div class="form-block">
                                         <div class="form-group">
-                                            <button type="submit" class="btn btn-blue" ng-click="submitted = true;">Save             
+                                            <button type="submit" class="btn btn-blue" ng-click="submitted = true;" ng-disabled="store.storeName.$error.pattern || store.storeAddress.$error.pattern || store.storeCity.$error.pattern || store.storeState.$error.pattern">Save             
 
                                                 <span ng-show="spinner">
                                                     <i class="fa fa-spin fa-spinner"></i>
