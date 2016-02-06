@@ -221,11 +221,18 @@
                                 <input type="text"  class="form-control">
                             </p>
                         </div> -->
-                    <div class="col-sm-4">
-                        <br>
+                    <div class="col-sm-6 col-sm-offset-2" style="padding-left: 0px;">
+                        <div>
+                            
+                            <p style="color:red" ng-show="errorForTaxField">Please set the Delivery Tax field</p>
+                            <p style="color:red" ng-show="errorday_in_schedule_view">Please set opening times</p>
+                        </div>   
+                       <div class="form-block">
+                        
                         <button class="btn btn-blue" ng-click="save()">Save <span ng-show="spinner">
                                 <i class="fa fa-spin fa-spinner"></i>
                             </span></button>
+                       </div>
                     </div>
                 </form>
             </div>
