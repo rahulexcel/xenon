@@ -8,6 +8,7 @@
 
         var response_products;
         var response_categories;
+        var onRefreshData;
         $scope.spinner = true;
         $scope.location_desc_part2_show = false;
         $scope.class = "left_menu_display";
@@ -15,6 +16,7 @@
         $scope.product_menu = "product_menu_not_display";
         $scope.backCatMenu = false;
         $scope.productInCart = 0;
+        $scope.cart=[];
         var llt;
         var OnpageLoadData;
         $scope.changeClassLeftMenu = function() {
@@ -56,7 +58,7 @@
                 locationID: locationID.locationID
             });
             query.$promise.then(function(data) {
-               
+                  onRefreshData=data;
                 updatetime(data);
                 OnpageLoadData=data;
                 llt = data.llt;
@@ -91,17 +93,25 @@
                 $scope.location_closingtime = data.lwots[0].closing_time + ":" + "00";
                 $scope.all_clicked = true;
                
-            if(data.lcompleted.length<3){
-                $scope.not_allow_checkout=true;
-            }
             
-
+                checkoutButtonValidation();
                 get_category();
                 check_local_storage();
                 language.get(data.lstorelang);
               
 
             });
+        }
+       
+        function checkoutButtonValidation(){
+            console.log($scope.cart.length);
+            if(onRefreshData.lcompleted.length<3 || $scope.cart.length==0) {
+                  
+                $scope.not_allow_checkout=true;
+            }else{
+                $scope.not_allow_checkout=false;
+            }
+            
         }
         function check_local_storage() {
             if (angular.isDefined($localStorage.Orders_sent)) {
@@ -225,6 +235,7 @@
             
 
             $scope.total_price = arrayService.getTotalprice($scope.cart);
+            checkoutButtonValidation();
 
 
 
@@ -250,6 +261,7 @@
               
             }
             $scope.total_price = arrayService.getTotalprice($scope.cart);
+             checkoutButtonValidation();
 
         }
 
