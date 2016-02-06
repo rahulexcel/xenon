@@ -10,7 +10,7 @@
         var after_load_image_response;
         var flag_for_cheking_add_or_edit = 0;
         var storeData = localStorageService.get('storeInfo');
-        $scope.currency = storeData.data.lcurrency; 
+        $scope.currency = storeData.lcurrency; 
         $scope.formSpinner = true;
         var editProductId = localStorageService.get('editProductId');
         var uploadResponseFileName;
