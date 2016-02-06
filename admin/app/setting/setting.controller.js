@@ -5,8 +5,6 @@
             .controller('settingController', settingController);
     function settingController($scope, countryData, calanderService, dropdownService, storeinfoLocationsIdFactory, localStorageService) {
         console.log("Setting Page");
-        var tz = jstz.determine();
-        var timeZone = tz.name();
         var userData = localStorageService.get("userData");
         var locationid = userData.locations[0];
         var dateArray = [];
@@ -43,6 +41,7 @@
             $scope.countryCurrency = data.lcurrency;
             $scope.day_in_schedule_view = data.lwots;
             $scope.llt = data.llt;
+            $scope.lclosed = data.lclosed;
             dayArr_for_schedule_view = $scope.day_in_schedule_view;
             if ($scope.day_in_schedule_view.length == 0) {
                 $scope.show_scheduled_table = false;
@@ -65,8 +64,6 @@
             $scope.spinner = true;
             var query = storeinfoLocationsIdFactory.update({}, {
                 'locationid': locationid,
-                'lcountry': $scope.selectedCountryName,
-                'lcurrency': $scope.countryCurrency,
                 'ltax': $scope.tax,
                 'ltaxall': $scope.includeTax,
                 'lstorelang': $scope.transalation,
@@ -74,9 +71,9 @@
                 'ldeliverymode': $scope.deliveryMode,
                 'ldeliveryprice': $scope.deliveryPrice,
                 'ldeliverytax': $scope.deliveryTax,
-                'ltimezone': timeZone,
                 'lwots': dayArr_for_schedule_view,
-                'llt': $scope.llt
+                'llt': $scope.llt,
+                'lclosed': $scope.lclosed
             });
             query.$promise.then(function(data) {
                 console.log(data);
@@ -138,6 +135,20 @@
                 $scope.show_scheduled_table = true;
             }
 
+        }
+        $scope.checkStoreSetting = function() {
+            // console.log('checkStoreSetting');
+            if (localStorageService.get('storeInfo')) {
+                var storeInfo = localStorageService.get('storeInfo');
+                var lcompletedLength = storeInfo.lcompleted.length;
+                if (lcompletedLength < 3) {
+                    $scope.checkStoreOpen = true;
+                    $scope.lclosed = false;
+                }
+            } else {
+                $scope.checkStoreOpen = true;
+                $scope.lclosed = false;
+            }
         }
     }
     ;

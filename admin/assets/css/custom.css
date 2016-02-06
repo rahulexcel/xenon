@@ -151,6 +151,3 @@ tr.angular-ui-tree-empty {
     .submitted .ng-invalid{
         border: 1px solid red;
     }
-    .submitted .btn-file {
-        border: 1px solid red;
-    }
