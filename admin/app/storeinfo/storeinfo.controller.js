@@ -25,8 +25,7 @@
                 'locationid': userData.locations[0]
             });
             query.$promise.then(function(data) {
-                //console.log(data.lphone);
-                localStorageService.set('storeInfo', data);
+                console.log(data);
                 localStorageService.set('storeInfo', data);
                 $scope.spinner = false;
                 $scope.lname = data.lname;
@@ -85,7 +84,7 @@
                 });
                 query.$promise.then(function(data) {
                     $scope.spinner = false;
-                    localStorageService.set('storeInfo', data);
+                    localStorageService.set('storeInfo', data.data);
                     $state.go('dashboard.productList');
                 });
             } else {

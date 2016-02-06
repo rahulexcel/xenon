@@ -77,7 +77,7 @@
             });
             query.$promise.then(function(data) {
                 console.log(data);
-                localStorageService.set('storeInfo', data);
+                localStorageService.set('storeInfo', data.data);
                 $scope.spinner = false;
             });
         };

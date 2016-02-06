@@ -30,7 +30,7 @@
                 $scope.storeEmail = storeInfo.lemail;
                 $scope.storePhone = storeInfo.lphone;
                 $scope.storeName = storeInfo.lname;
-                $scope.currencySymbole = arrayService.CurrencySymbol($localStorage.storeInfo.data.lcurrency);
+                $scope.currencySymbole = arrayService.CurrencySymbol($localStorage.storeInfo.lcurrency);
             });
         }
 
