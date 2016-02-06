@@ -26,7 +26,6 @@
         });
         query.$promise.then(function(data) {
             console.log(data);
-
             $scope.selectedCountryName = data.lcountry;
             console.log($scope.selectedCountryName);
             $scope.countryCurrency = data.lcurrency;
@@ -61,6 +60,19 @@
             console.log($scope.selectedDays);
         });
         $scope.save = function() {
+           if($scope.deliveryPrice && !$scope.deliveryTax){
+               if($scope.deliveryPrice && !$scope.deliveryTax){
+                   $scope.errorForTaxField=true;
+                   $scope.errorday_in_schedule_view=false;
+               }
+             
+           } else{
+                 if($scope.day_in_schedule_view.length==0){
+                    $scope.errorday_in_schedule_view=true;
+                    $scope.errorForTaxField=false; 
+               }else{
+            $scope.errorForTaxField=false;
+            $scope.errorday_in_schedule_view=false;
             $scope.spinner = true;
             var query = storeinfoLocationsIdFactory.update({}, {
                 'locationid': locationid,
@@ -80,6 +92,8 @@
                 localStorageService.set('storeInfo', data.data);
                 $scope.spinner = false;
             });
+               }
+        }
         };
         $scope.logInfos = function(event, date) {
             var ServiceDateArrayResponse = calanderService.getcalanderService(event, date, dateArray);
@@ -140,7 +154,7 @@
             // console.log('checkStoreSetting');
             if (localStorageService.get('storeInfo')) {
                 var storeInfo = localStorageService.get('storeInfo');
-                var lcompletedLength = storeInfo.lcompleted.length;
+                var lcompletedLength = storeInfo.data.lcompleted.length;
                 if (lcompletedLength < 3) {
                     $scope.checkStoreOpen = true;
                     $scope.lclosed = false;
