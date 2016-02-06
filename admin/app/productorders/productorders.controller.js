@@ -26,7 +26,7 @@
             seenOrderService.newOrderList(data).then(function(newOrderList) {
                 $scope.orderList = newOrderList;
                 // console.log(newOrderList);
-                $scope.currencySymbole = arrayService.CurrencySymbol($localStorage.storeInfo.data.lcurrency);
+                $scope.currencySymbole = arrayService.CurrencySymbol($localStorage.storeInfo.lcurrency);
                 $scope.spinner = false;
             });
         });
