@@ -40,7 +40,6 @@
                 $scope.lcountry = data.lcountry;
                 $scope.lmessage = data.lmessage;
                 $scope.highlightDays = data.ldateclosed;
-                $scope.lclosed = data.lclosed;
                 response_phone_no = data.lphone;
                 //console.log(data.lphone);
                 if (angular.isDefined(data.llogo)) {
@@ -81,7 +80,6 @@
                     'lcountrycode': $scope.phone_code[0],
                     'lphone': $scope.phone_no,
                     'lmessage': $scope.lmessage,
-                    'lclosed': $scope.lclosed,
                     'ltimezone': timeZone,
                     'lcurrency': $scope.countryCurrency
                 });
@@ -105,7 +103,6 @@
                     'lcountry': $scope.lcountry,
                     'lphone': $scope.phone_no,
                     'lmessage': $scope.lmessage,
-                    'lclosed': $scope.lclosed,
                     'ltimezone': timeZone,
                     'lcurrency': $scope.countryCurrency
                 });
@@ -125,20 +122,6 @@
                     console.log(countryData[i].callingCode);
                     console.log($scope.countryCurrency);
                 }
-            }
-        }
-        $scope.checkStoreSetting = function() {
-            // console.log('checkStoreSetting');
-            if (localStorageService.get('storeInfo')) {
-                var storeInfo = localStorageService.get('storeInfo');
-                var lcompletedLength = storeInfo.lcompleted.length;
-                if (lcompletedLength < 3) {
-                    $scope.checkStoreOpen = true;
-                    $scope.lclosed = false;
-                }
-            } else {
-                $scope.checkStoreOpen = true;
-                $scope.lclosed = false;
             }
         }
     }
