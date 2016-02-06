@@ -345,25 +345,25 @@
             }
            
         }
-        $('#options, #options1').flagStrap({
-            countries: {
-                "ES": "Spanish",
-                "DE": "German",
-                "FR": "French",
-                "DK": "Danish",
-                "FI": "Finnish",
-                "NO": "Norwegian",
-                "SE": "Swedish",
-                "GB": "English"
-            },
-            placeholder: false,
-            onSelect: function(value, element) {
-                $('div#options button span').text(" ");
-         
-                language.set(value);
-                    
-            },
-        });
+//        $('#options, #options1').flagStrap({
+//            countries: {
+//                "ES": "Spanish",
+//                "DE": "German",
+//                "FR": "French",
+//                "DK": "Danish",
+//                "FI": "Finnish",
+//                "NO": "Norwegian",
+//                "SE": "Swedish",
+//                "GB": "English"
+//            },
+//            placeholder: false,
+//            onSelect: function(value, element) {
+//                $('div#options button span').text(" ");
+//         
+//                language.set(value);
+//                    
+//            },
+//        });
        
     }
 })();
