@@ -60,40 +60,40 @@
             console.log($scope.selectedDays);
         });
         $scope.save = function() {
-           if($scope.deliveryPrice && !$scope.deliveryTax){
-               if($scope.deliveryPrice && !$scope.deliveryTax){
-                   $scope.errorForTaxField=true;
-                   $scope.errorday_in_schedule_view=false;
-               }
-             
-           } else{
-                 if($scope.day_in_schedule_view.length==0){
-                    $scope.errorday_in_schedule_view=true;
-                    $scope.errorForTaxField=false; 
-               }else{
-            $scope.errorForTaxField=false;
-            $scope.errorday_in_schedule_view=false;
-            $scope.spinner = true;
-            var query = storeinfoLocationsIdFactory.update({}, {
-                'locationid': locationid,
-                'ltax': $scope.tax,
-                'ltaxall': $scope.includeTax,
-                'lstorelang': $scope.transalation,
-                'ldateclosed': dateArray,
-                'ldeliverymode': $scope.deliveryMode,
-                'ldeliveryprice': $scope.deliveryPrice,
-                'ldeliverytax': $scope.deliveryTax,
-                'lwots': dayArr_for_schedule_view,
-                'llt': $scope.llt,
-                'lclosed': $scope.lclosed
-            });
-            query.$promise.then(function(data) {
-                console.log(data);
-                localStorageService.set('storeInfo', data.data);
-                $scope.spinner = false;
-            });
-               }
-        }
+            if ($scope.deliveryPrice && !$scope.deliveryTax) {
+                if ($scope.deliveryPrice && !$scope.deliveryTax) {
+                    $scope.errorForTaxField = true;
+                    $scope.errorday_in_schedule_view = false;
+                }
+
+            } else {
+                if ($scope.day_in_schedule_view.length == 0) {
+                    $scope.errorday_in_schedule_view = true;
+                    $scope.errorForTaxField = false;
+                } else {
+                    $scope.errorForTaxField = false;
+                    $scope.errorday_in_schedule_view = false;
+                    $scope.spinner = true;
+                    var query = storeinfoLocationsIdFactory.update({}, {
+                        'locationid': locationid,
+                        'ltax': $scope.tax,
+                        'ltaxall': $scope.includeTax,
+                        'lstorelang': $scope.transalation,
+                        'ldateclosed': dateArray,
+                        'ldeliverymode': $scope.deliveryMode,
+                        'ldeliveryprice': $scope.deliveryPrice,
+                        'ldeliverytax': $scope.deliveryTax,
+                        'lwots': dayArr_for_schedule_view,
+                        'llt': $scope.llt,
+                        'lclosed': $scope.lclosed
+                    });
+                    query.$promise.then(function(data) {
+                        console.log(data);
+                        localStorageService.set('storeInfo', data.data);
+                        $scope.spinner = false;
+                    });
+                }
+            }
         };
         $scope.logInfos = function(event, date) {
             var ServiceDateArrayResponse = calanderService.getcalanderService(event, date, dateArray);
@@ -122,7 +122,8 @@
         var dayArr_for_schedule_view = [];
         $scope.tsave = function() {
             if ($scope.day && $scope.opening_selected_hour && $scope.closing_selected_hour) {
-
+                $scope.errorForTaxField = false;
+                $scope.errorday_in_schedule_view = false;
                 $scope.show_scheduled_table = true;
                 var day = $scope.day;
                 var openingTime = $scope.opening_selected_hour;
