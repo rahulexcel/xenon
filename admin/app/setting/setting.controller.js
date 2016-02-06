@@ -5,8 +5,6 @@
             .controller('settingController', settingController);
     function settingController($scope, countryData, calanderService, dropdownService, storeinfoLocationsIdFactory, localStorageService) {
         console.log("Setting Page");
-        var tz = jstz.determine();
-        var timeZone = tz.name();
         var userData = localStorageService.get("userData");
         var locationid = userData.locations[0];
         var dateArray = [];
@@ -65,8 +63,6 @@
             $scope.spinner = true;
             var query = storeinfoLocationsIdFactory.update({}, {
                 'locationid': locationid,
-                'lcountry': $scope.selectedCountryName,
-                'lcurrency': $scope.countryCurrency,
                 'ltax': $scope.tax,
                 'ltaxall': $scope.includeTax,
                 'lstorelang': $scope.transalation,
@@ -74,7 +70,6 @@
                 'ldeliverymode': $scope.deliveryMode,
                 'ldeliveryprice': $scope.deliveryPrice,
                 'ldeliverytax': $scope.deliveryTax,
-                'ltimezone': timeZone,
                 'lwots': dayArr_for_schedule_view,
                 'llt': $scope.llt
             });
