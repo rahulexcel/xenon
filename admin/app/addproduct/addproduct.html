@@ -13,12 +13,10 @@
                 </div>
             </div>
             <span ng-show="formSpinner" style="text-align:center;display:block;"><i class="fa fa-spin fa-spinner"></i></span>
-
             <div class="panel-body" ng-show="editForm">
                 <h4>Image (<small><em>Optional</em></small>)</h4>
                 <form class="form-horizontal ng-pristine ng-valid" role="form" ng-class="{'submitted': submitted}">
                     <div class="form-group">
-
                         <div class="col-sm-12">
                             <span class="file-input btn btn-blue btn-file1">Browse...
                                 <input type="file" ngf-select="" ng-model="picImage" name="fileName" ngf-accept="'image/*'" ngf-resize="{width: 400, height: 400, quality: 0.9}">
@@ -78,9 +76,7 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label class="control-label">Quantity</label>
-
                                     <div class="input-group input-group-sm input-group-minimal">
-
                                         <input type="text" class="form-control" ng-model="productQuantity">
                                         <span class="input-group-addon" style="font-size:12px; background-color:#8dc63f;" ng-click="infinite()">
                                             &#8734;<!-- <i class="linecons-pencil"></i> -->
@@ -109,7 +105,6 @@
                     </div>
                 </form>
             </div>
-
         </div>
     </div>
     <div class="col-sm-2"></div>

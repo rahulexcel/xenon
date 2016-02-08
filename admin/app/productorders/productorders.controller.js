@@ -31,7 +31,6 @@
             });
         });
 
-
         $scope.addOrder = function() {
             var query = addOrderFactory.save({
                 "eid": eid,
@@ -62,7 +61,6 @@
                 $scope.orderList.splice(index, 1);
             });
         };
-    }
-    ;
+    };
 
 })();

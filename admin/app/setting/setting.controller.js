@@ -35,7 +35,7 @@
             $scope.deliveryMode = data.ldeliverymode;
             $scope.deliveryPrice = data.ldeliveryprice;
             $scope.deliveryTax = data.ldeliverytax;
-            console.log(data.lcountry);
+            //console.log(data.lcountry);
             $scope.selectedCountryName = data.lcountry;
             $scope.countryCurrency = data.lcurrency;
             $scope.day_in_schedule_view = data.lwots;
@@ -57,7 +57,7 @@
                 console.log(responseTimestamp);
             }
             $scope.selectedDays = responseDateArr;
-            console.log($scope.selectedDays);
+            //console.log($scope.selectedDays);
         });
         $scope.save = function() {
             if ($scope.deliveryPrice && !$scope.deliveryTax) {
@@ -65,7 +65,6 @@
                     $scope.errorForTaxField = true;
                     $scope.errorday_in_schedule_view = false;
                 }
-
             } else {
                 if ($scope.day_in_schedule_view.length == 0) {
                     $scope.errorday_in_schedule_view = true;
@@ -165,7 +164,6 @@
                 $scope.lclosed = false;
             }
         }
-    }
-    ;
+    };
 
 })();

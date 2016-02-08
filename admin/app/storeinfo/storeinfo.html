@@ -18,7 +18,7 @@
                                     <label class="control-label" for="full_name">
                                         <strong>Name</strong>
                                     </label>
-                                    <input class="form-control" name="storeName" ng-pattern="/^[a-zA-Z0-9]*$/"  ng-model="lname" required/>
+                                    <input class="form-control" name="storeName" ng-pattern="/^[a-zA-Z 0-9]*$/"  ng-model="lname" required/>
                                     <span style="color:red;" ng-show="store.storeName.$error.pattern">Please use alpha numeric only</span>
                                 </div>
                                 <div class="col-sm-12">
@@ -42,7 +42,6 @@
                                             <img ngf-src="picImage" ngf-resize="{width: 400, height: 400, quality: 0.9}" >
                                             <!--   <button ng-click="upload(croppedDataUrl)">Submit</button>  -->
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
@@ -61,7 +60,7 @@
                                         <label class="control-label" for="full_name">
                                             <strong>Store address</strong>
                                         </label>
-                                        <input class="form-control" name="storeAddress" ng-model="laddr" ng-pattern="/^[a-zA-Z0-9]*$/" required/>
+                                        <input class="form-control" name="storeAddress" ng-model="laddr" ng-pattern="/^[a-zA-Z 0-9]*$/" required/>
                                         <p style="color:red;" ng-show="store.storeAddress.$error.pattern">Please use alpha numeric only</p>
                                         <label class="control-label" for="full_name">
                                             <strong>Post code</strong>
@@ -70,12 +69,12 @@
                                         <label class="control-label" for="full_name">
                                             <strong>City</strong>
                                         </label>
-                                        <input class="form-control" name="storeCity" ng-pattern="/^[a-zA-Z0-9]*$/"  ng-model="lcity"/>
+                                        <input class="form-control" name="storeCity" ng-pattern="/^[a-zA-Z 0-9]*$/"  ng-model="lcity"/>
                                         <p style="color:red;" ng-show="store.storeCity.$error.pattern">Please use alpha numeric only</p>
                                         <label class="control-label" for="full_name">
                                             <strong>State</strong>
                                         </label>
-                                        <input class="form-control" name="storeState" ng-pattern="/^[a-zA-Z0-9]*$/"  ng-model="lstate" />
+                                        <input class="form-control" name="storeState" ng-pattern="/^[a-zA-Z 0-9]*$/"  ng-model="lstate" />
                                         <p style="color:red;" ng-show="store.storeState.$error.pattern">Please use alpha numeric only</p>
                                         <label class="control-label" for="full_name">
                                             <strong>Country</strong>
@@ -145,6 +144,5 @@
                 </form>
             </div>
         </div>
-
     </div>
 </div>

@@ -51,7 +51,6 @@
         }
         $scope.lsave = function(picImageurl) {
             $scope.spinner = true;
-
             if ($scope.picImage == response_pic_name) {
                 send_data_after_upload();
             } else {

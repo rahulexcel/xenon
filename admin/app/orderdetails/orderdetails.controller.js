@@ -46,10 +46,6 @@
             delete $localStorage.singleOrderId;
             $state.go('dashboard.productOrders');
         };
-
-
-
-    }
-    ;
+    };
 
 })();
