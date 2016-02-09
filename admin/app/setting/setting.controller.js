@@ -5,6 +5,8 @@
             .controller('settingController', settingController);
     function settingController($scope, countryData, calanderService, dropdownService, storeinfoLocationsIdFactory, localStorageService) {
         console.log("Setting Page");
+        $scope.settingSpinner = true;
+        $scope.showSettingContent = false;
         var userData = localStorageService.get("userData");
         var locationid = userData.locations[0];
         var dateArray = [];
@@ -25,14 +27,25 @@
             'locationid': locationid
         });
         query.$promise.then(function(data) {
+            $scope.settingSpinner = false;
+            $scope.showSettingContent = true;
             console.log(data);
             $scope.selectedCountryName = data.lcountry;
-            console.log($scope.selectedCountryName);
+            //console.log($scope.selectedCountryName);
             $scope.countryCurrency = data.lcurrency;
             $scope.tax = data.ltax;
             $scope.includeTax = data.ltaxall;
             $scope.transalation = data.lstorelang;
-            $scope.deliveryMode = data.ldeliverymode;
+            if(data.ldeliverymode == 1){
+                $scope.deliveryModePic = true;
+                $scope.deliveryModeDel = false;
+            } else if(data.ldeliverymode == 2){
+                $scope.deliveryModePic = false;
+                $scope.deliveryModeDel = true;
+            } else if(data.ldeliverymode == 3){
+                $scope.deliveryModePic = true;
+                $scope.deliveryModeDel = true;
+            }
             $scope.deliveryPrice = data.ldeliveryprice;
             $scope.deliveryTax = data.ldeliverytax;
             //console.log(data.lcountry);
@@ -51,10 +64,10 @@
             dateArray = dateArray.concat(closed);
             for (var i = 0; i < closed.length; i++) {
                 var responseDate = closed[i].split('-').reverse();
-                console.log(responseDate);
+                //console.log(responseDate);
                 var responseTimestamp = new Date(responseDate).getTime();
                 responseDateArr.push(responseTimestamp);
-                console.log(responseTimestamp);
+                //console.log(responseTimestamp);
             }
             $scope.selectedDays = responseDateArr;
             //console.log($scope.selectedDays);
@@ -73,6 +86,15 @@
                     $scope.errorForTaxField = false;
                     $scope.errorday_in_schedule_view = false;
                     $scope.spinner = true;
+                    if($scope.deliveryModeDel && $scope.deliveryModePic){
+                        $scope.deliveryMode = 3;
+                    } else if($scope.deliveryModeDel){
+                        $scope.deliveryMode = 2;
+                    } else if($scope.deliveryModePic){
+                        $scope.deliveryMode = 1;
+                    } else{
+                        $scope.deliveryMode = 1;
+                    }
                     var query = storeinfoLocationsIdFactory.update({}, {
                         'locationid': locationid,
                         'ltax': $scope.tax,

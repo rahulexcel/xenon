@@ -4,11 +4,13 @@
             .factory('orderDetailsFactory', orderDetailsFactory);
 
     function orderDetailsFactory($resource, Configurations) {
-        return $resource(Configurations.Hostserver + '/orders/:orderId', {}, {
+        return $resource(Configurations.Hostserver + '/orders/:orderId', {
+            'orderId': '@orderId'
+        }, {
             editOrder: {
                 method: 'PUT',
                 isArray: false,
-                url: Configurations.Hostserver + '/orders/:orderId'
+                url: Configurations.Hostserver + '/orders/:orderId/:order_state'
             },
             deleteOrder: {
                 method: 'DELETE',

@@ -4,30 +4,31 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">Settings:</h3>
+                <h1 class="text-center"><span ng-show="settingSpinner"><i class="fa fa-spin fa-spinner"></i></span></h1>
             </div>
-            <div class="panel-body">
+            <div class="panel-body" ng-show="showSettingContent">
                 <form class="form-horizontal ng-pristine ng-valid" role="form">
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Delivery Options</label>
                         <div class="col-sm-10">
                             <div class="row">
-                                <!-- div class="col-sm-5">
+                                <div class="col-sm-5 col-xs-4">
                                        <strong>Delivery Mode</strong>
                                        <p>
                                        <div class="form-block">
                                            <label>
-                                               <input type="checkbox" class="cbr cbr-secondary">
+                                               <input type="checkbox"  ng-model="deliveryModeDel">
                                                Delivery
                                            </label>
                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                            <label>
-                                               <input type="checkbox" class="cbr cbr-turquoise">
+                                               <input type="checkbox"  ng-model="deliveryModePic">
                                                Pickup
                                            </label>
                                        </div>
                                        </p>
-                                   </div> -->
-                                <div class="col-sm-5 col-xs-4">
+                                   </div>
+                                <!-- <div class="col-sm-5 col-xs-4">
                                     <strong>Delivery Mode</strong>
                                     <p>
                                     <div class="form-block">
@@ -41,7 +42,7 @@
                                         </label>
                                     </div>
                                     </p>
-                                </div>
+                                </div> -->
                                 <div class="col-sm-3 col-xs-4">
                                     <strong>Delivery Price</strong>
                                     <p>
@@ -80,12 +81,14 @@
                             </div>
                         </div>
                     </div>
+                    <div class="form-group-separator"></div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Closed days:</label>
                         <div class="col-sm-10">
                             <multiple-date-picker days-selected="selectedDays" day-click="logInfos" highlight-days="highlightDays" />
                         </div>
                     </div>
+                    <div class="form-group-separator"></div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Opening times</label>
                         <div class="col-sm-9">
@@ -164,6 +167,7 @@
                         </div>
 
                     </div>
+                    <div class="form-group-separator"></div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Translation</label>
                         <div class="col-sm-4">
@@ -182,6 +186,7 @@
                             </p>
                         </div>
                     </div>
+                    <div class="form-group-separator"></div>
                     <div class="form-group">
                             <label class="col-sm-2 control-label">Store status</label>
                             <div class="col-sm-9">
@@ -194,6 +199,7 @@
                                 </div>
                             </div>
                         </div>
+                        
                     <!-- Do not delete below commented area -->
 
                     <!-- <div class="form-group-separator"></div>

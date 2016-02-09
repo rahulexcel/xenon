@@ -17,23 +17,26 @@
             </div>
             <div class="panel-body">
                 <div class="row">
-                    <div class="col-sm-12">
+                    <div class="col-sm-8">
                         <p>Invoice</p>
+                    </div>
+                    <div class="col-sm-2 pull-right">
+                        <button class="btn btn-danger pull-right" ng-click="cancelOrder()"><strong>Cancel Order</strong></button>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
-                        <h2><strong>XENON</strong></h2>
-                        <p>Invoice No. #5652256 <br>{{orderDate}} <br>Prishtine, Kosovo</p>
+                        <h2><img src="app/assets/images/logo.png"  alt="" class="invoice-logo"/></h2>
+                        <p>Invoice No. #{{ordernr}} <br>{{orderDate}} <br>Prishtine, Kosovo</p>
                     </div>
                     <div class="col-sm-6">
                         <br><br>
                         <div class="row">
                             <div class="col-sm-6">
-                                <p><strong>Client</strong><br>Jhon Doe <br> Mr. Nilson Otto<br> Food Master ltd</p>
+                                <p><strong>Client</strong><br>{{cname}}<br> Food Master ltd</p>
                             </div>
                             <div class="col-sm-6">
-                                <p><br>1982 OOP <br> Madrid, Spain<br> +1 (151) 225-4183</p>
+                                <p><br>1982 OOP <br> Madrid, Spain<br> +91 {{cphone}}</p>
                             </div>
                         </div>
 

@@ -45,8 +45,8 @@
             $scope.location_lpostcode = data.lpostcode;
             $scope.location_lstate = data.lstate;
             $scope.location_lphone = arrayService.getPhoneNo(data.lphone);
-            $scope.location_openingtime = arrayService.openingTime(data.lwots[0].opening_time);
-            $scope.location_closingtime = arrayService.closingTime(data.lwots[0].closing_time);
+            $scope.location_openingtime = data.lwots[0].opening_time + ":" + "00";
+            $scope.location_closingtime = data.lwots[0].closing_time + ":" + "00";
             $scope.data_recevied = false;
         });
         $scope.phone_no_submitted = function() {

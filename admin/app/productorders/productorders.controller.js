@@ -3,7 +3,7 @@
 
     angular.module('xenon-app')
             .controller('productOrdersController', productOrdersController);
-    function productOrdersController($scope, addOrderFactory, $localStorage, localStorageService, orderListFactory, $rootScope, $state, orderDetailsFactory, seenOrderService, arrayService) {
+    function productOrdersController($scope, addOrderFactory, $localStorage, $interval, localStorageService, orderListFactory, $rootScope, $state, orderDetailsFactory, arrayService) {
         console.log("Product Orders Page");
         var userData = localStorageService.get('userData');
         var eid = userData.eid;
@@ -12,24 +12,24 @@
         $scope.spinner = true;
         var orderAm = [];
         var totalAmount;
-        var query = orderListFactory.query({"storeId": lid});
-        query.$promise.then(function(data) {
-            for (var i = 0; i < data.length; i++) {
-                totalAmount = 0;
-                for (var j = 0; j < data[i].products.length; j++) {
+        onPageLoadApi();
+        function onPageLoadApi(){
+            var query = orderListFactory.query({"storeId": lid});
+            query.$promise.then(function(data) {
+                for (var i = 0; i < data.length; i++) {
+                    totalAmount = 0;
+                    for (var j = 0; j < data[i].products.length; j++) {
 
-                    totalAmount = totalAmount + data[i].products[j].price;
+                        totalAmount = totalAmount + data[i].products[j].price;
+                    }
+                    data[i].totalamount = totalAmount;
+                    // console.log(data[i]);
                 }
-                data[i].totalamount = totalAmount;
-                // console.log(data[i]);
-            }
-            seenOrderService.newOrderList(data).then(function(newOrderList) {
-                $scope.orderList = newOrderList;
-                // console.log(newOrderList);
-                $scope.currencySymbole = arrayService.CurrencySymbol($localStorage.storeInfo.lcurrency);
-                $scope.spinner = false;
+                    $scope.orderList = data;
+                    $scope.currencySymbole = arrayService.CurrencySymbol($localStorage.storeInfo.lcurrency);
+                    $scope.spinner = false;
             });
-        });
+        }
 
         $scope.addOrder = function() {
             var query = addOrderFactory.save({
@@ -49,7 +49,10 @@
             });
         };
         $scope.orderId = function(orderId) {
-            seenOrderService.seenOrder(orderId);
+            var query = orderDetailsFactory.editOrder({"orderId": orderId,"order_state":3});
+            query.$promise.then(function(data) {
+                //console.log(data);
+            });
             // console.log(orderId);
             localStorageService.set('singleOrderId', orderId);
             $state.go('dashboard.orderDetails');
@@ -61,6 +64,9 @@
                 $scope.orderList.splice(index, 1);
             });
         };
+        $interval(function() {
+            onPageLoadApi();
+          }, 60000);
     };
 
 })();

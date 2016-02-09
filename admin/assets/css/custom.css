@@ -151,3 +151,13 @@ tr.angular-ui-tree-empty {
     .submitted .ng-invalid{
         border: 1px solid red;
     }
+.navbar-brand{
+/*  min-width: 200px!important;
+  min-height: 85px!important;*/
+  padding-top: 15px!important;
+  padding-bottom: 15px!important;
+}
+.invoice-logo{
+  width: 100px!important;
+  /*height: 45px!important;*/
+}

@@ -5,7 +5,7 @@
                 <div class="login-header">
                     <strong>SIGN UP</strong>
                     </a>
-                    <p>Resgistration!</p>
+                    <p>Create Your Store</p>
                     <p style="color:blue">{{info}}</p>
                 </div>
                 <div class="form-group" ng-class="{ 'has-error': email.$invalid }">
@@ -25,6 +25,9 @@
                 <span style="color:red" ng-show="signupform.passwd.$error.minlength">
                     Password must be more then 6 character 
                 </span>
+                <div style="padding-bottom:5px;">
+                    <div class="info-links">By starting your store, you agree to EatingNext's <a target="_blank" href="https://eatingnext.com/tos">Terms of Service</a> and <a target="_blank" href="https://eatingnext.com">Privacy policy</a></div>
+                </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary  btn-block text-left" ng-click="signup()" ng-disabled="signupform.$invalid">
                         <i class="fa-lock"></i> Sign Up                        

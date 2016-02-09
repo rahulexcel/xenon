@@ -123,14 +123,17 @@
          if(data==1){
              mode.push("Pickup");
                      
-        }else{
+        }else if(data==2){
             mode.push("Delivery");
+        } else{
+            mode.push("Delivery");
+            mode.push("Pickup");
         }
         modeSelected=mode;
         return mode;
         }
         service.delivery_method_selected=function(data){
-            return modeSelected.toString();
+            return modeSelected[0].toString();
         }
         service.selectedMinutes = function(data) {
 

@@ -3,7 +3,7 @@
 
     angular.module('xenon-app')
             .controller('orderDetailsController', orderDetailsController);
-    function orderDetailsController($scope, $rootScope, orderDetailsFactory, $state, orderDetailsService, localStorageService, $localStorage, arrayService) {
+    function orderDetailsController($scope, $rootScope, orderDetailsFactory, cancelOrderFactory, $state, orderDetailsService, localStorageService, $localStorage, arrayService) {
         console.log("Order Details Page");
         var singleOrderId = localStorageService.get('singleOrderId');
         console.log("Single Order id " + singleOrderId);
@@ -17,6 +17,10 @@
                 $scope.hideMainContent = true;
                 console.log(data);
                 $scope.orderDetails = data.products;
+                $scope.orderId = data._id;
+                $scope.ordernr = data.ordernr;
+                $scope.cname = data.cfirstname + " " + data.clastname;
+                $scope.cphone = data.cphone;
                 for (var i = 0; i < data.products.length; i++) {
                     totalAmount = totalAmount + data.products[i].price;
                 }
@@ -42,6 +46,15 @@
         //                 $state.go('dashboard.productOrders');
         //             });
         // };
+
+        $scope.cancelOrder = function(){
+            console.log($scope.orderId);
+         var query = cancelOrderFactory.query({"orderId":$scope.orderId});
+         query.$promise.then(function(data) {
+                        console.log(data);
+                      //  $state.go('dashboard.productOrders');
+                    });
+        };
         $scope.backTolist = function() {
             delete $localStorage.singleOrderId;
             $state.go('dashboard.productOrders');

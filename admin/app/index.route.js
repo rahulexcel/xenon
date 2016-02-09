@@ -134,6 +134,11 @@
                                 },
                             }
                         }).
+                        state('dashboard.plans', {
+                            url: '/plans',
+                            templateUrl: "app/plans/plans.html",
+                            controller: 'plansController'
+                        }).
                         state('dashboard.forgot', {
                             url: '/forgot',
                             templateUrl: "app/forgotpassword/forgotpassword.html",

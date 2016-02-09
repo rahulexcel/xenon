@@ -64,7 +64,7 @@
                                 $rootScope.navMenu = false;
                                 console.log(toState.url);
                                 if (toState.url == '/setting' || toState.url == '/payment' || toState.url == '/productList' || toState.url == '/addProduct'
-                                        || toState.url == '/productOrders' || toState.url == '/orderDetails' || toState.url == '/storeinfo') {
+                                        || toState.url == '/productOrders' || toState.url == '/orderDetails' || toState.url == '/plans' || toState.url == '/storeinfo') {
 
                                 } else {
                                     $state.go("dashboard.storeinfo");
@@ -83,8 +83,6 @@
                                 }
                             }
                         })
-
-                console.log('hai');
                 $rootScope.userNavMenu = true;
                 $rootScope.navMenu = false;
 
