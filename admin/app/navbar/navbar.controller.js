@@ -19,16 +19,15 @@
         };
         $scope.goSignUp = function() {
             $state.go('dashboard.singup');
-        };
+        }; 
         if(localStorageService.get('storeInfo')){
-            console.log('storeInfo present');
+            //console.log('storeInfo present');
             $scope.showMyStoreNav = true;
             var storeInfo = localStorageService.get('storeInfo');
             $scope.ldomain = storeInfo.ldomain;
         } else{
             $scope.showMyStoreNav = false;
-        }
-        
+        }    
 
     }
 })();

@@ -18,7 +18,7 @@
             </ul>
             <ul class="nav navbar-nav navbar-right" ng-show="userNavMenu">
                 <li>
-                    <a href="#/dashboard/productOrders">ORDERS</a>
+                    <a href="#/dashboard/productOrders">ORDERS <span ng-if="newOrder" style="margin-top:-5px;" class="badge badge-secondary pull-right">{{newOrder}}</span></a>
                 </li>
                 <li>
                     <a href="#/dashboard/productList">PRODUCTS</a>

@@ -1,87 +1,87 @@
-<div class="row">
-    <div class="col-sm-1"></div>
-    <div class="col-sm-10">
-        <alert type="danger" ng-show="location_id_is_not_available" id="alertDanger">
-            Please setup your store information first before going to other pages
-        </alert>
-        <div class="panel panel-default">
-            <div class="panel-heading" style="border-bottom:0px;">
-                <h4 class="panel-title">Store info:</h4>
-            </div>
-            <div class="panel-body">
-                <form role="form" class="form-horizontal" name="store" ng-class="{'submitted': submitted}" ng-submit="lsave(croppedDataUrl);">
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">Store Description</label>
-                        <div class="col-sm-10">
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <label class="control-label" for="full_name">
-                                        <strong>Name</strong>
-                                    </label>
-                                    <input class="form-control" name="storeName" ng-pattern="/^[a-zA-Z 0-9]*$/"  ng-model="lname" required/>
-                                    <span style="color:red;" ng-show="store.storeName.$error.pattern">Please use alpha numeric only</span>
-                                </div>
-                                <div class="col-sm-12">
-                                    <label class="control-label" for="full_name">
-                                        <strong>Description</strong>
-                                    </label>
-                                    <textarea class="form-control" rows="5" ng-model="ldesc"></textarea>
-                                </div>
-                                <div class="col-sm-9 ">
-                                    <br>
-                                    <div class="row">
-                                        <div class="col-sm-3">
-                                            <label class="control-label" for="full_name">
-                                                <strong>Logo</strong>
-                                            </label>
-                                            <br/>
-                                            <span class="file-input btn btn-blue btn-file">Browse...
-                                                <input type="file" ngf-select="" ng-model="picImage" name="fileName" ngf-accept="'image/*'"   ngf-resize="{width: 400, height: 400, quality: 0.9}">
-                                            </span>
-                                            <br>
-                                            <img ngf-src="picImage" ngf-resize="{width: 400, height: 400, quality: 0.9}" >
-                                            <!--   <button ng-click="upload(croppedDataUrl)">Submit</button>  -->
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group-separator"></div>
-                        <!-- <div class="form-group"> -->
-                        <div class="">
-                            <label class="col-sm-2 control-label">Contact:</label>
+    <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-10">
+            <alert type="danger" ng-show="location_id_is_not_available" id="alertDanger">
+                Please setup your store information first before going to other pages
+            </alert>
+            <div class="panel panel-default">
+                <div class="panel-heading" style="border-bottom:0px;">
+                    <h4 class="panel-title">Store info:</h4>
+                </div>
+                <div class="panel-body">
+                    <form role="form" class="form-horizontal" name="store" ng-class="{'submitted': submitted}" ng-submit="lsave(croppedDataUrl);">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Store Description</label>
                             <div class="col-sm-10">
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <label class="control-label" for="full_name">
-                                            <strong>Contact email</strong>&nbsp;&nbsp;&nbsp;Will be included in emails sent to your customers
+                                            <strong>Name</strong>
                                         </label>
-                                        <input class="form-control" name="full_name"  ng-model="lemail" required/>
+                                        <input class="form-control" name="storeName" ng-pattern="/^[a-zA-Z 0-9]*$/"  ng-model="lname" required/>
+                                        <span style="color:red;" ng-show="store.storeName.$error.pattern">Please use alpha numeric only</span>
+                                    </div>
+                                    <div class="col-sm-12">
                                         <label class="control-label" for="full_name">
-                                            <strong>Store address</strong>
+                                            <strong>Description</strong>
                                         </label>
-                                        <input class="form-control" name="storeAddress" ng-model="laddr" ng-pattern="/^[a-zA-Z 0-9]*$/" required/>
-                                        <p style="color:red;" ng-show="store.storeAddress.$error.pattern">Please use alpha numeric only</p>
-                                        <label class="control-label" for="full_name">
-                                            <strong>Post code</strong>
-                                        </label>
-                                        <input class="form-control" name="full_name"  ng-model="lpostcode" required/>
-                                        <label class="control-label" for="full_name">
-                                            <strong>City</strong>
-                                        </label>
-                                        <input class="form-control" name="storeCity" ng-pattern="/^[a-zA-Z 0-9]*$/"  ng-model="lcity"/>
-                                        <p style="color:red;" ng-show="store.storeCity.$error.pattern">Please use alpha numeric only</p>
-                                        <label class="control-label" for="full_name">
-                                            <strong>State</strong>
-                                        </label>
-                                        <input class="form-control" name="storeState" ng-pattern="/^[a-zA-Z 0-9]*$/"  ng-model="lstate" />
-                                        <p style="color:red;" ng-show="store.storeState.$error.pattern">Please use alpha numeric only</p>
-                                        <label class="control-label" for="full_name">
-                                            <strong>Country</strong>
-                                        </label>
-                                        <select class="form-control"  ng-model="lcountry" ng-change="country_selected()" required>
-                                            <option ng-repeat="row in dropdown_country track by $index" value="{{row}}">{{row}}</option>
-                                        </select>
+                                        <textarea class="form-control" rows="5" ng-model="ldesc"></textarea>
+                                    </div>
+                                    <div class="col-sm-9 ">
+                                        <br>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <label class="control-label" for="full_name">
+                                                    <strong>Logo</strong>
+                                                </label>
+                                                <br/>
+                                                <span class="file-input btn btn-blue btn-file">Browse...
+                                                    <input type="file" ngf-select="" ng-model="picImage" name="fileName" ngf-accept="'image/*'"   ngf-resize="{width: 400, height: 400, quality: 0.9}">
+                                                </span>
+                                                <br>
+                                                <img ngf-src="picImage" ngf-resize="{width: 400, height: 400, quality: 0.9}" >
+                                                <!--   <button ng-click="upload(croppedDataUrl)">Submit</button>  -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group-separator"></div>
+                            <!-- <div class="form-group"> -->
+                            <div class="">
+                                <label class="col-sm-2 control-label">Contact:</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <label class="control-label" for="full_name">
+                                                <strong>Contact email</strong>&nbsp;&nbsp;&nbsp;Will be included in emails sent to your customers
+                                            </label>
+                                            <input class="form-control" name="full_name"  ng-model="lemail" required/>
+                                            <label class="control-label" for="full_name">
+                                                <strong>Store address</strong>
+                                            </label>
+                                            <input class="form-control" name="storeAddress" ng-model="laddr" ng-pattern="/^[a-zA-Z 0-9]*$/" required/>
+                                            <p style="color:red;" ng-show="store.storeAddress.$error.pattern">Please use alpha numeric only</p>
+                                            <label class="control-label" for="full_name">
+                                                <strong>Post code</strong>
+                                            </label>
+                                            <input class="form-control" name="full_name"  ng-model="lpostcode" required/>
+                                            <label class="control-label" for="full_name">
+                                                <strong>City</strong>
+                                            </label>
+                                            <input class="form-control" name="storeCity" ng-pattern="/^[a-zA-Z 0-9]*$/"  ng-model="lcity"/>
+                                            <p style="color:red;" ng-show="store.storeCity.$error.pattern">Please use alpha numeric only</p>
+                                            <label class="control-label" for="full_name">
+                                                <strong>State</strong>
+                                            </label>
+                                            <input class="form-control" name="storeState" ng-pattern="/^[a-zA-Z 0-9]*$/"  ng-model="lstate" />
+                                            <p style="color:red;" ng-show="store.storeState.$error.pattern">Please use alpha numeric only</p>
+                                            <label class="control-label" for="full_name">
+                                                <strong>Country</strong>
+                                            </label>
+                                            <select class="form-control"  ng-model="lcountry" ng-change="country_selected()" required>
+                                                <option ng-repeat="row in dropdown_country track by $index" value="{{row}}">{{row}}</option>
+                                            </select>
                                         </select>
                                         <label class="control-label" for="full_name">
                                             <strong>Phone</strong>
@@ -101,48 +101,83 @@
                         <div class="col-sm-12">
                             <hr>
                         </div>
-                        <!-- <div class="form-group">
-                            <label class="col-sm-2 control-label">Store status</label>
-                            <div class="col-sm-9">
-                                <label class="control-label" for="full_name">
-                                    <strong>Open to customers</strong>
-                                </label>
-                                <div class="form-block">
-                                    <input type="checkbox" checked="" class="iswitch-lg iswitch-info" ng-model="lclosed" ng-change="checkStoreSetting()">
-                                    <span style="color:red;" ng-show="checkStoreOpen">Store status cannot be switched on until payments is setup.</span>
-                                </div>
-                            </div>
-                        </div> -->
-                        <div>
-                            <div class="form-group-separator"></div>
-                            <div class="col-sm-9 col-sm-offset-2">
-                                <div class="form-block">
-                                    <div class="form-group">
-                                        <label class="control-label" for="full_name">
-                                            <strong>Message</strong>
-                                        </label>
-                                        <textarea class="form-control" rows="5" ng-model="lmessage"></textarea>
+                            <!-- <div class="form-group">
+                                <label class="col-sm-2 control-label">Store status</label>
+                                <div class="col-sm-9">
+                                    <label class="control-label" for="full_name">
+                                        <strong>Open to customers</strong>
+                                    </label>
+                                    <div class="form-block">
+                                        <input type="checkbox" checked="" class="iswitch-lg iswitch-info" ng-model="lclosed" ng-change="checkStoreSetting()">
+                                        <span style="color:red;" ng-show="checkStoreOpen">Store status cannot be switched on until payments is setup.</span>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             <div>
+                                <div class="form-group-separator"></div>
                                 <div class="col-sm-9 col-sm-offset-2">
                                     <div class="form-block">
                                         <div class="form-group">
-                                            <button type="submit" class="btn btn-blue" ng-click="submitted = true;" ng-disabled="store.storeName.$error.pattern || store.storeAddress.$error.pattern || store.storeCity.$error.pattern || store.storeState.$error.pattern">Save             
+                                            <label class="control-label" for="full_name">
+                                                <strong>Message</strong>
+                                            </label>
+                                            <textarea class="form-control" rows="5" ng-model="lmessage"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="col-sm-9 col-sm-offset-2">
+                                        <div class="form-block">
+                                            <div class="form-group">
+                                                <button type="submit" class="btn btn-blue" ng-click="submitted = true;" ng-disabled="store.storeName.$error.pattern || store.storeAddress.$error.pattern || store.storeCity.$error.pattern || store.storeState.$error.pattern">Save             
 
-                                                <span ng-show="spinner">
-                                                    <i class="fa fa-spin fa-spinner"></i>
-                                                </span>
-                                            </button>
+                                                    <span ng-show="spinner">
+                                                        <i class="fa fa-spin fa-spinner"></i>
+                                                    </span>
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
+    <!-- model for new user -->
+    <script type="text/ng-template" id="storeInfoModel">
+        <div class="modal-header">
+            <button type="button" class="close" ng-click="currentModal.close();" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">Welcome User</h4>
+            <h5>Store Info</h5>
+        </div>
+        
+        <div class="modal-body">
+            <div class="list-group">                            
+                <a href="" class="list-group-item">
+                    <h4 class="list-group-item-heading">Setup Your Store</h4>
+                    <p class="list-group-item-text">Here you can setup your <strong>Store</strong> <em>Name</em>, <em>Description</em>, <em>Logo</em>, <em>Contact Information</em> and <em>Message</em> of the store. All fields are mendetery. After fill details Click on Save.</p>
+                </a>
+            </div>
+        </div>
+        
+        <div class="modal-footer">
+            <button type="button" class="btn btn-white" ng-click="currentModal.close();">Close</button>
+        </div>
+    </script>
+    <!-- model for after setup storeinfo -->
+    <script type="text/ng-template" id="setupStoreInfoModel">
+        <div class="modal-header">
+            <h4 class="modal-title">Congrats</h4>
+        </div>
+        
+        <div class="modal-body">
+            <h5> You setup your store Step 1.</h5>
+        </div>
+        
+        <div class="modal-footer">
+            <a type="button" class="btn btn-white" ng-click="currentModal.close();" href="#/dashboard/setting">Go to setup store Setting</a>
+        </div>
+    </script>

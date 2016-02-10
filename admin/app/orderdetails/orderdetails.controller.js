@@ -11,7 +11,6 @@
             $scope.loadingSpinner = true;
             $scope.hideMainContent = false;
             var query = orderDetailsFactory.get({"orderId": singleOrderId});
-            var totalAmount = 0;
             query.$promise.then(function(data) {
                 $scope.loadingSpinner = false;
                 $scope.hideMainContent = true;
@@ -21,12 +20,9 @@
                 $scope.ordernr = data.ordernr;
                 $scope.cname = data.cfirstname + " " + data.clastname;
                 $scope.cphone = data.cphone;
-                for (var i = 0; i < data.products.length; i++) {
-                    totalAmount = totalAmount + data.products[i].price;
-                }
-                $scope.totalAmount = totalAmount;
-                var vatAmount = (totalAmount * 12.9) / 100;
-                $scope.grandTotalAmount = totalAmount + vatAmount;
+                $scope.totalAmount = data.total;
+                var vatAmount = ($scope.totalAmount * 12.9) / 100;
+                $scope.grandTotalAmount = $scope.totalAmount + vatAmount;
                 $scope.orderDate = orderDetailsService.orderDate(data.created);
                 var storeInfo = localStorageService.get('storeInfo');
                 $scope.storeAddress = storeInfo.laddr;

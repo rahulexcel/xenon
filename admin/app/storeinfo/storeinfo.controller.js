@@ -3,7 +3,9 @@
     angular
             .module('xenon.controllers')
             .controller('storeinfoCtrl', storeinfoCtrl);
-    function storeinfoCtrl($scope, $log, countryData, FileUploader, arrayService, uploadService, dropdownService, $state, storeinfoFactory, $timeout, calanderService, localStorageService, Upload, storeinfoLocationsFactory, storeinfoLocationsIdFactory, storeinfoLocFile) {
+    function storeinfoCtrl($scope, $log, countryData, $rootScope, fetchOrdersService, $modal, openModelService, FileUploader, arrayService, uploadService, dropdownService, $state, storeinfoFactory, $timeout, calanderService, localStorageService, Upload, storeinfoLocationsFactory, storeinfoLocationsIdFactory, storeinfoLocFile) {
+        openModelService.checknewUser();
+        fetchOrdersService.newOrders();
         var tz = jstz.determine();
         var timeZone = tz.name();
         var i;
@@ -25,7 +27,9 @@
                 'locationid': userData.locations[0]
             });
             query.$promise.then(function(data) {
-                console.log(data);
+                // console.log(data);
+                $scope.showMyStoreNav = true;
+                $scope.ldomain = data.ldomain;
                 localStorageService.set('storeInfo', data);
                 $scope.spinner = false;
                 $scope.lname = data.lname;
@@ -108,7 +112,8 @@
                     $scope.spinner = false;
                     userData.locations = [data.data._id];
                     localStorageService.set('userData', userData);
-                    $state.go('dashboard.productList');
+                    openModelService.afterFirstSetupStore();
+                    // $state.go('dashboard.productList');
                 });
             }
         }

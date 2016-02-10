@@ -3,7 +3,7 @@
 
     angular.module('xenon-app')
             .controller('productOrdersController', productOrdersController);
-    function productOrdersController($scope, addOrderFactory, $localStorage, $interval, localStorageService, orderListFactory, $rootScope, $state, orderDetailsFactory, arrayService) {
+    function productOrdersController($scope, addOrderFactory, $localStorage, $interval, fetchOrdersService, localStorageService, orderListFactory, $rootScope, $state, orderDetailsFactory, arrayService) {
         console.log("Product Orders Page");
         var userData = localStorageService.get('userData');
         var eid = userData.eid;
@@ -12,22 +12,15 @@
         $scope.spinner = true;
         var orderAm = [];
         var totalAmount;
-        onPageLoadApi();
-        function onPageLoadApi(){
+        onpageLoadApi();
+        fetchOrdersService.newOrders();
+        function onpageLoadApi(){
             var query = orderListFactory.query({"storeId": lid});
             query.$promise.then(function(data) {
-                for (var i = 0; i < data.length; i++) {
-                    totalAmount = 0;
-                    for (var j = 0; j < data[i].products.length; j++) {
-
-                        totalAmount = totalAmount + data[i].products[j].price;
-                    }
-                    data[i].totalamount = totalAmount;
-                    // console.log(data[i]);
-                }
                     $scope.orderList = data;
                     $scope.currencySymbole = arrayService.CurrencySymbol($localStorage.storeInfo.lcurrency);
                     $scope.spinner = false;
+                    fetchOrdersService.newOrders();
             });
         }
 
@@ -49,6 +42,7 @@
             });
         };
         $scope.orderId = function(orderId) {
+            fetchOrdersService.newOrders();
             var query = orderDetailsFactory.editOrder({"orderId": orderId,"order_state":3});
             query.$promise.then(function(data) {
                 //console.log(data);
@@ -58,15 +52,19 @@
             $state.go('dashboard.orderDetails');
         };
         $scope.deleteOrder = function(orderId, index) {
+            $scope.spinner = true;
             var query = orderDetailsFactory.deleteOrder({"orderId": orderId});
             query.$promise.then(function(data) {
                 console.log(data);
-                $scope.orderList.splice(index, 1);
+                onpageLoadApi();
+                // $scope.orderList.splice(index, 1);
             });
         };
         $interval(function() {
-            onPageLoadApi();
-          }, 60000);
+            onpageLoadApi();
+        }, 60000); 
+
+
     };
 
 })();

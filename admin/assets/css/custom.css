@@ -161,3 +161,8 @@ tr.angular-ui-tree-empty {
   width: 100px!important;
   /*height: 45px!important;*/
 }
+.modal-content{
+  background: #115685;
+  color: #fff;
+  border-radius: 5px;
+}

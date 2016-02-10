@@ -3,7 +3,7 @@
 
     angular.module('xenon-app')
             .controller('settingController', settingController);
-    function settingController($scope, countryData, calanderService, dropdownService, storeinfoLocationsIdFactory, localStorageService) {
+    function settingController($scope, countryData, calanderService, openModelService, dropdownService, storeinfoLocationsIdFactory, localStorageService) {
         console.log("Setting Page");
         $scope.settingSpinner = true;
         $scope.showSettingContent = false;
@@ -30,6 +30,9 @@
             $scope.settingSpinner = false;
             $scope.showSettingContent = true;
             console.log(data);
+            if(data.lcompleted.length == 1){
+                openModelService.openSettingModel();
+            }
             $scope.selectedCountryName = data.lcountry;
             //console.log($scope.selectedCountryName);
             $scope.countryCurrency = data.lcurrency;
@@ -110,6 +113,9 @@
                     });
                     query.$promise.then(function(data) {
                         console.log(data);
+                        if(data.data.lcompleted.length < 3){
+                            openModelService.aftersaveSettingModel();
+                        }
                         localStorageService.set('storeInfo', data.data);
                         $scope.spinner = false;
                     });

@@ -13,21 +13,21 @@
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="col-sm-5 col-xs-4">
-                                       <strong>Delivery Mode</strong>
-                                       <p>
-                                       <div class="form-block">
-                                           <label>
-                                               <input type="checkbox"  ng-model="deliveryModeDel">
-                                               Delivery
-                                           </label>
-                                           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                           <label>
-                                               <input type="checkbox"  ng-model="deliveryModePic">
-                                               Pickup
-                                           </label>
-                                       </div>
-                                       </p>
-                                   </div>
+                                 <strong>Delivery Mode</strong>
+                                 <p>
+                                     <div class="form-block">
+                                         <label>
+                                             <input type="checkbox"  ng-model="deliveryModeDel">
+                                             Delivery
+                                         </label>
+                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                         <label>
+                                             <input type="checkbox"  ng-model="deliveryModePic">
+                                             Pickup
+                                         </label>
+                                     </div>
+                                 </p>
+                             </div>
                                 <!-- <div class="col-sm-5 col-xs-4">
                                     <strong>Delivery Mode</strong>
                                     <p>
@@ -188,18 +188,18 @@
                     </div>
                     <div class="form-group-separator"></div>
                     <div class="form-group">
-                            <label class="col-sm-2 control-label">Store status</label>
-                            <div class="col-sm-9">
-                                <label class="control-label" for="full_name">
-                                    <strong>Open to customers</strong>
-                                </label>
-                                <div class="form-block">
-                                    <input type="checkbox" checked="" class="iswitch-lg iswitch-info" ng-model="lclosed" ng-change="checkStoreSetting()">
-                                    <span style="color:red;" ng-show="checkStoreOpen">Store status cannot be switched on until payments is setup.</span>
-                                </div>
+                        <label class="col-sm-2 control-label">Store status</label>
+                        <div class="col-sm-9">
+                            <label class="control-label" for="full_name">
+                                <strong>Open to customers</strong>
+                            </label>
+                            <div class="form-block">
+                                <input type="checkbox" checked="" class="iswitch-lg iswitch-info" ng-model="lclosed" ng-change="checkStoreSetting()">
+                                <span style="color:red;" ng-show="checkStoreOpen">Store status cannot be switched on until payments is setup.</span>
                             </div>
                         </div>
-                        
+                    </div>
+
                     <!-- Do not delete below commented area -->
 
                     <!-- <div class="form-group-separator"></div>
@@ -223,24 +223,59 @@
                                 <input type="text"  class="form-control">
                             </p>
                         </div> -->
-                    <div class="col-sm-6 col-sm-offset-2" style="padding-left: 0px;">
-                        <div>
-                            
-                            <p style="color:red" ng-show="errorForTaxField">Please set the Delivery Tax field</p>
-                            <p style="color:red" ng-show="errorday_in_schedule_view">Please set opening times</p>
-                        </div>   
-                       <div class="form-block">
-                        <button class="btn btn-blue" ng-click="save()">Save <span ng-show="spinner">
-                                <i class="fa fa-spin fa-spinner"></i>
-                            </span></button>
-                       </div>
-                    </div>
-                </form>
+                        <div class="col-sm-6 col-sm-offset-2" style="padding-left: 0px;">
+                            <div>
+
+                                <p style="color:red" ng-show="errorForTaxField">Please set the Delivery Tax field</p>
+                                <p style="color:red" ng-show="errorday_in_schedule_view">Please set opening times</p>
+                            </div>   
+                            <div class="form-block">
+                                <button class="btn btn-blue" ng-click="save()">Save <span ng-show="spinner">
+                                    <i class="fa fa-spin fa-spinner"></i>
+                                </span></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<div class="col-sm-1"></div>
-<script language="javascript">
+    <div class="col-sm-1"></div>
+    <script language="javascript">
             // populateCountries("country");
-</script>
+        </script>
+
+        <!-- model for First setting -->
+        <script type="text/ng-template" id="settingModel">
+            <div class="modal-header">
+                <button type="button" class="close" ng-click="currentModal.close();" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Store Setting</h4>
+            </div>
+
+            <div class="modal-body">
+                <div class="list-group">                            
+                    <a href="" class="list-group-item">
+                        <h4 class="list-group-item-heading">Setup Your Store Settings</h4>
+                        <p class="list-group-item-text">Here you can setup your <strong>Store</strong> <em>Delivery options</em>, <em>Tax options</em>, <em>Closed Days</em>, <em>Opening Times</em> and <em>Lead Time</em> <em>Language</em> <em>Status</em> of the store. All fields are mendetery. After fill details Click on Save.</p>
+                    </a>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white" ng-click="currentModal.close();">Close</button>
+            </div>
+        </script>
+        <!-- model for after setup setting -->
+        <script type="text/ng-template" id="aftersaveSettingModel">
+            <div class="modal-header">
+                <h4 class="modal-title">Congrats</h4>
+            </div>
+
+            <div class="modal-body">
+                <h5> You setup your store Step 2.</h5>
+            </div>
+
+            <div class="modal-footer">
+                <a type="button" class="btn btn-white" ng-click="currentModal.close();" href="#/dashboard/payment">Go to setup store Payment</a>
+            </div>
+        </script>
