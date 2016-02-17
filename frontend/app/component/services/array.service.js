@@ -15,7 +15,7 @@
                 }
                 Send_Array.push(obj);
             }
-            //  console.log(Send_Array);
+             console.log(Send_Array);
             return Send_Array;
         }
         service.getProduct = function(response_products, category) {
@@ -58,7 +58,7 @@
                         arr1.push(products[k].price);
                         arr2.push(products[k].pdesc);
                         arr3.push(products[k]._id);
-                        http://s3.amazonaws.com/ordermagic/{{row1.images[0]}}
+                        // http://s3.amazonaws.com/ordermagic/{{row1.images[0]}}
                                 arr4.push(products[k].pimages);
 
                     }

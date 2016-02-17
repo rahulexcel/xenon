@@ -23,7 +23,8 @@
                     localStorageService.set('userData', {'userid': data.userid, 'eid': data.eid, 'locations': locations, 'token': data.token});
                     $rootScope.userNavMenu = true;
                     $rootScope.navMenu = false;
-                    $state.go('dashboard.storeinfo');
+                    // $state.go('dashboard.storeinfo');
+                    $state.go('dashboard.welcome');
                 }
             });
         };

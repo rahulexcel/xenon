@@ -11,11 +11,13 @@
         });
         $scope.activateStripe = function() {
             console.log('activateStripe');
+            $scope.activateStripeSpinner = true;
             var userData = localStorageService.get('userData');
             var lid = userData.locations[0];
             var query = paymentFactory.authorize();
             query.$promise.then(function(data) {
                 console.log(data);
+                $scope.activateStripeSpinner = false;
                 window.open(data.authorize_url + "?response_type=" + data.response_type + "&scope=" + data.scope + "&client_id=" + data.client_id + "&state=" + lid);
             });
         };

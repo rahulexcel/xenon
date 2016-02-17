@@ -244,38 +244,3 @@
     <script language="javascript">
             // populateCountries("country");
         </script>
-
-        <!-- model for First setting -->
-        <script type="text/ng-template" id="settingModel">
-            <div class="modal-header">
-                <button type="button" class="close" ng-click="currentModal.close();" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Store Setting</h4>
-            </div>
-
-            <div class="modal-body">
-                <div class="list-group">                            
-                    <a href="" class="list-group-item">
-                        <h4 class="list-group-item-heading">Setup Your Store Settings</h4>
-                        <p class="list-group-item-text">Here you can setup your <strong>Store</strong> <em>Delivery options</em>, <em>Tax options</em>, <em>Closed Days</em>, <em>Opening Times</em> and <em>Lead Time</em> <em>Language</em> <em>Status</em> of the store. All fields are mendetery. After fill details Click on Save.</p>
-                    </a>
-                </div>
-            </div>
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-white" ng-click="currentModal.close();">Close</button>
-            </div>
-        </script>
-        <!-- model for after setup setting -->
-        <script type="text/ng-template" id="aftersaveSettingModel">
-            <div class="modal-header">
-                <h4 class="modal-title">Congrats</h4>
-            </div>
-
-            <div class="modal-body">
-                <h5> You setup your store Step 2.</h5>
-            </div>
-
-            <div class="modal-footer">
-                <a type="button" class="btn btn-white" ng-click="currentModal.close();" href="#/dashboard/payment">Go to setup store Payment</a>
-            </div>
-        </script>

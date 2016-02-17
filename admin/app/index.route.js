@@ -139,6 +139,11 @@
                             templateUrl: "app/plans/plans.html",
                             controller: 'plansController'
                         }).
+                        state('dashboard.welcome', {
+                            url: '/welcome',
+                            templateUrl: "app/welcome/welcome.html",
+                            controller: 'welcomeController'
+                        }).
                         state('dashboard.forgot', {
                             url: '/forgot',
                             templateUrl: "app/forgotpassword/forgotpassword.html",

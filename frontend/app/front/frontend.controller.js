@@ -105,7 +105,7 @@
        
         function checkoutButtonValidation(){
             console.log($scope.cart.length);
-            if(onRefreshData.lcompleted.length<3 || $scope.cart.length==0) {
+            if(onRefreshData.lcompleted.length<2 || $scope.cart.length==0) {
                   
                 $scope.not_allow_checkout=true;
             }else{

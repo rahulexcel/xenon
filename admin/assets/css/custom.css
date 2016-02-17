@@ -166,3 +166,6 @@ tr.angular-ui-tree-empty {
   color: #fff;
   border-radius: 5px;
 }
+.hover{
+  cursor: pointer; 
+}

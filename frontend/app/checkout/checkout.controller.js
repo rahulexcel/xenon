@@ -321,7 +321,10 @@
                 $scope.orderNo = response.ordernr;
                 $scope.order_not_success = false;
                 $scope.success_message = true;
-                $localStorage.$reset();
+                // $localStorage.$reset();
+                delete $localStorage.Orders_response;
+                delete $localStorage.Orders_sent;
+                delete $localStorage.shippingdata;
                 $scope.payment_spinner = false;
             } else {
                 $scope.payment_spinner = false;

@@ -13,6 +13,7 @@
         var orderAm = [];
         var totalAmount;
         onpageLoadApi();
+        // fetchOrdersService.playSound();
         fetchOrdersService.newOrders();
         function onpageLoadApi(){
             var query = orderListFactory.query({"storeId": lid});
@@ -20,7 +21,6 @@
                     $scope.orderList = data;
                     $scope.currencySymbole = arrayService.CurrencySymbol($localStorage.storeInfo.lcurrency);
                     $scope.spinner = false;
-                    fetchOrdersService.newOrders();
             });
         }
 
@@ -41,15 +41,19 @@
                 // $scope.spinner = false;
             });
         };
-        $scope.orderId = function(orderId) {
-            fetchOrdersService.newOrders();
-            var query = orderDetailsFactory.editOrder({"orderId": orderId,"order_state":3});
-            query.$promise.then(function(data) {
-                //console.log(data);
-            });
-            // console.log(orderId);
-            localStorageService.set('singleOrderId', orderId);
-            $state.go('dashboard.orderDetails');
+        $scope.orderId = function(orderId, order_state) {
+            if(order_state == 15 || order_state == 3){
+                localStorageService.set('singleOrderId', orderId);
+                $state.go('dashboard.orderDetails');
+            } else{
+                var query = orderDetailsFactory.editOrder({"orderId": orderId,"order_state":3});
+                    query.$promise.then(function(data) {
+                        fetchOrdersService.newOrders();
+                        //console.log(data);
+                    });
+                    localStorageService.set('singleOrderId', orderId);
+                    $state.go('dashboard.orderDetails');
+            }
         };
         $scope.deleteOrder = function(orderId, index) {
             $scope.spinner = true;
@@ -60,8 +64,12 @@
                 // $scope.orderList.splice(index, 1);
             });
         };
-        $interval(function() {
+      var interval =  $interval(function() {
+        if(!$localStorage.userData)
+            $interval.cancel(interval);
+        else
             onpageLoadApi();
+            console.log('calling from page');
         }, 60000); 
 
 

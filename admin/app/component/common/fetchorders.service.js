@@ -2,12 +2,23 @@
     'use strict';
     angular.module('xenon-app')
             .factory('fetchOrdersService', fetchOrdersService);
-    function fetchOrdersService(ngAudio, orderListFactory, localStorageService, $rootScope) {
+    function fetchOrdersService(ngAudio, orderListFactory, localStorageService, $rootScope, $interval) {
         var service = {};
-        service.playSound = function(data) {
-           var audio = ngAudio.load("app/audio/song1.mp3");
+        service.playSound = function() {
+           var audio = ngAudio.load("app/audio/notify.wav");
+           audio.unlock = true;
                 audio.play();
+                console.log(audio);
+                console.log('sound play');
             };
+        service.playSoundInLoop = function(NoOfOrders) {
+           var audio = ngAudio.load("app/audio/notify.wav");
+           audio.unlock = true;
+                audio.play();
+                audio.loop = NoOfOrders-1;
+                console.log('sound play');
+            };
+
         service.newOrders = function() {
             var userData = localStorageService.get("userData");
                 if (angular.isDefined(userData)) {
@@ -19,11 +30,17 @@
                             var newOrder=0;
                             for(var i=0; i < data.length; i++){
                                 //console.log(data[i].order_state);
-                                if(data[i].order_state == 2){
+                                if(data[i].order_state == 2 || data[i].order_state == 1){
                                     newOrder++;
                                 }
                             }
-                            if(newOrder > 0){
+                            if(newOrder > 1){
+                                service.playSoundInLoop(newOrder);
+                                // service.playSound();
+                                // $interval(function() {
+                                //     service.playSound();
+                                //   }, 4000);
+                            } else if(newOrder > 0){
                                 service.playSound();
                             }
                             $rootScope.newOrder = newOrder;

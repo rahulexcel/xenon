@@ -146,7 +146,13 @@
                 $scope.productPrice = '';
                 $scope.productQuantity = '';
                 $scope.productDescription = '';
-                $state.go('dashboard.productList');
+                
+                var storeInfo = localStorageService.get('storeInfo');
+                if(storeInfo.lcompleted.length == 2 || storeInfo.lcompleted.length == 3){
+                    $state.go('dashboard.welcome');
+                } else{
+                    $state.go('dashboard.productList');
+                }
             });
         }
         $scope.back = function() {
