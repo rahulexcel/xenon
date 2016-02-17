@@ -20,31 +20,75 @@
             };
 
         service.newOrders = function() {
-            var userData = localStorageService.get("userData");
+                var userData = localStorageService.get("userData");
                 if (angular.isDefined(userData)) {
                     if(userData.locations.length != 0){
+
                         var lid = userData.locations[0];
-                        var query = orderListFactory.query({"storeId": lid});
-                        query.$promise.then(function(data) {
-                            // console.log(data);
-                            var newOrder=0;
-                            for(var i=0; i < data.length; i++){
-                                //console.log(data[i].order_state);
-                                if(data[i].order_state == 2 || data[i].order_state == 1){
-                                    newOrder++;
-                                }
+                                var query = orderListFactory.query({"storeId": lid});
+                                    query.$promise.then(function(data) {
+                                        // console.log(data);
+                                        var newOrder=0;
+                                        for(var i=0; i < data.length; i++){
+                                            //console.log(data[i].order_state);
+                                            if(data[i].order_state == 2 || data[i].order_state == 1){
+                                                newOrder++;
+                                            }
+                                        }
+                                        if(newOrder > 1){
+                                            service.playSoundInLoop(newOrder);
+                                        } else if(newOrder > 0){
+                                            service.playSound();
+                                        }
+                                        $rootScope.newOrder = newOrder;
+                                    });
+
+                        
+                        $interval(function() {
+                            var userData = localStorageService.get("userData");
+                            if(userData){
+                                console.log(userData);
+                                var lid = userData.locations[0];
+                                var query = orderListFactory.query({"storeId": lid});
+                                    query.$promise.then(function(data) {
+                                        // console.log(data);
+                                        var newOrder=0;
+                                        for(var i=0; i < data.length; i++){
+                                            //console.log(data[i].order_state);
+                                            if(data[i].order_state == 2 || data[i].order_state == 1){
+                                                newOrder++;
+                                            }
+                                        }
+                                        if(newOrder > 1){
+                                            service.playSoundInLoop(newOrder);
+                                        } else if(newOrder > 0){
+                                            service.playSound();
+                                        }
+                                        $rootScope.newOrder = newOrder;
+                                    });
                             }
-                            if(newOrder > 1){
-                                service.playSoundInLoop(newOrder);
-                                // service.playSound();
-                                // $interval(function() {
-                                //     service.playSound();
-                                //   }, 4000);
-                            } else if(newOrder > 0){
-                                service.playSound();
-                            }
-                            $rootScope.newOrder = newOrder;
-                        });
+                        console.log('calling from service');
+                        }, 60000);  
+
+
+                        // var lid = userData.locations[0];
+                        // var query = orderListFactory.query({"storeId": lid});
+                        // query.$promise.then(function(data) {
+                        //     // console.log(data);
+                        //     var newOrder=0;
+                        //     for(var i=0; i < data.length; i++){
+                        //         //console.log(data[i].order_state);
+                        //         if(data[i].order_state == 2 || data[i].order_state == 1){
+                        //             newOrder++;
+                        //         }
+                        //     }
+                        //     if(newOrder > 1){
+                        //         service.playSoundInLoop(newOrder);
+                        //     } else if(newOrder > 0){
+                        //         service.playSound();
+                        //     }
+                        //     $rootScope.newOrder = newOrder;
+                        // });
                     }
                 }
             };

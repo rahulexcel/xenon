@@ -7,11 +7,10 @@
                 if (angular.isDefined(userData)) {
                     if(userData.locations.length != 0){
                     fetchOrdersService.newOrders();
-                     $interval(function() {
-                        fetchOrdersService.newOrders();
-                        console.log('calling from run');
-                        
-                      }, 60000);                    
+                     // $interval(function() {
+                     //    fetchOrdersService.newOrders();
+                     //    console.log('calling from run');
+                     //  }, 60000);                    
                     }    
                 }
 

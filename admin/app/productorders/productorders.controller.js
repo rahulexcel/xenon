@@ -13,8 +13,6 @@
         var orderAm = [];
         var totalAmount;
         onpageLoadApi();
-        // fetchOrdersService.playSound();
-        fetchOrdersService.newOrders();
         function onpageLoadApi(){
             var query = orderListFactory.query({"storeId": lid});
             query.$promise.then(function(data) {
