@@ -9,7 +9,10 @@ body{
 
 
 }
-
+.img-thumbnail{
+    border: none!important;
+    max-width: 128px!important;
+}
 .topContainer{
     /*padding-top: 16px;*/
     margin-top: -0.5rem;

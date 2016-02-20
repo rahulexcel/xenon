@@ -15,7 +15,7 @@
         }
         service.Timedropdown = function() {
             var hour = [];
-            console.log(minutes_is_more);
+            // console.log(minutes_is_more);
             var current = new Date().getHours();
             var time;
             if (minutes_is_more == 1) {
@@ -32,7 +32,7 @@
                 selected_hour = hour[0];
 
             }
-            console.log(selected_hour);
+            // console.log(selected_hour);
             return hour;
         }
         service.minutesdropdown = function(llt) {
@@ -41,16 +41,16 @@
             var time;
             var sumllt = minutesInterval + llt;
             var finalminutes = 0;
-            console.log("previous=" + sumllt);
+            // console.log("previous=" + sumllt);
             for (var i = 0; i < 16; i++) {
                 if (sumllt % 15 !== 0) {
                     sumllt++;
                 }
             }
-            console.log(sumllt);
+            // console.log(sumllt);
             if (sumllt > 59) {
                 sumllt = sumllt - 60;
-                console.log(sumllt);
+                // console.log(sumllt);
                 minutes_is_more = 1;
                 if (sumllt == 15) {
                     minutes.push(15, 30, 45);
@@ -75,7 +75,7 @@
                     minutes.push(45);
                 }
             }
-            console.log(minutes);
+            // console.log(minutes);
             //       console.log(minutesInterval+llt);
             //       if (minutesInterval + llt > 59) {
             //           minutes_is_more = 1;
@@ -112,13 +112,13 @@
             return minutes;
         }
         service.Selected = function(llt) {
-            console.log(selected_hour.toString());
+            // console.log(selected_hour.toString());
             return selected_hour.toString();
 
         }
         var modeSelected;
         service.delivery_method = function(data) {
-         console.log(data);
+         // console.log(data);
          var mode=[];
          if(data==1){
              mode.push("Pickup");
@@ -126,8 +126,8 @@
         }else if(data==2){
             mode.push("Delivery");
         } else{
-            mode.push("Delivery");
             mode.push("Pickup");
+            mode.push("Delivery");
         }
         modeSelected=mode;
         return mode;
@@ -141,7 +141,7 @@
 
         }
         service.currenttime = function(data) {
-            console.log(selected_hour);
+            // console.log(selected_hour);
             return  selected_hour.toString();
 
         }
@@ -154,7 +154,7 @@
                 minutes.push(num);
             }
 
-            console.log(minutes);
+            // console.log(minutes);
             return minutes;
         }
         return service;

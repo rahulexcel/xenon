@@ -19,6 +19,7 @@
                 <div class="row">
                     <div class="col-sm-8">
                         <h4><span ng-hide="orderState == 15">Invoice</span><span ng-show="orderState == 15" style="color:red;">Order Cancelled</span></h4>
+                        <h5>Order No: {{ordernr}}</h5>
                     </div>
                     <div class="col-sm-2 pull-right">
                         <button ng-hide="orderState == 15" class="btn btn-danger pull-right" confirmed-click="cancelOrder()" 
@@ -34,7 +35,7 @@
                         <br><br>
                         <div class="row">
                             <div class="col-sm-6 col-sm-offset-6" style="text-align:right;">
-                                <p style="padding-right:12px;"><strong>{{cname}}</strong> <br/><i class="fa fa-phone"></i> {{cphone}}</p>
+                                <p style="padding-right:12px;"><strong>{{cname}}</strong> <br/><i class="fa fa-phone"></i> {{cphone}} <br/>{{clientStreetAddress}}</p>
                             </div>
                         </div>
 

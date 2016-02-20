@@ -22,12 +22,21 @@
         }; 
         if(localStorageService.get('storeInfo')){
             //console.log('storeInfo present');
-            $scope.showMyStoreNav = true;
+            $rootScope.showMyStoreNav = false;
             var storeInfo = localStorageService.get('storeInfo');
             $scope.ldomain = storeInfo.ldomain;
         } else{
-            $scope.showMyStoreNav = false;
-        }    
+            $rootScope.showMyStoreNav = true;
+        }
+        $scope.goToMyStore = function(){
+            if(localStorageService.get('storeInfo')){
+                console.log('store info is present');
+                var storeInfo = localStorageService.get('storeInfo');
+                window.open('https://'+storeInfo.ldomain);
+            } else{
+                console.log('store info is not present');
+            }
+        }
 
     }
 })();

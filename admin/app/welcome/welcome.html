@@ -2,9 +2,10 @@
     <div class="col-sm-2"></div>
     <div class="col-sm-8">
                         
-                        <h3>Welcome User</h5>
-                    
-                        <div class="list-group">                            
+                        <h3>Welcome User</h3>
+                        <h5>Please complete the below steps to setup your online store. Once done, your store will be opened and you can start taking orders.</h5>
+                        <h1 style="text-align:center;" ng-show="welcomeSpinner"><span class="fa fa-spin fa-spinner"></span></h1>
+                        <div class="list-group" ng-show="showMainContent">                            
                             <div href="" class="list-group-item" ng-show="setupStoreInfo">
                                 <a class="btn btn-info btn-lg pull-right" href="#/dashboard/storeinfo">Go</a>
                                 <h4 class="list-group-item-heading">Setup StoreInfo</h4>
@@ -12,19 +13,19 @@
                             </div>
                             
                             <div href="" class="list-group-item" ng-show="setupStoreSetting">
-                                <a class="btn btn-info btn-lg pull-right" href="#/dashboard/setting">Go</a>
+                                <a class="btn btn-info btn-lg pull-right" ng-disabled="notCompleteFirstStep" href="#/dashboard/setting">Go</a>
                                 <h4 class="list-group-item-heading">Setup Store Setting</h4>
                                 <p class="list-group-item-text">Here you can setup your store settings</p>
                             </div>
                             
                             <div href="" class="list-group-item" ng-show="addFirstProduct">
-                                <a class="btn btn-info btn-lg pull-right" href="#/dashboard/addProduct">Go</a>
+                                <a class="btn btn-info btn-lg pull-right" href="#/dashboard/addProduct" ng-disabled="notCompleteFirstStep">Go</a>
                                 <h4 class="list-group-item-heading">Add Your First Product</h4>
                                 <p class="list-group-item-text">Here you can setup your store settings</p>
                             </div>
 
                             <div href="" class="list-group-item" ng-show="paymentDone">
-                                <a class="btn btn-info btn-lg pull-right" href="#/dashboard/payment">Go</a>
+                                <a class="btn btn-info btn-lg pull-right" href="#/dashboard/payment" ng-disabled="notCompleteFirstStep">Go</a>
                                 <h4 class="list-group-item-heading">Setup Payment</h4>
                                 <p class="list-group-item-text">Here you can setup your payment</p>
                             </div>

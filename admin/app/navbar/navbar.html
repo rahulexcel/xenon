@@ -45,8 +45,8 @@
                         </li>
                     </ul>
                 </li>
-                <li ng-show="showMyStoreNav">
-                    <a style="cursor:pointer;" target="_blank" href="http://{{ldomain}}">SHOW MY STORE</a>
+                <li><a>
+                    <span ng-disabled="showMyStoreNav" style="cursor:pointer;" ng-click="goToMyStore()" ng-style="{ color: showMyStoreNav ? '#ddd' : '#979898' }" href="https://{{ldomain}}">SHOW MY STORE</span></a>
                 </li>
                 <li ng-click="logout()">
                     <a style="cursor:pointer;">LOGOUT</a>

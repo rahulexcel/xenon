@@ -15,7 +15,7 @@
                 }
                 Send_Array.push(obj);
             }
-             console.log(Send_Array);
+             // console.log(Send_Array);
             return Send_Array;
         }
         service.getProduct = function(response_products, category) {
@@ -38,14 +38,14 @@
                 }
             }
             phoneNo = fullPhoneNo.substring(dash + 1, fullPhoneNo.length);
-            console.log(phoneNo);
+            // console.log(phoneNo);
             return phoneNo;
         }
         service.showAllService = function(category, products) {
             var Send_Array = [];
 
             var obj = {};
-            console.log(products);
+            // console.log(products);
             for (var i = 1; i < category.length; i++) {
                 var arr = [];
                 var arr1 = [];
@@ -84,7 +84,7 @@
             }
 
 
-            console.log(Send_Array);
+            // console.log(Send_Array);
 
             return Send_Array;
         }
@@ -143,10 +143,10 @@
                 }
             }
             if(flag==0){
-                console.log(data);
+                // console.log(data);
                 return data;
             }else{
-                console.log(symbol);
+                // console.log(symbol);
                 return symbol;
             }
         }

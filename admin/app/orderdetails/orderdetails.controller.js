@@ -22,7 +22,7 @@
                 $scope.cphone = data.cphone;
                 $scope.totalAmount = data.subtotal;
                 $scope.orderState = data.order_state;
-                $scope.grandTotalAmount = data.total;
+                $scope.grandTotalAmount = orderDetailsService.grandTotalAmount(data.total, data.deliverymode, data.deliveryrate, data.deliverytax);
                 $scope.vat = data.vat;
                 $scope.orderDate = orderDetailsService.orderDate(data.created);
                 var storeInfo = localStorageService.get('storeInfo');
@@ -32,6 +32,7 @@
                 $scope.storePhone = storeInfo.lphone;
                 $scope.storeName = storeInfo.lname;
                 $scope.currencySymbole = arrayService.CurrencySymbol($localStorage.storeInfo.lcurrency);
+                $scope.clientStreetAddress = data.cstreetaddr;
             });
         }
 

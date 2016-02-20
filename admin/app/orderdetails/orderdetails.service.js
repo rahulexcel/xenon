@@ -13,14 +13,15 @@
             var fullDate = day + "-" + month + "-" + year;
             return fullDate;
         };
-        service.grandTotalAmount = function(totalAmount) {
+        service.grandTotalAmount = function(totalAmount, deliverymode, deliveryrate, deliverytax) {
             var grandTotalAmount = 0;
-            var storeInfo = localStorageService.get('storeInfo');
-            if(storeInfo.ltaxall){
-                grandTotalAmount = totalAmount;
+            console.log(deliveryrate +" "+deliverytax);
+            if(deliverymode == 2){
+                if(deliveryrate && deliverytax){
+                    grandTotalAmount = totalAmount + deliveryrate + (deliveryrate*deliverytax)/100;
+                }
             } else{
-                var vatAmount = (totalAmount * 12.9) / 100;
-                grandTotalAmount = totalAmount + vatAmount;
+                grandTotalAmount = totalAmount;
             }
             return grandTotalAmount;
         };

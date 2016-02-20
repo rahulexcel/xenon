@@ -62,6 +62,8 @@
                 updatetime(data);
                 OnpageLoadData=data;
                 llt = data.llt;
+                $scope.lwots = data.lwots;
+                $scope.ldateclosed = data.ldateclosed;
                 $scope.delivery_method = dropdownService.delivery_method(data.ldeliverymode);
                 $scope.method = dropdownService.delivery_method_selected($scope.delivery_method);
                 $scope.currency = data.lcurrency;
@@ -104,9 +106,20 @@
         }
        
         function checkoutButtonValidation(){
-            console.log($scope.cart.length);
-            if(onRefreshData.lcompleted.length<2 || $scope.cart.length==0) {
-                  
+            // console.log($scope.cart.length);
+            // console.log($scope.ldateclosed);
+            // console.log($scope.lwots);
+            var weekdaysOpningClosingTime = timeService.weekdaysOpningTime($scope.lwots);
+            //console.log(weekdaysOpningClosingTime);
+            if(weekdaysOpningClosingTime){
+                $scope.storeClosed = true;
+            }
+            var closedDay = timeService.closedDaysCheckoutButton($scope.ldateclosed);
+            if(closedDay){
+                $scope.storeClosed = true;
+            }
+            if(onRefreshData.lcompleted.length<2 || $scope.cart.length==0 || closedDay || weekdaysOpningClosingTime) {
+                
                 $scope.not_allow_checkout=true;
             }else{
                 $scope.not_allow_checkout=false;

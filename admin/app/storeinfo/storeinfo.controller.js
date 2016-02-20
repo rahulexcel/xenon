@@ -50,7 +50,7 @@
                 response_pic_name = $scope.picImage;
                 $scope.phone_code = data.lcountrycode;
                 $scope.phone_no = data.lphone;
-                $rootScope.showMyStoreNav = true;
+                $rootScope.showMyStoreNav = false;
                 $rootScope.ldomain = data.ldomain;
             });
         }
@@ -114,7 +114,10 @@
                     userData.locations = [data.data._id];
                     localStorageService.set('userData', userData);
                     localStorageService.set('storeInfo', data.data);
-                    $state.go('dashboard.welcome');
+                    
+	                $rootScope.showMyStoreNav = false;
+	                $rootScope.ldomain = data.ldomain;
+	                $state.go('dashboard.welcome');
                     // $state.go('dashboard.productList');
                 });
             }
