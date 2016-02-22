@@ -18,7 +18,9 @@
                 $scope.orderDetails = data.products;
                 $scope.orderId = data._id;
                 $scope.ordernr = data.ordernr;
+                if(data.cfirstname && data.clastname){
                 $scope.cname = data.cfirstname + " " + data.clastname;
+                }
                 $scope.cphone = data.cphone;
                 $scope.totalAmount = data.subtotal;
                 $scope.orderState = data.order_state;
