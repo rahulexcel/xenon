@@ -20,7 +20,7 @@
                 <div class="col-sm-8 bgwhite leftCtnr">
                     <div class="text-center" ng-show="success_message">
                         <h2 class="order-no"># {{orderNo}}</h2>
-                        <span  class="bold"><span translate="thankyou">Thank You </span>{{fullname}}!<span translate="deliverymsg"> </span>
+                        <span  class="bold"><span translate="thankyou">Thank You </span>{{fullname}}!<span translate="We have registered your order and will soon start to prepare it for you. You will receive an email confirming from us shortly."> </span>
                         </span><br><br>
                         <a class="btn btn-info" href="#/frontend" translate="Go To Home Page"></a>
                     </div>
@@ -188,8 +188,9 @@
                                         </div>
                                         <div class="form-group pull-right">
 
-                                            <button class="btn btn-info btn-lg" ng-click="newcharge()" ng-disabled="userForm.name.$invalid || userForm.cvc.$invalid || userForm.expiry.$invalid || userForm.number.$invalid" ng-show="button_when_pickup_mode"> <span ng-show="payment_spinner">
-                                                    <i class="fa fa-spin fa-spinner"></i>
+                                            <button class="btn btn-info btn-lg" ng-click="newcharge()" ng-disabled="userForm.name.$invalid || userForm.cvc.$invalid || userForm.expiry.$invalid || userForm.number.$invalid" ng-show="button_when_pickup_mode"> <span ng-show="new_charge_spinner" >
+
+                                                    <i class="fa fa-spin fa-spinner" id="spinner_on_error"></i>
                                                 </span><span translate="Submit"></span></button>
                                             <button class="btn btn-info btn-lg" ng-click="newcharge()" ng-disabled="userForm.name.$invalid || userForm.cvc.$invalid || userForm.expiry.$invalid || userForm.number.$invalid || detailsform.f_n.$invalid || detailsform.l_n.$invalid || detailsform.stripeEmail.$invalid || detailsform.addr.$invalid || detailsform.postcode.$invalid" ng-show="button_when_delivery_mode"> <span ng-show="new_charge_spinner" >
 

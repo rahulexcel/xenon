@@ -15,21 +15,21 @@
         }
         service.Timedropdown = function() {
             var now = new Date();
-           var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-           var day = days[ now.getDay() ];
-           var hour = [];
+            var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            var day = days[ now.getDay() ];
+            var hour = [];
             var current = new Date().getHours();
             var time;
             console.log($localStorage.frontStoreData.lwots);
-            for(var i=0; i<$localStorage.frontStoreData.lwots.length; i++){
-                if(day==$localStorage.frontStoreData.lwots[i].day){
-                    if(current<$localStorage.frontStoreData.lwots[i].opening_time){
-                    current= parseInt($localStorage.frontStoreData.lwots[i].opening_time);
-                }
+            for (var i = 0; i < $localStorage.frontStoreData.lwots.length; i++) {
+                if (day == $localStorage.frontStoreData.lwots[i].day) {
+                    if (current < $localStorage.frontStoreData.lwots[i].opening_time) {
+                        current = parseInt($localStorage.frontStoreData.lwots[i].opening_time);
+                    }
                 }
                 console.log($localStorage.frontStoreData.lwots[i].day);
             }
-            
+
             if (minutes_is_more == 1) {
                 for (var i = current + 1; i <= 23; i++) {
                     time = i;
@@ -87,39 +87,7 @@
                     minutes.push(45);
                 }
             }
-            // console.log(minutes);
-            //       console.log(minutesInterval+llt);
-            //       if (minutesInterval + llt > 59) {
-            //           minutes_is_more = 1;
-            //           minutesInterval= minutesInterval+llt-60;
-            //           for(var i=0; i<15; i++){
-            //           if(minutesInterval%15!==0){
 
-
-            //          }
-
-            //     }
-            //           console.log(minutesInterval) ;
-            //       }else{
-            //           minutesInterval=minutesInterval+llt;
-            //          for(var i=0; i<15; i++){
-            //           if(minutesInterval%15!==0){
-            //               if(minutesInterval!==60){
-            //               minutesInterval++;      
-            //               }
-            //               // minutesInterval++;
-            //          }
-
-            //     }
-            // }
-            //     minutes.push(minutesInterval);
-            //       for (var i = 0; i < 4; i++) {
-            //           minutesInterval = minutesInterval+15;
-            //           if(minutesInterval<59){
-            //           minutes.push(minutesInterval);
-            //         }
-            //       }
-            //       console.log(minutes);
             selected_mintue = minutes[0].toString();
             return minutes;
         }
@@ -130,21 +98,21 @@
         }
         var modeSelected;
         service.delivery_method = function(data) {
-         // console.log(data);
-         var mode=[];
-         if(data==1){
-             mode.push("Pickup");
-                     
-        }else if(data==2){
-            mode.push("Delivery");
-        } else{
-            mode.push("Pickup");
-            mode.push("Delivery");
+            // console.log(data);
+            var mode = [];
+            if (data == 1) {
+                mode.push("Pickup");
+
+            } else if (data == 2) {
+                mode.push("Delivery");
+            } else {
+                mode.push("Pickup");
+                mode.push("Delivery");
+            }
+            modeSelected = mode;
+            return mode;
         }
-        modeSelected=mode;
-        return mode;
-        }
-        service.delivery_method_selected=function(data){
+        service.delivery_method_selected = function(data) {
             return modeSelected[0].toString();
         }
         service.selectedMinutes = function(data) {

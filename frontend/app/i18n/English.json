@@ -10,8 +10,9 @@
     "subtotal": "Subtotal",
     "poweredby": "Powered by",
     "total": "Total",
-    "thankyou": "Thank you",
-    "deliverymsg": "We have registered your order and will soon start to prepare it for you. You will receive an email confirming from us shortly.",
+    "thankyou": "THANKYOU",
+    "We have registered your order and will soon start to prepare it for you. You will receive an email confirming from us shortly."
+    : "We have registered your order and will soon start to prepare it for you. You will receive an email confirming from us shortly.",
     "Go To Home Page": "Go To Home Page",
     "Please provide the SMS code received at above phone number": "Please provide the SMS code received at above phone number",
     "Verify": "Verify",
@@ -41,7 +42,8 @@
     "hour":"Hour",
     "minutes":"Minutes",
     "Pickup":"Pickup",
-    "Delivery":"Delivery"
+    "Delivery":"Delivery",
+    "Store is closed.":"Store is closed."
 
 
 }
