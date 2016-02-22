@@ -110,16 +110,14 @@
             // console.log($scope.cart.length);
             // console.log($scope.ldateclosed);
             // console.log($scope.lwots);
-            var weekdaysOpningClosingTime = timeService.weekdaysOpningTime($scope.lwots);
+          
             //console.log(weekdaysOpningClosingTime);
-            if(weekdaysOpningClosingTime){
-                $scope.storeClosed = true;
-            }
+           
             var closedDay = timeService.closedDaysCheckoutButton($scope.ldateclosed);
             if(closedDay){
                 $scope.storeClosed = true;
             }
-            if(onRefreshData.lcompleted.length<2 || $scope.cart.length==0 || closedDay || weekdaysOpningClosingTime) {
+            if(onRefreshData.lcompleted.length<2 || $scope.cart.length==0 || closedDay) {
                 
                 $scope.not_allow_checkout=true;
             }else{
@@ -243,7 +241,16 @@
                 cart_obj.push(obj1);
             }
             $scope.cart = cart_obj;
-            var total = 0;
+           methodChanged();
+            checkoutButtonValidation();
+
+
+
+
+
+        }
+        function methodChanged(){
+             var total = 0;
 
 
             
@@ -252,21 +259,20 @@
             if($scope.method == 'Delivery'){
                 if(frontStoreData.ldeliveryprice){
                     $scope.deliveryPriceTax = true;
-                    $scope.deliveryPrice = frontStoreData.ldeliveryprice;
+                    $scope.deliveryPrice = frontStoreData.ldeliveryprice; 
                     $scope.deliveryTax = frontStoreData.ldeliverytax;
                     $scope.total_price = arrayService.getTotalprice($scope.cart);
-                    $scope.grandTotal_price = $scope.total_price + $scope.deliveryPrice + ($scope.deliveryPrice/$scope.deliveryTax) ;
+                    $scope.grandTotal_price = parseInt($scope.total_price) + $scope.deliveryPrice + ($scope.deliveryPrice/$scope.deliveryTax) ;
+                      
                 }
             } else{
+                $scope.deliveryPriceTax = false;
                 $scope.total_price = arrayService.getTotalprice($scope.cart);
                 $scope.grandTotal_price = arrayService.getTotalprice($scope.cart);
             }
-            checkoutButtonValidation();
-
-
-
-
-
+        }
+        $scope.method_change=function(){
+            methodChanged();
         }
 
         $scope.remove_product_from_cart = function(product) {
@@ -371,25 +377,7 @@
             }
            
         }
-//        $('#options, #options1').flagStrap({
-//            countries: {
-//                "ES": "Spanish",
-//                "DE": "German",
-//                "FR": "French",
-//                "DK": "Danish",
-//                "FI": "Finnish",
-//                "NO": "Norwegian",
-//                "SE": "Swedish",
-//                "GB": "English"
-//            },
-//            placeholder: false,
-//            onSelect: function(value, element) {
-//                $('div#options button span').text(" ");
-//         
-//                language.set(value);
-//                    
-//            },
-//        });
+
        
     }
 })();

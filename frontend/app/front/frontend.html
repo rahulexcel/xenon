@@ -158,7 +158,7 @@
                             </span>
                             <div class="dropdown">
                                 <div class="form-group">
-                                    <select class="form-control input-lg text-center"  ng-model="method">
+                                    <select class="form-control input-lg text-center"  ng-model="method" ng-change="method_change()">
                                         <!-- <option ng-repeat="row in delivery_method" value="{{row}}">{{row}}</option> -->
                                         <option ng-repeat="row in delivery_method" value="{{row}}">{{row | translate }}</option>
                                     </select>
