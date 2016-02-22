@@ -37,7 +37,11 @@
     "Submit": "Submit",
     "Add new card": "Add new card",
     "Looking for a valid CVC": "Looking for a valid CVC",
-    "Looking for a valid expiry date": "Looking for a valid expiry date"
+    "Looking for a valid expiry date": "Looking for a valid expiry date",
+    "hour":"Hour",
+    "minutes":"Minutes",
+    "Pickup":"Pickup",
+    "Delivery":"Delivery"
 
 
 }

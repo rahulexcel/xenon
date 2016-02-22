@@ -4,7 +4,7 @@
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
             <div class="col-xs-4 no-pad-left">
-                <span class="navbar-brand-image">
+                <span class="navbar-brand-image not-show-main-logo">
                     <img src="{{picImage}}"></span>
             </div>
             <div class="col-xs-8 no-pad-left nav-store-name-container">
@@ -36,7 +36,7 @@
             <div class="row bgwhite TOP">
                 <div class="col-sm-3 col-xs-12 not-show-main-logo">
                     <div class="image">
-                        <img ng-src="{{picImage}}" class='img-thumbnail img-responsive logo'>
+                        <img ng-src="{{picImage}}" class='img-thumbnail img-responsive'><!-- //removed class logo -->
                     </div>
                 </div>
                 <div class="col-sm-6 col-xs-12 text-center">
@@ -159,21 +159,21 @@
                             <div class="dropdown">
                                 <div class="form-group">
                                     <select class="form-control input-lg text-center"  ng-model="method">
-                                        <option ng-repeat="row in delivery_method" value="{{row}}">{{row}}</option>
+                                        <!-- <option ng-repeat="row in delivery_method" value="{{row}}">{{row}}</option> -->
+                                        <option ng-repeat="row in delivery_method" value="{{row}}">{{row | translate }}</option>
                                     </select>
                                 </div>
 
                                 <div class="form-inline">
                                     <div class="form-group" style="width:100%">
                                         <div class="col-md-6 col-xs-6 time-dropdown no-pad-left">
-                                            <span>Hour</span>
+                                            <span translate="hour"> </span><!-- <span>Hour</span> -->
                                             <select class="form-control input-lg select1" ng-change="hour_changing()" ng-model="time">
-                                                <option  
-                                                    ng-repeat="row in dropdown_days" value="{{row}}">{{row}}</option>
+                                                <option ng-repeat="row in dropdown_days" value="{{row}}">{{row}}</option>
                                             </select>
                                         </div>
                                         <div class="col-md-6 col-xs-6 time-dropdown no-pad-left no-pad-right">
-                                            <span>Minutes</span>
+                                            <span translate="minutes"> </span><!-- <span>Minutes</span> -->
                                             <select class="form-control input-lg select2"  ng-model="minutes">
                                                 <option  
                                                     ng-repeat="row in dropdown_minutes" value="{{row}}">{{row}}</option>
@@ -221,6 +221,8 @@
                                          ">
                                         <div class="pull-left">
                                             <div translate="subtotal">&nbsp;&nbsp;&nbsp;</div>
+                                            <div ng-show="deliveryPriceTax">&nbsp;&nbsp;&nbsp;Delivery Price</div>
+                                            <div ng-show="deliveryPriceTax">&nbsp;&nbsp;&nbsp;Delivery Tax</div>
                                             <div class="bold" style="
                                                  font-size: medium;
                                                  padding-top: 20px;
@@ -232,10 +234,12 @@
                                     <div class="col-sm-6 col-xs-6">
                                         <div class="pull-right">
                                             <div>{{total_price}} <!--{{currency}}-->{{currencysymbol}}</div>
+                                            <div ng-show="deliveryPriceTax">&nbsp;&nbsp;&nbsp;{{deliveryPrice}} {{currencysymbol}}</div>
+                                            <div ng-show="deliveryPriceTax">&nbsp;&nbsp;&nbsp;{{deliveryTax}}%</div>
                                             <div class="bold"style="
                                                  font-size: medium;     padding-right: 11px;  padding-top: 20px;
 
-                                                 ">{{total_price}} <!--{{currency}}-->{{currencysymbol}} </div>
+                                                 ">{{grandTotal_price}} <!--{{currency}}-->{{currencysymbol}} </div>
                                         </div>
                                     </div>
                                     <div class="col-sm-12 col-xs-12" ng-if="storeClosed">

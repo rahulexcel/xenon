@@ -6,7 +6,11 @@
     "verify order msg": "Vennligst bekreft bestillingen med ditt telefonnummer. Dette er også hvordan vi skal nå ut til deg om status for bestillingen.",
     "Verify order": "1.VERIFY ORDER",
     "deliverydetails": "2.DELIVERY DETALJER",
-    "paymentdetails": "3.PAYMENT DETALJER"
+    "paymentdetails": "3.PAYMENT DETALJER",
+    "hour":"Time",
+    "minutes":"minutter",
+    "Pickup":"Plukke opp",
+    "Delivery":"Leveranse"
 
 
 }

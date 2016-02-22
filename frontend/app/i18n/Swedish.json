@@ -6,6 +6,10 @@
     "verify order msg": "Bekräfta order med ditt telefonnummer. Detta är också hur vi kommer att nå ut till dig om statusen för din beställning.",
     "Verify order": "1.VERIFY ORDER",
     "deliverydetails": "2.DELIVERY DETALJER",
-    "paymentdetails": "3.Payment DETALJER"
+    "paymentdetails": "3.Payment DETALJER",
+    "hour":"Timme",
+    "minutes":"Minuter",
+    "Pickup":"Plocka upp",
+    "Delivery":"Leverans"
 
 }

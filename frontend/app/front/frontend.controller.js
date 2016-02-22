@@ -58,6 +58,7 @@
                 locationID: locationID.locationID
             });
             query.$promise.then(function(data) {
+                timeStorage.set('frontStoreData', data, 1);
                   onRefreshData=data;
                 updatetime(data);
                 OnpageLoadData=data;
@@ -246,8 +247,20 @@
 
 
             
-
-            $scope.total_price = arrayService.getTotalprice($scope.cart);
+            var frontStoreData = timeStorage.get('frontStoreData');
+            console.log(frontStoreData);
+            if($scope.method == 'Delivery'){
+                if(frontStoreData.ldeliveryprice){
+                    $scope.deliveryPriceTax = true;
+                    $scope.deliveryPrice = frontStoreData.ldeliveryprice;
+                    $scope.deliveryTax = frontStoreData.ldeliverytax;
+                    $scope.total_price = arrayService.getTotalprice($scope.cart);
+                    $scope.grandTotal_price = $scope.total_price + $scope.deliveryPrice + ($scope.deliveryPrice/$scope.deliveryTax) ;
+                }
+            } else{
+                $scope.total_price = arrayService.getTotalprice($scope.cart);
+                $scope.grandTotal_price = arrayService.getTotalprice($scope.cart);
+            }
             checkoutButtonValidation();
 
 

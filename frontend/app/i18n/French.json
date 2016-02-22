@@ -6,6 +6,10 @@
     "verify order msg": "S'il vous plaît vérifier commande avec votre numéro de téléphone. Ceci est également la façon dont nous allons tendre la main à vous au sujet de l'état de votre commande.",
     "Verify order": "1. Vérifier COMMANDER",
     "deliverydetails": "2.DELIVERY DÉTAILS",
-    "paymentdetails": "3.Payment DÉTAILS"
+    "paymentdetails": "3.Payment DÉTAILS",
+    "hour":"Heure",
+    "minutes":"Minutes",
+    "Pickup":"Ramasser",
+    "Delivery":"Livraison"
 
 }

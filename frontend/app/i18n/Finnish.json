@@ -6,6 +6,10 @@
     "verify order msg": "Please verify order with your phone number. This is also how we will reach out to you about status of your order.",
     "Verify order": "1.VERIFY ORDER",
     "deliverydetails": "2.DELIVERY TIEDOT",
-    "paymentdetails": "3.PAYMENT TIEDOT"
+    "paymentdetails": "3.PAYMENT TIEDOT",
+    "hour":"Tunnin",
+    "minutes":"Minuutin",
+    "Pickup":"Noukkia",
+    "Delivery":"Toimitus"
 
 }
