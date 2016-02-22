@@ -3,7 +3,7 @@
     angular.module('xenon-frontend')
             .factory('dropdownService', dropdownService);
 
-    function dropdownService() {
+    function dropdownService($localStorage) {
         var minutes_is_more = 0;
         var service = {};
         var selected_hour;
@@ -14,10 +14,22 @@
             return Daydropdown;
         }
         service.Timedropdown = function() {
-            var hour = [];
-            // console.log(minutes_is_more);
+            var now = new Date();
+           var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+           var day = days[ now.getDay() ];
+           var hour = [];
             var current = new Date().getHours();
             var time;
+            console.log($localStorage.frontStoreData.lwots);
+            for(var i=0; i<$localStorage.frontStoreData.lwots.length; i++){
+                if(day==$localStorage.frontStoreData.lwots[i].day){
+                    if(current<$localStorage.frontStoreData.lwots[i].opening_time){
+                    current= parseInt($localStorage.frontStoreData.lwots[i].opening_time);
+                }
+                }
+                console.log($localStorage.frontStoreData.lwots[i].day);
+            }
+            
             if (minutes_is_more == 1) {
                 for (var i = current + 1; i <= 23; i++) {
                     time = i;
