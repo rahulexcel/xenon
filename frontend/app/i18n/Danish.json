@@ -10,6 +10,7 @@
     "hour":"Time",
     "minutes":"Minutter",
     "Pickup":"Saml op",
-    "Delivery":"Levering"
+    "Delivery":"Levering",
+    "Store is closed.":"Store is closed."
 
 }

@@ -4,8 +4,7 @@
             .controller('frontendCtrl', frontendCtrl);
 
     function frontendCtrl($scope, locations, timeStorage, $window, currencySymbol, language, locationID, $localStorage, category, $rootScope, products, Order, $state, arrayService, dropdownService, timeService, $interval) {
-
-
+        
         var response_products;
         var response_categories;
         var onRefreshData;
@@ -45,14 +44,8 @@
         $scope.showlist = function() {
             $scope.list = !$scope.list;
         }
-
-
-
-
-
         $scope.category = 'View All';
         on_page_load();
-
         function on_page_load() {
             var query = locations.get({
                 locationID: locationID.locationID
@@ -338,7 +331,7 @@
                     shipping_time: $scope.time + ":" + $scope.minutes,
                     timestamp: timeService.getTimestamp($scope.time, $scope.minutes),
                     currency: $scope.currency,
-                    total_price: $scope.total_price};
+                    total_price: $scope.grandTotal_price};
                 timeStorage.set('shippingdata', data, 1);
                 $state.go('checkout');
             });

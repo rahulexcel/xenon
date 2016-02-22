@@ -11,7 +11,7 @@
         $scope.orderid = $localStorage.Orders_response.orderid;
         console.log($localStorage.Orders_response.orderid);
         $scope.cart = $localStorage.Orders_sent;
-        $scope.total_price = arrayService.getTotalprice($scope.cart);
+        $scope.total_price = $localStorage.shippingdata.total_price;
         $scope.currency = $localStorage.shippingdata.currency;
         $scope.shipping_method = $localStorage.shippingdata.methodName;
         $scope.shipping_time = $localStorage.shippingdata.shipping_time;
