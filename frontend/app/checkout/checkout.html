@@ -205,10 +205,10 @@
                                         </div>
                                         <div class="form-group">
                                             <div class="form-inline" id="card_details">
-                                                <input type="text" class="form-control input-lg" ng-model="existingexpmonth" disabled>
-                                                <span> / </span>
-                                                <input type="text" class="form-control input-lg" ng-model="existingcc_yearnew" disabled/>
-                                                <input type="text" class="form-control input-lg" maxlength="3" ng-model="existingCVC" name="cvc" placeholder="CVC" ng-minlength="3" required>
+                                                <!-- <input type="text" class="form-control input-lg" ng-model="existingexpmonth" disabled> -->
+                                                <!-- <span> / </span> -->
+                                                <!-- <input type="text" class="form-control input-lg" ng-model="existingcc_yearnew" disabled/> -->
+                                                <!-- <input type="text" class="form-control input-lg" maxlength="3" ng-model="existingCVC" name="cvc" placeholder="CVC" ng-minlength="3" required> -->
 
 
                                             </div>
@@ -216,14 +216,14 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <input type="text" class="form-control input-lg" ng-model="existingfullname" disabled>
+                                            <!-- <input type="text" class="form-control input-lg" ng-model="existingfullname" disabled> -->
                                         </div>
                                         <div class="pull-left form-group">
                                             <span style="color:rgb(239,110,84) cursor:pointer;" ng-click="user_is_adding_new_card()" translate="Add new card"> </span>
 
                                         </div>
                                         <div class="form-group pull-right">
-                                            <button class="btn btn-info btn-lg" ng-click="existingcharge()" ng-disabled="existing.cvc.$invalid"> 
+                                            <button class="btn btn-info btn-lg" ng-click="existingcharge()"> 
                                                 <span ng-show="payment_spinner">
 
                                                     <i class="fa fa-spin fa-spinner"></i>

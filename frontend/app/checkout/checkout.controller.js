@@ -120,8 +120,10 @@
                             $scope.dis_last_name = response.lastname,
                             $scope.dis_postcode = response.postcode,
                             $scope.dis_addr = response.streetaddr,
-                            $scope.existingexpmonth = response.card_exp_month;
-                    $scope.existingcc_yearnew = response.card_exp_year;
+                            // $scope.existingexpmonth = response.card_exp_month;
+                            $scope.existingexpmonth = "xx";
+                    // $scope.existingcc_yearnew = response.card_exp_year;
+                    $scope.existingcc_yearnew = "xxxx";
                     $scope.existingcardnumber = "xxxx" + " " + "xxxx" + " " + "xxxx" + " " + "xxxx" + " " + response.card_last4;
                     $scope.dis_email = response.email;
                     $scope.existingfullname = response.firstname + " " + response.lastname;
