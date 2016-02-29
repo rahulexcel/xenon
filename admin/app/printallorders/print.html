@@ -1,0 +1,86 @@
+<div class="row">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h1 class="panel-title"><strong >Order details:</strong></h1>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="panel-body">
+                <div ng-repeat="row in customerdata">
+                    
+                    <div class="pull-left">
+                        <strong style="color:black">{{$index + 1}} :</strong>
+                    </div>
+                    
+                    <div class="form-group" style="margin-left:29px;">  
+                        <strong>Order no:</strong>&nbsp;{{row.ordernr}}<br/>
+                        <strong>Delivery mode:</strong>&nbsp;{{row.deliverymode}}<br/>
+                        <span ng-hide="{{row.deliverymode==1}}"><strong>Customer first-name:</strong>&nbsp;{{row.cfirstname}}<br/></span>
+                         <span ng-hide="{{row.deliverymode==1}}"> <strong>Customer last-name:</strong>&nbsp;{{row.clastname}}<br/></span>
+                         <span ng-hide="{{row.deliverymode==1}}"> <strong>Customer Address:</strong>&nbsp;{{row.clastname}}<br/></span>
+                          <span ng-hide="{{row.deliverymode==1}}"><strong>Customer Postcode:</strong>&nbsp;{{row.cpostcode}}<br/></span>
+                        <strong>Customer phone:</strong>&nbsp;{{row.cphone}}<br/>
+                        <strong>Order_state:</strong>&nbsp;{{row.order_state}}&nbsp;<span ng-show="row.order_state == 15">(Order cancelled)</span><br/>
+                        <strong>Paid:</strong>&nbsp; {{row.paid}}<br/>
+                        <strong>Time:</strong>&nbsp;{{row.time}}<br/>
+                        <strong>Currency:</strong>&nbsp;{{row.currency}}<br/>
+                        <strong>App fee</strong>&nbsp;{{row.app_fee}}<br/>
+                        <strong>App fee currency:</strong>&nbsp;{{row.app_fee_cur}}<br/>
+                        <strong>Currency:</strong>&nbsp;{{row.app_fee_vat}}<br/>
+                        <strong>T fee:</strong>&nbsp;{{row.t_fee}}<br/>
+                        <strong>T fee currency:</strong>&nbsp;{{row.t_fee_cur}}<br/>
+                        
+                         <span ng-hide="{{row.deliverymode==1}}"> <strong>Delivery rate:</strong>&nbsp;{{row.deliveryrate}}<br/></span>
+                         <span ng-hide="{{row.deliverymode==1}}"> <strong>Delivery tax:</strong>&nbsp;{{row.deliverytax}}<br/></span>
+                         <strong>Subtotal</strong>&nbsp;{{row.subtotal}}<br/>
+                          <strong>Vat</strong>&nbsp;{{row.vat}}%<br/>
+                        <strong>Total price:</strong>&nbsp;{{row.total}}<br/>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table class="table responsive">
+                                <colgroup>
+                                    <col width="10%"></col>
+                                    <col width="45%"></col>
+                                    <col width="25%"></col>
+                                    <col width="25%"></col>
+                                </colgroup>
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Product name</th>
+                                        <th>Quantity</th>
+                                        <th style="text-align:right;">Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="order in row.products">
+                                        <td>{{$index + 1}} </td>
+                                        <td>{{order.pname}}</td>
+                                        <td>{{order.qty}}</td>
+                                        <td style="text-align:right"><strong>{{currencySymbole}}{{order.price}}</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 text-center">
+                    <button class="btn btn-info" ng-click="print()">Print</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

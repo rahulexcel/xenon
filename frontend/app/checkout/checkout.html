@@ -2,11 +2,11 @@
 <div class="container" style="margin-top:1.5em;margin-bottom:1.5em;">
     <div class="topContainer">
         <div class="row bgwhite TOP">
-            <div class="col-sm-3 col-xs-12">
-                <div class="image not-show-main-logo" >
-                    <img ng-src="{{picImage}}" class='img-thumbnail img-responsive logo'>
+              <div class="col-sm-3 col-xs-12 not-show-main-logo">
+                    <div class="image">
+                        <img ng-src="{{picImage}}" class='img-thumbnail img-responsive'><!-- //removed class logo -->
+                    </div>
                 </div>
-            </div>
             <div class="col-sm-6 col-xs-12 text-center">
                 <h3 class="heading topheading">{{location_name}} 
                     <p class="store-desc">{{location_addr}}, {{location_lcity}},  {{location_lpostcode}}, {{location_lstate}} <br><i class="glyphicon glyphicon-earphone"></i> {{location_lphone}} | {{location_openingtime}}-{{location_closingtime}}</p>
@@ -18,9 +18,9 @@
         <div class='row to-do'>
             <div>
                 <div class="col-sm-8 bgwhite leftCtnr">
-                    <div class="text-center" ng-show="success_message">
+                    <div class="text-center"  ng-show="success_message">
                         <h2 class="order-no"># {{orderNo}}</h2>
-                        <span  class="bold"><span translate="thankyou">Thank You </span>{{fullname}}!<span translate="We have registered your order and will soon start to prepare it for you. You will receive an email confirming from us shortly."> </span>
+                        <span  class="bold"><span translate="thankyou"></span>&nbsp;<br/>"{{fullname}}"<br/><span translate="We have registered your order and will soon start to prepare it for you. You will receive an email confirming from us shortly."> </span>
                         </span><br><br>
                         <a class="btn btn-info" href="#/frontend" translate="Go To Home Page"></a>
                     </div>
@@ -163,7 +163,7 @@
                                 <div class="col-sm-6 no-pad-left-right" ng-show="existing_card">
                                     <form id="payment-form" name="userForm" novalidate>
                                         <div class="form-group" ng-class="{ 'has-error': userForm.name.$touched && userForm.name.$invalid }">
-                                            <input type="text" class="form-control input-lg" maxlength="20" data-stripe="number" ng-model="cardnumber" name="number" placeholder="{{ 'Card number' | translate }}" ng-blur="card_error()" ng-minlength="16" required>
+                                            <input type="text" class="form-control input-lg" maxlength="20" data-stripe="number" ng-model="cardnumber" name="number" placeholder="{{ 'Card number' | translate }}" ng-blur="card_error()" ng-minlength="12" required>
                                             <div class="help-block" ng-messages="userForm.number.$error" ng-if="userForm.number.$touched">
                                                 <p ng-message="minlength" ><span translate="Card number is too short."></span></p>
 
@@ -235,7 +235,7 @@
                                 <div class="col-sm-6 no-pad-left-right" ng-show="newcard">
                                     <form name="newcardform" id="cardnew">
                                         <div class="form-group" ng-class="{ 'has-error': newcardform.name.$touched && newcardform.name.$invalid }">
-                                            <input type="text" class="form-control input-lg" size="20" data-stripe="number" ng-model="newcardnumber" placeholder="{{ 'Card number' | translate }}" ng-blur="card_error()" ng-minlength="16" name="number" required>
+                                            <input type="text" class="form-control input-lg" size="20" data-stripe="number" ng-model="newcardnumber" placeholder="{{ 'Card number' | translate }}" ng-blur="card_error()" ng-minlength="12" name="number" required>
                                             <div class="help-block" ng-messages="newcardform.number.$error" ng-if="newcardform.number.$touched">
                                                 <p ng-message="minlength"><span  translate="Card number is too short."></span></p>
 
@@ -256,7 +256,7 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <input type="text" class="form-control input-lg" ng-model="fullnamenew" placeholder="{{ 'Name on card' | translate }}" name="fullname" required>
+                                            <input type="text" class="form-control input-lg" ng-model="fullnamenew" placeholder="{{ 'Name on card' | translate }}" name="name" required>
                                         </div>
                                         <div class="form-group">
                                             <span class="payment-errors" style="color: red" ng-bind="payment_errors"></span>
@@ -309,17 +309,40 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
                                 <div class="cart-containt">
-                                    <div class="row">
-                                        <div class="col-sm-12 subtotal pad-2-left-right">
-                                            <div class="pull-left">Subtotal</div>
-                                            <div class="pull-right">{{total_price}} <!--{{currency}}-->{{currencysymbol}}</div>
-                                        </div>
-                                        <div class="col-sm-12 col-xs-12 pad-2-left-right">
-                                            <div class="bold pull-left" translate="total"></div>
-                                            <div class="bold pull-right">{{total_price}} <!--{{currency}}-->{{currencysymbol}}</div>
+                                   <div class="row">
+                                    <div class="col-sm-6 col-xs-6"style="
+                                         padding-bottom: 17px;
+                                         ">
+                                        <div class="pull-left">
+                                            <div style="text-align: left;padding-left:6px;" translate="subtotal"></div>
+                                            <div style="text-align: left;padding-left:6px;" translate="vat(inc.)"></div>
+                                            <div style="text-align: left;padding-left:6px;"  translate="Delivery Price" ng-show="{{shipping_method=='Delivery'}}"></div>
+                                            <div style="text-align: left;padding-left:6px;"  translate="Delivery Tax" ng-show="{{shipping_method=='Delivery'}}"></div>
+                                            <div class="bold" style="
+                                                 font-size: medium;
+                                                 padding-top: 20px;
+                                                 padding-left:6px;
+                                                 text-align: left;
+                                                 "
+                                                 >Total</div>
                                         </div>
                                     </div>
+                                    <div class="col-sm-6 col-xs-6">
+                                        <div class="pull-right">
+                                            <div>{{total_price}} <!--{{currency}}-->{{currencysymbol}}</div>
+                                            <div>{{vat}} <!--{{currency}}-->{{currencysymbol}}</div>
+                                            <div ng-show="{{shipping_method=='Delivery'}}">&nbsp;&nbsp;&nbsp;{{deliveryPrice}} {{currencysymbol}}</div>
+                                            <div ng-show="{{shipping_method=='Delivery'}}">&nbsp;&nbsp;&nbsp;{{deliveryTax}}%</div>
+                                            <div class="bold"style="
+                                                 font-size: medium;     padding-right: 11px;  padding-top: 20px;
+
+                                                 ">{{grandTotal_price}} <!--{{currency}}-->{{currencysymbol}} </div>
+                                        </div>
+                                    </div>
+                                   
+                                </div>
                                 </div>
                                 <div class='col-sm-12 col-xs-12 text-center poweredByFooter'>
                                     <h4 style="margin-bottom:0px;" translate="poweredby"></h4>

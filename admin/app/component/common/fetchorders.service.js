@@ -68,7 +68,7 @@
                                     });
                             }
                         console.log('calling from service');
-                        }, 60000);  
+                        }, 180000);  
 
 
                         // var lid = userData.locations[0];

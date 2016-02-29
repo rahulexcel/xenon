@@ -7,9 +7,12 @@
     "Verify order": "1.VERIFY ORDER",
     "deliverydetails": "2.DELIVERY DETALJER",
     "paymentdetails": "3.Payment DETALJER",
-    "hour":"Timme",
-    "minutes":"Minuter",
-    "Pickup":"Plocka upp",
-    "Delivery":"Leverans"
+    "hour": "Timme",
+    "minutes": "Minuter",
+    "Pickup": "Plocka upp",
+    "Delivery": "Leverans",
+    "Store is closed.": "Store är stängd.",
+    "Delivery Price": "leverans Pris",
+    "Delivery Tax": "leverans Tax"
 
 }

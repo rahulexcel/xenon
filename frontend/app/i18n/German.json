@@ -10,7 +10,10 @@
     "hour":"Stunde",
     "minutes":"Protokoll",
     "Pickup":"Abholen",
-    "Delivery":"Lieferung"
+    "Delivery":"Lieferung",
+    "Store is closed.":"Store ist geschlossen.",
+    "Delivery Price":"Lieferung Preis",
+    "Delivery Tax":"Lieferung Besteuern"
 }
 
 

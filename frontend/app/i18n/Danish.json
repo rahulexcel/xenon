@@ -11,6 +11,9 @@
     "minutes":"Minutter",
     "Pickup":"Saml op",
     "Delivery":"Levering",
-    "Store is closed.":"Store is closed."
+    "Store is closed.":"Store er lukket .",
+    "Delivery Price":"Levering Pris",
+    "Delivery Tax":"Levering Skat",
+    "comment":"Comment:"
 
 }

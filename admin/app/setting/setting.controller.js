@@ -3,7 +3,7 @@
 
     angular.module('xenon-app')
             .controller('settingController', settingController);
-    function settingController($scope, countryData, calanderService, $state, dropdownService, storeinfoLocationsIdFactory, localStorageService) {
+    function settingController($scope, countryData, calanderService, $state, arrayService, dropdownService, storeinfoLocationsIdFactory, localStorageService) {
         console.log("Setting Page");
         $scope.settingSpinner = true;
         $scope.showSettingContent = false;
@@ -36,13 +36,13 @@
             $scope.tax = data.ltax;
             $scope.includeTax = data.ltaxall;
             $scope.transalation = data.lstorelang;
-            if(data.ldeliverymode == 1){
+            if (data.ldeliverymode == 1) {
                 $scope.deliveryModePic = true;
                 $scope.deliveryModeDel = false;
-            } else if(data.ldeliverymode == 2){
+            } else if (data.ldeliverymode == 2) {
                 $scope.deliveryModePic = false;
                 $scope.deliveryModeDel = true;
-            } else if(data.ldeliverymode == 3){
+            } else if (data.ldeliverymode == 3) {
                 $scope.deliveryModePic = true;
                 $scope.deliveryModeDel = true;
             }
@@ -86,13 +86,13 @@
                     $scope.errorForTaxField = false;
                     $scope.errorday_in_schedule_view = false;
                     $scope.spinner = true;
-                    if($scope.deliveryModeDel && $scope.deliveryModePic){
+                    if ($scope.deliveryModeDel && $scope.deliveryModePic) {
                         $scope.deliveryMode = 3;
-                    } else if($scope.deliveryModeDel){
+                    } else if ($scope.deliveryModeDel) {
                         $scope.deliveryMode = 2;
-                    } else if($scope.deliveryModePic){
+                    } else if ($scope.deliveryModePic) {
                         $scope.deliveryMode = 1;
-                    } else{
+                    } else {
                         $scope.deliveryMode = 1;
                     }
                     var query = storeinfoLocationsIdFactory.update({}, {
@@ -111,11 +111,16 @@
                     query.$promise.then(function(data) {
                         console.log(data);
                         localStorageService.set('storeInfo', data.data);
-                        if(data.data.lcompleted.length < 3){
+                        if (data.data.lcompleted.length < 3) {
                             $state.go('dashboard.welcome');
                         }
-                        
+
                         $scope.spinner = false;
+                       
+                       
+                         $scope.lastupdated = arrayService.currenttime();
+
+
                     });
                 }
             }
@@ -190,6 +195,7 @@
                 $scope.lclosed = false;
             }
         }
-    };
+    }
+    ;
 
 })();

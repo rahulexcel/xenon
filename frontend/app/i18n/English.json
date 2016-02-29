@@ -43,7 +43,11 @@
     "minutes":"Minutes",
     "Pickup":"Pickup",
     "Delivery":"Delivery",
-    "Store is closed.":"Store is closed."
+    "Store is closed.":"Store is closed.",
+    "Delivery Price":"Delivery Price",
+    "Delivery Tax":"Delivery Tax",
+    "vat(inc.)":"Vat(inc.)",
+    "comment":"Comment:"
 
 
 }

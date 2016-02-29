@@ -17,6 +17,7 @@
     function existingcharge($resource, Configurations, $localStorage, timeStorage, $rootScope) {
         return {
             update: function(token) {
+                console.log(token);
                 return $resource(Configurations.Hostserver + '/existingcharge', {
                 }, {
                     'query': {
@@ -28,6 +29,18 @@
                         headers: {'Authorization': 'Bearer ' + token}
                     }
 
+                });
+            },
+            save: function(){
+                return $resource(Configurations.Hostserver + '/existingcharge', {
+                }, {
+                    'query': {
+                        method: 'POST',
+                        params: {
+                            // 'customerid':"@customerid",
+                            //  'orderid':"@orderid"    
+                        }
+            }
                 });
             }
         };
