@@ -230,9 +230,14 @@
                                 <p style="color:red" ng-show="errorday_in_schedule_view">Please set opening times</p>
                             </div>   
                             <div class="form-block">
+                                
+                                
                                 <button class="btn btn-blue" ng-click="save()">Save <span ng-show="spinner">
                                     <i class="fa fa-spin fa-spinner"></i>
                                 </span></button>
+                            </div>
+                            <div class="form-block">
+                                <span>{{lastupdated}}</span>
                             </div>
                         </div>
                     </form>

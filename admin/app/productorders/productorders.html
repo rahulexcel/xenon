@@ -8,11 +8,26 @@
                         <div class="col-sm-6">
                             <h1 class="panel-title"><strong>Orders</strong></h1>
                         </div>
-                        <div class="col-sm-6">
-                            <!-- <button class="btn btn-blue" ng-click="addOrder()">Add Orders</button> -->
+                        <div class="col-sm-5">
+                            <div class="form-group">
+                                <button class="btn btn-info" ng-click="get_data_for_print()">Print Orders</button>
+                            </div> 
                         </div>
                     </div>
+                    <form class="form-inline" role="form">
+                        <div class="form-group">
+                            <label for="email">Select Date:</label>
+                            <div id="reportrange"  style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
+                                <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
+                                <span></span> <b class="caret"></b>
+                            </div>
+                        </div>
+
+                    </form>
+
                 </div>
+
+
             </div>
             <div class="panel-body">
                 <form class="form-horizontal ng-pristine ng-valid" role="form">
@@ -45,10 +60,10 @@
                                         <td ng-click="orderId(orders._id, orders.order_state)">{{orders.cphone}}</td>
                                         <td ng-click="orderId(orders._id, orders.order_state)">{{currencySymbole}}{{orders.total}}</td>
                                         <td ng-click="orderId(orders._id, orders.order_state)">
-                                        <i ng-show="orders.order_state == 3" class="mar-top-5 btn btn-success btn-circle"></i>
-                                        <i ng-show="orders.order_state == 2" class="mar-top-5 btn btn-danger btn-circle"></i>
-                                        <i ng-show="orders.order_state == 15" class="mar-top-5 btn btn-danger btn-circle" style="background-color: #ddd;border-color: #ddd;"></i>
-                                        <i ng-show="orders.order_state == 1" class="mar-top-5 btn btn-danger btn-circle"></i>
+                                            <i ng-show="orders.order_state == 3" class="mar-top-5 btn btn-success btn-circle"></i>
+                                            <i ng-show="orders.order_state == 2" class="mar-top-5 btn btn-danger btn-circle" style="margin-left: 0px;"></i>
+                                            <i ng-show="orders.order_state == 15" class="mar-top-5 btn btn-danger btn-circle" style="background-color: #ddd;border-color: #ddd; margin-left: 0px;"></i>
+                                            <i ng-show="orders.order_state == 1" class="mar-top-5 btn btn-danger btn-circle" ></i>
                                         </td>
                                     </tr>
                                 </tbody>

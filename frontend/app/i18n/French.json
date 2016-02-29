@@ -10,6 +10,9 @@
     "hour":"Heure",
     "minutes":"Minutes",
     "Pickup":"Ramasser",
-    "Delivery":"Livraison"
+    "Delivery":"Livraison",
+     "Store is closed.":"Store est fermé .",
+    "Delivery Price":"La livraison Prix",
+    "Delivery Tax":"La taxe de livraison"
 
 }

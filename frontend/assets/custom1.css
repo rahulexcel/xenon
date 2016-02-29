@@ -7,7 +7,7 @@
         color: rgb(131, 130, 138);
         display: block;
         line-height: 19.5px;
-        background-color:#EFF1F5;
+        background-color:white;
 
     }
     .glyphicon-th-list{
@@ -28,7 +28,7 @@
      float: left;	
     }*/
 
-
+    
 
 
     .topContainer{
@@ -411,7 +411,10 @@
     }
 
 
-
+    .container{
+        padding-left: 0px;
+        padding-right:0px;
+    }
 
 
 
@@ -422,8 +425,6 @@
         display: block;
         background: #fff;
         padding-top: 1px;
-        margin-left: 15px;
-        margin-right: 15px;
         margin-bottom: 10px;
     }
     .mar-top-28-mbl{

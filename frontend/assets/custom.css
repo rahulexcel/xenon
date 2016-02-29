@@ -275,9 +275,8 @@ i{
     padding-top:20px;
 }
 .cartheader-message{
-    /*padding: 15px;*/
-    min-height: 88px;
-    /*border-bottom: 1px solid black;*/
+    height: 88px;
+    overflow-y: scroll;
 }
 .cart-containt{
     padding-top: 15px;

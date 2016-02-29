@@ -15,11 +15,12 @@
                 }
                 Send_Array.push(obj);
             }
-             // console.log(Send_Array);
+            // //console.log(Send_Array);
             return Send_Array;
         }
         service.getProduct = function(response_products, category) {
-
+            console.log(response_products);
+            console.log(category);
             var Send_Array = [];
             for (var i = 0; i < response_products.length; i++) {
                 for (var k = 0; k < category.length; k++) {
@@ -28,6 +29,7 @@
                     }
                 }
             }
+            console.log(Send_Array);
             return Send_Array;
         }
         service.getPhoneNo = function(fullPhoneNo) {
@@ -38,31 +40,34 @@
                 }
             }
             phoneNo = fullPhoneNo.substring(dash + 1, fullPhoneNo.length);
-            // console.log(phoneNo);
+            // //console.log(phoneNo);
             return phoneNo;
         }
         service.showAllService = function(category, products) {
             var Send_Array = [];
-
+            //console.log(category);
+            //console.log(products);
             var obj = {};
-            // console.log(products);
+            // //console.log(products);
             for (var i = 1; i < category.length; i++) {
                 var arr = [];
                 var arr1 = [];
                 var arr2 = [];
                 var arr3 = [];
                 var arr4 = [];
+                for(var l=0; l< category[i].catproducts.length; l++){
                 for (var k = 0; k < products.length; k++) {
-                    if (products[k].pcatid == category[i]._id) {
+                    if (products[k]._id == category[i].catproducts[l]) {
                         arr.push(products[k].pname);
                         arr1.push(products[k].price);
                         arr2.push(products[k].pdesc);
                         arr3.push(products[k]._id);
                         // http://s3.amazonaws.com/ordermagic/{{row1.images[0]}}
-                                arr4.push(products[k].pimages);
+                        arr4.push(products[k].pimages);
 
                     }
                 }
+            }
                 var prdct = [];
                 for (var k = 0; k < arr.length; k++) {
                     var obj1 = {
@@ -84,7 +89,7 @@
             }
 
 
-            // console.log(Send_Array);
+            //console.log(Send_Array);
 
             return Send_Array;
         }
@@ -94,7 +99,7 @@
             for (var c = 0; c < cart.length; c++) {
                 sum = sum + cart[c].price;
             }
-//console.log(parseFloat(sum).toFixed(2));
+////console.log(parseFloat(sum).toFixed(2));
             return parseFloat(sum).toFixed(2);
         }
         service.openingTime = function(openingTime) {
@@ -124,31 +129,45 @@
             return sHours + ':00';
         }
         service.totalItemInCart = function(cartData) {
-            console.log(cartData);
+            //console.log(cartData);
             var totalItemInCart = 0;
             for (var i = 0; i < cartData.length; i++) {
-                console.log(cartData[i].count);
+                //console.log(cartData[i].count);
                 totalItemInCart = totalItemInCart + cartData[i].count;
             }
             return totalItemInCart;
         }
         service.CurrencySymbol = function(data) {
-           console.log(data);
+            //console.log(data);
             var flag = 0;
             var symbol;
             for (var i = 0; i < currencySymbol.length; i++) {
-                if (currencySymbol[i].cc == data.toLowerCase()||currencySymbol[i].cc == data.toUpperCase()) {
+                if (currencySymbol[i].cc == data.toLowerCase() || currencySymbol[i].cc == data.toUpperCase()) {
                     symbol = currencySymbol[i].symbol;
-                    flag=1;
+                    flag = 1;
                 }
             }
-            if(flag==0){
-                // console.log(data);
+            if (flag == 0) {
+                // //console.log(data);
                 return data;
-            }else{
-                // console.log(symbol);
+            } else {
+                // //console.log(symbol);
                 return symbol;
             }
+        }
+         service.checkday = function(data) {
+            console.log(data);
+             var now = new Date();
+            var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            var day = days[ now.getDay() ];
+            for(var i=0; i<data.lwots.length; i++){
+                if(data.lwots[i].day==day){
+                    return 0;
+                }else{
+                    return 1;
+                }
+            }
+           
         }
 
         return service;

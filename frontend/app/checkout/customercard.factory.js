@@ -9,6 +9,8 @@
 
         return {
             update: function(token) {
+                
+                console.log(token);
                 return $resource(Configurations.Hostserver + '/customercard/:customerid', {
                     'customerid': '@customerid'
                 }, {

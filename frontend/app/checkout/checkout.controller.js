@@ -15,6 +15,10 @@
         $scope.currency = $localStorage.shippingdata.currency;
         $scope.shipping_method = $localStorage.shippingdata.methodName;
         $scope.shipping_time = $localStorage.shippingdata.shipping_time;
+        $scope.vat=$localStorage.shippingdata.vat;
+        $scope.deliveryPrice=$localStorage.shippingdata.deliveryPrice;
+        $scope.deliveryTax=$localStorage.shippingdata.deliveryTax;
+        $scope.grandTotal_price=$localStorage.shippingdata.grandtotal;
         var on_load_response;
         var existing_customer;
         var smscode_response = false;
@@ -335,15 +339,16 @@
         $scope.pay_by_new_card = function() {
             $scope.pay_by_new_card_spinner = true;
             var country_code = angular.element($("#mobile-number").intlTelInput("getSelectedCountryData"));
-            var savedcard = existingcharge.save({
+             var savedcard = existingcharge.update($localStorage.smstoken1).query({}, {
                 customerid: customer_id,
                 orderid: $localStorage.Orders_response.orderid
             });
             savedcard.$promise.then(function(response) {
                 console.log(response);
                 after_payment(response);
-                $scope.pay_by_new_card_spinner = false;
+                $scope.payment_spinner = false;
             });
+
         }
         var handler = StripeCheckout.configure({
             //key: 'pk_test_6pRNASCoBOKtIshFeQd4XMUh',

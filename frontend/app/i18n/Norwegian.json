@@ -10,7 +10,10 @@
     "hour":"Time",
     "minutes":"minutter",
     "Pickup":"Plukke opp",
-    "Delivery":"Leveranse"
+    "Delivery":"Leveranse",
+    "Store is closed.":"Store er stengt.",
+    "Delivery Price":"levering Pris",
+    "Delivery Tax":"levering Skatte"
 
 
 }

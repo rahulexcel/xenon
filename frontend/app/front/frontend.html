@@ -8,13 +8,7 @@
                     <img src="{{picImage}}"></span>
             </div>
             <div class="col-xs-8 no-pad-left nav-store-name-container">
-
                 <span class="nav-store-name"> {{location_name}}</span>
-
-
-
-
-
                 <span class="sticky-cart pull-right" ng-click="clickOnCart()" ng-if="(productInCart)">
                     <notification-icon count="productInCart">
                         <i class="fa fa-shopping-cart fa-2x" style="color:rgb(239, 110, 84);"></i>
@@ -101,7 +95,8 @@
                                                 <img ng-src="http://s3.amazonaws.com/ordermagic/{{image}}" class="img-responsive center-image">
                                             </div>
                                             <div class="col-sm-6  col-xs-10 no-pad vcenter productName">
-                                                <h4 class="heading">{{row1.pname}} 
+                                                <h4 class="heading">{{row1.pname}} <br
+                                                        >
                                                     <span class="prod-desc">{{row1.desc}}</span>
                                                 </h4>
                                             </div>
@@ -160,7 +155,7 @@
                                 <div class="form-group">
                                     <select class="form-control input-lg text-center"  ng-model="method" ng-change="method_change()">
                                         <!-- <option ng-repeat="row in delivery_method" value="{{row}}">{{row}}</option> -->
-                                        <option ng-repeat="row in delivery_method" value="{{row}}">{{row | translate }}</option>
+                                        <option ng-repeat="row in delivery_method" value="{{row}}">{{row| translate }}</option>
                                     </select>
                                 </div>
 
@@ -221,8 +216,9 @@
                                          ">
                                         <div class="pull-left">
                                             <div style="text-align: left;padding-left:6px;" translate="subtotal"></div>
-                                            <div style="text-align: left;padding-left:6px;" ng-show="deliveryPriceTax">Delivery Price</div>
-                                            <div style="text-align: left;padding-left:6px;" ng-show="deliveryPriceTax">Delivery Tax</div>
+                                            <div style="text-align: left;padding-left:6px;" translate="vat(inc.)"></div>
+                                            <div style="text-align: left;padding-left:6px;" ng-show="deliveryPriceTax" translate="Delivery Price">Delivery Price</div>
+                                            <div style="text-align: left;padding-left:6px;" ng-show="deliveryPriceTax" translate="Delivery Tax">Delivery Tax</div>
                                             <div class="bold" style="
                                                  font-size: medium;
                                                  padding-top: 20px;
@@ -235,6 +231,7 @@
                                     <div class="col-sm-6 col-xs-6">
                                         <div class="pull-right">
                                             <div>{{total_price}} <!--{{currency}}-->{{currencysymbol}}</div>
+                                            <div>{{vat}} <!--{{currency}}-->{{currencysymbol}}</div>
                                             <div ng-show="deliveryPriceTax">&nbsp;&nbsp;&nbsp;{{deliveryPrice}} {{currencysymbol}}</div>
                                             <div ng-show="deliveryPriceTax">&nbsp;&nbsp;&nbsp;{{deliveryTax}}%</div>
                                             <div class="bold"style="
@@ -246,6 +243,13 @@
                                     <div class="col-sm-12 col-xs-12" ng-if="storeClosed">
                                         <h3 style="color:red;" translate="Store is closed."></h3>
                                     </div>
+                                    <div class="col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label for="comment" class="pull-left" translate="comment"></label>
+                                            <textarea class="form-control" rows="3" id="comment" ng-model="comments"></textarea>
+                                        </div>
+                                    </div>
+
                                     <button class='col-sm-12 col-xs-12 rightmenufooter text-center'  ng-style="{'background-color' : (cart.length > 0 && !not_allow_checkout) ? 'rgb(239, 110, 84)' : '#bbbdc0'}" ng-click="sendOrder()" ng-disabled="not_allow_checkout" >
                                         CHECKOUT 
                                         <span ng-show="checkout_clicked">

@@ -89,6 +89,12 @@
                             templateUrl: 'app/productorders/productorders.html',
                             controller: 'productOrdersController',
                         }).
+                        state('dashboard.print', {
+                            url: '/print',
+                            templateUrl: "app/printallorders/print.html",
+                            controller:"printctrl"
+                         
+                        }).
                         state('dashboard.orderDetails', {
                             url: '/orderDetails',
                             templateUrl: 'app/orderdetails/orderdetails.html',

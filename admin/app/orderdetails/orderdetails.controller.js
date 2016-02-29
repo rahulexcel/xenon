@@ -4,9 +4,9 @@
     angular.module('xenon-app')
             .controller('orderDetailsController', orderDetailsController);
     function orderDetailsController($scope, $rootScope, $timeout, orderDetailsFactory, cancelOrderFactory, $state, orderDetailsService, localStorageService, $localStorage, arrayService) {
-        console.log("Order Details Page");
+        //console.log("Order Details Page");
         var singleOrderId = localStorageService.get('singleOrderId');
-        console.log("Single Order id " + singleOrderId);
+        //console.log("Single Order id " + singleOrderId);
         if (singleOrderId) {
             $scope.loadingSpinner = true;
             $scope.hideMainContent = false;
@@ -14,12 +14,12 @@
             query.$promise.then(function(data) {
                 $scope.loadingSpinner = false;
                 $scope.hideMainContent = true;
-                console.log(data);
+                //console.log(data);
                 $scope.orderDetails = data.products;
                 $scope.orderId = data._id;
                 $scope.ordernr = data.ordernr;
-                if(data.cfirstname && data.clastname){
-                $scope.cname = data.cfirstname + " " + data.clastname;
+                if (data.cfirstname && data.clastname) {
+                    $scope.cname = data.cfirstname + " " + data.clastname;
                 }
                 $scope.cphone = data.cphone;
                 $scope.totalAmount = data.subtotal;
@@ -35,42 +35,56 @@
                 $scope.storeName = storeInfo.lname;
                 $scope.currencySymbole = arrayService.CurrencySymbol($localStorage.storeInfo.lcurrency);
                 $scope.clientStreetAddress = data.cstreetaddr;
+                $scope.comment = data.comments;
+
+                $scope.deliverytime = data.time;
+                $scope.deliveryprice = data.deliveryrate;
+                $scope.deliverytax = data.deliverytax;
+                console.log($scope.comment);
+                
+                if (angular.isDefined($scope.comment)) {
+                    $scope.comments = true;
+                }
+                 if (angular.isDefined($scope.deliveryprice)) {
+                    $scope.mode2 = true;
+                }
             });
         }
 
         // $scope.deleteOrder = function(){
-        //  console.log($rootScope.singleOrderId);
+        //  //console.log($rootScope.singleOrderId);
         //  var query = orderDetailsFactory.deleteOrder({"orderId":$rootScope.singleOrderId});
         //  query.$promise.then(function(data) {
-        //                 console.log(data);
+        //                 //console.log(data);
         //                 $state.go('dashboard.productOrders');
         //             });
         // };
 
-        $scope.cancelOrder = function(){
-            console.log($scope.orderId);
+        $scope.cancelOrder = function() {
+            //console.log($scope.orderId);
             $scope.cancelOrderSpinner = true;
-         var query = cancelOrderFactory.get({"orderId":$scope.orderId});
-         query.$promise.then(function(data) {
-                        console.log(data);
-                        $state.go('dashboard.productOrders');
-                      //  $state.go('dashboard.productOrders');
-                    });
+            var query = cancelOrderFactory.get({"orderId": $scope.orderId});
+            query.$promise.then(function(data) {
+                //console.log(data);
+                $state.go('dashboard.productOrders');
+                //  $state.go('dashboard.productOrders');
+            });
         };
         $scope.backTolist = function() {
             delete $localStorage.singleOrderId;
             $state.go('dashboard.productOrders');
         };
-        $scope.print = function(){
-            console.log('print');
+        $scope.print = function() {
+            //console.log('print');
             $scope.onPrint = true;
             $timeout(function() {
-            window.print();
+                window.print();
             }, 0);
             $timeout(function() {
-            $scope.onPrint = false;
+                $scope.onPrint = false;
             }, 0);
         };
-    };
+    }
+    ;
 
 })();

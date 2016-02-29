@@ -1,6 +1,7 @@
 <div class="text-center" ng-show="loadingSpinner" style="margin-top:15%;">
     <h1><i class="fa fa-spin fa-spinner"></i></h1>
 </div>
+  
 <div class="row" ng-show="hideMainContent">
     <div class="col-sm-2"></div>
     <div class="col-sm-8">
@@ -17,13 +18,18 @@
             </div>
             <div class="panel-body">
                 <div class="row">
-                    <div class="col-sm-8">
+                    <div class="col-sm-5">
                         <h4><span ng-hide="orderState == 15">Invoice</span><span ng-show="orderState == 15" style="color:red;">Order Cancelled</span></h4>
                         <h5>Order No: {{ordernr}}</h5>
+                        <div ng-show="comments">
+                        <span style="font-weight: 600;">Comment:</span><br/>
+                       {{comment}}
+                        
+                        </div>
                     </div>
                     <div class="col-sm-2 pull-right">
-                        <button ng-hide="orderState == 15" class="btn btn-danger pull-right" confirmed-click="cancelOrder()" 
-    ng-confirm-click="Are you sure you want to cancel the order?"><strong ng-hide="onPrint">Cancel Order <i ng-show="cancelOrderSpinner" class="fa fa-spin fa-spinner"></i></strong></button>
+                        <button  class="btn btn-danger pull-right" ng-hide="orderState == 15" data-toggle="modal" data-target="#myModal"
+    ><strong ng-hide="onPrint">Cancel Order <i ng-show="cancelOrderSpinner" class="fa fa-spin fa-spinner"></i></strong></button>
                     </div>
                 </div>
                 <div class="row">
@@ -78,7 +84,7 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th style="text-align:center;">Products</th>
+                                    <th style="text-align:left;">Products</th>
                                     <th>Quantity</th>
                                     <th style="text-align:right;">Price</th>
                                 </tr>
@@ -100,11 +106,21 @@
                                     <td colspan="2">
                                         {{storeAddress}} <br>{{storeCountry}} <br> P: {{storePhone}} <br> {{storeName}} <br>{{storeEmail}}
                                     </td>
-                                    <td colspan="2" style="text-align:right">
+                                    <td colspan="2" style="text-align:left; padding-left:50px;">
+                                        Delivery time: <strong>{{deliverytime}}</strong><br>
                                         Sub - Total amount: <strong>{{currencySymbole}}{{totalAmount}}</strong><br>
-                                        VAT: <strong> {{vat}}%</strong><br>
+                                        VAT: <strong> {{vat}}%</strong>
+                                        <div ng-show="mode2">
+                                          
+                                        Delivery price: <strong>{{currencySymbole}}{{deliveryprice}}</strong><br>
+                                        Delivery tax: <strong>{{deliverytax}}%</strong>
+                                           <br>
+                                        </div>
+                                     
                                         Discount: <strong>......</strong><br>
                                         Grand Total: <strong>{{currencySymbole}}{{grandTotalAmount}}</strong><br>
+                                      
+                                       
                                     </td>
                                 </tr>
                             </tbody>
@@ -119,3 +135,20 @@
     </div>
     <div class="col-sm-2"></div>
 </div>
+ <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                   
+                    <div class="modal-body">
+
+                      Are you sure you want to cancel the order? Customer will be refunded the full amount that they have paid for this order.
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cancelOrder()">YES
+              </button>
+                        <button type="button" class="btn btn-default"  data-dismiss="modal">NO</button>
+                    </div>
+                </div>
+            </div>
+        </div>

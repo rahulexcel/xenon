@@ -3,24 +3,32 @@
 
     angular.module('xenon-app')
             .controller('productOrdersController', productOrdersController);
-    function productOrdersController($scope, addOrderFactory, $localStorage, $interval, fetchOrdersService, localStorageService, orderListFactory, $rootScope, $state, orderDetailsFactory, arrayService) {
+    function productOrdersController($scope, addOrderFactory, $localStorage, orders, $interval, fetchOrdersService, localStorageService, orderListFactory, $rootScope, $state, orderDetailsFactory, arrayService) {
         console.log("Product Orders Page");
         var userData = localStorageService.get('userData');
         var eid = userData.eid;
         var lid = userData.locations[0];
         var cid = userData.userid;
         $scope.spinner = true;
+
         var orderAm = [];
         var totalAmount;
         onpageLoadApi();
-        function onpageLoadApi(){
+        function onpageLoadApi() {
             var query = orderListFactory.query({"storeId": lid});
             query.$promise.then(function(data) {
-                    $scope.orderList = data;
-                    $scope.currencySymbole = arrayService.CurrencySymbol($localStorage.storeInfo.lcurrency);
-                    $scope.spinner = false;
+//                $scope.orderList = data;
+                $scope.currencySymbole = arrayService.CurrencySymbol($localStorage.storeInfo.lcurrency);
+                $scope.spinner = false;
             });
         }
+
+        $scope.get_data_for_print = function() {
+            $state.go('dashboard.print');
+
+        }
+
+
 
         $scope.addOrder = function() {
             var query = addOrderFactory.save({
@@ -40,17 +48,17 @@
             });
         };
         $scope.orderId = function(orderId, order_state) {
-            if(order_state == 15 || order_state == 3){
+            if (order_state == 15 || order_state == 3) {
                 localStorageService.set('singleOrderId', orderId);
                 $state.go('dashboard.orderDetails');
-            } else{
-                var query = orderDetailsFactory.editOrder({"orderId": orderId,"order_state":3});
-                    query.$promise.then(function(data) {
-                        fetchOrdersService.newOrders();
-                        //console.log(data);
-                    });
-                    localStorageService.set('singleOrderId', orderId);
-                    $state.go('dashboard.orderDetails');
+            } else {
+                var query = orderDetailsFactory.editOrder({"orderId": orderId, "order_state": 3});
+                query.$promise.then(function(data) {
+                    fetchOrdersService.newOrders();
+                    //console.log(data);
+                });
+                localStorageService.set('singleOrderId', orderId);
+                $state.go('dashboard.orderDetails');
             }
         };
         $scope.deleteOrder = function(orderId, index) {
@@ -62,15 +70,77 @@
                 // $scope.orderList.splice(index, 1);
             });
         };
-      var interval =  $interval(function() {
-        if(!$localStorage.userData)
-            $interval.cancel(interval);
-        else
-            onpageLoadApi();
+        var interval = $interval(function() {
+            if (!$localStorage.userData)
+                $interval.cancel(interval);
+            else
+                onpageLoadApi();
             console.log('calling from page');
-        }, 60000); 
+        }, 60000);
+        var flag = 1;
+        $(function() {
+            function cb(start, end) {
+                flag++;
+                console.log(flag);
+                $scope.startdate = Date.parse(end);
+                $scope.enddate = Date.parse(start);
+                $scope.spinner = true;
+                getOrders(flag, $scope.startdate, $scope.enddate);
 
+                $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+            }
+            cb(moment().subtract(0, 'days'), moment());
+
+            $('#reportrange').daterangepicker({
+                ranges: {
+                    'Today': [moment(), moment()],
+                    'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                    'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                    'This Month': [moment().startOf('month'), moment().endOf('month')],
+                    'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                }
+            }, cb);
+
+        });
+        function getOrders(flag) {
+            if (flag == 2) {
+             $scope.enddate=new Date(moment().startOf('day')).getTime();
+              updatetime();
+            } else {
+                var query4 = orders.save({
+                    "to": $scope.startdate,
+                    "from": $scope.enddate
+                });
+                query4.$promise.then(function(data) {
+                    $scope.orderList = data.data;
+                    $scope.spinner = false;
+                    $rootScope.customerdata = data.data;
+                });
+            }
+        }
+          $interval(function() {
+        if($scope.enddate==new Date(moment().startOf('day')).getTime()){
+        updatetime();
+       
+       }else{
+           console.log("no");
+       }
+     }, 1000);
+     
+        function updatetime() {
+                var query5 = orders.save({
+                    "to": new Date().getTime(),
+                    "from": new Date(moment().startOf('day')).getTime()
+                });
+                query5.$promise.then(function(data) {
+                    $scope.orderList = data.data;
+                    $scope.spinner = false;
+                    $rootScope.customerdata = data.data;
+                     console.log('yesss');
+                });
+         
+        }
 
     };
-
 })();

@@ -10,6 +10,9 @@
     "hour":"Tunnin",
     "minutes":"Minuutin",
     "Pickup":"Noukkia",
-    "Delivery":"Toimitus"
+    "Delivery":"Toimitus",
+     "Store is closed.":"Store on suljettu .",
+    "Delivery Price":"Toimitus Hinta",
+    "Delivery Tax":"Toimitus Tax"
 
 }

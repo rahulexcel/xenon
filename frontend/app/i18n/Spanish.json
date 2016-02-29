@@ -10,6 +10,10 @@
     "hour":"Hora",
     "minutes":"Minutos",
     "Pickup":"Recoger",
-    "Delivery":"Entrega"
+    "Delivery":"Entrega",
+      "Store is closed.":"Tienda está cerrada .",
+    "Delivery Price":"Precio de entrega",
+    "Delivery Tax":"Impuesto sobre la entrega"
+
 
 }
