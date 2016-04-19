@@ -6,7 +6,6 @@
     angular.module('xenon-app')
             .controller('addProductController', addProductController);
     function addProductController($scope, uploadService,remainingStatusservice, categoryListFactory, addProductService, addProductFactory, Upload, localStorageService, $rootScope, productListFactory, productFactory, $state, imageUploadFactory) {
-        console.log("Add Product Page");
         var userData = localStorageService.get('userData');
         var lid = userData.locations[0];
         var after_load_image_response;
@@ -63,7 +62,7 @@
             $scope.productQuantity = 'Infinite';
         };
         $scope.editProduct = function() {
-            if ($scope.productName && $scope.productDescription && $scope.productPrice) {
+            if ($scope.productName &&  $scope.productPrice) {
                 $scope.spinner = true;
                 if ($scope.picImage == after_load_image_response) {
                     edit_product_after_uploader_response();
@@ -104,7 +103,7 @@
         }
 
         $scope.addProduct = function() {
-            if ($scope.productName && $scope.productDescription && $scope.selectedCategoryId && $scope.productPrice) {
+            if ($scope.productName && $scope.selectedCategoryId && $scope.productPrice) {
                 $scope.spinner = true;
                 if ($scope.picImage == after_load_image_response) {
                     send_data_after_uploader_response();

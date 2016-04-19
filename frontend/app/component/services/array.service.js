@@ -18,22 +18,21 @@
                 }
                 Send_Array.push(obj);
             }
-
-            // //console.log(Send_Array);
             return Send_Array;
         }
         service.getProduct = function (response_products, category) {
-            console.log(response_products);
-            console.log(category);
             var Send_Array = [];
             for (var i = 0; i < response_products.length; i++) {
                 for (var k = 0; k < category.length; k++) {
                     if (category[k] == response_products[i]._id) {
-                        Send_Array.push(response_products[i]);
+                        if(response_products[i].pinvdaily==true){
+                            if(response_products[i].pinv!==0){
+                                 Send_Array.push(response_products[i]);
+                            }                       
+                    }
                     }
                 }
             }
-            console.log(Send_Array);
             return Send_Array;
         }
         service.getPhoneNo = function (fullPhoneNo) {
@@ -44,14 +43,10 @@
                 }
             }
             phoneNo = fullPhoneNo.substring(dash + 1, fullPhoneNo.length);
-            // //console.log(phoneNo);
             return phoneNo;
         }
         service.showAllService = function (category, products) {
             var Send_Array = [];
-
-            console.log(category);
-            console.log(products);
             var obj = {};
            
             for (var i = 0; i < category.length; i++) {
@@ -62,14 +57,18 @@
                 var arr4 = [];
                 for (var l = 0; l < category[i].catproducts.length; l++) {
                     for (var k = 0; k < products.length; k++) {
-                        if (products[k]._id == category[i].catproducts[l]) {
-                            arr.push(products[k].pname);
+                        if (products[k]._id == category[i].catproducts[l] ) {
+                           if(products[k].pinvdaily==true){
+                            if(products[k].pinv!==0){
+                                arr.push(products[k].pname);
                             arr1.push(products[k].price);
                             arr2.push(products[k].pdesc);
                             arr3.push(products[k]._id);
                             arr4.push(products[k].pimages);
-                            //                       productforuncat.splice(1,k);
 
+                            }
+                            
+                        }
                         }
                     }
                 }
@@ -92,20 +91,7 @@
                 Send_Array.push(obj);
 
             }
-//            var r = [];
-//            for (var i = 0; i < products.length; i++) {
-//
-//                if (products[i].pcatid == undefined) {
-//                    r.push(products[i]);
-//                    //console.log(products[i].pname);
-//                }
-//            }
-//            var obj2 = {
-//                'name': '',
-//                'products': r
-//            }
-//            Send_Array.push(obj2);
-//            console.log(Send_Array);
+
             return Send_Array;
         }
 
@@ -114,7 +100,6 @@
             for (var c = 0; c < cart.length; c++) {
                 sum = sum + cart[c].price;
             }
-////console.log(parseFloat(sum).toFixed(2));
             return parseFloat(sum).toFixed(2);
         }
         service.openingTime = function (openingTime) {
@@ -144,16 +129,13 @@
             return sHours + ':00';
         }
         service.totalItemInCart = function (cartData) {
-            //console.log(cartData);
             var totalItemInCart = 0;
             for (var i = 0; i < cartData.length; i++) {
-                //console.log(cartData[i].count);
                 totalItemInCart = totalItemInCart + cartData[i].count;
             }
             return totalItemInCart;
         }
         service.CurrencySymbol = function (data) {
-            //console.log(data);
             var flag = 0;
             var symbol;
             for (var i = 0; i < currencySymbol.length; i++) {
@@ -163,15 +145,12 @@
                 }
             }
             if (flag == 0) {
-                // //console.log(data);
                 return data;
             } else {
-                // //console.log(symbol);
                 return symbol;
             }
         }
         service.checkday = function (data) {
-            console.log(data);
             var now = new Date();
             var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
             var day = days[ now.getDay() ];
@@ -189,7 +168,6 @@
             return flag;
         }
         service.open = function (data, des) {
-            console.log(data);
             var now = new Date();
             var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
             var day = days[ now.getDay() ];
@@ -221,14 +199,9 @@
 
                 if (products[i].pcatid == undefined) {
                     r.push(products[i]);
-                    //console.log(products[i].pname);
                 } else {
-                    console.log('abcd');
                 }
             }
-
-
-            console.log(Send_Array);
             return r;
         }
 

@@ -54,7 +54,6 @@
                 locationID: locationID.locationID
             });
             query.$promise.then(function(data) {
-                console.log(data);
                 timeStorage.set('frontStoreData', data, 1);
                 onRefreshData = data;
                 OnpageLoadData = data;
@@ -98,9 +97,6 @@
         }
 
         function checkoutButtonValidation() {
-            console.log($scope.dropdown_days);
-            console.log($scope.time);
-            console.log(timeService.todayDay());
             var closedDay = timeService.closedDaysCheckoutButton($scope.ldateclosed);
            
             if (closedDay || !$scope.time) {
@@ -123,11 +119,6 @@
                    
                      updatetime(onRefreshData);
                 }
-                
-                
-                
-                
-
         }
         function check_local_storage() {
             if (angular.isDefined($localStorage.Orders_sent)) {
@@ -144,7 +135,6 @@
                 locationID: locationID.locationID
             });
             query1.$promise.then(function(data1) {
-                //console.log(data1);
                 response_categories = data1;
                 catlength = data1.length;
                 if (catlength < 6) {
@@ -162,7 +152,7 @@
                 locationID: locationID.locationID
             });
             query2.$promise.then(function(data2) {
-                //console.log(data2);
+                console.log(data2)
                 response_products = data2;
                 show_all();
                 $scope.spinner = false;
@@ -179,14 +169,11 @@
 
 
         $scope.category_selected = function(category) {
-            //console.log(category);
             $scope.cart_shown = "cart_not_display";
             $scope.class = "left_menu_not_display";
             $scope.product_menu = "product_menu_display";
             $scope.backCatMenu = true;
             $scope.backProductMenu = false;
-
-
             $scope.all_clicked = true;
             $scope.category_clicked = false;
             if (category.name == 'View all') {
@@ -198,15 +185,11 @@
                     $scope.category = category.name;
                     $scope.products = arrayService.otherProducts(response_products);
                 } else {
-
-
                     $scope.all_clicked = false;
                     $scope.category_clicked = true;
                     $scope.category = category.name;
                     product_api();
                     $scope.products = arrayService.getProduct(response_products, category.id);
-                    ////console.log($scope.products);
-                    ////console.log(category.id);
                 }
             }
         }
@@ -281,7 +264,6 @@
         function methodChanged() {
             var total = 0;
             var frontStoreData = timeStorage.get('frontStoreData');
-            ////console.log(frontStoreData);
             if ($scope.method == 'Delivery') {
                 if (frontStoreData.ldeliveryprice) {
                     $scope.deliveryPriceTax = true;
@@ -291,7 +273,6 @@
 
                     if ($scope.ltaxall == false) {
                         var deliveryTax = $scope.deliveryTax * $scope.total_price / 100;
-                        console.log(deliveryTax);
                         $scope.grandTotal_price = parseInt($scope.total_price) + $scope.deliveryPrice + deliveryTax;
                     }
                     if ($scope.ltaxall == true) {
@@ -335,7 +316,6 @@
 
             }
             $scope.total_price = arrayService.getTotalprice($scope.cart);
-            ////console.log($scope.total_price);
             methodChanged();
             checkoutButtonValidation();
 
@@ -363,7 +343,6 @@
                 }
                 product_order_array.push(product_order_obj);
             }
-            ////console.log($scope.comments);
             var query2 = Order.save({
                 'lid': locationID.locationID,
                 'products': product_order_array,
@@ -375,8 +354,6 @@
             query2.$promise.then(function(response) {
                 timeStorage.set('Orders_response', response, 1);
                 timeStorage.set('Orders_sent', $scope.cart, 1);
-                //  timeStorage.set('currency', $scope.currency, 1);
-                // timeStorage.set('deliverymode', mode, 1);
                 var data = {time: $scope.time,
                     methodName: $scope.method,
                     deliverymode: mode,
@@ -405,7 +382,6 @@
 
         function updatetime(data) {  
             $interval(function() {
-                console.log("time updating");
                 $scope.dropdown_minutes = dropdownService.minutesdropdown(llt);
                 $scope.dropdown_days = dropdownService.Timedropdown();
                 $scope.minutes = dropdownService.selectedMinutes($scope.dropdown_minutes);
@@ -416,7 +392,6 @@
                 $scope.dropdown_minutes =[];
                 }
             }, 300000);
-//            }, 1000);
         }
 
        
@@ -428,7 +403,6 @@
             } else {
                 $scope.dropdown_minutes = dropdownService.changedMinutes();
                 $scope.minutes = "00";
-                console.log($scope.minutes);
             }
         }
     }
