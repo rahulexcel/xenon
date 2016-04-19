@@ -32,7 +32,7 @@
                                         <li data-item="Item 1" data-item-id="a" ui-tree-node ng-repeat="Arr in displaycatArr" ui-tree-node>
                                             <div class="uk-nestable-item">
                                                 <div class=""><strong>{{Arr.catname}}</strong> <a class="pull-right btn btn-danger btn-xs" data-nodrag="" ng-click="remove(this);
-                                                            deleteCategory(Arr._id)">
+                                                            deleteCategory(Arr._id)" ng-hide="{{Arr.catname == 'Level 0 (No category)'}}">
                                                         <i class="fa fa-times"></i>
                                                     </a>
                                                     <!-- Html code For editing Category -->

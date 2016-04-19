@@ -71,24 +71,7 @@
                         }, 180000);  
 
 
-                        // var lid = userData.locations[0];
-                        // var query = orderListFactory.query({"storeId": lid});
-                        // query.$promise.then(function(data) {
-                        //     // console.log(data);
-                        //     var newOrder=0;
-                        //     for(var i=0; i < data.length; i++){
-                        //         //console.log(data[i].order_state);
-                        //         if(data[i].order_state == 2 || data[i].order_state == 1){
-                        //             newOrder++;
-                        //         }
-                        //     }
-                        //     if(newOrder > 1){
-                        //         service.playSoundInLoop(newOrder);
-                        //     } else if(newOrder > 0){
-                        //         service.playSound();
-                        //     }
-                        //     $rootScope.newOrder = newOrder;
-                        // });
+                       
                     }
                 }
             };

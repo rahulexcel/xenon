@@ -2,11 +2,11 @@
 <div class="container" style="margin-top:1.5em;margin-bottom:1.5em;">
     <div class="topContainer">
         <div class="row bgwhite TOP">
-              <div class="col-sm-3 col-xs-12 not-show-main-logo">
-                    <div class="image">
-                        <img ng-src="{{picImage}}" class='img-thumbnail img-responsive'><!-- //removed class logo -->
-                    </div>
+            <div class="col-sm-3 col-xs-12 not-show-main-logo">
+                <div class="image" ng-show="imagenot">
+                    <img ng-src="{{picImage}}" class='img-thumbnail img-responsive'><!-- //removed class logo -->
                 </div>
+            </div>
             <div class="col-sm-6 col-xs-12 text-center">
                 <h3 class="heading topheading">{{location_name}} 
                     <p class="store-desc">{{location_addr}}, {{location_lcity}},  {{location_lpostcode}}, {{location_lstate}} <br><i class="glyphicon glyphicon-earphone"></i> {{location_lphone}} | {{location_openingtime}}-{{location_closingtime}}</p>
@@ -20,7 +20,7 @@
                 <div class="col-sm-8 bgwhite leftCtnr">
                     <div class="text-center"  ng-show="success_message">
                         <h2 class="order-no"># {{orderNo}}</h2>
-                        <span  class="bold"><span translate="thankyou"></span>&nbsp;<br/>"{{fullname}}"<br/><span translate="We have registered your order and will soon start to prepare it for you. You will receive an email confirming from us shortly."> </span>
+                        <span  class="bold"><span translate="thankyou"></span>&nbsp;<br/><span translate="We have registered your order and will soon start to prepare it for you. You will receive an email confirming from us shortly."> </span>
                         </span><br><br>
                         <a class="btn btn-info" href="#/frontend" translate="Go To Home Page"></a>
                     </div>
@@ -29,20 +29,35 @@
                             <div class="formcontainer">
                                 <span class="bold" translate="Verify order"></span>
                                 <p translate="verify order msg"></p>
-                                <div class="form-group" style="width:100%">
+                                <form name="phone">
                                     <div class="row">
-                                        <div class="col-md-10 col-xs-12 no-pad">
-                                            <input type="tel" class="form-control input-lg" id="mobile-number" ng-model="phone_no" style="width:100%" placeholder="Phone number" name="phone" required />
-                                            <span style="color:red">{{phone_error}}</span>
+                                        <div class="col-md-5 col-xs-12 col-sm-5 no-pad-left">
+                                            <input type="tel" class="form-control input-lg" id="mobile-number" ng-model="phone_no" class="form-control" placeholder="{{ 'Phone number' | translate }}" name="contact" required />
+                                            
+                                            <!--                                            <div class="form-group" ng-class="{ 'has-error': detailsform.name.$touched && detailsform.name.$invalid }">-->
+                                            <div class="help-block">   <p style="color:red">{{phone_error}}</p></div>
+                                         
                                         </div>
-                                        <div class="col-md-2 col-xs-12 no-pad mar-top-5">
+                                        <div class="col-md-5 col-xs-12 col-sm-5 no-pad-left">
+                                            <div class="form-group"  ng-class="{ 'has-error': phone.name.$touched && phone.name.$invalid }">
+                                                <input type="email" class="form-control input-lg" name="stripeEmail" ng-model="stripeEmail" placeholder="Email" required>
+                                                <div class="help-block" ng-messages="phone.stripeEmail.$error" ng-if="phone.stripeEmail.$touched">
+
+                                                    <p ng-message="required" ><span translate="Your email is required."></span></p>
+                                                </div>
+                                                <p ng-show="phone.stripeEmail.$invalid && !phone.stripeEmail.$pristine" translate="Looking for a valid email-id"></p>
+                                            </div>
+                                          
+                                        </div>
+
+                                        <div class="col-md-2 col-xs-12 col-sm-2 no-pad mar-top-5">
                                             <span class="btn btn-info btn-lg btn-block" ng-style="{'background-color': submitBackgroundCol,'border-color':submitBorderCol}" ng-click="phone_no_submitted(
-                                                        )" ng-disabled="contact.$invalid || contact.$pending"><span ng-show="phone_spinner">
+                                                        )" ng-disabled="phone.contact.$invalid || phone.contact.$pending||phone.stripeEmail.$invalid||clickedphonebutton "><span ng-show="phone_spinner">
                                                     <i class="fa fa-spin fa-spinner"></i>
                                                 </span>Submit</span>
                                         </div>
                                     </div>
-                                </div>
+                                </form>
                                 <div class="form-group" ng-show="show_sms_code_enter">
                                     <p translate="Please provide the SMS code received at above phone number"></p>
                                     <p style="color:red">{{code_error}}</p>
@@ -107,16 +122,14 @@
                                                 <p ng-message="required" ><span translate="Your name is required."></span></p>
                                             </div>
                                         </div>
-                                        <div class="form-group" ng-class="{ 'has-error': detailsform.name.$touched && detailsform.name.$invalid }">
-                                            <input type="email" class="form-control input-lg" name="stripeEmail" ng-model="stripeEmail" placeholder="Email" ng-blur="emailerror()" required>
-                                            <div class="help-block" ng-messages="detailsform.stripeEmail.$error" ng-if="detailsform.stripeEmail.$touched">
-
-                                                <p ng-message="required" ><span translate="Your email is required."></span></p>
-                                            </div>
-                                            <span ng-show="detailsform.stripeEmail.$invalid && !detailsform.stripeEmail.$pristine" translate="Looking for a valid email-id"></span>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 no-pad-left-right">
+                                        <!--                                        <div class="form-group" ng-class="{ 'has-error': detailsform.name.$touched && detailsform.name.$invalid }">
+                                                                                    <input type="email" class="form-control input-lg" name="stripeEmail" ng-model="stripeEmail" placeholder="Email" ng-blur="emailerror()" required>
+                                                                                    <div class="help-block" ng-messages="detailsform.stripeEmail.$error" ng-if="detailsform.stripeEmail.$touched">
+                                        
+                                                                                        <p ng-message="required" ><span translate="Your email is required."></span></p>
+                                                                                    </div>
+                                                                                    <span ng-show="detailsform.stripeEmail.$invalid && !detailsform.stripeEmail.$pristine" translate="Looking for a valid email-id"></span>
+                                                                                </div>-->
                                         <div class="form-group" ng-class="{ 'has-error': detailsform.name.$touched && detailsform.name.$invalid }">
                                             <input type="text" class="form-control input-lg" name="addr" ng-model="addr" placeholder="{{ 'Address' | translate }}" ng-blur="addr_error()" required>
                                             <div class="help-block" ng-messages="detailsform.addr.$error" ng-if="detailsform.addr.$touched">
@@ -124,6 +137,12 @@
                                                 <p ng-message="required"><span translate="Your Address is required."></span></p>
                                             </div>
                                         </div>
+
+
+
+                                    </div>
+                                    <div class="col-sm-6 no-pad-left-right">
+
                                         <div class="form-group" ng-class="{ 'has-error': detailsform.name.$touched && detailsform.name.$invalid }">
                                             <input type="text" class="form-control input-lg" name=" postcode" ng-model="postcode" placeholder="{{ 'Post code' | translate }}" ng-blur="postcode_error" required>
                                             <div class="help-block" ng-messages="detailsform.detailsform.$error" ng-if="detailsform.postcode.$touched">
@@ -138,7 +157,7 @@
                                             <input type="text" class="form-control input-lg" name="country" ng-model="country" placeholder="{{ 'Country' | translate }}" disabled>
                                         </div>
                                         <div class="form-group pull-right" ng-show="update_button">
-                                            <button class="btn btn-info btn-lg" ng-click="update_customer_information()" ng-disabled="detailsform.f_n.$invalid || detailsform.l_n.$invalid || detailsform.stripeEmail.$invalid || detailsform.addr.$invalid || detailsform.postcode.$invalid"> <span ng-show="update_spinner">
+                                            <button class="btn btn-info btn-lg" ng-click="update_customer_information()" ng-disabled="detailsform.f_n.$invalid || detailsform.l_n.$invalid || detailsform.addr.$invalid || detailsform.postcode.$invalid||updatebuttonclicked"> <span ng-show="update_spinner">
                                                     <i class="fa fa-spin fa-spinner"></i>
                                                 </span><span translate="Update"></span></button>
                                         </div>
@@ -155,12 +174,12 @@
 
                             </div>
                             <div class="row padbot" ng-show="payment_details_form" id="">
-                                <div class="col-sm-6">
+                                <div class="col-sm-7">
                                     <div ng-show="existing_card" class='card-wrapper1 form-group'></div>
                                     <div ng-show="newcard" class='card-wrapper form-group'></div>
-                                    <div ng-show="never" class='card-wrapper2 form-group'></div>
+                                    <div ng-show="existing_card_show_cvc" class='text-center' style="padding-top: 14px;"><span translate='Use previously used credit card:' style=' font-size: initial;'></span> </div>
                                 </div>
-                                <div class="col-sm-6 no-pad-left-right" ng-show="existing_card">
+                                <div class="col-sm-5 no-pad-left-right" ng-show="existing_card">
                                     <form id="payment-form" name="userForm" novalidate>
                                         <div class="form-group" ng-class="{ 'has-error': userForm.name.$touched && userForm.name.$invalid }">
                                             <input type="text" class="form-control input-lg" maxlength="20" data-stripe="number" ng-model="cardnumber" name="number" placeholder="{{ 'Card number' | translate }}" ng-blur="card_error()" ng-minlength="12" required>
@@ -199,7 +218,7 @@
                                         </div>
                                     </form>
                                 </div>
-                                <div class="col-sm-6 no-pad-left-right" ng-show="existing_card_show_cvc">
+                                <div class="col-sm-5 no-pad-left-right" ng-show="existing_card_show_cvc">
                                     <form name="existing" id="exist">
                                         <div class="form-group">
                                             <input type="text" class="form-control input-lg" ng-model="existingcardnumber" disabled>
@@ -224,7 +243,7 @@
 
                                         </div>
                                         <div class="form-group pull-right">
-                                            <button class="btn btn-info btn-lg" ng-click="existingcharge()"> 
+                                            <button class="btn btn-info btn-lg" ng-click="existingcharge()" ng-disabled="existingchargebutton"> 
                                                 <span ng-show="payment_spinner">
 
                                                     <i class="fa fa-spin fa-spinner"></i>
@@ -232,7 +251,7 @@
                                         </div>
                                     </form>
                                 </div>
-                                <div class="col-sm-6 no-pad-left-right" ng-show="newcard">
+                                <div class="col-sm-5 no-pad-left-right" ng-show="newcard">
                                     <form name="newcardform" id="cardnew">
                                         <div class="form-group" ng-class="{ 'has-error': newcardform.name.$touched && newcardform.name.$invalid }">
                                             <input type="text" class="form-control input-lg" size="20" data-stripe="number" ng-model="newcardnumber" placeholder="{{ 'Card number' | translate }}" ng-blur="card_error()" ng-minlength="12" name="number" required>
@@ -263,10 +282,10 @@
                                         </div>
                                         <span style="color:red">{{authentication_error}}</span>
                                         <div class="form-group pull-right">
-                                            <span class="btn btn-info btn-lg" ng-show="newcard_update_button" id="update" ng-click="cardnew()" ng-disabled="newcardform.fullname.$invalid || newcardform.cvc.$invalid || newcardform.expiry.$invalid || newcardform.number.$invalid || newcardform.postcode.$invalid || newcardform.addr.$invalid || newcardform.stripeEmail.$invalid || newcardform.f_n.$invalid || newcardform.l_n.$invalid" > <span ng-show="payment_spinner">
+                                            <span class="btn btn-info btn-lg" ng-show="newcard_update_button" id="update" ng-click="cardnew()" ng-disabled="newcardform.fullname.$invalid || newcardform.cvc.$invalid || newcardform.expiry.$invalid || newcardform.number.$invalid || newcardform.postcode.$invalid || newcardform.addr.$invalid || newcardform.f_n.$invalid || newcardform.l_n.$invalid||newcardupdatebuttonclicked" > <span ng-show="payment_spinner">
                                                     <i class="fa fa-spin fa-spinner"></i>
                                                 </span><span translate="Update"></span></span>
-                                            <button class="btn btn-info btn-lg" ng-show="new_card_submit_button" ng-click="pay_by_new_card()"><span ng-show="pay_by_new_card_spinner">
+                                            <button class="btn btn-info btn-lg" ng-show="new_card_submit_button" ng-click="pay_by_new_card()" ng-disabled="pay_by_new_cardclicked"><span ng-show="pay_by_new_card_spinner">
                                                     <i class="fa fa-spin fa-spinner"></i>
                                                 </span><span translate="Submit"></span></button>
                                         </div>
@@ -281,7 +300,7 @@
                 <div class="row" style="padding-top:22px;">
                     <div class="col-sm-6 pad-2-left-right">
                         <!-- <span class="medium pull-left">Shipping method</span> -->
-                        <span class="medium pull-left">{{shipping_method}}</span>
+                        <span class="medium pull-left">{{shipping_method| translate}}</span>
                     </div>
                     <div class="col-sm-6 pad-2-left-right">
                         <!-- <span class="medium pull-left">Shipping time</span> -->
@@ -310,16 +329,16 @@
                                     </div>
                                 </div>
                             </div>
-                                <div class="cart-containt">
-                                   <div class="row">
+                            <div class="cart-containt">
+                                <div class="row">
                                     <div class="col-sm-6 col-xs-6"style="
                                          padding-bottom: 17px;
                                          ">
                                         <div class="pull-left">
                                             <div style="text-align: left;padding-left:6px;" translate="subtotal"></div>
                                             <div style="text-align: left;padding-left:6px;" translate="vat(inc.)"></div>
-                                            <div style="text-align: left;padding-left:6px;"  translate="Delivery Price" ng-show="{{shipping_method=='Delivery'}}"></div>
-                                            <div style="text-align: left;padding-left:6px;"  translate="Delivery Tax" ng-show="{{shipping_method=='Delivery'}}"></div>
+                                            <div style="text-align: left;padding-left:6px;"  translate="Delivery Price" ng-show="{{shipping_method == 'Delivery'}}"></div>
+                                            <div style="text-align: left;padding-left:6px;"  translate="Delivery Tax" ng-show="{{shipping_method == 'Delivery'}}"></div>
                                             <div class="bold" style="
                                                  font-size: medium;
                                                  padding-top: 20px;
@@ -333,25 +352,24 @@
                                         <div class="pull-right">
                                             <div>{{total_price}} <!--{{currency}}-->{{currencysymbol}}</div>
                                             <div>{{vat}} <!--{{currency}}-->{{currencysymbol}}</div>
-                                            <div ng-show="{{shipping_method=='Delivery'}}">&nbsp;&nbsp;&nbsp;{{deliveryPrice}} {{currencysymbol}}</div>
-                                            <div ng-show="{{shipping_method=='Delivery'}}">&nbsp;&nbsp;&nbsp;{{deliveryTax}}%</div>
+                                            <div ng-show="{{shipping_method == 'Delivery'}}">&nbsp;&nbsp;&nbsp;{{deliveryPrice}} {{currencysymbol}}</div>
+                                            <div ng-show="{{shipping_method == 'Delivery'}}">&nbsp;&nbsp;&nbsp;{{deliveryTax}}%</div>
                                             <div class="bold"style="
                                                  font-size: medium;     padding-right: 11px;  padding-top: 20px;
 
                                                  ">{{grandTotal_price}} <!--{{currency}}-->{{currencysymbol}} </div>
                                         </div>
                                     </div>
-                                   
+
                                 </div>
-                                </div>
-                                <div class='col-sm-12 col-xs-12 text-center poweredByFooter'>
-                                    <h4 style="margin-bottom:0px;" translate="poweredby"></h4>
-                                    <img src="img/powered.png" />
-                                </div>
-                                <div class='col-sm-12 col-xs-12 text-center poweredByFooterInMobile no-pad-left'>
-                                    <h4 style="margin-bottom:0px;" translate="poweredby"></h4>
-                                    <img src="img/powered.png" />
-                                </div>
+                            </div>
+                            <div class='col-sm-12 col-xs-12 text-center poweredByFooter'>
+                                <h4 style="margin-bottom:0px;" translate="poweredby"></h4>
+                                <a target="_blank" href="https://eatingnext.com/"><img src="img/powered.png" /></a> 
+                            </div>
+                            <div class='col-sm-12 col-xs-12 text-center poweredByFooterInMobile no-pad-left'>
+                                <h4 style="margin-bottom:0px;" translate="poweredby"></h4>
+                                <a href="https://eatingnext.com/"><img src="img/powered.png" /></a> 
                             </div>
                         </div>
                     </div>
@@ -362,30 +380,10 @@
 </div>
 
 <script>
-    $("#mobile-number").intlTelInput({
-        initialCountry: "auto",
-        geoIpLookup: function(callback) {
-            $.get('http://ipinfo.io', function() {
-            }, "jsonp").always(function(resp) {
-                var countryCode = (resp && resp.country) ? resp.country : "";
-                callback(countryCode);
-            });
-        }
-    });
-</script>
-<script type="text/javascript">
-    // This identifies your website in the createToken call below
-    Stripe.setPublishableKey('pk_test_s9jIizZdUfhjMplDPtyMFAN7');
-    // ...
-</script>
-<script>
     $('#payment-form').card({
         container: '.card-wrapper1',
     });
     $('#cardnew').card({
         container: '.card-wrapper',
-    });
-    $('#exist').card({
-        container: '.card-wrapper2',
-    });
+    });   
 </script>

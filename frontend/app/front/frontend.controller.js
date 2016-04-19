@@ -4,7 +4,6 @@
             .controller('frontendCtrl', frontendCtrl);
 
     function frontendCtrl($scope, locations, timeStorage, $window, currencySymbol, language, locationID, $localStorage, category, $rootScope, products, Order, $state, arrayService, dropdownService, timeService, $interval) {
-
         var response_products;
         var response_categories;
         var onRefreshData;
@@ -55,9 +54,9 @@
                 locationID: locationID.locationID
             });
             query.$promise.then(function(data) {
+                console.log(data);
                 timeStorage.set('frontStoreData', data, 1);
                 onRefreshData = data;
-                updatetime(data);
                 OnpageLoadData = data;
                 llt = data.llt;
                 $scope.lwots = data.lwots;
@@ -68,60 +67,66 @@
                 $scope.currencysymbol = arrayService.CurrencySymbol(data.lcurrency);
                 $scope.dropdown_minutes = dropdownService.minutesdropdown(data.llt);
                 $scope.dropdown_days = dropdownService.Timedropdown();
-                $scope.minutes = $scope.dropdown_minutes[0].toString();
-                // $scope.dropdown_days.unshift(dropdownService.Selected(data.llt));
-                $scope.time = dropdownService.Selected(data.llt);
-                ////console.log();
-                // dropdownService.Selected(data.llt);
-
+                $scope.minutes = dropdownService.selectedMinutes($scope.dropdown_minutes);
+                $scope.time = dropdownService.Selected(data.llt);                
                 $scope.location_name = data.lname;
-                if (data.ldesc.split(' ').length > 20) {
-                    $scope.location_desc_part1 = data.ldesc.substring(0, 80);
-                    $scope.location_desc_part2 = data.ldesc.substring(80, data.ldesc.length);
+                if (angular.isDefined(data.llogo)) {
+                    $scope.imagenot = true;
+
+                    $scope.picImage = 'https://s3.amazonaws.com/ordermagic/' + data.llogo;
                 } else {
-                    $scope.location_desc_part1 = data.ldesc;
-                    $scope.location_desc_part2_show = true;
+                    $scope.imagenot = false;
                 }
-                $scope.picImage = 'http://s3.amazonaws.com/ordermagic/' + data.llogo;
+
                 $scope.location_addr = data.laddr;
                 $scope.location_lcity = data.lcity;
                 $scope.location_lcountry = data.lcountry;
                 $scope.location_lpostcode = data.lpostcode;
                 $scope.location_lstate = data.lstate;
                 $scope.location_lphone = arrayService.getPhoneNo(data.lphone);
-                $scope.location_openingtime = data.lwots[0].opening_time + ":" + "00";
-                $scope.location_closingtime = data.lwots[0].closing_time + ":" + "00";
+                $scope.location_openingtime =arrayService.open(data, 1)+ ":" + "00";
+                $scope.location_closingtime = arrayService.open(data, 2) + ":" + "00";
                 $scope.all_clicked = true;
                 $scope.storeclose = data.lclosed;
                 $scope.ltaxall = data.ltaxall;
                 $scope.ltax = data.ltax;
-
                 checkoutButtonValidation();
                 get_category();
                 check_local_storage();
                 language.get(data.lstorelang);
-
-
             });
         }
 
         function checkoutButtonValidation() {
-            // //console.log($scope.cart.length);
-            // //console.log($scope.ldateclosed);
-            // //console.log($scope.lwots);
-
-            ////console.log(weekdaysOpningClosingTime);
-         
+            console.log($scope.dropdown_days);
+            console.log($scope.time);
+            console.log(timeService.todayDay());
             var closedDay = timeService.closedDaysCheckoutButton($scope.ldateclosed);
-            if (closedDay) {
+           
+            if (closedDay || !$scope.time) {
                 $scope.storeClosed = true;
+               
             }
-            if (onRefreshData.lcompleted.length < 2 || $scope.cart.length == 0 || closedDay || !$scope.storeclose || arrayService.checkday(onRefreshData)==1) {
-
+            if (onRefreshData.lcompleted.length < 4 || $scope.cart.length == 0 || closedDay || !$scope.storeclose || arrayService.checkday(onRefreshData) == 1 || !$scope.time) {
                 $scope.not_allow_checkout = true;
+             
             } else {
+                
                 $scope.not_allow_checkout = false;
             }
+             if (!$scope.time) {
+                 
+                $scope.storeClosed = true;
+                $scope.not_allow_checkout = true;
+                $scope.dropdown_minutes=[];
+                }else{
+                   
+                     updatetime(onRefreshData);
+                }
+                
+                
+                
+                
 
         }
         function check_local_storage() {
@@ -139,6 +144,7 @@
                 locationID: locationID.locationID
             });
             query1.$promise.then(function(data1) {
+                //console.log(data1);
                 response_categories = data1;
                 catlength = data1.length;
                 if (catlength < 6) {
@@ -156,6 +162,7 @@
                 locationID: locationID.locationID
             });
             query2.$promise.then(function(data2) {
+                //console.log(data2);
                 response_products = data2;
                 show_all();
                 $scope.spinner = false;
@@ -166,12 +173,13 @@
 
         function show_all() {
             $scope.All_products = arrayService.showAllService(response_categories, response_products);
-            ////console.log(response_categories);
+
+
         }
 
 
         $scope.category_selected = function(category) {
-            console.log(category);
+            //console.log(category);
             $scope.cart_shown = "cart_not_display";
             $scope.class = "left_menu_not_display";
             $scope.product_menu = "product_menu_display";
@@ -184,14 +192,22 @@
             if (category.name == 'View all') {
                 show_all();
             } else {
-                $scope.all_clicked = false;
-                $scope.category_clicked = true;
-                $scope.category = category.name;
-                product_api();
-                $scope.products = arrayService.getProduct(response_products, category.id);
-                //console.log($scope.products);
-                //console.log(category.id);
+                if (category.name == 'Others') {
+                    $scope.all_clicked = false;
+                    $scope.category_clicked = true;
+                    $scope.category = category.name;
+                    $scope.products = arrayService.otherProducts(response_products);
+                } else {
 
+
+                    $scope.all_clicked = false;
+                    $scope.category_clicked = true;
+                    $scope.category = category.name;
+                    product_api();
+                    $scope.products = arrayService.getProduct(response_products, category.id);
+                    ////console.log($scope.products);
+                    ////console.log(category.id);
+                }
             }
         }
         $scope.sidebarInMobile = true;
@@ -264,21 +280,24 @@
         }
         function methodChanged() {
             var total = 0;
-
-
-
             var frontStoreData = timeStorage.get('frontStoreData');
-            //console.log(frontStoreData);
-
+            ////console.log(frontStoreData);
             if ($scope.method == 'Delivery') {
-
                 if (frontStoreData.ldeliveryprice) {
                     $scope.deliveryPriceTax = true;
                     $scope.deliveryPrice = frontStoreData.ldeliveryprice;
                     $scope.deliveryTax = frontStoreData.ldeliverytax;
                     $scope.total_price = arrayService.getTotalprice($scope.cart);
-                    $scope.grandTotal_price = parseInt($scope.total_price) + $scope.deliveryPrice + ($scope.deliveryPrice / $scope.deliveryTax);
 
+                    if ($scope.ltaxall == false) {
+                        var deliveryTax = $scope.deliveryTax * $scope.total_price / 100;
+                        console.log(deliveryTax);
+                        $scope.grandTotal_price = parseInt($scope.total_price) + $scope.deliveryPrice + deliveryTax;
+                    }
+                    if ($scope.ltaxall == true) {
+                        $scope.grandTotal_price = (parseInt($scope.total_price) + $scope.deliveryPrice).toFixed(2);
+                        ;
+                    }
                 }
             } else {
 
@@ -316,7 +335,7 @@
 
             }
             $scope.total_price = arrayService.getTotalprice($scope.cart);
-            //console.log($scope.total_price);
+            ////console.log($scope.total_price);
             methodChanged();
             checkoutButtonValidation();
 
@@ -344,7 +363,7 @@
                 }
                 product_order_array.push(product_order_obj);
             }
-            //console.log($scope.comments);
+            ////console.log($scope.comments);
             var query2 = Order.save({
                 'lid': locationID.locationID,
                 'products': product_order_array,
@@ -367,8 +386,8 @@
                     total_price: $scope.total_price,
                     grandtotal: $scope.grandTotal_price,
                     deliveryPriceTax: $scope.deliveryPriceTax,
-                    deliveryPrice:$scope.deliveryPrice,
-                    deliveryTax :$scope.deliveryTax,
+                    deliveryPrice: $scope.deliveryPrice,
+                    deliveryTax: $scope.deliveryTax,
                     vat: $scope.vat};
                 timeStorage.set('shippingdata', data, 1);
                 $state.go('checkout');
@@ -384,31 +403,33 @@
             $scope.backProductMenu = true;
         }
 
-        function updatetime(data) {
+        function updatetime(data) {  
             $interval(function() {
-
+                console.log("time updating");
                 $scope.dropdown_minutes = dropdownService.minutesdropdown(llt);
                 $scope.dropdown_days = dropdownService.Timedropdown();
-                $scope.minutes = $scope.dropdown_minutes[0].toString();
+                $scope.minutes = dropdownService.selectedMinutes($scope.dropdown_minutes);
                 $scope.time = dropdownService.Selected(llt);
+                if(!angular.isDefined($scope.time)){
+                $scope.storeClosed = true;
+                $scope.not_allow_checkout = true;
+                $scope.dropdown_minutes =[];
+                }
             }, 300000);
+//            }, 1000);
         }
 
+       
         $scope.hour_changing = function() {
             if ($scope.time === dropdownService.currenttime()) {
-
                 $scope.dropdown_minutes = dropdownService.minutesdropdown(llt);
                 $scope.minutes = dropdownService.selectedMinutes($scope.dropdown_minutes);
-
+              
             } else {
-
                 $scope.dropdown_minutes = dropdownService.changedMinutes();
                 $scope.minutes = "00";
-
+                console.log($scope.minutes);
             }
-
         }
-
-
     }
 })();

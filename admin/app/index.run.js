@@ -1,8 +1,9 @@
 (function() {
     'use strict';
     angular.module('xenon-app')
-            .run(function(userValidate, $rootScope, $state, localStorageService, fetchOrdersService, $location, $timeout, $interval) {
+            .run(function(userValidate, $rootScope,remainingStatusservice, $state, localStorageService, fetchOrdersService, $location, $timeout, $interval) {
                 userValidate.validUser();
+                remainingStatusservice.remainingStatus();
                 var userData = localStorageService.get("userData");
                 if (angular.isDefined(userData)) {
                     if(userData.locations.length != 0){

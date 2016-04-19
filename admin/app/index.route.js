@@ -129,7 +129,7 @@
                             }
                         }).
                         state('dashboard.reset', {
-                            url: '/reset/3f962ba188383621c8c44fec0bfe5dd8638d342f',
+                            url: '/reset/:token',
                             templateUrl: "app/resetpassword/resetpassword.html",
                             controller: 'ResetPasswordCtrl',
                             resolve: {

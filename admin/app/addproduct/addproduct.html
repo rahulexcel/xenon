@@ -34,14 +34,14 @@
                                 <div class="col-sm-8">
                                     <strong>Title</strong>
                                     <p>
-                                        <input type="text" class="form-control" ng-model="productName" required>
+                                        <input type="text" class="form-control" ng-model="productName" ng-blur="title_entered()" required>
                                     </p>
                                     <span style="margin-bottom:10px;display:block;"><!-- mrezshop.tictail.com/products/{{productName| spaceless}} --></span>
                                 </div>
                                 <div class="col-sm-4">
                                     <strong>Price</strong> <small>in {{currency}}</small>
                                     <p>
-                                        <input type="text" class="form-control" ng-model="productPrice">
+                                        <input type="text" class="form-control" ng-model="productPrice" required>
                                     </p>
                                 </div>
                             </div>
@@ -64,7 +64,7 @@
                             <h4><strong>Select Category</strong></h4>
                             <div class="col-sm-6 col-md-4">
                                 <div class="form-group">
-                                    <select class="form-control" ng-model="selectedCategoryId">
+                                    <select class="form-control" ng-model="selectedCategoryId" required>
                                         <option ng-repeat="cat in categorylist" value="{{cat._id}}">{{cat.catname}}</option>
                                     </select>
                                 </div>
@@ -89,7 +89,7 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <label>
-                                        <input type="checkbox" ng-init="showInStore = false" class="" ng-model="showInStore">
+                                        <input type="checkbox" ng-init="showInStore = true" class="" ng-model="showInStore">
                                         Show products in store
                                     </label>
                                 </div> 

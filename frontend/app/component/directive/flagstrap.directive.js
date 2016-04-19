@@ -416,7 +416,7 @@ angular
                             .html(flagIcon)
                             .append(text)
                             .on('click', function(e) {
-                                console.log(flagStrapItem[0].innerHTML);
+                                //console.log(flagStrapItem[0].innerHTML);
                                 $(htmlSelect).find('option').removeAttr('selected');
                                 $(htmlSelect).find('option[value="' + $(this).data('val') + '"]').attr("selected", "selected");
                                 $(htmlSelect).trigger('change');
@@ -464,17 +464,18 @@ angular
             });
 
         }
-        console.log('ok2222222');
+        //console.log('ok2222222');
         element.flagStrap({
             countries: {
                 "ES": "Spanish",
                 "DE": "German",
                 "FR": "French",
                 "DK": "Danish",
-                "FI": "Finnish",
+                "IT": "Italian",
                 "NO": "Norwegian",
                 "SE": "Swedish",
-                "GB": "English"
+                "GB": "English -UK",
+                "US": "English -US"
             },
             placeholder: false,
             onSelect: function(value, element) {

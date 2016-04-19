@@ -128,7 +128,7 @@ angular.module('xenon.factory', []).
             },
         };
     }).
-	factory('$pageLoadingBar', function($rootScope, $window){
+	factory('$pageLoadingBar', function($rootScope, $window, localStorageService){
 
 		return {
 
@@ -136,16 +136,16 @@ angular.module('xenon.factory', []).
 			{
 				var pl = this;
 
-				$window.showLoadingBar = this.showLoadingBar;
-				$window.hideLoadingBar = this.hideLoadingBar;
+		        $window.showLoadingBar = this.showLoadingBar;
+			$window.hideLoadingBar = this.hideLoadingBar;
 
 				$rootScope.$on('$stateChangeStart', function()
 				{
-					pl.showLoadingBar({
-						pct: 95,
-						delay: 1.1,
-						resetOnEnd: false
-					});
+//					pl.showLoadingBar({
+//						pct: 95,
+//						delay: 1.1,
+//						resetOnEnd: false
+//					});
 
 					jQuery('body .page-container .main-content').addClass('is-loading');
 				});
@@ -164,6 +164,7 @@ angular.module('xenon.factory', []).
 
 			showLoadingBar: function(options)
 			{
+                            
 				var defaults = {
 					pct: 0,
 					delay: 1.3,
@@ -191,9 +192,11 @@ angular.module('xenon.factory', []).
 					$loading_bar = $(".xenon-loading-bar");
 
 				if($loading_bar.length == 0)
-				{
+				{  
+                                    
 					$loading_bar = $('<div class="xenon-loading-bar progress-is-hidden"><span data-pct="0"></span></div>');
 					public_vars.$body.append( $loading_bar );
+                                   
 				}
 
 				var $pct = $loading_bar.find('span'),
@@ -227,6 +230,7 @@ angular.module('xenon.factory', []).
 
 			hideLoadingBar: function()
 			{
+                           
 				var $ = jQuery,
 					$loading_bar = $(".xenon-loading-bar"),
 					$pct = $loading_bar.find('span');
@@ -298,6 +302,7 @@ angular.module('xenon.factory', []).
 				var dis = this,
 					cookie_entries = dis.iterateObject($rootScope.layoutOptions, '', {}),
 					loaded_props = {};
+
 
 				angular.forEach(cookie_entries, function(value, prop)
 				{

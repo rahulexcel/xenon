@@ -2,8 +2,16 @@
     'use strict';
     angular.module('xenon-frontend')
             .controller('checkoutCtrl', checkoutCtrl);
-    function checkoutCtrl(validate, $scope, $rootScope, timeStorage, existingcharge, customercard, $localStorage, putCustomer, cauth, newcharge, arrayService, locations, cauthreq, locationID) {
+    function checkoutCtrl(validate, $scope, $rootScope, timeStorage, stripekey, dropdownService, existingcharge, customercard, $localStorage, putCustomer, cauth, newcharge, arrayService, locations, cauthreq, locationID) {
+        Stripe.setPublishableKey(stripekey.Key);  
+        function countrydropdown(lcountry) {
+            console.log(lcountry);
 
+            $("#mobile-number").intlTelInput({
+                initialCountry: lcountry,
+                autoPlaceholder: true
+            });
+        }
         validate.order_placed();
         $scope.location_desc_part2_show = false;
         $scope.data_recevied = true;
@@ -15,10 +23,10 @@
         $scope.currency = $localStorage.shippingdata.currency;
         $scope.shipping_method = $localStorage.shippingdata.methodName;
         $scope.shipping_time = $localStorage.shippingdata.shipping_time;
-        $scope.vat=$localStorage.shippingdata.vat;
-        $scope.deliveryPrice=$localStorage.shippingdata.deliveryPrice;
-        $scope.deliveryTax=$localStorage.shippingdata.deliveryTax;
-        $scope.grandTotal_price=$localStorage.shippingdata.grandtotal;
+        $scope.vat = $localStorage.shippingdata.vat;
+        $scope.deliveryPrice = $localStorage.shippingdata.deliveryPrice;
+        $scope.deliveryTax = $localStorage.shippingdata.deliveryTax;
+        $scope.grandTotal_price = $localStorage.shippingdata.grandtotal;
         var on_load_response;
         var existing_customer;
         var smscode_response = false;
@@ -32,25 +40,25 @@
             on_load_response = data;
             $scope.city = data.lcity;
             $scope.currency = data.lcurrency;
-             $scope.currencysymbol= arrayService.CurrencySymbol(data.lcurrency);
+            $scope.currencysymbol = arrayService.CurrencySymbol(data.lcurrency);
             $scope.location_name = data.lname;
-            console.log(data.ldesc.split(' ').length);
-            if (data.ldesc.split(' ').length > 20) {
-                $scope.location_desc_part1 = data.ldesc.substring(0, 80);
-                $scope.location_desc_part2 = data.ldesc.substring(80, data.ldesc.length);
+            if (angular.isDefined(data.llogo)) {
+                $scope.imagenot = true;
+
+                $scope.picImage = 'https://s3.amazonaws.com/ordermagic/' + data.llogo;
             } else {
-                $scope.location_desc_part1 = data.ldesc;
-                $scope.location_desc_part2_show = true;
+                $scope.imagenot = false;
             }
-            $scope.picImage = 'http://s3.amazonaws.com/ordermagic/' + data.llogo;
+
             $scope.location_addr = data.laddr;
             $scope.location_lcity = data.lcity;
             $scope.location_lcountry = data.lcountry;
+            countrydropdown(dropdownService.selectcountry(data.lcountrycode));
             $scope.location_lpostcode = data.lpostcode;
             $scope.location_lstate = data.lstate;
             $scope.location_lphone = arrayService.getPhoneNo(data.lphone);
-            $scope.location_openingtime = data.lwots[0].opening_time + ":" + "00";
-            $scope.location_closingtime = data.lwots[0].closing_time + ":" + "00";
+            $scope.location_openingtime = arrayService.open(data, 1)+ ":" + "00";
+            $scope.location_closingtime = arrayService.open(data, 2) + ":" + "00";
             $scope.data_recevied = false;
         });
         $scope.phone_no_submitted = function() {
@@ -63,6 +71,7 @@
             $scope.show_sms_code_enter = false;
             $scope.submitBackgroundCol = '#d3d3d3';
             $scope.submitBorderCol = '#d3d3d3';
+           $scope.clickedphonebutton=true;
             smscode_response = false;
             if (angular.isDefined($scope.phone_no)) {
                 $scope.phone_spinner = true;
@@ -72,6 +81,7 @@
                 console.log(country_code[0].dialCode);
                 var query2 = cauthreq.save({
                     phone: $scope.phone_no,
+                    email: $scope.stripeEmail,
                     countrycode: country_code[0].dialCode
                 });
                 query2.$promise.then(function(response) {
@@ -93,13 +103,17 @@
                         $scope.existing_card = true;
                         $scope.existing_card_show_cvc = false;
                         $scope.newcard = false;
+                        if (jQuery.browser.mobile) {
+                            $scope.payment_details_form = false;
+                            $scope.payment_by_mobile = true;
+                        }
 
                     }
 
                 });
             }
         }
-        $scope.sms_code_submitted = function() {
+        $scope.sms_code_submitted = function() {           
             $scope.verifyBackgroundCol = '#d3d3d3';
             $scope.verifyBorderCol = '#d3d3d3';
             var country_code = angular.element($("#mobile-number").intlTelInput("getSelectedCountryData"));
@@ -120,13 +134,16 @@
                 if (response.smscode == false) {
                     $scope.code_error = response.data;
                 } else {
+                    if (jQuery.browser.mobile) {
+                        $scope.payment_details_form = true;
+                        $scope.payment_by_mobile = false;
+                    }
+
                     $scope.dis_first_name = response.firstname,
-                            $scope.dis_last_name = response.lastname,
-                            $scope.dis_postcode = response.postcode,
-                            $scope.dis_addr = response.streetaddr,
-                            // $scope.existingexpmonth = response.card_exp_month;
-                            $scope.existingexpmonth = "xx";
-                    // $scope.existingcc_yearnew = response.card_exp_year;
+                    $scope.dis_last_name = response.lastname,
+                    $scope.dis_postcode = response.postcode,
+                    $scope.dis_addr = response.streetaddr,
+                    $scope.existingexpmonth = "xx";
                     $scope.existingcc_yearnew = "xxxx";
                     $scope.existingcardnumber = "xxxx" + " " + "xxxx" + " " + "xxxx" + " " + "xxxx" + " " + response.card_last4;
                     $scope.dis_email = response.email;
@@ -144,10 +161,6 @@
                 $scope.button_when_pickup_mode = true;
                 $scope.button_when_delivery_mode = false;
                 $scope.payment_details_form = true;
-                if (jQuery.browser.mobile) {
-                    $scope.payment_details_form = false;
-                    $scope.payment_by_mobile = true;
-                }
             } else {
                 $scope.button_when_pickup_mode = false;
                 $scope.button_when_delivery_mode = true;
@@ -155,6 +168,13 @@
                 if (smscode_response == true) {
                     $scope.delivery_details_disabled_form = true;
                     $scope.delivery_details_form = false;
+                    if (!$scope.dis_first_name || !$scope.dis_last_name) {
+                        $scope.delivery_details_disabled_form = false;
+                        $scope.delivery_details_form = true;
+                        if ($scope.delivery_details_form === true) {
+                            $scope.update_button = true;
+                        }
+                    }
                 } else {
                     $scope.delivery_details_form = true;
                     $scope.delivery_details_disabled_form = false;
@@ -175,13 +195,13 @@
             }
         }
         $scope.update_customer_information = function() {
+            $scope.updatebuttonclicked=true;
             $scope.update_spinner = true;
             console.log($localStorage.smstoken1);
             var country_code = angular.element($("#mobile-number").intlTelInput("getSelectedCountryData"));
             var updateCustomer = putCustomer.update($localStorage.smstoken1).query({}, {
                 customerid: customer_id,
                 firstname: $scope.first_name,
-                email: $scope.stripeEmail,
                 lastname: $scope.last_name,
                 streetaddr: $scope.addr,
                 postcode: $scope.postcode
@@ -206,9 +226,9 @@
         });
         $scope.newcharge = function() {
             $scope.new_charge_spinner = true;
-            // $scope.payment_spinner_new_charge = true;
         }
         $scope.cardnew = function() {
+            $scope.newcardupdatebuttonclicked=true;
             $scope.payment_spinner = true;
             var customerCard = customercard.update($localStorage.smstoken1).query({}, {
                 customerid: customer_id,
@@ -242,7 +262,6 @@
                 if (existing_customer === true) {
                     existinguser(response);
                 }
-                // $scope.updatebutton = true;
                 else {
                     newuser(response);
                 }
@@ -263,6 +282,7 @@
             newcardflag = 1;
         }
         $scope.existingcharge = function() {
+            $scope.existingchargebutton=true;
             $scope.payment_spinner = true;
             var country_code = angular.element($("#mobile-number").intlTelInput("getSelectedCountryData"));
             var savedcard = existingcharge.update($localStorage.smstoken1).query({}, {
@@ -338,8 +358,9 @@
         }
         $scope.pay_by_new_card = function() {
             $scope.pay_by_new_card_spinner = true;
+            $scope.pay_by_new_cardclicked=true;
             var country_code = angular.element($("#mobile-number").intlTelInput("getSelectedCountryData"));
-             var savedcard = existingcharge.update($localStorage.smstoken1).query({}, {
+            var savedcard = existingcharge.update($localStorage.smstoken1).query({}, {
                 customerid: customer_id,
                 orderid: $localStorage.Orders_response.orderid
             });
@@ -351,15 +372,11 @@
 
         }
         var handler = StripeCheckout.configure({
-            //key: 'pk_test_6pRNASCoBOKtIshFeQd4XMUh',
-            key: 'pk_test_s9jIizZdUfhjMplDPtyMFAN7',
-            // image: '/img/pay.png',
+            key: stripekey.Key,
             locale: 'auto',
             token: function(response) {
                 console.log(response);
                 verifyCustomer(response);
-                // Use the token to create the charge with a server-side script.
-                // You can access the token ID with `token.id`
             }
         });
 
@@ -372,11 +389,10 @@
             if (angular.isDefined($scope.dis_email) && $scope.dis_email != null) {
                 var Email = $scope.dis_email;
             }
-            // Open Checkout with further options
             handler.open({
                 name: $scope.location_name,
                 description: totalItemInCart + ' items',
-                amount: $scope.total_price * 100,
+                amount:  $scope.grandTotal_price * 100,
                 currency: $localStorage.shippingdata.currency,
                 locale: 'auto',
                 image: $scope.picImage,

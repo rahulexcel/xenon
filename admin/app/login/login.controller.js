@@ -4,6 +4,7 @@
             controller('LoginLightCtrl', LoginLightCtrl);
     function LoginLightCtrl($scope, $rootScope, ajaxRequest, loginFactory, storeinfoLocationsIdFactory, localStorageService, $log, $state, storeinfoLocationsFactory, userValidate)
     {
+       
         $log.debug('Login Controller');
         var userData = localStorageService.get('userData');
         if (userData) {

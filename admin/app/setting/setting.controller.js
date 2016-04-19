@@ -3,7 +3,7 @@
 
     angular.module('xenon-app')
             .controller('settingController', settingController);
-    function settingController($scope, countryData, calanderService, $state, arrayService, dropdownService, storeinfoLocationsIdFactory, localStorageService) {
+    function settingController($scope, countryData, calanderService, remainingStatusservice, $state, arrayService, dropdownService, storeinfoLocationsIdFactory, localStorageService) {
         console.log("Setting Page");
         $scope.settingSpinner = true;
         $scope.showSettingContent = false;
@@ -111,6 +111,7 @@
                     query.$promise.then(function(data) {
                         console.log(data);
                         localStorageService.set('storeInfo', data.data);
+                         remainingStatusservice. remainingStatus();
                         if (data.data.lcompleted.length < 3) {
                             $state.go('dashboard.welcome');
                         }
@@ -183,10 +184,16 @@
         }
         $scope.checkStoreSetting = function() {
             // console.log('checkStoreSetting');
+            var flag=0;
             if (localStorageService.get('storeInfo')) {
                 var storeInfo = localStorageService.get('storeInfo');
                 var lcompletedLength = storeInfo.lcompleted.length;
-                if (lcompletedLength < 3) {
+                for(var i=0; i<lcompletedLength; i++){
+                    if(storeInfo.lcompleted[i]==4){
+                        flag=1;
+                    }
+                }
+                if (flag==0) {
                     $scope.checkStoreOpen = true;
                     $scope.lclosed = false;
                 }

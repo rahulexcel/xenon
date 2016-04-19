@@ -4,7 +4,7 @@ var app = angular.module('xenon-app', [
     'ngCookies',
     'ngResource',
     'ui.router',
-    'ui.bootstrap',
+  
     'ngAnimate',
     'oc.lazyLoad',
     'angularFileUpload',

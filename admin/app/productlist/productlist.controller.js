@@ -7,7 +7,6 @@
         $scope.spinner = true;
         $scope.catSpinner = true;
         $scope.saveCategoryTreeStructure = false;
-
         var userData = localStorageService.get('userData');
         var lid = userData.locations[0];
         categoryListApi();
@@ -17,12 +16,17 @@
             });
             query.$promise.then(function(data1) {
                 $scope.spinner = false;
-                $scope.displayProductList = productlistService.productlist($scope.catArr, data1);
+                //$scope.displayProductList = productlistService.productlist($scope.catArr, data1);
+                console.log($scope.displayProductList);
                 $scope.catSpinner = false;
-                if ($scope.catArr[0] && $scope.catArr[0].level == 0) {
-                    $scope.catArr.shift();
-                }
+//                if ($scope.catArr[0] && $scope.catArr[0].level == 0) {
+//                    $scope.catArr.shift();
+//                }
+               
                 $scope.displaycatArr = categorylistService.categorylist($scope.catArr, data1);
+                     console.log($scope.displaycatArr);              
+                
+                
             });
         }
         function categoryListApi() {
@@ -30,13 +34,13 @@
                 "locationId": lid,
             }, {});
             query1.$promise.then(function(data2) {
-                //console.log(data2);
+                ////console.log(data2);
                 $scope.catArr = data2;
                 productListApi();
             });
         }
         $scope.editProduct = function(productId, productcatId) {
-            console.log(productcatId);
+            //console.log(productcatId);
             localStorageService.set('editProductId', productId);
             localStorageService.set('editProductcatId', productcatId);
             $state.go('dashboard.addProduct');
@@ -59,15 +63,15 @@
             dropped: function(e) {
                 if (e.dest.nodesScope.$parent.$type == "uiTree") {
                     $scope.saveCategoryTreeStructure = true;
-                    console.log('Moving and Updating category');
+                    //console.log('Moving and Updating category');
                     for (var k = 0; k < e.source.nodeScope.$treeScope.$parent.$parent.catArr.length; k++) {
-                        console.log(e.source.nodeScope.$treeScope.$parent.$parent.catArr[k].catname);
+                        //console.log(e.source.nodeScope.$treeScope.$parent.$parent.catArr[k].catname);
                         var query = categoryFactory.Update({}, {
                             'catid': e.source.nodeScope.$treeScope.$parent.$parent.catArr[k]._id,
                             'index': k
                         });
                         query.$promise.then(function(data) {
-                            console.log(data);
+                            //console.log(data);
                             $scope.saveCategoryTreeStructure = false;
                         });
                     }
@@ -101,29 +105,29 @@
                 if (event.source.nodeScope.$modelValue.title) {
                     is_source_category = true;
                 }
-                // console.log(event.dest.nodesScope.$parent.$type);
+                // //console.log(event.dest.nodesScope.$parent.$type);
                 if (event.dest.nodesScope.$parent.$type == "uiTree") {
                     is_dest_category = true;
                 }
-                // console.log(event);
+                // //console.log(event);
                 if (is_source_category) {
-                    console.log('//we are moving category');
+                    //console.log('//we are moving category');
                     if (is_dest_category) {
-                        console.log('//its fine to move category up/down');
+                        //console.log('//its fine to move category up/down');
                         return true;
                     } else {
-                        console.log('//we cannot move category in product');
+                        //console.log('//we cannot move category in product');
                         alertDanger();
                         return false;
                     }
                 }
                 if (!is_source_category) {
-                    console.log('//we are moving a product');
+                    //console.log('//we are moving a product');
                     if (!is_dest_category) {
-                        console.log('//moving inside product is fine');
+                        //console.log('//moving inside product is fine');
                         return true;
                     } else {
-                        console.log('//cannot move product in parent category');
+                        //console.log('//cannot move product in parent category');
                         alertDanger();
                         return false;
                     }
@@ -133,7 +137,7 @@
         };
         $scope.productTreeOption = {
             beforeDrop: function(event) {
-                // console.log(event);
+                // //console.log(event);
                 if (event.dest.nodesScope.$parent.$type == "uiTree") {
                     alertDanger();
                     return false;
@@ -159,17 +163,18 @@
             });
             $scope.categoryName = '';
             query.$promise.then(function(data) {
-                console.log(data);
+                //console.log(data);
+                
             });
         };
 
         $scope.deleteCategory = function(categoryId) {
-            console.log(categoryId);
+            //console.log(categoryId);
             var query = categoryFactory.delete({}, {
                 'catid': categoryId
             });
             query.$promise.then(function(data) {
-                console.log(data);
+                //console.log(data);
                 productListApi();
             });
         };
@@ -183,13 +188,13 @@
         };
         function updateCategory(categoryId, productIds) {
             $scope.saveCategoryTreeStructure = true;
-            // console.log(categoryId);
+            // //console.log(categoryId);
             var query = categoryFactory.Update({}, {
                 'catid': categoryId,
                 'catproducts': productIds
             });
             query.$promise.then(function(data) {
-                console.log(data);
+                //console.log(data);
                 $scope.saveCategoryTreeStructure = false;
             });
         }
@@ -201,7 +206,6 @@
                 $scope.alertDanger = false;
             }, 5000);
         }
-    }
-    ;
+    };
 
 })();

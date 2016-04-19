@@ -47,7 +47,9 @@
     "Delivery Price":"Delivery Price",
     "Delivery Tax":"Delivery Tax",
     "vat(inc.)":"Vat(inc.)",
-    "comment":"Comment:"
+    "comment":"Comment:",
+    "CHECKOUT":"CHECKOUT",
+    "Phone number":"Phone number"
 
 
 }
