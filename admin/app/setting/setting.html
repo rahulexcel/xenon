@@ -13,21 +13,21 @@
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="col-sm-5 col-xs-4">
-                                 <strong>Delivery Mode</strong>
-                                 <p>
-                                     <div class="form-block">
-                                         <label>
-                                             <input type="checkbox"  ng-model="deliveryModeDel">
-                                             Delivery
-                                         </label>
-                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                         <label>
-                                             <input type="checkbox"  ng-model="deliveryModePic">
-                                             Pickup
-                                         </label>
-                                     </div>
-                                 </p>
-                             </div>
+                                    <strong>Delivery Mode</strong>
+                                    <p>
+                                    <div class="form-block">
+                                        <label>
+                                            <input type="checkbox"  ng-model="deliveryModeDel">
+                                            Delivery
+                                        </label>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <label>
+                                            <input type="checkbox"  ng-model="deliveryModePic">
+                                            Pickup
+                                        </label>
+                                    </div>
+                                    </p>
+                                </div>
                                 <!-- <div class="col-sm-5 col-xs-4">
                                     <strong>Delivery Mode</strong>
                                     <p>
@@ -174,9 +174,10 @@
                             <strong>Storefront language</strong>
                             <p>
                                 <select class="form-control" ng-model="transalation">
-                                    <option value="English">English</option>
+                                    <option value="English-US">English -US</option>
+                                    <option value="English-UK">English -UK</option>
                                     <option value="Danish">Danish</option>
-                                    <option value="Finnish">Finnish</option>
+                                    <option value="Italian">Italian</option>
                                     <option value="French">French</option>
                                     <option value="German">German</option>
                                     <option value="Norwegian">Norwegian</option>
@@ -223,29 +224,29 @@
                                 <input type="text"  class="form-control">
                             </p>
                         </div> -->
-                        <div class="col-sm-6 col-sm-offset-2" style="padding-left: 0px;">
-                            <div>
+                    <div class="col-sm-6 col-sm-offset-2" style="padding-left: 0px;">
+                        <div>
 
-                                <p style="color:red" ng-show="errorForTaxField">Please set the Delivery Tax field</p>
-                                <p style="color:red" ng-show="errorday_in_schedule_view">Please set opening times</p>
-                            </div>   
-                            <div class="form-block">
-                                
-                                
-                                <button class="btn btn-blue" ng-click="save()">Save <span ng-show="spinner">
+                            <p style="color:red" ng-show="errorForTaxField">Please set the Delivery Tax field</p>
+                            <p style="color:red" ng-show="errorday_in_schedule_view">Please set opening times</p>
+                        </div>   
+                        <div class="form-block">
+
+
+                            <button class="btn btn-blue" ng-click="save()">Save <span ng-show="spinner">
                                     <i class="fa fa-spin fa-spinner"></i>
                                 </span></button>
-                            </div>
-                            <div class="form-block">
-                                <span>{{lastupdated}}</span>
-                            </div>
                         </div>
-                    </form>
-                </div>
+                        <div class="form-block">
+                            <span>{{lastupdated}}</span>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-    <div class="col-sm-1"></div>
-    <script language="javascript">
+</div>
+<div class="col-sm-1"></div>
+<script language="javascript">
             // populateCountries("country");
-        </script>
+</script>

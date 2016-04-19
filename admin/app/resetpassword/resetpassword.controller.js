@@ -3,11 +3,12 @@
     angular
             .module('xenon.controllers')
             .controller('ResetPasswordCtrl', ResetPasswordCtrl);
-    function ResetPasswordCtrl($scope, resetFactory, $rootScope) {
+    function ResetPasswordCtrl($scope, resetFactory,$stateParams, $rootScope) {
+        console.log($stateParams);
         $scope.reset = function() {
             $scope.spinner = "true";
             var query = resetFactory.save({
-                token: '87e56afaaa585553bdfaee1563c50a66b423d0f5',
+                token: $stateParams.token,
                 password: $scope.password
             });
             query.$promise.then(function(data) {

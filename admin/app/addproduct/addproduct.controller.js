@@ -1,9 +1,11 @@
+
+
 (function() {
     'use strict';
 
     angular.module('xenon-app')
             .controller('addProductController', addProductController);
-    function addProductController($scope, uploadService, categoryListFactory, addProductService, addProductFactory, Upload, localStorageService, $rootScope, productListFactory, productFactory, $state, imageUploadFactory) {
+    function addProductController($scope, uploadService,remainingStatusservice, categoryListFactory, addProductService, addProductFactory, Upload, localStorageService, $rootScope, productListFactory, productFactory, $state, imageUploadFactory) {
         console.log("Add Product Page");
         var userData = localStorageService.get('userData');
         var lid = userData.locations[0];
@@ -18,11 +20,10 @@
             "locationId": lid,
         }, {});
         query.$promise.then(function(categoryList) {
-            console.log(categoryList);
-            if (categoryList[0].level == 0) {
-                categoryList.shift();
-            }
+           categoryList[0].catname="Level 0 (No category)";                
             $scope.categorylist = categoryList;
+            $scope.selectedCategoryId= $scope.categorylist[0]._id;
+            console.log($scope.categorylist[0]._id);
             $scope.formSpinner = false;
             if (editProductId) {
                 var editProductcatId = localStorageService.get('editProductcatId');
@@ -62,7 +63,7 @@
             $scope.productQuantity = 'Infinite';
         };
         $scope.editProduct = function() {
-            if ($scope.productName && $scope.productDescription) {
+            if ($scope.productName && $scope.productDescription && $scope.productPrice) {
                 $scope.spinner = true;
                 if ($scope.picImage == after_load_image_response) {
                     edit_product_after_uploader_response();
@@ -103,7 +104,7 @@
         }
 
         $scope.addProduct = function() {
-            if ($scope.productName && $scope.productDescription) {
+            if ($scope.productName && $scope.productDescription && $scope.selectedCategoryId && $scope.productPrice) {
                 $scope.spinner = true;
                 if ($scope.picImage == after_load_image_response) {
                     send_data_after_uploader_response();
@@ -113,13 +114,14 @@
                                 console.log(response);
                                 uploadResponseFileName = response.filename;
                                 send_data_after_uploader_response();
-                                console.log(response)
+                                
                             });
                 }
             }
         };
 
         function send_data_after_uploader_response() {
+           
             var userData = localStorageService.get('userData');
             var lid = userData.locations[0];
             if ($scope.productQuantity == 'Infinite' || $scope.productQuantity == undefined) {
@@ -146,7 +148,7 @@
                 $scope.productPrice = '';
                 $scope.productQuantity = '';
                 $scope.productDescription = '';
-                
+                 remainingStatusservice.remainingStatus();
                 var storeInfo = localStorageService.get('storeInfo');
                 if(storeInfo.lcompleted.length == 2 || storeInfo.lcompleted.length == 3){
                     $state.go('dashboard.welcome');

@@ -1,9 +1,9 @@
-<nav class="navbar navbar-default" role="navigation">
+<nav class="navbar navbar-default " role="navigation">
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                 <span class="sr-only">Toggle navigation</span>
-                <i class="fa-bars"></i>
+                <i class="fa fa-bars"></i>
             </button>
             <img src="app/assets/images/logo.png"  alt="" class="navbar-brand"/>
         </div>
@@ -16,15 +16,86 @@
                     <a href="">SIGN UP</a>
                 </li>
             </ul>
-            <ul class="nav navbar-nav navbar-right" ng-show="userNavMenu">
+            <ul class="nav navbar-nav navbar-right user-info-menu left-links list-inline list-unstyled" ng-show="userNavMenu">
+                <li class="dropdown hover-line" ng-show="completed">
+                     <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                        <i class="fa fa-bell-o"></i>
+                        <span class="badge badge-purple">{{remainingstatus}}</span>
+                        <ul class="dropdown-menu notifications" style="left:0;">
+                        <li class="top">
+                            <p class="small">
+                                <a  class="pull-right">Complete them</a>
+        You have 
+                                <strong>{{remainingstatus}}</strong> pending task.
+    
+                            </p>
+                        </li>
+                        <li>
+                            <ul class="dropdown-menu-list list-unstyled ps-scrollbar">
+                                <li class="active notification-success" ng-show="storemessage">
+                                    <a href="#/dashboard/storeinfo">
+                                        <i class="fa-user"></i>
+                                        <span class="line">
+                                            <strong>Setup StoreInfo</strong>
+                                        </span>
+                                        <span class="line small time">
+                    Here you can setup about your store
+                </span>
+                                    </a>
+                                </li>
+                                <li class="active notification-secondary"  ng-show="settingmessage">
+                                    <a href="#/dashboard/setting">
+                                        <i class="fa-lock"></i>
+                                        <span class="line">
+                                            <strong>Setup Store Setting</strong>
+                                        </span>
+                                        <span class="line small time">
+                   Here you can setup your store settings
+                </span>
+                                    </a>
+                                </li>
+                                <li class="notification-primary" ng-show="productmessage">
+                                    <a  href="#/dashboard/productList">
+                                        <i class="fa-thumbs-up"></i>
+                                        <span class="line">
+                                            <strong>Add Your First Product</strong>
+                                        </span>
+                                        <span class="line small time">
+                  Here you can setup your store settings
+                </span>
+                                    </a>
+                                </li>
+                                <li class="notification-primary" ng-show="paymentmessage">
+                                    <a href="#/dashboard/payment">
+                                        <i class="fa-calendar"></i>
+                                        <span class="line">
+                                            <strong>Setup Payment</strong>
+                </span>
+                                        <span class="line small time">
+                  Here you can setup your payment
+                </span>
+                                    </a>
+                                </li>
+                             
+                              
+                            </ul>
+                        </li>
+                    </ul>
+                    </a>
+                </li>
+
                 <li>
-                    <a href="#/dashboard/productOrders">ORDERS <span ng-if="newOrder" style="margin-top:-5px;" class="badge badge-secondary pull-right">{{newOrder}}</span></a>
+                    <ul class="dropdown-menu-list list-unstyled ps-scrollbar">
+                    </ul>
+                </li>
+                <li>
+                    <a href="#/dashboard/productOrders">ORDERS <span ng-if="newOrder" style="margin-top:-5px;" class="badge badge-secondary pull-right" ng-click="gotoorders()">{{newOrder}}</span></a>
                 </li>
                 <li>
                     <a href="#/dashboard/productList">PRODUCTS</a>
                 </li>
                 <li>
-                    <a href="" data-toggle="dropdown" class="dropdown-toggle" style="font-size:13px">ACCOUNT
+                    <a href="" data-toggle="dropdown" class="dropdown-toggle" style="font-size:14px">ACCOUNT
                         <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
@@ -43,10 +114,12 @@
                         <li>
                             <a style="cursor:pointer;" href="#/dashboard/plans">PLANS</a>
                         </li>
+
+
                     </ul>
                 </li>
                 <li><a>
-                    <span ng-disabled="showMyStoreNav" style="cursor:pointer;" ng-click="goToMyStore()" ng-style="{ color: showMyStoreNav ? '#ddd' : '#979898' }" href="https://{{ldomain}}">SHOW MY STORE</span></a>
+                        <span ng-disabled="showMyStoreNav" style="cursor:pointer;" ng-click="goToMyStore()" ng-style="{ color: showMyStoreNav ? '#d3d3d3' : 'rgb(3, 103, 3)' }" href="https://{{ldomain}}">SHOW MY STORE</span></a>
                 </li>
                 <li ng-click="logout()">
                     <a style="cursor:pointer;">LOGOUT</a>
@@ -55,6 +128,11 @@
         </div>
     </div>
 </nav>
+
+
+
+
+
 <div class="container">
     <ui-view class="main-content-view"></ui-view>
 </div>

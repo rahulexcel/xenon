@@ -3,8 +3,9 @@
 
     angular.module('xenon-app')
             .controller('productOrdersController', productOrdersController);
-    function productOrdersController($scope, addOrderFactory, $localStorage, orders, $interval, fetchOrdersService, localStorageService, orderListFactory, $rootScope, $state, orderDetailsFactory, arrayService) {
-        console.log("Product Orders Page");
+    function productOrdersController($scope, addOrderFactory, $localStorage,remainingStatusservice, orders, $interval, fetchOrdersService, localStorageService, orderListFactory, $rootScope, $state, orderDetailsFactory, arrayService) {
+        //console.log("Product Orders Page");
+        remainingStatusservice.remainingStatus();
         var userData = localStorageService.get('userData');
         var eid = userData.eid;
         var lid = userData.locations[0];
@@ -43,7 +44,7 @@
                 "pickuptime": "2015-12-17T09:01:50.261Z"
             });
             query.$promise.then(function(data) {
-                console.log(data);
+                //console.log(data);
                 // $scope.spinner = false;
             });
         };
@@ -55,7 +56,7 @@
                 var query = orderDetailsFactory.editOrder({"orderId": orderId, "order_state": 3});
                 query.$promise.then(function(data) {
                     fetchOrdersService.newOrders();
-                    //console.log(data);
+                    
                 });
                 localStorageService.set('singleOrderId', orderId);
                 $state.go('dashboard.orderDetails');
@@ -65,7 +66,7 @@
             $scope.spinner = true;
             var query = orderDetailsFactory.deleteOrder({"orderId": orderId});
             query.$promise.then(function(data) {
-                console.log(data);
+                //console.log(data);
                 onpageLoadApi();
                 // $scope.orderList.splice(index, 1);
             });
@@ -75,13 +76,16 @@
                 $interval.cancel(interval);
             else
                 onpageLoadApi();
-            console.log('calling from page');
+            //console.log('calling from page');
         }, 60000);
+        
+        
+       
         var flag = 1;
         $(function() {
             function cb(start, end) {
                 flag++;
-                console.log(flag);
+                //console.log(flag);
                 $scope.startdate = Date.parse(end);
                 $scope.enddate = Date.parse(start);
                 $scope.spinner = true;
@@ -122,11 +126,11 @@
           $interval(function() {
         if($scope.enddate==new Date(moment().startOf('day')).getTime()){
         updatetime();
-       
+       console.log("end date having value, updating");
        }else{
-           console.log("no");
+           console.log("not updating"); //console.log("no");
        }
-     }, 1000);
+     }, 180000);
      
         function updatetime() {
                 var query5 = orders.save({
@@ -137,7 +141,7 @@
                     $scope.orderList = data.data;
                     $scope.spinner = false;
                     $rootScope.customerdata = data.data;
-                     console.log('yesss');
+                     //console.log('yesss');
                 });
          
         }

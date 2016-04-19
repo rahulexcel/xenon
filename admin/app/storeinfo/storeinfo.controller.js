@@ -3,7 +3,7 @@
     angular
             .module('xenon.controllers')
             .controller('storeinfoCtrl', storeinfoCtrl);
-    function storeinfoCtrl($scope, $log, countryData, $rootScope, fetchOrdersService, $modal, FileUploader, arrayService, uploadService, dropdownService, $state, storeinfoFactory, $timeout, calanderService, localStorageService, Upload, storeinfoLocationsFactory, storeinfoLocationsIdFactory, storeinfoLocFile) {
+    function storeinfoCtrl($scope, $log, countryData, $rootScope, remainingStatusservice, fetchOrdersService,  FileUploader, arrayService, uploadService, dropdownService, $state, storeinfoFactory, $timeout, calanderService, localStorageService, Upload, storeinfoLocationsFactory, storeinfoLocationsIdFactory, storeinfoLocFile) {
         fetchOrdersService.newOrders();
         var tz = jstz.determine();
         var timeZone = tz.name();
@@ -45,7 +45,7 @@
                 response_phone_no = data.lphone;
                 //console.log(data.lphone);
                 if (angular.isDefined(data.llogo)) {
-                    $scope.picImage = 'http://s3.amazonaws.com/ordermagic/' + data.llogo;
+                    $scope.picImage = 'https://s3.amazonaws.com/ordermagic/' + data.llogo;
                 }
                 response_pic_name = $scope.picImage;
                 $scope.phone_code = data.lcountrycode;
@@ -89,7 +89,12 @@
                 query.$promise.then(function(data) {
                     $scope.spinner = false;
                     localStorageService.set('storeInfo', data.data);
+                    if(data.data.lcompleted.length==4){
                     $state.go('dashboard.productList');
+                }
+                else{
+                    $state.go('dashboard.welcome');  
+                }
                 });
             } else {
                 var query = storeinfoFactory.save({
@@ -118,6 +123,7 @@
 	                $rootScope.showMyStoreNav = false;
 	                $rootScope.ldomain = data.ldomain;
 	                $state.go('dashboard.welcome');
+                        remainingStatusservice.remainingStatus();
                     // $state.go('dashboard.productList');
                 });
             }

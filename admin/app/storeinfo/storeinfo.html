@@ -18,7 +18,7 @@
                                         <label class="control-label" for="full_name">
                                             <strong>Name</strong>
                                         </label>
-                                        <input class="form-control" name="storeName" ng-pattern="/^[a-zA-Z 0-9]*$/"  ng-model="lname" required/>
+                                        <input class="form-control" name="storeName" ng-pattern="/^[ÆØÅæøå A-Za-z0-9]*$/"  ng-model="lname" required/>
                                         <span style="color:red;" ng-show="store.storeName.$error.pattern">Please use alpha numeric only</span>
                                     </div>
                                     <div class="col-sm-12">
@@ -60,7 +60,7 @@
                                             <label class="control-label" for="full_name">
                                                 <strong>Store address</strong>
                                             </label>
-                                            <input class="form-control" name="storeAddress" ng-model="laddr" ng-pattern="/^[a-zA-Z 0-9]*$/" required/>
+                                            <input class="form-control" name="storeAddress" ng-model="laddr" ng-pattern="/^[ÆØÅæøå A-Za-z0-9]*$/" required/>
                                             <p style="color:red;" ng-show="store.storeAddress.$error.pattern">Please use alpha numeric only</p>
                                             <label class="control-label" for="full_name">
                                                 <strong>Post code</strong>
@@ -69,12 +69,12 @@
                                             <label class="control-label" for="full_name">
                                                 <strong>City</strong>
                                             </label>
-                                            <input class="form-control" name="storeCity" ng-pattern="/^[a-zA-Z 0-9]*$/"  ng-model="lcity"/>
+                                            <input class="form-control" name="storeCity" ng-pattern="/^[ÆØÅæøå A-Za-z0-9]*$/"  ng-model="lcity"/>
                                             <p style="color:red;" ng-show="store.storeCity.$error.pattern">Please use alpha numeric only</p>
                                             <label class="control-label" for="full_name">
                                                 <strong>State</strong>
                                             </label>
-                                            <input class="form-control" name="storeState" ng-pattern="/^[a-zA-Z 0-9]*$/"  ng-model="lstate" />
+                                            <input class="form-control" name="storeState" ng-pattern="/^[ÆØÅæøå A-Za-z0-9]*$/"  ng-model="lstate" />
                                             <p style="color:red;" ng-show="store.storeState.$error.pattern">Please use alpha numeric only</p>
                                             <label class="control-label" for="full_name">
                                                 <strong>Country</strong>
@@ -114,7 +114,7 @@
                                 </div>
                             </div> -->
                             <div>
-                                <div class="form-group-separator"></div>
+<!--                                <div class="form-group-separator"></div>
                                 <div class="col-sm-9 col-sm-offset-2">
                                     <div class="form-block">
                                         <div class="form-group">
@@ -124,7 +124,7 @@
                                             <textarea class="form-control" rows="5" ng-model="lmessage"></textarea>
                                         </div>
                                     </div>
-                                </div>
+                                </div>-->
                                 <div>
                                     <div class="col-sm-9 col-sm-offset-2">
                                         <div class="form-block">

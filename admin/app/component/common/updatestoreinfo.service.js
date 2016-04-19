@@ -2,7 +2,7 @@
     'use strict';
     angular.module('xenon-app')
             .factory('updateStoreInfoService', updateStoreInfoService);
-    function updateStoreInfoService(localStorageService, storeinfoLocationsIdFactory) {
+    function updateStoreInfoService(localStorageService, storeinfoLocationsIdFactory, remainingStatusservice) {
         var service = {};
         service.updateStoreInfo = function() {
             console.log('service is called');
@@ -14,6 +14,9 @@
         query.$promise.then(function(data) {
             console.log(data);
             localStorageService.set('storeInfo', data);
+            
+                             remainingStatusservice.remainingStatus();
+                        
             console.log('data is saved in localstorage');
         });
         }

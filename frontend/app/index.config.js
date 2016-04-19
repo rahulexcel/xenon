@@ -9,10 +9,7 @@
             suffix: '.json'
         });
         $translateProvider.useSanitizeValueStrategy(null);
-        $translateProvider.preferredLanguage('English');
-        $translateProvider.usePostCompiling(true);
-   
-          
-    }
-    
+        $translateProvider.preferredLanguage('English-UK');
+        $translateProvider.usePostCompiling(true);     
+    }   
 })();

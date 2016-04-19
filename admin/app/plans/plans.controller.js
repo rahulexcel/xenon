@@ -5,7 +5,9 @@
             .controller('plansController', plansController);
     function plansController($scope, localStorageService, $timeout, $localStorage, proPlanFactory, basicPlanFactory, updateStoreInfoService) {
         console.log('Plans Controller');
+         $scope.showModal = false;
         var storeInfo = localStorageService.get("storeInfo");
+        console.log(storeInfo);
         if(storeInfo){
         	if(storeInfo.lplan){
         		$scope.plan = storeInfo.lplan;
@@ -21,11 +23,12 @@
        		} else{
        			console.log(currentPlanValue);
               if(currentPlanValue == 1){
-                if(confirm("going from pro to pay as you go")){
-                  console.log('yes');
-                  console.log('change to basic plan');
-                changePlanToBasicApi();
-                }
+                   $scope.showModal = !$scope.showModal;
+//                if(confirm("going from pro to pay as you go")){
+//                  console.log('yes');
+//                  console.log('change to basic plan');
+//                changePlanToBasicApi();
+//                }
                 
               }
               if(currentPlanValue == 2){
@@ -33,6 +36,14 @@
                 proPlanCheckout();
               }
        		}
+       }
+       $scope.yes=function(){
+           changePlanToBasicApi();
+           $scope.spinneryes=true;
+       }
+       $scope.no=function(){
+            $scope.showModal=false;
+            $scope.spinneryes=false;
        }
        function changePlanToProApi(stripeData){
           var query = proPlanFactory.save({
@@ -52,11 +63,16 @@
                 updateStoreInfoService.updateStoreInfo();
                 $scope.plan = data.plan_type;
                 $scope.planChangeSpinner = false;
+                $scope.showModal=false;
             }); 
        }
+//        $scope.showModal = false;
+//    $scope.toggleModal = function(){
+//        $scope.showModal = !$scope.showModal;
+//    };
        function proPlanCheckout(){
           var handler = StripeCheckout.configure({
-                  key: 'pk_test_s9jIizZdUfhjMplDPtyMFAN7',
+                  key: 'pk_test_6pRNASCoBOKtIshFeQd4XMUh'   ,
                   locale: 'auto',
                   token: function(response) {
                       console.log(response);
@@ -65,7 +81,7 @@
               });
                 // Open Checkout with further options
                 handler.open({
-                    name: 'store name',
+                    name: storeInfo.lname,
                     description: 'changing plan',
                     amount: 3900,//39$
                     // currency: $localStorage.storeInfo.lcurrency,

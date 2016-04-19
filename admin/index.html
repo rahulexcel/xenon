@@ -7,6 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="description" content="Xenon" />
         <meta name="author" content="" />
+        
         <link rel="icon" href="app/assets/images/logo.png" type="image/gif" sizes="24x16"> 
 
         <title>eatingNext</title>
@@ -30,7 +31,7 @@
         <link rel="stylesheet" type="text/css" href="assets/css/daterangepicker.css" />
 
         <script src="app/js/socket.io.min.js"></script>
-        <script src="app/js/checkout.js"></script>
+        <script src="https://checkout.stripe.com/checkout.js"></script>
 
         <script>
             var appHelper = {
@@ -69,6 +70,7 @@
     <script src="app/js/angular/angular.min.js"></script>
     <script src="app/js/angular-ui/angular-ui-router.min.js"></script>
     <script src="app/js/angular-ui/ui-bootstrap-tpls-0.11.2.min.js"></script>
+  
     <script src="app/js/angular/angular-cookies.min.js"></script>
     <script src="app/js/angular/angular-resource.min.js"></script>
     <script src="app/js/angular/angular-animate.js"></script>
@@ -110,7 +112,7 @@
     <script src="app/js/customlib/country.js"></script>
     <!--  <script src="assets/js/uikit/js/uikit.js"></script> -->
     <!-- App js -->
-
+    
     <script src="app/storeinfo/storeinfo.factory.js"></script>
     <script src="app/storeinfo/storeinfolocations.factory.js"></script>
     <script src="app/storeinfo/storeinfolocationid.factory.js"></script>            
@@ -132,6 +134,7 @@
     <script src="app/component/common/uservalidate.service.js"></script>
     <script src="app/index.run.js"></script>
     <script src="app/component/common/filter.js"></script>
+    <script src="app/component/common/remainingstatus.factory.js"></script>
     <script src="app/component/common/imageupload.factory.js"></script>
     <script src="app/productorders/addorder.factory.js"></script>
     <script src="app/productorders/orderlist.factory.js"></script>
@@ -160,12 +163,18 @@
     <script src="app/plans/proplan.factory.js"></script>
     <script src="app/plans/basicplan.factory.js"></script>
     <script src="app/js/ngAudio.js"></script>
+<!--    <script src="app/component/common/audio.directive.js"></script>  -->
     <script src="app/component/common/fetchorders.service.js"></script>
     <script src="app/component/common/openmodel.service.js"></script>
     <script src="app/component/common/ngConfirmClick.directive.js"></script>
+    <script src="app/component/common/model.directive.js"></script>
     <script src="app/welcome/welcome.controller.js"></script>
     <script src="app/productorders/order.factory.js"></script>
-      <script src="app/printallorders/printallorders.controller.js"></script>
+    <script src="app/printallorders/printallorders.controller.js"></script>
+  
+  
+      
+
 
 </body>
 </html>

@@ -9,10 +9,10 @@
             "DE": "German",
             "FR": "French",
             "DK": "Danish",
-            "FI": "Finnish",
+            "IT": "Italian",
             "NO": "Norwegian",
-            "SE": "Swedish",
-            "GB": "English"
+            "GB": "English-UK",
+            "US": "English-US"
         }
         service.set = function(value) {
             console.log(value);

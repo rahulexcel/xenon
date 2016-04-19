@@ -3,7 +3,7 @@
 
     angular.module('xenon-app').
             controller('navbarController', navbarController);
-    function navbarController($scope, $rootScope, ajaxRequest, loginFactory, localStorageService, $log, $state)
+    function navbarController($scope, $rootScope, ajaxRequest, loginFactory, localStorageService, $log, $state, remainingStatusservice)
     {
         console.log($state.current.name);
        
@@ -25,6 +25,9 @@
             $rootScope.showMyStoreNav = false;
             var storeInfo = localStorageService.get('storeInfo');
             $scope.ldomain = storeInfo.ldomain;
+            console.log(storeInfo.lcompleted);
+//            $scope.complete=storeInfo.lcompleted;
+//            $scope.remainingstatus=storeInfo.lcompleted.length;
         } else{
             $rootScope.showMyStoreNav = true;
         }

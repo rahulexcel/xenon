@@ -160,6 +160,7 @@ span {
 }
 .TOP{
     margin-top: -3.5rem;
+    min-height: 160px;
 }
 
 .vcenter {
@@ -195,7 +196,7 @@ span {
 }
 .topheading{
     margin-bottom: 2px;
-    margin-top: 32px;
+    margin-top: 50px;
     /*padding-top: 14px;*/
 }
 .store-desc{
