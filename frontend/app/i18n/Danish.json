@@ -1,0 +1,22 @@
+{
+    "Apple": "en",
+    "cart_empty_alert": "Din indkøbskurv er tom. Vælg emner til din kurv",
+    "cart_empty_msg": "Du har ikke tilføjet noget til din indkøbskurv endnu! Begynde at tilføje dine livretter",
+    "yourorder": "DIN BESTILLING",
+    "verify order msg": "Kontroller ordre med dit telefonnummer. Dette er også, hvordan vi vil nå ud til dig om status for din ordre.",
+    "Verify order": "1.VERIFY ORDER",
+    "deliverydetails": "2.DELIVERY DETALJER",
+    "paymentdetails": "3.PAYMENT DETALJER",
+    "hour":"Time",
+    "minutes":"Minutter",
+    "Pickup":"Saml op",
+    "Delivery":"Levering",
+    "Store is closed.":"Store er lukket .",
+    "Delivery Price":"Levering Pris",
+    "Delivery Tax":"Levering Skat",
+    "comment":"Comment:",
+    "First name": "abcd",
+    "Phone number":"Phone",
+    "View all":"View"
+
+}

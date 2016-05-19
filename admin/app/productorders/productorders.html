@@ -1,0 +1,79 @@
+<div class="row">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h1 class="panel-title"><strong>Orders</strong></h1>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="form-group">
+                                <button class="btn btn-info" ng-click="get_data_for_print()">Print Orders</button>
+                            </div> 
+                        </div>
+                    </div>
+                    <form class="form-inline" role="form">
+                        <div class="form-group">
+                            <label for="email">Select Date:</label>
+                            <div id="reportrange"  style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
+                                <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
+                                <span></span> <b class="caret"></b>
+                            </div>
+                        </div>
+
+                    </form>
+
+                </div>
+
+
+            </div>
+            <div class="panel-body">
+                <form class="form-horizontal ng-pristine ng-valid" role="form">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <!-- <select class="form-control">
+                                <option value="Option 1">Inbox</option>
+                                <option value="Option 2">Archive</option>
+                                <option value="Option 3">All</option>
+                            </select> -->
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table class="table responsive">
+                                <thead>
+                                    <tr>
+                                        <th>Order No.</th>
+                                        <th>Phone No.</th>
+                                        <th>Total Amount</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-show="spinner">
+                                        <td colspan="7" style="text-align:center;"><i class="fa fa-spin fa-spinner"></i></td>
+                                    </tr>
+                                    <tr ng-repeat="orders in orderList| orderBy: '-created'" class="hover">
+                                        <td ng-click="orderId(orders._id, orders.order_state)">#{{orders.ordernr}}</td>
+                                        <td ng-click="orderId(orders._id, orders.order_state)">{{orders.cphone}}</td>
+                                        <td ng-click="orderId(orders._id, orders.order_state)">{{currencySymbole}}{{orders.total}}</td>
+                                        <td ng-click="orderId(orders._id, orders.order_state)">
+                                            <i ng-show="orders.order_state == 3" class="mar-top-5 btn btn-success btn-circle"></i>
+                                            <i ng-show="orders.order_state == 2" class="mar-top-5 btn btn-danger btn-circle" style="margin-left: 0px;"></i>
+                                            <i ng-show="orders.order_state == 15" class="mar-top-5 btn btn-danger btn-circle" style="background-color: #ddd;border-color: #ddd; margin-left: 0px;"></i>
+                                            <i ng-show="orders.order_state == 1" class="mar-top-5 btn btn-danger btn-circle" ></i>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-2"></div>
+</div>

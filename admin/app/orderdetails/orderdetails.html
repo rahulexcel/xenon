@@ -1,0 +1,158 @@
+<div class="text-center" ng-show="loadingSpinner" style="margin-top:15%;">
+    <h1><i class="fa fa-spin fa-spinner"></i></h1>
+</div>
+  
+<div class="row" ng-show="hideMainContent" >
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h1 class="panel-title"><strong ng-hide="onPrint">Order details:</strong></h1>
+                    </div>
+                    <div class="col-sm-2 col-sm-offset-4">
+                        <button class="btn btn-blue pull-right" style="background-color:#ddd;color:#0e62c7;" ng-click="backTolist()"><span ng-hide="onPrint">Back</span></button>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body" style="
+    color: #2F4F4F;
+">
+                <div class="row">
+                    <div class="col-sm-5">
+                        <h4><span ng-hide="orderState == 15">Invoice</span><span ng-show="orderState == 15" style="color:red;">Order Cancelled</span></h4>
+                        <h5>Order No: {{ordernr}}</h5>
+                        <div ng-show="comments">
+                        <span style="font-weight: 600;">Comment:</span><br/>
+                       {{comment}}
+                        
+                        </div>
+                    </div>
+                    <div class="col-sm-2 pull-right">
+                        <button  class="btn btn-danger pull-right" ng-hide="orderState == 15" data-toggle="modal" data-target="#myModal"
+    ><strong ng-hide="onPrint">Cancel Order <i ng-show="cancelOrderSpinner" class="fa fa-spin fa-spinner"></i></strong></button>
+                    </div>
+                </div>
+                <div class="row">
+                    <!-- <div class="col-sm-6">
+                        <h2><img src="app/assets/images/logo.png"  alt="" class="invoice-logo"/></h2>
+                        <p>Invoice No. #{{ordernr}} <br>{{orderDate}} <br>Prishtine, Kosovo</p>
+                    </div> -->
+                    <div class="col-sm-12">
+                        <br><br>
+                        <div class="row" style="
+    color: #2F4F4F;
+">
+                            <div class="col-sm-6 col-sm-offset-6" style="text-align:right; ">
+                                <p style="padding-right:12px; color:#2F4F4F;"><strong>{{cname}}</strong> <br/><i class="fa fa-phone"></i> {{cphone}} <br/>{{clientStreetAddress}}</p>
+                            </div>
+                        </div>
+
+                        <!-- <br>
+                            <p><span class="input-group-btn">
+                                        <button type="button" class="btn btn-white btn-md">Send</button>
+                                        <button type="button" class="btn btn-white">
+                                            <i class="fa-envelope"></i>
+                                        </button>
+                                    </span></p>
+                            <span class="input-group-btn">
+                                        <button type="button" class="btn btn-success btn-md">Print</button>
+                                        <button type="button" class="btn btn-success">
+                                            <i class="fa-print"></i>
+                                        </button>
+                                    </span> -->
+                    </div>
+                </div><br><br>
+                <!-- <div class="row">
+                    <div class="col-sm-3">
+                        <p><strong>Client</strong><br>Jhon Doe <br> Mr. Nilson Otto<br> Food Master ltd</p>
+                    </div>
+                    <div class="col-sm-4">
+                        <p><br>1982 OOP <br> Madrid, Spain<br> +1 (151) 225-4183</p>
+                    </div>
+                    <div class="col-sm-5">
+                        <p><strong>Payment Details</strong><br>V.A.T Reg #: <strong>54254(DEMO)78</strong> <br> Account Name: <strong>Food Master Ltd</strong><br> SWIFT code: <strong>454785DV54FGH54</strong></p>
+                    </div>
+                </div> -->
+                <br>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <table class="table responsive">
+                            <colgroup>
+                                <col width="10%"></col>
+                                <col width="45%"></col>
+                                <col width="25%"></col>
+                                <col width="25%"></col>
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th style="text-align:left;">Products</th>
+                                    <th>Quantity</th>
+                                    <th style="text-align:right;">Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="order in orderDetails">
+                                    <td>{{$index}}</td>
+                                    <td>{{order.pname}}</td>
+                                    <td>{{order.qty}}</td>
+                                    <td style="text-align:right"><strong>{{currencySymbole}}{{order.price}}</strong></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        {{storeAddress}} <br>{{storeCountry}} <br> P: {{storePhone}} <br> {{storeName}} <br>{{storeEmail}}
+                                    </td>
+                                    <td colspan="2" style="text-align:left; padding-left:50px;">
+                                        Delivery time: <strong>{{deliverytime}}</strong><br>
+                                        Sub - Total amount: <strong>{{currencySymbole}}{{totalAmount}}</strong><br>
+                                        VAT: <strong> {{vat}}%</strong><br>
+                                      
+                      
+                                            <span ng-show="mode2"> Delivery price: <strong>{{currencySymbole}}{{deliveryprice}}</strong><br></span>
+                                            <span ng-show="mode2"> Delivery tax: <strong>{{deliverytax}}%</strong><br></span>
+                                           
+                                        
+                                            
+                                        Discount: <strong>......</strong><br>
+                                        Grand Total: <strong>{{currencySymbole}}{{grandTotalAmount}}</strong><br>
+                                      
+                                       
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-sm-12 text-center">
+                        <button class="btn btn-info" ng-click="print()">Print</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-2"></div>
+</div>
+ <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                   
+                    <div class="modal-body">
+
+                      Are you sure you want to cancel the order? Customer will be refunded the full amount that they have paid for this order.
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cancelOrder()">YES
+              </button>
+                        <button type="button" class="btn btn-default"  data-dismiss="modal">NO</button>
+                    </div>
+                </div>
+            </div>
+        </div>

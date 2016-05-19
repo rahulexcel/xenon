@@ -1,0 +1,18 @@
+{
+    "Apple": "en",
+    "cart_empty_alert": "Ostoskorisi on tyhjä. Valitse kohteita omaan koriin",
+    "cart_empty_msg": "Et ole lisännyt mitään omaan tyhjä! Aloita lisäämällä suosikkiruokiasi",
+    "yourorder": "TILAUKSESI",
+    "verify order msg": "S'il vous plaît vérifier commande avec votre numéro de téléphone. Ceci est également la façon dont nous allons tendre la main à vous au sujet de l'état de votre commande.",
+    "Verify order": "1. Vérifier COMMANDER",
+    "deliverydetails": "2.DELIVERY DÉTAILS",
+    "paymentdetails": "3.Payment DÉTAILS",
+    "hour":"Heure",
+    "minutes":"Minutes",
+    "Pickup":"Ramasser",
+    "Delivery":"Livraison",
+     "Store is closed.":"Store est fermé .",
+    "Delivery Price":"La livraison Prix",
+    "Delivery Tax":"La taxe de livraison"
+
+}

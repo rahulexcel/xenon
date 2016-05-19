@@ -1,0 +1,31 @@
+<div class="row">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8">
+                        
+                        <h3>PLANS <!-- <i class="fa fa-spinner fa-spin" style="font-size:24px" ng-show="planChangeSpinner"></i> --></h5>
+                        <alert type="danger" ng-show="currentPlanAlert">
+                            You are already on this plan
+                        </alert>
+                        <div class="list-group">                            
+                            <a href="" class="list-group-item" ng-style="plan === 1 && {'background-color':'rgba(149, 205, 98, 0.53)'}" ng-click="changePlan(1)">
+                                <h4 class="list-group-item-heading">pay as you go plan</h4>
+                                <p class="list-group-item-text">Started his hearted any civilly. So me by marianne admitted speaking. Men bred fine call ask. Cease one miles truth day above seven. Suspicion sportsmen provision suffering mrs saw engrossed something. Snug soon he on plan in be dine some. </p>
+                            </a>
+                            
+                            <a href="" class="list-group-item" ng-style="plan === 2 && {'background-color':'rgba(149, 205, 98, 0.53)'}" ng-click="changePlan(2)">
+                                <h4 class="list-group-item-heading">Pro plan</h4>
+                                <p class="list-group-item-text">Talking chamber as shewing an it minutes. Trees fully of blind do. Exquisite favourite at do extensive listening. Improve up musical welcome he. Gay attended vicinity prepared now diverted. Esteems it ye sending reached as. Longer lively her design settle tastes advice mrs off who. </p>
+                            </a>
+                        </div>
+    </div>
+    <div class="col-sm-2"></div>
+</div>
+
+
+ 
+<modal title="Going from pro to pay as you go" visible="showModal">
+    
+    <button ng-click="yes()" class="btn btn-default">YES <span ng-show="spinneryes"> 
+            <i class="fa fa-spinner fa-spin"></i></span></button>
+    <button ng-click="no()" class="btn btn-default">NO</button>
+  </modal>

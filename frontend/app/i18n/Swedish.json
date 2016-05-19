@@ -1,0 +1,18 @@
+{
+    "Apple": "sw",
+    "cart_empty_msg": "Du har inte lagt något i din varukorg ännu! Börja lägga dina favoriträtter",
+    "cart_empty_alert": "Your Cart is Empty. Please select items for your cart",
+    "yourorder": "DU BESTÄLLER",
+    "verify order msg": "Bekräfta order med ditt telefonnummer. Detta är också hur vi kommer att nå ut till dig om statusen för din beställning.",
+    "Verify order": "1.VERIFY ORDER",
+    "deliverydetails": "2.DELIVERY DETALJER",
+    "paymentdetails": "3.Payment DETALJER",
+    "hour": "Timme",
+    "minutes": "Minuter",
+    "Pickup": "Plocka upp",
+    "Delivery": "Leverans",
+    "Store is closed.": "Store är stängd.",
+    "Delivery Price": "leverans Pris",
+    "Delivery Tax": "leverans Tax"
+
+}
