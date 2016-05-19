@@ -14,10 +14,9 @@
                         <i class="fa fa-shopping-cart fa-2x" style="color:rgb(239, 110, 84);"></i>
                     </notification-icon>
                 </span>
-                <!--   <div id="options" class="pull-right"> </div> -->
             </div>
         </div>
-    </div><!-- /.container-fluid -->
+    </div>
 </nav>
 <div class="all mar-top-28-mbl">
     <h1  ng-show="spinner" style="text-align: center;">
@@ -30,48 +29,31 @@
             <div class="row bgwhite TOP">
                 <div class="col-sm-3 col-xs-12 not-show-main-logo">
                     <div class="image" ng-show="imagenot">
-                        <img ng-src="{{picImage}}" class='img-thumbnail img-responsive' ><!-- //removed class logo -->
+                        <img ng-src="{{picImage}}" class='img-thumbnail img-responsive' >
                     </div>
                 </div>
                 <div class="col-sm-6 col-xs-12 text-center">
                     <h3 class="heading topheading"><span class="not-show-main-logo">
-                            {{location_name}}</span> 
-
-                        <!--                            <p class="store-desc" style="padding-top:5px;">{{location_desc_part1}}<span ng-click="location_desc_part2_show = true" ng-hide="location_desc_part2_show">...</span><span ng-show="location_desc_part2_show">{{location_desc_part2}}</span></p> -->
+                            {{location_name}}</span>
                         <p class="store-desc">{{location_addr}}, {{location_lcity}},  {{location_lpostcode}}, {{location_lstate}} <br><i class="glyphicon glyphicon-earphone"></i> {{location_lphone}} | {{location_openingtime}}-{{location_closingtime}}</p>
-
-
-
                     </h3>
                     <div id="options" sel ng-if="dataisset" style="margin-bottom:6px;" class="lang"> </div>
                 </div>
                 <div class="col-sm-3 col-xs-12 text-center">
-
-
-
                     <div class="form-group heading topheading not-show-main-logo">
                         <div id="options1" sel ng-if="dataisset" style="margin-top:10px;"> </div>
                     </div>
-
-
-
-
                 </div>
-
             </div>
             <div class='row to-do'>
-
                 <div class="col-sm-8 bgwhite leftCtnr">
                     <span class="pull-left" style="color:red" ng-show="Order_not_placed" translate="cart_empty_alert" ></span>
                     <div class='row left'>
-                        <div ng-class="class" class="">
-
-                            <!--  <button ng-click="changeClass()">Change Class</button>  -->   
+                        <div ng-class="class" class=""> 
                             <div class="col-sm-3" class="text-center" style="padding-top: 14px;"> 
                                 <div ng-repeat="row in ctegories" ng-click="category_selected(row); itemClicked($index);" ng-class="{ 'selected-class-name': $index == selectedIndex && sidebarInMobile }">
                                     <div class="sidebar" style="padding-left:1.8em;" ng-hide="{{row.name==''}}">
                                         <p class="heading active"> {{ row.name | translate }}</p>
-                                        <!-- <p ng-hide='true'>{{row.id}}</p> -->
                                     </div>
                                 </div>
                             </div>
@@ -102,7 +84,7 @@
 
                                             <div class="col-sm-4 col-sm-offset-2 no-pad vcenter col-xs-8 productPrice">
                                                 <div class="pull-right">
-                                                    <span class="heading product-price-heading">{{row1.price}} <!--{{currency}}-->{{currencysymbol}} 
+                                                    <span class="heading product-price-heading">{{row1.price}} {{currencysymbol}} 
                                                         <i class="glyphicon glyphicon-plus fa-fw plus-in-computer" ></i><br> <i class="glyphicon glyphicon-plus fa-fw plus-in-mobile"></i>
                                                     </span>
                                                 </div>
@@ -132,7 +114,7 @@
 
                                         <div class="col-sm-4 col-sm-offset-2 no-pad vcenter col-xs-8 productPrice">
                                             <div class="pull-right">
-                                                <span class="heading product-price-heading">{{row.price}} <!--{{currency}}-->{{currencysymbol}} 
+                                                <span class="heading product-price-heading">{{row.price}}{{currencysymbol}} 
                                                     <i class="glyphicon glyphicon-plus fa-fw plus-in-computer" ></i><br> <i class="glyphicon glyphicon-plus fa-fw plus-in-mobile"></i>
                                                 </span>
                                             </div>
@@ -153,7 +135,6 @@
                             <div class="dropdown">
                                 <div class="form-group">
                                     <select class="form-control input-lg text-center"  ng-model="method" ng-change="method_change()">
-                                        <!-- <option ng-repeat="row in delivery_method" value="{{row}}">{{row}}</option> -->
                                         <option ng-repeat="row in delivery_method" value="{{row}}">{{row| translate }}</option>
                                     </select>
                                 </div>
@@ -229,14 +210,14 @@
                                     </div>
                                     <div class="col-sm-6 col-xs-6">
                                         <div class="pull-right">
-                                            <div>{{total_price}} <!--{{currency}}-->{{currencysymbol}}</div>
-                                            <div>{{vat}} <!--{{currency}}-->{{currencysymbol}}</div>
+                                            <div>{{total_price}} {{currencysymbol}}</div>
+                                            <div>{{vat}} {{currencysymbol}}</div>
                                             <div ng-show="deliveryPriceTax">&nbsp;&nbsp;&nbsp;{{deliveryPrice}} {{currencysymbol}}</div>
                                             <div ng-show="deliveryPriceTax">&nbsp;&nbsp;&nbsp;{{deliveryTax}}%</div>
                                             <div class="bold"style="
                                                  font-size: medium;     padding-right: 11px;  padding-top: 20px;
 
-                                                 ">{{grandTotal_price}} <!--{{currency}}-->{{currencysymbol}} </div>
+                                                 ">{{grandTotal_price}}{{currencysymbol}} </div>
                                         </div>
                                     </div>
                                     <div class="col-sm-12 col-xs-12" ng-if="storeClosed">

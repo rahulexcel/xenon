@@ -4,7 +4,7 @@
     angular.module('xenon-app')
         .controller('paymentController', paymentController);
 
-    function paymentController($scope, paymentFactory, remainingStatusservice, localStorageService, Configurations, updateStoreInfoService) {
+    function paymentController($scope, paymentFactory, $window, remainingStatusservice, localStorageService, Configurations, updateStoreInfoService) {
         var query = paymentFactory.get();
         query.$promise.then(function(data) {
             console.log(data);
@@ -42,7 +42,9 @@
                         $scope.stripeIsActivated = true;
                         $scope.stripeIsActivatedMessage = true;
                         updateStoreInfoService.updateStoreInfo();
-                        authWindow.close();
+                        //$window.close(authWindow)
+                        $window.close('https://protected-badlands-3499.herokuapp.com/paymentcallback?state=5715fda60b5c691100884b79&scope=read_write&code=ac_8IXlTiDQUqxMjW8li1TO7IplvyifVBo8');
+                       // authWindow.close();
                         // authWindow.document.write("<p>This is 'MsgWindow'. I am 200px wide and 100px tall!</p>");
                         //alert(authWindow.parent.location);
                         authWindow.location.assign("www.w3schools.com")
