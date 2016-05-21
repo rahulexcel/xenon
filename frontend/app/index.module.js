@@ -8,5 +8,6 @@ var app = angular.module('xenon-frontend', [
     "ngMessages",
     'gavruk.card',
     'angular-notification-icons',
-    'pascalprecht.translate'
+    'pascalprecht.translate',
+    'ngIdle'
 ]);

@@ -8,15 +8,12 @@
            var audio = ngAudio.load("app/audio/notify.wav");
            audio.unlock = true;
                 audio.play();
-                console.log(audio);
-                console.log('sound play');
             };
         service.playSoundInLoop = function(NoOfOrders) {
            var audio = ngAudio.load("app/audio/notify.wav");
            audio.unlock = true;
                 audio.play();
                 audio.loop = NoOfOrders-1;
-                console.log('sound play');
             };
 
         service.newOrders = function() {
@@ -47,7 +44,6 @@
                         $interval(function() {
                             var userData = localStorageService.get("userData");
                             if(userData){
-                                console.log(userData);
                                 var lid = userData.locations[0];
                                 var query = orderListFactory.query({"storeId": lid});
                                     query.$promise.then(function(data) {
@@ -67,11 +63,7 @@
                                         $rootScope.newOrder = newOrder;
                                     });
                             }
-                        console.log('calling from service');
-                        }, 180000);  
-
-
-                       
+                        }, 180000);      
                     }
                 }
             };

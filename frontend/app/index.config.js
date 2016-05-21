@@ -3,7 +3,8 @@
     angular
             .module('xenon-frontend')
             .config(translateConfig);
-    function translateConfig($translateProvider) {
+    function translateConfig($translateProvider, IdleProvider, KeepaliveProvider) {
+         IdleProvider.idle(1800);
         $translateProvider.useStaticFilesLoader({
             prefix: 'app/i18n/',
             suffix: '.json'

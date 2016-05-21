@@ -27,6 +27,9 @@
      height: 94px;
      float: left;	
     }*/
+    #NotScrollSideMenu{
+         text-align: center;
+     }
 
     
 
@@ -409,7 +412,9 @@
         position:relative;
         top:-16px;
     }
-
+    .pull-right1{
+        float: right!important;
+    }
 
     .container{
         padding-left: 0px;

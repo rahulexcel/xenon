@@ -22,7 +22,7 @@
                                 <input type="file" ngf-select="" ng-model="picImage" name="fileName" ngf-accept="'image/*'" ngf-resize="{width: 400, height: 400, quality: 0.9}">
                             </span>
                             <br>
-                            <img ngf-src="picImage" ngf-resize="{width: 400, height: 400, quality: 0.9}" >
+                            <img ngf-src="picImage" ngf-resize="{width: 400, height: 400, quality: 0.9}">
                         </div>
                     </div>
 
@@ -69,7 +69,49 @@
                                     </select>
                                 </div>
                             </div>
-                        </div>  
+                        </div>
+                        <div class="form-group-separator"></div>
+                        <div class="row">
+                            <h4><strong>Variations</strong></h4>
+                            <div class="col-sm-5">
+                                <div class="form-group">
+                                    <strong>Title</strong>
+                                    <input type="text" class="form-control" ng-model="Vtitle">
+                                </div>
+                            </div>
+                            <div class="col-sm-5">
+                                <div class="form-group padd">
+                                    <strong>Price</strong>
+                                    <input type="text" class="form-control" ng-model="Vprice">
+                                </div>
+                            </div>
+                            <div class="col-sm-1">
+                                <div class="form-group padd" style="margin-top:17px;">
+                                    <span class="btn btn-blue" ng-click="AddVariations();">Add <span ng-show="spinner"><i class="fa fa-spin fa-spinner"></i></span></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <table class="table responsive">
+                                <colgroup>
+                                    <col style="width:50%">
+                                    <col style="width:50%">
+
+                                </colgroup>
+                                <thead>
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="data in VariationsData track by $index">
+                                        <td>{{data.title}}</td>
+                                        <td>{{data.price}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                         <div class="form-group-separator"></div>
                         <div class="form-group">
                             <h4><strong>Details</strong></h4>
@@ -79,12 +121,12 @@
                                     <div class="input-group input-group-sm input-group-minimal">
                                         <input type="text" class="form-control" ng-model="productQuantity">
                                         <span class="input-group-addon" style="font-size:12px; background-color:#8dc63f;" ng-click="infinite()">
-                                            &#8734;<!-- <i class="linecons-pencil"></i> -->
+                                            &#8734;
                                         </span>
                                     </div>
                                 </div>
-                            </div>  
-                        </div>
+                            </div>
+                        </div>  
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-sm-6">
@@ -92,7 +134,7 @@
                                         <input type="checkbox" ng-init="showInStore = true" class="" ng-model="showInStore">
                                         Show products in store
                                     </label>
-                                </div> 
+                                </div>
                                 <div class="col-sm-12">
                                     <br>
                                     <button ng-show="saveProduct" class="btn btn-blue" ng-click="submitted = true;

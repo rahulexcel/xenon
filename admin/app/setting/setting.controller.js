@@ -31,7 +31,6 @@
             $scope.showSettingContent = true;
             console.log(data);
             $scope.selectedCountryName = data.lcountry;
-            //console.log($scope.selectedCountryName);
             $scope.countryCurrency = data.lcurrency;
             $scope.tax = data.ltax;
             $scope.includeTax = data.ltaxall;
@@ -106,7 +105,8 @@
                         'ldeliverytax': $scope.deliveryTax,
                         'lwots': dayArr_for_schedule_view,
                         'llt': $scope.llt,
-                        'lclosed': $scope.lclosed
+                        'lclosed': $scope.lclosed,
+                        'ldeliverylimit': $scope.threshold
                     });
                     query.$promise.then(function(data) {
                         console.log(data);

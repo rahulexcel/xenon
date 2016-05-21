@@ -1,7 +1,6 @@
                  
 <nav class="navbar navbar-fixed-top cart-container">
     <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
             <div class="col-xs-4 no-pad-left">
                 <span class="navbar-brand-image not-show-main-logo">
@@ -49,18 +48,20 @@
                 <div class="col-sm-8 bgwhite leftCtnr">
                     <span class="pull-left" style="color:red" ng-show="Order_not_placed" translate="cart_empty_alert" ></span>
                     <div class='row left'>
-                        <div ng-class="class" class=""> 
-                            <div class="col-sm-3" class="text-center" style="padding-top: 14px;"> 
+                        <div ng-class="class"> 
+                         <div id="NotScrollSideMenu" class="col-sm-3" >
+                               <div  style="padding-top: 14px;"> 
                                 <div ng-repeat="row in ctegories" ng-click="category_selected(row); itemClicked($index);" ng-class="{ 'selected-class-name': $index == selectedIndex && sidebarInMobile }">
                                     <div class="sidebar" style="padding-left:1.8em;" ng-hide="{{row.name==''}}">
                                         <p class="heading active"> {{ row.name | translate }}</p>
                                     </div>
                                 </div>
                             </div>
+                         </div>
+                           
                         </div>
                         <div ng-class="product_menu">
-
-                            <div class="col-sm-9">
+                            <div class="col-sm-9" id="productMenu">
                                 <div ng-show="all_clicked" class="aligned-center" id="allProduct">
                                     <span class="pull-right back-menu" ng-show="backCatMenu" ng-click="backToCatList()" ><i class='glyphicon glyphicon-chevron-left fa-md' style="color:rgb(239,110,84)"></i> <span class="back-text">back</span></span>
                                     <span class="pull-right back-menu" ng-show="backProductMenu" ng-click="backToProductList()"><i class='glyphicon glyphicon-chevron-left fa-md' style="color:rgb(239,110,84)"></i> <span class="back-text">back</span></span>
@@ -71,7 +72,8 @@
                                             <p class='no-pad'>{{row.name}}</p>
 
                                         </header>
-                                        <div class="menu-item" ng-repeat="row1 in row.products" ng-click="show_in_cart(row1)">
+                                        <div ng-repeat="row1 in row.products" class="topMenu">
+                                        <div class="menu-item"  ng-click="row1.variations.length > 0  || show_in_cart(row1)" ng-class="{'Hov': row1.variations.length == 0}" ng-disabled="row1.variations.length > 0 ">
                                             <div ng-repeat='image in row1.pimages' class="col-xs-6 no-pad-left vcenter">
                                                 <img ng-src="https://s3.amazonaws.com/ordermagic/{{image}}" class="img-responsive center-image">
                                             </div>
@@ -82,12 +84,26 @@
                                                 </h4>
                                             </div>
 
-                                            <div class="col-sm-4 col-sm-offset-2 no-pad vcenter col-xs-8 productPrice">
+                                            <div class="col-sm-4 col-sm-offset-2 no-pad vcenter col-xs-8 productPrice" ng-if="row1.variations.length == 0 " ng-disabled="row1.variations.length == 0 ">
                                                 <div class="pull-right">
                                                     <span class="heading product-price-heading">{{row1.price}} {{currencysymbol}} 
                                                         <i class="glyphicon glyphicon-plus fa-fw plus-in-computer" ></i><br> <i class="glyphicon glyphicon-plus fa-fw plus-in-mobile"></i>
                                                     </span>
                                                 </div>
+                                            </div>
+                                        </div>
+                                             <div class="row padB15" ng-if="row1.variations.length > 0 " >
+                                               <div class="col-sm-12 col-md-12  no-pad">
+                                                   <div class="col-sm-4 col-md-4 no-pad" ng-repeat="variation in row1.variations track by $index" ng-class="{'Hov': row1.variations.length >0}" style="height: 36px;"  ng-click="row1.variations.length == 0  || show_in_cart(row1, variation)">
+                                                   <div style="padding-top: 7px;">
+                                                        {{variation.title}}: 
+                                                     <span class="pull-right1">
+                                                         {{variation.price}} {{currencysymbol}} 
+                                                       <i class="glyphicon glyphicon-plus fa-fw"></i>
+                                                     </span>      
+                                                   </div>
+                                                   </div>
+                                               </div>
                                             </div>
                                         </div>
                                     </div>
@@ -101,7 +117,8 @@
                                         <p class='no-pad'>{{category}}</p>
                                         <input type="hidden" ng-model="cat_id">
                                     </header>
-                                    <div class="menu-item" ng-repeat="row in products" ng-click="show_in_cart(row)" id="allProduct">
+                                <div ng-repeat="row in products" class="topMenu">
+                                     <div class="menu-item" ng-click="row.variations.length > 0 || show_in_cart(row)" id="allProduct" ng-disabled="row.variations.length > 0" ng-class="{'Hov': row.variations.length == 0}" ng-disabled="row.variations.length > 0 ">
                                         <div ng-repeat='image in row.pimages' class="col-xs-6 no-pad-left vcenter">
                                             <img ng-src="http://s3.amazonaws.com/ordermagic/{{image}}" class="img-responsive center-image">
                                         </div>
@@ -112,7 +129,7 @@
                                             </h4>
                                         </div>
 
-                                        <div class="col-sm-4 col-sm-offset-2 no-pad vcenter col-xs-8 productPrice">
+                                        <div class="col-sm-4 col-sm-offset-2 no-pad vcenter col-xs-8 productPrice" ng-if="row.variations.length == 0 " ng-disabled="row.variations.length == 0 ">
                                             <div class="pull-right">
                                                 <span class="heading product-price-heading">{{row.price}}{{currencysymbol}} 
                                                     <i class="glyphicon glyphicon-plus fa-fw plus-in-computer" ></i><br> <i class="glyphicon glyphicon-plus fa-fw plus-in-mobile"></i>
@@ -120,6 +137,20 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="row padB15" ng-if="row.variations.length > 0 " >
+                                               <div class="col-sm-12 col-md-12  no-pad">
+                                                   <div class="col-sm-4 col-md-4 no-pad" ng-repeat="variation in row.variations track by $index" ng-class="{'Hov': row.variations.length >0}" style="height: 36px;"  ng-click="row.variations.length == 0  || show_in_cart(row, variation)">
+                                                   <div style="padding-top: 7px;">
+                                                        {{variation.title}}: 
+                                                     <span class="pull-right1">
+                                                         {{variation.price}} {{currencysymbol}} 
+                                                       <i class="glyphicon glyphicon-plus fa-fw"></i>
+                                                     </span>      
+                                                   </div>
+                                                   </div>
+                                               </div>
+                                            </div>
+                                    </div> 
                                 </div>
                             </div>
                         </div>
@@ -127,7 +158,7 @@
                 </div>
                 <div ng-class="cart_shown">
                     <div class="col-sm-4 bgwhite rightCtnr">
-                        <div class="text-center" style="padding-top: 20px;">
+                        <div id="NotScroll" style="padding-top: 20px;">
                             <span class=" bold">&nbsp;
                                 <span class="pull-right back-menu1" ng-show="backCatMenu" ng-click="backToCatList()"><i class='glyphicon glyphicon-chevron-left fa-md'></i> <span class="back-text">back</span></span>
                                 <span class="pull-right back-menu1" ng-show="backProductMenu" ng-click="backToProductList()"><i class='glyphicon glyphicon-chevron-left fa-md'></i> <span class="back-text">back</span></span>
@@ -142,13 +173,13 @@
                                 <div class="form-inline">
                                     <div class="form-group" style="width:100%">
                                         <div class="col-md-6 col-xs-6 time-dropdown no-pad-left">
-                                            <span translate="hour"> </span><!-- <span>Hour</span> -->
+                                            <span translate="hour"> </span>
                                             <select class="form-control input-lg select1" ng-change="hour_changing()" ng-model="time">
                                                 <option ng-repeat="row in dropdown_days" value="{{row}}">{{row}}</option>
                                             </select>
                                         </div>
                                         <div class="col-md-6 col-xs-6 time-dropdown no-pad-left no-pad-right">
-                                            <span translate="minutes"> </span><!-- <span>Minutes</span> -->
+                                            <span translate="minutes"> </span>
                                             <select class="form-control input-lg select2"  ng-model="minutes">
                                                 <option  
                                                     ng-repeat="row in dropdown_minutes" value="{{row}}">{{row}}</option>
@@ -175,7 +206,7 @@
 
                                                         </div>
                                                         <div class="pull-right" style="color:rgb(239,110,84)">
-                                                            {{row.price}}<!--{{currency}}-->{{currencysymbol}} 
+                                                            {{row.price}}{{currencysymbol}} 
                                                             <span ng-click="remove_product_from_cart(row)"  >
                                                                 <i class="glyphicon glyphicon-remove "></i>
                                                             </span> 
@@ -254,11 +285,7 @@
         </div>
     </div>
 </div>
-
-
-
-
-
-
-
+<div ng-if='currencysymbol'>
+<alert currency='currencysymbol'  limit='deliveryLimit'></alert>
+</div>
 

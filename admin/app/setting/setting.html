@@ -12,7 +12,7 @@
                         <label class="col-sm-2 control-label">Delivery Options</label>
                         <div class="col-sm-10">
                             <div class="row">
-                                <div class="col-sm-5 col-xs-4">
+                                <div class="col-sm-3 col-xs-4">
                                     <strong>Delivery Mode</strong>
                                     <p>
                                     <div class="form-block">
@@ -28,21 +28,6 @@
                                     </div>
                                     </p>
                                 </div>
-                                <!-- <div class="col-sm-5 col-xs-4">
-                                    <strong>Delivery Mode</strong>
-                                    <p>
-                                    <div class="form-block">
-                                        <label>
-                                            <input type="radio" name="delivery" value="2" ng-model="deliveryMode">
-                                            Delivery
-                                        </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <label>
-                                            <input type="radio" name="delivery" value="1" ng-model="deliveryMode">
-                                            Pickup
-                                        </label>
-                                    </div>
-                                    </p>
-                                </div> -->
                                 <div class="col-sm-3 col-xs-4">
                                     <strong>Delivery Price</strong>
                                     <p>
@@ -53,6 +38,12 @@
                                     <strong>Delivery Tax</strong>
                                     <p>
                                         <input type="number" class="form-control" ng-model="deliveryTax" />
+                                    </p>
+                                </div>
+                                 <div class="col-sm-3 col-xs-4">
+                                    <strong>Delivery Limit</strong>
+                                    <p>
+                                        <input type="number" class="form-control" ng-model="threshold" />
                                     </p>
                                 </div>
                             </div>

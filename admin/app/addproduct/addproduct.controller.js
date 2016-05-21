@@ -22,7 +22,6 @@
            categoryList[0].catname="Level 0 (No category)";                
             $scope.categorylist = categoryList;
             $scope.selectedCategoryId= $scope.categorylist[0]._id;
-            console.log($scope.categorylist[0]._id);
             $scope.formSpinner = false;
             if (editProductId) {
                 var editProductcatId = localStorageService.get('editProductcatId');
@@ -37,6 +36,7 @@
                         $scope.picImage = 'http://s3.amazonaws.com/ordermagic/' + data.pimages[0];
                     }
                     after_load_image_response = $scope.picImage;
+                    $scope.VariationsData=data.variations;
                     $scope.productName = data.pname;
                     $scope.productDescription = data.pdesc;
                     $scope.productPrice = data.price;
@@ -71,7 +71,6 @@
                             .then(function(response) {
                                 uploadResponseFileName = response.filename;
                                 edit_product_after_uploader_response();
-                                console.log(response)
                             });
                 }
             }
@@ -94,10 +93,10 @@
                 "pimages": uploadResponseFileName,
                 "pfeatures": false,
                 "lid": lid,
-                "pcatid": $scope.selectedCategoryId
+                "pcatid": $scope.selectedCategoryId,
+                "variations":$scope.VariationsData 
             });
             query.$promise.then(function(data) {
-                console.log(data);
                 $state.go('dashboard.productList');
             });
         }
@@ -110,7 +109,6 @@
                 } else {
                     uploadService.send($scope.picImage, 'prodfile')
                             .then(function(response) {
-                                console.log(response);
                                 uploadResponseFileName = response.filename;
                                 send_data_after_uploader_response();
                                 
@@ -138,10 +136,10 @@
                 "pimages": uploadResponseFileName,
                 "pfeatures": false,
                 "lid": lid,
-                "pcatid": $scope.selectedCategoryId
+                "pcatid": $scope.selectedCategoryId,
+                "variations":$scope.VariationsData
             });
             query.$promise.then(function(data) {
-                console.log(data);
                 $scope.spinner = false;
                 $scope.productName = '';
                 $scope.productPrice = '';
@@ -156,9 +154,20 @@
                 }
             });
         }
+        $scope.VariationsData=[];
+        $scope.AddVariations=function(){
+            var json={
+                'title': $scope.Vtitle,
+                'price': $scope.Vprice  
+            }
+            $scope.VariationsData.unshift(json);
+            $scope.Vtitle='';
+            $scope.Vprice='';
+        }
         $scope.back = function() {
             $state.go('dashboard.productList');
         };
+     
     }
     ;
 

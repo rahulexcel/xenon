@@ -64,14 +64,18 @@ body{
 .menu-item{
     display: flex;
     align:center;
+    border-bottom: none !important;
+    min-height: 80px;
+
+}
+.topMenu{
     border-bottom: 1px solid #d8d8d8;
     min-height: 95px;
-
 }
 .menu-item:hover div img{
     opacity: .5;
 }
-.menu-item:hover{
+.Hov:hover{
     background-color:#EFF1F5;
     cursor:pointer;
 }
@@ -164,7 +168,7 @@ span {
 }
 
 .vcenter {
-    /*height: 430px; */
+   
     line-height: 90px;
 }
 .vcenter h4{
@@ -452,4 +456,18 @@ div#options button span i{
 
 div#options{
     display: none;
+}
+.padB15{
+    padding-bottom: 15px;
+}
+.modal-title{
+ color: #ab2d32;
+}
+.modal-body{
+    font-size: larger;
+    font-weight: 600;
+}
+#NotScrollSideMenu{
+    padding-left:10px;
+    padding-right:10px;
 }

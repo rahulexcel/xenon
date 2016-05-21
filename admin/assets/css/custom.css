@@ -169,4 +169,6 @@ tr.angular-ui-tree-empty {
 .hover{
   cursor: pointer; 
 }
-    
+.padd{
+  padding-left: 56px;
+}

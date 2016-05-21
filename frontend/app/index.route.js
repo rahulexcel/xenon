@@ -5,7 +5,7 @@
                 $stateProvider.
                         state('frontend', {
                             url: '/frontend',
-                            templateUrl: "app/front/frontend.html",
+                            templateUrl: "app/front/frontend.html", 
                             controller: 'frontendCtrl'
                         })
                         .

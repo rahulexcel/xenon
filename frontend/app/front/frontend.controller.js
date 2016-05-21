@@ -1,7 +1,7 @@
 (function() {
     'use strict';
     angular.module('xenon-frontend')
-            .controller('frontendCtrl', frontendCtrl);
+        .controller('frontendCtrl', frontendCtrl);
 
     function frontendCtrl($scope, locations, timeStorage, $window, currencySymbol, language, locationID, $localStorage, category, $rootScope, products, Order, $state, arrayService, dropdownService, timeService, $interval) {
         var response_products;
@@ -38,7 +38,6 @@
             } else {
                 $scope.backCatMenu = true;
             }
-            // $scope.backCatMenu = true;
             $scope.backProductMenu = false;
             $scope.product_menu = "product_menu_display";
             $scope.cart_shown = "cart_not_display";
@@ -49,6 +48,7 @@
         }
         $scope.category = 'View All';
         on_page_load();
+
         function on_page_load() {
             var query = locations.get({
                 locationID: locationID.locationID
@@ -67,8 +67,9 @@
                 $scope.dropdown_minutes = dropdownService.minutesdropdown(data.llt);
                 $scope.dropdown_days = dropdownService.Timedropdown();
                 $scope.minutes = dropdownService.selectedMinutes($scope.dropdown_minutes);
-                $scope.time = dropdownService.Selected(data.llt);                
+                $scope.time = dropdownService.Selected(data.llt);
                 $scope.location_name = data.lname;
+                $scope.deliveryLimit = data.ldeliverylimit;
                 if (angular.isDefined(data.llogo)) {
                     $scope.imagenot = true;
 
@@ -83,7 +84,7 @@
                 $scope.location_lpostcode = data.lpostcode;
                 $scope.location_lstate = data.lstate;
                 $scope.location_lphone = arrayService.getPhoneNo(data.lphone);
-                $scope.location_openingtime =arrayService.open(data, 1)+ ":" + "00";
+                $scope.location_openingtime = arrayService.open(data, 1) + ":" + "00";
                 $scope.location_closingtime = arrayService.open(data, 2) + ":" + "00";
                 $scope.all_clicked = true;
                 $scope.storeclose = data.lclosed;
@@ -98,28 +99,29 @@
 
         function checkoutButtonValidation() {
             var closedDay = timeService.closedDaysCheckoutButton($scope.ldateclosed);
-           
+
             if (closedDay || !$scope.time) {
                 $scope.storeClosed = true;
-               
+
             }
             if (onRefreshData.lcompleted.length < 4 || $scope.cart.length == 0 || closedDay || !$scope.storeclose || arrayService.checkday(onRefreshData) == 1 || !$scope.time) {
                 $scope.not_allow_checkout = true;
-             
+
             } else {
-                
+
                 $scope.not_allow_checkout = false;
             }
-             if (!$scope.time) {
-                 
+            if (!$scope.time) {
+
                 $scope.storeClosed = true;
                 $scope.not_allow_checkout = true;
-                $scope.dropdown_minutes=[];
-                }else{
-                   
-                     updatetime(onRefreshData);
-                }
+                $scope.dropdown_minutes = [];
+            } else {
+
+                updatetime(onRefreshData);
+            }
         }
+
         function check_local_storage() {
             if (angular.isDefined($localStorage.Orders_sent)) {
                 $scope.cart = $localStorage.Orders_sent;
@@ -130,6 +132,7 @@
             }
         }
         var catlength;
+
         function get_category() {
             var query1 = category.query({
                 locationID: locationID.locationID
@@ -152,7 +155,6 @@
                 locationID: locationID.locationID
             });
             query2.$promise.then(function(data2) {
-                console.log(data2)
                 response_products = data2;
                 show_all();
                 $scope.spinner = false;
@@ -163,8 +165,6 @@
 
         function show_all() {
             $scope.All_products = arrayService.showAllService(response_categories, response_products);
-
-
         }
 
 
@@ -202,7 +202,6 @@
         $scope.itemClicked = function($index) {
             $scope.sidebarInMobile = true;
             $scope.selectedIndex = $index;
-            //$scope.cart_shown="cart_display";
         };
         var cart_array = [];
         var cart_obj = [];
@@ -212,10 +211,19 @@
         var flag = 0;
         var pr_total;
         var product_name;
-        $scope.show_in_cart = function(selected_product) {
+        $scope.show_in_cart = function(clickedProduct, variation) {
+            var selected_product = {};
+            if (variation) {
+                selected_product._id = variation._id;
+                selected_product.Pid = clickedProduct._id;
+                selected_product.pname = clickedProduct.pname + " " + "-" + variation.title;
+                selected_product.price = variation.price;
+                selected_product.ProdName = clickedProduct.pname;
+                selected_product.vid = variation._id;
+            } else {
+                selected_product = clickedProduct;
+            }
             $scope.productInCart = $scope.productInCart + 1;
-            //$scope.cart_shown="cart_display";
-            //$scope.product_menu = "product_menu_not_display";
             if (catlength < 6) {
                 $scope.backCatMenu = false;
             } else {
@@ -234,7 +242,6 @@
                 for (var j = 0; j < cart_array.length; j++) {
                     for (var i = 0; i < cart_obj.length; i++) {
                         if (cart_obj[i]._id == cart_array[j] && cart_obj[i]._id == selected_product._id) {
-
                             cart_obj[i].count++;
                             cart_obj[i].price = selected_product.price * cart_obj[i].count;
                             flag = 0;
@@ -248,19 +255,19 @@
                     _id: selected_product._id,
                     count: 1,
                     name: selected_product.pname,
-                    price: selected_product.price
+                    price: selected_product.price,
+                    Pid: selected_product.Pid,
+                    ProdName: selected_product.ProdName,
+                    vid: selected_product.vid
                 }
                 cart_obj.push(obj1);
             }
+
             $scope.cart = cart_obj;
             methodChanged();
             checkoutButtonValidation();
-
-
-
-
-
         }
+
         function methodChanged() {
             var total = 0;
             var frontStoreData = timeStorage.get('frontStoreData');
@@ -276,8 +283,7 @@
                         $scope.grandTotal_price = parseInt($scope.total_price) + $scope.deliveryPrice + deliveryTax;
                     }
                     if ($scope.ltaxall == true) {
-                        $scope.grandTotal_price = (parseInt($scope.total_price) + $scope.deliveryPrice).toFixed(2);
-                        ;
+                        $scope.grandTotal_price = (parseInt($scope.total_price) + $scope.deliveryPrice).toFixed(2);;
                     }
                 }
             } else {
@@ -321,55 +327,74 @@
 
         }
 
-        $scope.sendOrder = function() {
-            $scope.checkout_clicked = true;
+        $scope.sendOrder = function() {  
             var mode;
-
             if ($scope.method === "Delivery") {
-
                 mode = 2;
+                if ($scope.deliveryLimit == null) {
+                    checkout(mode);
+                } else {
+                    if (parseInt($scope.deliveryLimit) <= $scope.grandTotal_price) {
+                        checkout(mode);
+                    } else {
+                        $('#myModal').modal('show'); 
+                    }
+                }
             } else {
-
                 mode = 1;
+                checkout(mode);
             }
-
+        }
+        function checkout(mode) {
+            $scope.checkout_clicked = true;
             var product_order_array = [];
             var product_order_obj = {};
 
             for (var i = 0; i < $scope.cart.length; i++) {
-                product_order_obj = {
-                    id: $scope.cart[i]._id,
-                    qty: $scope.cart[i].count
+                if (angular.isDefined($scope.cart[i].Pid)) {
+                    product_order_obj = {
+                        id: $scope.cart[i].Pid,
+                        qty: $scope.cart[i].count,
+                        pname: $scope.cart[i].ProdName,
+                        price: $scope.cart[i].price,
+                        vid: $scope.cart[i].vid
+                    }
+                } else {
+                    product_order_obj = {
+                        id: $scope.cart[i]._id,
+                        qty: $scope.cart[i].count
+                    }
                 }
                 product_order_array.push(product_order_obj);
             }
-            var query2 = Order.save({
-                'lid': locationID.locationID,
-                'products': product_order_array,
-                'deliverymode': mode,
-                'time': timeService.getTimestamp($scope.time, $scope.minutes),
-                'total': $scope.total_price,
-                'comments': $scope.comments
-            });
-            query2.$promise.then(function(response) {
-                timeStorage.set('Orders_response', response, 1);
-                timeStorage.set('Orders_sent', $scope.cart, 1);
-                var data = {time: $scope.time,
-                    methodName: $scope.method,
-                    deliverymode: mode,
-                    shipping_time: $scope.time + ":" + $scope.minutes,
-                    timestamp: timeService.getTimestamp($scope.time, $scope.minutes),
-                    currency: $scope.currency,
-                    total_price: $scope.total_price,
-                    grandtotal: $scope.grandTotal_price,
-                    deliveryPriceTax: $scope.deliveryPriceTax,
-                    deliveryPrice: $scope.deliveryPrice,
-                    deliveryTax: $scope.deliveryTax,
-                    vat: $scope.vat};
-                timeStorage.set('shippingdata', data, 1);
-                $state.go('checkout');
-            });
-
+            // var query2 = Order.save({
+            //     'lid': locationID.locationID,
+            //     'products': product_order_array,
+            //     'deliverymode': mode,
+            //     'time': timeService.getTimestamp($scope.time, $scope.minutes),
+            //     'total': $scope.total_price,
+            //     'comments': $scope.comments
+            // });
+            // query2.$promise.then(function(response) {
+            //     timeStorage.set('Orders_response', response, 1);
+            //     timeStorage.set('Orders_sent', $scope.cart, 1);
+            //     var data = {
+            //         time: $scope.time,
+            //         methodName: $scope.method,
+            //         deliverymode: mode,
+            //         shipping_time: $scope.time + ":" + $scope.minutes,
+            //         timestamp: timeService.getTimestamp($scope.time, $scope.minutes),
+            //         currency: $scope.currency,
+            //         total_price: $scope.total_price,
+            //         grandtotal: $scope.grandTotal_price,
+            //         deliveryPriceTax: $scope.deliveryPriceTax,
+            //         deliveryPrice: $scope.deliveryPrice,
+            //         deliveryTax: $scope.deliveryTax,
+            //         vat: $scope.vat
+            //     };
+            //     timeStorage.set('shippingdata', data, 1);
+            //     $state.go('checkout');
+            // });
         }
         $scope.clickOnCart = function() {
 
@@ -380,26 +405,26 @@
             $scope.backProductMenu = true;
         }
 
-        function updatetime(data) {  
+        function updatetime(data) {
             $interval(function() {
                 $scope.dropdown_minutes = dropdownService.minutesdropdown(llt);
                 $scope.dropdown_days = dropdownService.Timedropdown();
                 $scope.minutes = dropdownService.selectedMinutes($scope.dropdown_minutes);
                 $scope.time = dropdownService.Selected(llt);
-                if(!angular.isDefined($scope.time)){
-                $scope.storeClosed = true;
-                $scope.not_allow_checkout = true;
-                $scope.dropdown_minutes =[];
+                if (!angular.isDefined($scope.time)) {
+                    $scope.storeClosed = true;
+                    $scope.not_allow_checkout = true;
+                    $scope.dropdown_minutes = [];
                 }
             }, 300000);
         }
 
-       
+
         $scope.hour_changing = function() {
             if ($scope.time === dropdownService.currenttime()) {
                 $scope.dropdown_minutes = dropdownService.minutesdropdown(llt);
                 $scope.minutes = dropdownService.selectedMinutes($scope.dropdown_minutes);
-              
+
             } else {
                 $scope.dropdown_minutes = dropdownService.changedMinutes();
                 $scope.minutes = "00";
