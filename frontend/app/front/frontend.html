@@ -1,4 +1,4 @@
-                 
+
 <nav class="navbar navbar-fixed-top cart-container">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -78,9 +78,10 @@
                                                 <img ng-src="https://s3.amazonaws.com/ordermagic/{{image}}" class="img-responsive center-image">
                                             </div>
                                             <div style="width:250%;" class="col-sm-6  col-xs-10 no-pad vcenter productName">
-                                                <h4 class="heading" style="    width: 125%;">{{row1.pname}} <br
+                                                <h4 class="heading">{{row1.pname}} <br
                                                         >
-                                                    <span class="prod-desc">{{row1.pdesc}}</span>
+
+                                                    <span class="prod-desc" style="white-space: pre;">{{row1.pdesc}}</span>
                                                 </h4>
                                             </div>
 
@@ -125,7 +126,7 @@
                                         <div class="col-sm-6  col-xs-10 no-pad  vcenter productName">
                                             <h4 class="heading" style="width: 125%;">{{row.pname}}
                                                 <br>
-                                                <span class="prod-desc">{{row.pdesc}}</span>
+                                                <span class="prod-desc" style="white-space: pre;">{{row.pdesc}}</span>
                                             </h4>
                                         </div>
 
@@ -262,6 +263,7 @@
                                     </div>
 
                                     <button class='col-sm-12 col-xs-12 rightmenufooter text-center'  ng-style="{'background-color' : (cart.length > 0 && !not_allow_checkout) ? 'rgb(239, 110, 84)' : '#bbbdc0'}" ng-click="sendOrder()" ng-disabled="not_allow_checkout" >
+
                                         <span translate="CHECKOUT">CHECKOUT</span>   
                                         <span ng-show="checkout_clicked">
                                             <i class="fa fa-spin fa-spinner"></i>
