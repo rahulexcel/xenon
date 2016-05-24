@@ -53,7 +53,7 @@
                                 <div class="col-sm-12">
                                     <strong>Description</strong>
                                     <p>
-                                        <textarea class="form-control" rows="5" ng-model="productDescription">
+                                        <textarea class="form-control" rows="5" ng-model="productDescription" id="word_count">
                                         </textarea>
                                     </p>
                                 </div>
@@ -77,6 +77,7 @@
                                 <div class="form-group">
                                     <strong>Title</strong>
                                     <input type="text" class="form-control" ng-model="Vtitle">
+                                    <span style="color:red;" ng-show="Validerror"> Fields can'nt be left blank</span>
                                 </div>
                             </div>
                             <div class="col-sm-5">
@@ -87,11 +88,12 @@
                             </div>
                             <div class="col-sm-1">
                                 <div class="form-group padd" style="margin-top:17px;">
-                                    <span class="btn btn-blue" ng-click="AddVariations();">Add <span ng-show="spinner"><i class="fa fa-spin fa-spinner"></i></span></span>
+                                    <span class="btn btn-blue" ng-click="AddVariations();">Add </span>
                                 </div>
                             </div>
+
                         </div>
-                        <div>
+                        <div ng-if="VariationsData!=0">
                             <table class="table responsive">
                                 <colgroup>
                                     <col style="width:50%">

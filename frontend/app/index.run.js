@@ -48,9 +48,8 @@
                         widthForsideMenu="25%";
                         var NotScroll = {
                             position: 'fixed',
-                            top: '0px',
                             width: 380,
-                            background: 'white'
+                            background: 'white',
                         }
                         var NotScrollSideMenu = {
                             position: 'fixed',
